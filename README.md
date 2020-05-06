@@ -9,7 +9,7 @@
 | title    | string  | null: false |
 | jam      | boolean | null: false |
 | standard | boolean | null: false |
-| bigginer | boolean | null: false |
+| beginner | boolean | null: false |
 | user_id  | integer | null: false |
 
 ### association
@@ -202,7 +202,7 @@
 | name          | type    | option                         |
 | ------------- | ------- | ------------------------------ |
 | string_num    | integer | null: false                    |
-| flet_num      | integer | null: false                    |
+| fret_num      | integer | null: false                    |
 | finger_all_id | integer | null: false, foreign_key: true |
 
 ### asocciation
