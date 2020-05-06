@@ -1,0 +1,33 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Chords</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Song</th>
+      <th>Artist</th>
+      <th>Album</th>
+      <th>Text</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @chords.each do |chord| %>
+      <tr>
+        <td><%= chord.song %></td>
+        <td><%= chord.artist %></td>
+        <td><%= chord.album %></td>
+        <td><%= chord.text %></td>
+        <td><%= link_to 'Show', chord %></td>
+        <td><%= link_to 'Edit', edit_chord_path(chord) %></td>
+        <td><%= link_to 'Destroy', chord, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Chord', new_chord_path %>

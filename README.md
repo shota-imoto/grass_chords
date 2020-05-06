@@ -9,14 +9,14 @@
 | title    | string  | null: false |
 | jam      | boolean | null: false |
 | standard | boolean | null: false |
-| bigginer | boolean | null: false |
+| beginner | boolean | null: false |
 | user_id  | integer | null: false |
 
 ### association
 
 - has_many :chords, dependent: :destroy
 - has_many :practices, dependent: :destroy
-- has_many :keys, , dependent: :destroy
+- has_many :keys, dependent: :destroy
 - has_many :scores, dependent: :destroy
 - belongs_to :user
 
@@ -26,7 +26,7 @@
 
 | name         | type    | option                         |
 | ------------ | ------- | ------------------------------ |
-| name         | binary  | null: false                    |
+| name         | integer | null: false                    |
 | instrumental | boolean | null: false                    |
 | male         | boolean | null: false                    |
 | female       | boolean | null: false                    |
@@ -118,7 +118,7 @@
 | name                  | type   | option                    |
 | --------------------- | ------ | ------------------------- |
 | name                  | string | null: false, unique: true |
-| mail                  | string | null: false, unique: true |
+| email                 | string | null: false, unique: true |
 | password              | text   | null: false, unique: true |
 | password_confirmaiton | text   | null: false, unique: true |
 | place                 | string |                           |
@@ -151,10 +151,10 @@
 
 ### table
 
-| name          | type    | option                    |
-| ------------- | ------- | ------------------------- |
-| name          | string  | null: false, unique: true |
-| total_strings | integer | null: false               |
+| name         | type    | option                    |
+| ------------ | ------- | ------------------------- |
+| name         | string  | null: false, unique: true |
+| total_string | integer | null: false               |
 
 ### asocciation
 
@@ -163,15 +163,15 @@
 - has_many :users, through: :user_instruments
 - has_many :user_instruments
 
-## user_instruments
+## user_instrument
 
 ### table
 
-| name            | type    | option                         |
-| --------------- | ------- | ------------------------------ |
-| user_id         | integer | null: false, foreign_key: true |
-| instrumental_id | integer | null: false, foreign_key: true |
-| default_inst    | integer |                                |
+| name          | type    | option                         |
+| ------------- | ------- | ------------------------------ |
+| user_id       | integer | null: false, foreign_key: true |
+| instrument_id | integer | null: false, foreign_key: true |
+| default_inst  | integer |                                |
 
 ### asocciation
 
@@ -182,11 +182,11 @@
 
 ### table
 
-| name            | type    | option                         |
-| --------------- | ------- | ------------------------------ |
-| name            | string  | null: false                    |
-| instrumental_id | integer | null: false, foreign_key: true |
-| tuning_all_id   | integer | null: false, foreign_key: true |
+| name          | type    | option                         |
+| ------------- | ------- | ------------------------------ |
+| name          | string  | null: false                    |
+| instrument_id | integer | null: false, foreign_key: true |
+| tuning_all_id | integer | null: false, foreign_key: true |
 
 ### asocciation
 
@@ -202,7 +202,7 @@
 | name          | type    | option                         |
 | ------------- | ------- | ------------------------------ |
 | string_num    | integer | null: false                    |
-| flet_num      | integer | null: false                    |
+| fret_num      | integer | null: false                    |
 | finger_all_id | integer | null: false, foreign_key: true |
 
 ### asocciation
@@ -213,10 +213,10 @@
 
 ### table
 
-| name            | type    | option                         |
-| --------------- | ------- | ------------------------------ |
-| name            | string  | null: false                    |
-| instrumental_id | integer | null: false, foreign_key: true |
+| name          | type    | option                         |
+| ------------- | ------- | ------------------------------ |
+| name          | string  | null: false                    |
+| instrument_id | integer | null: false, foreign_key: true |
 
 ### asocciation
 

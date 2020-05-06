@@ -1,0 +1,24 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Song:</strong>
+  <%= @chord.song %>
+</p>
+
+<p>
+  <strong>Artist:</strong>
+  <%= @chord.artist %>
+</p>
+
+<p>
+  <strong>Album:</strong>
+  <%= @chord.album %>
+</p>
+
+<p>
+  <strong>Text:</strong>
+  <%= @chord.text %>
+</p>
+
+<%= link_to 'Edit', edit_chord_path(@chord) %> |
+<%= link_to 'Back', chords_path %>
