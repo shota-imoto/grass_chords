@@ -4,8 +4,7 @@ class CreateChords < ActiveRecord::Migration[5.2]
       t.references :song, foreign_key: true
       t.references :artist, foreign_key: true
       t.references :album, foreign_key: true
-      t.text :text
-
+      t.text :text, null: false, unique: true
       t.timestamps
     end
   end
