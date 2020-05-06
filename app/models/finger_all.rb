@@ -1,0 +1,2 @@
+class FingerAll < ApplicationRecord
+end
