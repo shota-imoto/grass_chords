@@ -1,0 +1,23 @@
+= form_with(model: chord, local: true) do |form|
+  - if chord.errors.any?
+    #error_explanation
+      %h2
+        = pluralize(chord.errors.count, "error")
+        prohibited this chord from being saved:
+      %ul
+        - chord.errors.full_messages.each do |message|
+          %li= message
+  .field
+    = form.label :song_id
+    = form.text_field :song_id
+  .field
+    = form.label :artist_id
+    = form.text_field :artist_id
+  .field
+    = form.label :album_id
+    = form.text_field :album_id
+  .field
+    = form.label :text
+    = form.text_area :text
+  .actions
+    = form.submit
