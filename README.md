@@ -254,3 +254,37 @@
 | user registration         | x             | x      | x       | o     |
 | logout                    | o             | o      | o       | x     |
 | edit account              | o             | o      | o       | x     |
+| make a pdf                | o             | o      | o       | o     |
+
+# main menu
+
+| menu                | guest_mode | user_mode | editor_mode |
+| ------------------- | ---------- | --------- | ----------- |
+| registration        | o          | x         | x           |
+| login               | o          | x         | x           |
+| my_page             | x          | o         | o           |
+| practice_list       | x          | o         | o           |
+| make a pdf          | o          | o         | o           |
+| create - song       | x          | o         | o           |
+| create - chord      | x          | o         | o           |
+| create - finger     | x          | o         | o           |
+| create - instrument | x          | x         | o           |
+| search - score      | o          | o         | o           |
+| create - score      | x          | o         | o           |
+| contact             | o          | o         | o           |
+| logout              | x          | o         | o           | - |
+
+# routing
+
+- song
+  index, new, create, edit, show, update, destroy
+- chord
+  index, new, create, edit, show, update, destroy
+- user
+  new, create, edit, show, update, destroy
+- instrument
+  index, new, create, edit, update, destroy
+- finger_all
+  index, new, create, edit, update, destroy
+- tuning_all
+  indez, new, create, edit, update, destroy
