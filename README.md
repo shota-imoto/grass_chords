@@ -287,4 +287,8 @@
 - finger_all
   index, new, create, edit, update, destroy
 - tuning_all
-  indez, new, create, edit, update, destroy
+  index, new, create, edit, update, destroy
+- score
+  index, new, create, edit, show, update, destroy
+- practice
+  index, create, update, destroy
