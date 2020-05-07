@@ -1,0 +1,22 @@
+%p#notice= notice
+%h1 Chords
+%table
+  %thead
+    %tr
+      %th Song
+      %th Artist
+      %th Album
+      %th Text
+      %th{:colspan => "3"}
+  %tbody
+    - @chords.each do |chord|
+      %tr
+        %td= chord.song
+        %td= chord.artist
+        %td= chord.album
+        %td= chord.text
+        %td= link_to 'Show', chord
+        %td= link_to 'Edit', edit_chord_path(chord)
+        %td= link_to 'Destroy', chord, method: :delete, data: { confirm: 'Are you sure?' }
+%br/
+= link_to 'New Chord', new_chord_path

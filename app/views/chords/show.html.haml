@@ -1,0 +1,16 @@
+%p#notice= notice
+%p
+  %strong Song:
+  = @chord.song
+%p
+  %strong Artist:
+  = @chord.artist
+%p
+  %strong Album:
+  = @chord.album
+%p
+  %strong Text:
+  = @chord.text
+= link_to 'Edit', edit_chord_path(@chord)
+|
+= link_to 'Back', chords_path
