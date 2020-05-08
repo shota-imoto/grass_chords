@@ -1,3 +1,18 @@
-%h1 New Song
-= render 'form', song: @song
-= link_to 'Back', songs_path
+.contents__title
+=form_with url: songs_path, class: "contents__form", method: :post, local: true do |f|
+  .form--title
+    = f.label "タイトル" do
+      = f.text_field :title
+  .form__class
+    =f.label :jam, class: "class--element" do
+      = f.check_box :jam, checked_value: "1", unchecked_value: "0"
+      ジャムセッション向け曲
+    =f.label :standard, class: "class--element" do
+      = f.check_box :standard, checked_value: "1", unchecked_value: "0"
+      スタンダード曲
+    =f.label :beginner, class: "class--element" do
+      = f.check_box :beginner, checked_value: "1", unchecked_value: "0"
+      初心者向け曲
+  .form--btn
+    = f.submit "登録"
+

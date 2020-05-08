@@ -4,12 +4,13 @@ class ChordsController < ApplicationController
   # GET /chords
   # GET /chords.json
   def index
-    @chords = Chord.all
+    @chords = Chord.all.includes(:song, :user)
   end
 
   # GET /chords/1
   # GET /chords/1.json
   def show
+    @chord = Chord.find(params[:id])
   end
 
   # GET /chords/new
@@ -69,6 +70,6 @@ class ChordsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def chord_params
-      params.require(:chord).permit(:song_id, :artist_id, :album_id, :text)
+      params.permit(:song_id, :artist_id, :album_id, :user_id, :text)
     end
 end
