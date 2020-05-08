@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_05_06_100913) do
+ActiveRecord::Schema.define(version: 2020_05_08_135325) do
 
   create_table "albums", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name", null: false
@@ -33,9 +33,12 @@ ActiveRecord::Schema.define(version: 2020_05_06_100913) do
     t.text "text", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "user_id"
+    t.string "version"
     t.index ["album_id"], name: "index_chords_on_album_id"
     t.index ["artist_id"], name: "index_chords_on_artist_id"
     t.index ["song_id"], name: "index_chords_on_song_id"
+    t.index ["user_id"], name: "index_chords_on_user_id"
   end
 
   create_table "finger_alls", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
@@ -159,6 +162,7 @@ ActiveRecord::Schema.define(version: 2020_05_06_100913) do
   add_foreign_key "chords", "albums"
   add_foreign_key "chords", "artists"
   add_foreign_key "chords", "songs"
+  add_foreign_key "chords", "users"
   add_foreign_key "finger_alls", "instruments"
   add_foreign_key "finger_alls", "tuning_alls"
   add_foreign_key "fingers", "finger_alls"

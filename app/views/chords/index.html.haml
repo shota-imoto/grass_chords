@@ -1,22 +1,43 @@
 %p#notice= notice
-%h1 Chords
-%table
-  %thead
-    %tr
-      %th Song
-      %th Artist
-      %th Album
-      %th Text
-      %th{:colspan => "3"}
-  %tbody
+.wrapper__contents
+  .contents__top
+    =image_tag src="tops/top05.jpeg", class: "contents__top--image"
+  .contents__message
+    Jam with us??
+  =form_with url: search_songs_path, class: "contents__search", local: true do |f|
+    .form__search
+      =f.text_field :keyword
+      =f.submit "検索"
+
+  .contents__menu
+    %ul.menu__lists
+      %li.lists__list
+        =link_to "新規登録", new_user_registration_path
+      %li.lists__list
+        =link_to "ログイン", new_user_session_path
+      %li.lists__list マイページ
+      %li.lists__list 練習リスト
+      %li.lists__list PDF作成
+      %li.lists__list データ作成
+      %ul.lists__list.have-child
+        %li.list--childlist
+        %li.list--childlist コード進行
+        %li.list--childlist コード運指
+        %li.list--childlist
+          =link_to "楽曲", new_song_path
+      %li 譜面
+      %ul.list__list.have-child
+        %li.list--childlist 譜面の検索 
+        %li.list--childlist 譜面の作成
+      %li.lists__list お問い合わせ
+      %li.lists__list ログアウト 
+
+  .contents__whats-new
+    .whats-new__title What's new?
     - @chords.each do |chord|
-      %tr
-        %td= chord.song
-        %td= chord.artist
-        %td= chord.album
-        %td= chord.text
-        %td= link_to 'Show', chord
-        %td= link_to 'Edit', edit_chord_path(chord)
-        %td= link_to 'Destroy', chord, method: :delete, data: { confirm: 'Are you sure?' }
-%br/
-= link_to 'New Chord', new_chord_path
+      =link_to chord_path(chord) do
+        =chord.song.title
+        =chord.text
+        =chord.version
+        =chord.user.name
+        =l chord.created_at, format: :short
