@@ -1,16 +1,11 @@
-%p#notice= notice
-%p
-  %strong Song:
-  = @chord.song
-%p
-  %strong Artist:
-  = @chord.artist
-%p
-  %strong Album:
-  = @chord.album
-%p
-  %strong Text:
-  = @chord.text
-= link_to 'Edit', edit_chord_path(@chord)
-|
-= link_to 'Back', chords_path
+.chord-top
+  %h1
+    =@chord.song.title
+  %h2
+    =@chord.version
+.chord-menu
+  .chord-menu__key, class: 
+    key of G
+  .chord-menu__print
+    印刷
+    
