@@ -1,0 +1,51 @@
+@import "font-awesome-sprockets";
+@import "font-awesome";
+@import "modules/reset";
+@import "modules/chords";
+@import "modules/contacts";
+@import "modules/pdfs";
+@import "modules/songs";
+
+//
+
+.wrapper {
+  height: 100vh;
+  width: 100vw;
+}
+
+.header {
+  height: 60px;
+  width: 100vw;
+  padding: 0 10px;
+  background-color: lightblue;
+  color: grey;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: fixed;
+  z-index: 1;
+}
+
+.header__logo {
+  text-decoration: none;
+}
+
+.header__menu {
+  margin-left: 10px;
+}
+.menu--search-icon {
+}
+
+.contents {
+  padding: 60px 20px 0;
+  box-sizing: border-box;
+}
+
+.footer {
+  height: 60px;
+  width: 100vw;
+  background-color: lightseagreen;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

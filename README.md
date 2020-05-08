@@ -74,6 +74,7 @@
 | song_id   | integer | null: false, foreign_key: true |
 | artist_id | integer | foreign_key: true              |
 | album_id  | integer | foreign_key: true              |
+| user_id   | integer | foreign_key: true              |
 | text      | text    | null: false, unique: true      |
 
 ### asocciation
