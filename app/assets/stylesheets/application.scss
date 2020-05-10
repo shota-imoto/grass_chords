@@ -49,3 +49,65 @@
   justify-content: center;
   align-items: center;
 }
+
+// general css
+
+.chord-menu__key {
+  position: relative;
+
+  &--palettes {
+    border: 1px solid lightgray;
+    background-color: white;
+    height: 250px;
+    width: 200px;
+    display: none;
+    position: absolute;
+    top: 30px;
+  }
+}
+
+.key__key-display {
+  &--now {
+    background-color: yellow;
+    height: 40px;
+    width: 100px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  &--relative-key {
+    display: none;
+    background-color: pink;
+    height: 40px;
+    width: 100px;
+    position: absolute;
+    top: 0;
+    justify-content: center;
+    align-items: center;
+  }
+}
+
+.palettes__section {
+  display: flex;
+  width: 100%;
+}
+
+.palettes__palette {
+  border: 1px solid lightgray;
+  height: 25px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 3px;
+
+  &--one {
+    width: 100%;
+  }
+  &--three {
+    width: 33%;
+  }
+  &--four {
+    width: calc(100% / 4 - 3px * 2);
+  }
+}
