@@ -4,7 +4,7 @@ class ChordsController < ApplicationController
   # GET /chords
   # GET /chords.json
   def index
-    @chords = Chord.all.includes(:song, :user)
+    @chords = Chord.all.includes(:song, :user).order(id: "DESC").limit(5)
   end
 
   # GET /chords/1

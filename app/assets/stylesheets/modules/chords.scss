@@ -11,3 +11,11 @@
 }
 .contents__menu {
 }
+
+// showビュー
+
+.chord-display {
+  &--text {
+    display: none;
+  }
+}

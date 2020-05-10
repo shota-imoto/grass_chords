@@ -35,9 +35,10 @@
   .contents__whats-new
     .whats-new__title What's new?
     - @chords.each do |chord|
-      =link_to chord_path(chord) do
-        =chord.song.title
-        =chord.text
-        =chord.version
-        =chord.user.name
-        =l chord.created_at, format: :short
+      .whats-new__content
+        =link_to chord_path(chord) do
+          =chord.song.title
+          =chord.text
+          =chord.version
+          =chord.user.name
+          =l chord.created_at, format: :short
