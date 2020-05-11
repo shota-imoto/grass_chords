@@ -11,7 +11,7 @@
 .wrapper
   .header
     = link_to "GrassChords", root_path, class: "header__logo"
-    -# ユーザー名表示　開発用
+    -# ユーザー名表示 開発用
     - if user_signed_in?
       = @user.name
 

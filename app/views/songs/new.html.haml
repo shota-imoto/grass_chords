@@ -13,6 +13,55 @@
     =f.label :beginner, class: "class--element" do
       = f.check_box :beginner, checked_value: "1", unchecked_value: "0"
       初心者向け曲
+  .form__key
+    =f.fields_for :keys do |key_f|
+      .chord-menu
+        .chord-menu__key
+          .key__key-display
+            = key_f.text_field :name, value: "key of G"
+            .key__key-display--now
+              key of G
+            .key__key-display--relative-key
+              移動ド
+          .chord-menu__key--palettes
+            .palettes__section
+              .palettes__palette.palettes__palette--one
+                移動ド
+            .palettes__section
+              .palettes__palette.palettes__palette--four
+                G
+              .palettes__palette.palettes__palette--four
+                A
+              .palettes__palette.palettes__palette--four
+                B
+              .palettes__palette.palettes__palette--four
+                C
+            .palettes__section
+              .palettes__palette.palettes__palette--four
+                D
+              .palettes__palette.palettes__palette--four
+                E
+              .palettes__palette.palettes__palette--four
+                F
+            .palettes__section
+              .palettes__palette.palettes__palette--three
+                m
+              .palettes__palette.palettes__palette--three
+                \#
+              .palettes__palette.palettes__palette--three
+                ♭
+            .palettes__section
+              .palettes__palette.palettes__palette--one
+                閉じる
+      =key_f.label :instrumental, class: "class--element" do
+        = key_f.check_box :instrumental, checked_value: "1", unchecked: "0"
+        インストキー
+      =key_f.label :male, class: "class--element" do
+        = key_f.check_box :male, checked_value: "1", unchecked: "0"
+        男声キー
+      =key_f.label :female, class: "class--element" do
+        = key_f.check_box :female, checked_value: "1", unchecked: "0"
+        女声キー
   .form--btn
     = f.submit "登録"
 

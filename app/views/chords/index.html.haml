@@ -4,10 +4,10 @@
     =image_tag src="tops/top05.jpeg", class: "contents__top--image"
   .contents__message
     Jam with us??
-  =form_with url: search_songs_path, class: "contents__search", local: true do |f|
-    .form__search
-      =f.text_field :keyword
-      =f.submit "検索"
+
+  = form_with url: search_songs_path, class: "content__search-window", method: :get, local: true do |f|
+    =f.text_field :keyword
+    =f.submit "検索"
 
   .contents__menu
     %ul.menu__lists

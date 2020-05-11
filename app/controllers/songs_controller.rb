@@ -15,6 +15,7 @@ class SongsController < ApplicationController
   # GET /songs/new
   def new
     @song = Song.new
+    @song.keys.build
   end
 
   # GET /songs/1/edit
@@ -25,7 +26,6 @@ class SongsController < ApplicationController
   # POST /songs.json
   def create
     @song = Song.new(song_params)
-
     respond_to do |format|
       if @song.save
         format.html { redirect_to @song, notice: 'Song was successfully created.' }
@@ -61,6 +61,39 @@ class SongsController < ApplicationController
     end
   end
 
+  def search
+    params[:keyword].strip!
+    keywords = params[:keyword].split(/\s+/)
+    
+    @songs = Song.all
+
+    # 条件検索
+    @songs = @songs.where(standard: params[:jam])  unless (params[:jam].nil?)
+    @songs = @songs.where(standard: params[:standard])  unless (params[:standard].nil?)
+    @songs = @songs.where(standard: params[:beginner])  unless (params[:beginner].nil?)
+
+    # キーワード検索
+    keywords.each do |keyword| unless (params[:keyword].nil?)
+      @songs = @songs.where("title like ?", "%#{keyword}%")
+    end
+    
+
+    # unless (params[:standard].nil?)
+  end
+
+
+    # if (params[:keyword].nil?)
+    # else
+    #   keywords.each do |keyword|
+    #     @songs = @songs.where("title like ?", "%#{keyword}%")
+    #   end
+    # end
+    
+  end
+
+  def search_page
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_song
@@ -69,7 +102,7 @@ class SongsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def song_params
-      binding.pry
-      params.permit(:title, :jam, :standard, :beginner).merge(user_id: current_user.id)
+      params.permit(:title, :jam, :standard, :beginner, keys: [:name, :instrumental, :male, :female]).merge(user_id: current_user.id)
     end
+
 end
