@@ -5,7 +5,9 @@ Rails.application.routes.draw do
   devise_for :users, except: :index
   resources :songs do
     collection do
-      get "search"
+      get :search
+      get :search_page
+      get :search_detail
     end
   end
   resources :chords, except: :index

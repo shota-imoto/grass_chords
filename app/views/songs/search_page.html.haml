@@ -1,0 +1,15 @@
+.content__search-window
+  = form_with url: search_songs_path, method: :get, local: true do |f|
+    .seatch-result__search-window
+      =f.text_field :keyword
+      =f.submit "検索"
+    .search-result__search-option
+      =f.check_box :jam, checkd_value: "1", unchecked_value: "0"
+      ジャムセッション向け曲
+      =f.check_box :standard, checkd_value: "1", unchecked_value: "0"
+      スタンダード曲
+      =f.check_box :beginner, checkd_value: "1", unchecked_value: "0"
+      初心者向け
+    .seatch-result__search-window
+      =f.text_field :keyword
+      =f.submit "検索"
