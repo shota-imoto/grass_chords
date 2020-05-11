@@ -4,11 +4,11 @@
       =f.text_field :keyword
       =f.submit "検索"
     .search-result__search-option
-      =f.check_box :jam, checkd_value: "1", unchecked_value: "0"
+      =f.check_box :jam, checkd_value: "true", unchecked_value: "false"
       ジャムセッション向け曲
-      =f.check_box :standard, checkd_value: "1", unchecked_value: "0"
+      =f.check_box :standard, checkd_value: "true", unchecked_value: "false"
       スタンダード曲
-      =f.check_box :beginner, checkd_value: "1", unchecked_value: "0"
+      =f.check_box :beginner, checkd_value: "true", unchecked_value: "false"
       初心者向け
     .seatch-result__search-window
       =f.text_field :keyword
