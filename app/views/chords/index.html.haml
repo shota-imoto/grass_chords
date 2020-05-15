@@ -21,7 +21,9 @@
       %li.lists__list データ作成
       %ul.lists__list.have-child
         %li.list--childlist
-        %li.list--childlist コード進行
+          =link_to "楽器", new_instrument_path
+        %li.list--childlist
+          =link_to "コード進行", new_chord_path
         %li.list--childlist コード運指
         %li.list--childlist
           =link_to "楽曲", new_song_path

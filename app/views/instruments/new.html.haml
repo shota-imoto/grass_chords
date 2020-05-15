@@ -1,0 +1,9 @@
+.content
+  %h1 楽器の登録
+  =form_with url:instruments_path, method: :post, local: true do |f|
+    .content__name
+      =f.text_field :name, placeholder: "名称"
+    .content__total_string
+      =f.text_field :total_string, placeholder: "弦の数"
+    .content__btn
+      =f.submit "登録"
