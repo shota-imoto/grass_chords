@@ -3,6 +3,12 @@
     =@chord.song.title
   %h2
     =@chord.version
+.practice-btn
+  .practice-btn__display 練習してるボタン
+  =form_with url: practices_path, method: :post, local:true do |f|
+    =f.text_field :song_id, value: @chord.song_id, class: "form_blind"
+    =f.select :practice_key, [["なんでも","なんでも"],["G","G"],["A","A"],["B","B"],["C","C"],["D","D"],["E","E"],["F","F"],["Em","Em"],["Dm","Dm"],["Am","Am"],["Gm","Gm"]]
+    =f.submit "OK"
 .chord-menu
   .chord-menu__key
     .key__key-display
