@@ -73,6 +73,7 @@ $(function () {
       "F",
       "F#",
       "G",
+      "G#",
       "A",
       "B♭",
       "B",
@@ -89,21 +90,19 @@ $(function () {
     key_index = absolute_note_array.indexOf(key);
 
     // 度数の場合は、keyの音に対して何列後ろに該当する音があるのか計算。1~7それぞれについて足す値は次の通り。
-    // 1->+0, 2->+2, 3->+4, 4->+5, 5->+7, 6->+9, 7->+10
+    // 1->+0, 2->+2, 3->+4, 4->+5, 5->+7, 6->+9, 7->+11
     // 場合分けが可能な限り少なく済むように変換操作を行う
 
     // 2倍して2を引くグループ
     const relative_note_array1 = ["1", "2", "3"];
     // 2倍して3を引くグループ
-    const relative_note_array2 = ["4", "5", "6"];
-    // 3を足すグループ
-    const relative_note_array3 = ["7"];
+    const relative_note_array2 = ["4", "5", "6", "7"];
 
     // 度数に対して用いる変数
     var changed_index;
 
     // そのまま表記するグループ
-    const symbol_should_not_changed = ["|", "m"];
+    const symbol_should_not_changed = ["|", "m", "<", ">", "w", "f", "t"];
 
     // #または♭に対して用いる変数
     const half_note_array = ["#", "♭"];
@@ -112,6 +111,7 @@ $(function () {
 
     $.each(chord_array, function (index, value) {
       changed_index = 0;
+
       if (symbol_should_not_changed.includes(value)) {
         output_array.push(value);
       } else if (relative_note_array1.includes(value)) {
@@ -120,19 +120,20 @@ $(function () {
       } else if (relative_note_array2.includes(value)) {
         changed_index = key_index + (value * 2 - 3);
         output_array.push(absolute_note_array[changed_index]);
-      } else if (relative_note_array3.includes(value)) {
-        changed_index = key_index + (value * 1 + 3);
-        output_array.push(absolute_note_array[changed_index]);
       } else if (half_note_array.includes(value)) {
         previous_note = output_array[output_array.length - 1];
         previous_index = absolute_note_array.indexOf(previous_note);
         if (value == "#") previous_index = previous_index + 1;
-
-        if (value == "♭") previous_index = previous_index - 1;
+        if (value == "♭") {
+          console.log(previous_index);
+          previous_index = previous_index - 1;
+          console.log(previous_index);
+        }
         if (previous_index == -1)
           previous_index = absolute_note_array.length - 1;
         output_array[output_array.length - 1] = "delete";
         output_array.push(absolute_note_array[previous_index]);
+        console.log(absolute_note_array[previous_index]);
       }
     });
     var output_array = output_array.join("");
@@ -157,12 +158,10 @@ $(function () {
     if (
       $(".key__key-display--relative-key").attr("style") == "display: flex;"
     ) {
-      console.log("移動ドが有効");
       output_text = chord_display_relative(chord_array, output_array);
     } else if (
       $(".key__key-display--relative-key").attr("style") == "display: none;"
     ) {
-      console.log("絶対表示が有効");
       output_text = chord_display_absolute(key, chord_array, output_array);
     } else {
       output_text = chord_display_absolute(key, chord_array, output_array);
@@ -217,11 +216,14 @@ $(function () {
     } else {
       if (note_selected == "移動ド") {
         $(".key__key-display--relative-key").css("display", "flex");
+        key_for_registration("relative-key");
       } else {
         $(".key__key-display--relative-key").hide();
         absolute_key(note_selected, key_now_state);
+        key_now_state = $(".key__key-display--now").text();
+
+        key_for_registration(key_now_state);
       }
-      key_now_state = $(".key__key-display--now").text();
       chord_display(key_now_state);
     }
   });
@@ -229,8 +231,15 @@ $(function () {
   $(document).ready(function () {
     var key_now_state = $(".key__key-display--now").text();
     key_now_state = $.trim(key_now_state);
-
     // absolute_key(note_selected, key_now_state);
     chord_display(key_now_state);
+    key_for_registration(key_now_state);
   });
+
+  // コード作成画面用
+  function key_for_registration(key_now_state) {
+    if ($("#key_name").get(0) != undefined) {
+      $("#key_name").val(key_now_state);
+    }
+  }
 });

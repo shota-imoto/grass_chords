@@ -1,3 +1,85 @@
 %h1 New Chord
-= render 'form', chord: @chord
-= link_to 'Back', chords_path
+.content
+  =form_with url: chords_path, method: :post, local: true do |f|
+    .contest__song-name
+      =f.text_field :song_name, id: "search_song_name",class: "for_search-dont_send_this_data_to_action"
+      =f.text_field :song_id, id: "selected_song_id"
+    .content__search-result
+    .content__song-help
+      =link_to "曲が存在しない場合は新しく登録してください", new_song_path, target: :_blank
+    .content__version-name
+      %h2 バージョン名
+      =f.text_field :version
+    .form__key
+    =f.text_field :key_name, class: "key-display--registration"
+    =f.fields_for :keys do |key_f|
+      .chord-menu
+        .chord-menu__key
+          .key__key-display
+            = key_f.text_field :name, class: "key-display--dafault", value: "key of G"
+            .key__key-display--now
+              key of G
+            .key__key-display--relative-key
+              移動ド
+          #chord-menu.chord-menu__key--palettes
+            .palettes__section
+              .palettes__palette.palettes__palette--one
+                移動ド
+            .palettes__section
+              .palettes__palette.palettes__palette--four
+                G
+              .palettes__palette.palettes__palette--four
+                A
+              .palettes__palette.palettes__palette--four
+                B
+              .palettes__palette.palettes__palette--four
+                C
+            .palettes__section
+              .palettes__palette.palettes__palette--four
+                D
+              .palettes__palette.palettes__palette--four
+                E
+              .palettes__palette.palettes__palette--four
+                F
+            .palettes__section
+              .palettes__palette.palettes__palette--three
+                m
+              .palettes__palette.palettes__palette--three
+                \#
+              .palettes__palette.palettes__palette--three
+                ♭
+            .palettes__section
+              .palettes__palette.palettes__palette--one
+                閉じる
+    .content__chord-text
+      =f.text_area :text, class:"chord-text--form"
+    .content__chord-btns
+      %input{type: "button", value: "G", class: "chord-btns--command"}
+      %input{type: "button", value: "A", class: "chord-btns--command"}
+      %input{type: "button", value: "B", class: "chord-btns--command"}
+      %input{type: "button", value: "C", class: "chord-btns--command"}
+      %input{type: "button", value: "D", class: "chord-btns--command"}
+      %input{type: "button", value: "E", class: "chord-btns--command"}
+      %input{type: "button", value: "F", class: "chord-btns--command"}
+      %input{type: "button", value: "#", class: "chord-btns--command"}
+      %input{type: "button", value: "♭", class: "chord-btns--command"}
+      %input{type: "button", value: "m", class: "chord-btns--command"}
+      %input{type: "button", value: "|", class: "chord-btns--command"}
+      %input{type: "button", value: "繰返し始点", class: "chord-btns--command"}
+      %input{type: "button", value: "繰返し終点", class: "chord-btns--command"}
+      %input{type: "button", value: "小節区切り", class: "chord-btns--command"}
+      %input{type: "button", value: "半小節", class: "chord-btns--command"}
+      %input{type: "button", value: "add", class: "chord-btns--command"}
+      %input{type: "button", value: "2/4拍子", class: "chord-btns--command"}
+      %input{type: "button", value: "4/4拍子", class: "chord-btns--command"}
+      %input{type: "button", value: "3/4拍子", class: "chord-btns--command"}
+      %input{type: "button", value: "拍子", class: "chord-btns--command"}
+      %input{type: "button", value: "削除", class: "chord-btns--command"}
+    .content__option
+      オプション
+      .option__artist-name
+        =f.collection_select :artist_id, Artist.all, :id, :name, include_blank: false
+      .option__albumname
+        =f.collection_select :album_id, Album.all, :id, :name, include_blank: false
+    .content__registration
+      =f.submit "登録"
