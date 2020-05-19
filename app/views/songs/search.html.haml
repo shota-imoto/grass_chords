@@ -17,15 +17,13 @@
     =link_to "詳細検索", search_page_songs_path
     .search-results__search-result
       - @songs.each do |song|
-        .search-result__song-info
-          =song.title
-          -# =song.jam
-          =song.standard
-          -# =song.beginner
-        .search-result__first-chord
-          -# songに従属している複数のchordデータをid降順に並べ替え→その一番最初のデータを取得→その中でもキー：textを表示
-          -if (song.chords.length > 0)
-            =song.chords.order(id: "DESC").first[:text]
-          -else
-            コードが登録されていません
+        =link_to song_path(song) do
+          .search-result__song-info
+            =song.title
+          .search-result__first-chord
+            -# songに従属している複数のchordデータをid降順に並べ替え→その一番最初のデータを取得→その中でもキー：textを表示
+            -if (song.chords.length > 0)
+              =song.chords.order(id: "DESC").first[:text]
+            -else
+              コードが登録されていません
         

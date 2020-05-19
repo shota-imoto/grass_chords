@@ -13,7 +13,14 @@ Rails.application.routes.draw do
   resources :chords, except: :index
   resources :scores
   resources :practices, except: [:new, :edit, :show]
-  resources :instruments, except: :index
-  resources :tuning_alls, except: :show
+  resources :instruments, except: :index do
+    collection do
+      get :search
+    end
+  end
+  resources :keys, only: :create
+  resources :tuning_alls, except: :show do
+  end
+  resources :tuning_all_form, only: [:new, :create]
   resources :finger_alls, except: :show
 end

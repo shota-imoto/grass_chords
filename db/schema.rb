@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_05_08_135325) do
+ActiveRecord::Schema.define(version: 2020_05_17_092808) do
 
   create_table "albums", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name", null: false
@@ -68,7 +68,7 @@ ActiveRecord::Schema.define(version: 2020_05_08_135325) do
   end
 
   create_table "keys", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
-    t.integer "name", null: false
+    t.string "name", null: false
     t.boolean "instrumental", null: false
     t.boolean "male", null: false
     t.boolean "female", null: false
@@ -122,12 +122,14 @@ ActiveRecord::Schema.define(version: 2020_05_08_135325) do
     t.bigint "instrument_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "user_id"
     t.index ["instrument_id"], name: "index_tuning_alls_on_instrument_id"
+    t.index ["user_id"], name: "index_tuning_alls_on_user_id"
   end
 
   create_table "tunings", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.integer "string_num", null: false
-    t.integer "note_name", null: false
+    t.string "note_name", null: false
     t.bigint "tuning_all_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -174,6 +176,7 @@ ActiveRecord::Schema.define(version: 2020_05_08_135325) do
   add_foreign_key "scores", "songs"
   add_foreign_key "songs", "users"
   add_foreign_key "tuning_alls", "instruments"
+  add_foreign_key "tuning_alls", "users"
   add_foreign_key "tunings", "tuning_alls"
   add_foreign_key "user_instruments", "instruments"
   add_foreign_key "user_instruments", "users"

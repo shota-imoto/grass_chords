@@ -6,3 +6,4 @@ json.array! @songs do |song|
   json.beginner song.beginner
   json.chord_text song.chords, :text
 end
+
