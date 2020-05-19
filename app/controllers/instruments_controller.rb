@@ -8,6 +8,20 @@ class InstrumentsController < ApplicationController
     redirect_to("/")
   end
 
+  def search
+    params[:keyword].strip!
+    keywords = params[:keyword].split(/\s/)
+    @instruments = Instrument.all
+    keywords.each do |keyword|
+      @instruments = @instruments.where("name like ?", "%#{keyword}%")
+    end
+
+    respond_to do |format|
+      format.html
+      format.json
+    end
+  end
+
   private
 
   def instrument_params

@@ -1,0 +1,2 @@
+class FigerAllsController < ApplicationController
+end
