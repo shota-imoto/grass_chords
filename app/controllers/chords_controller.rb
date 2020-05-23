@@ -80,23 +80,23 @@ class ChordsController < ApplicationController
         "G",
         "G#",
         "A",
-        "B♭",
+        "Bb",
         "B",
         "C",
         "C#",
         "D",
-        "E♭",
+        "Eb",
         "E",
         "F",
         "F#",
         "G",
         "A",
-        "B♭",
+        "Bb",
         "B",
         "C",
         "C#",
         "D",
-        "E♭",
+        "Eb",
         "E",
         "F",
         "F#",
@@ -117,22 +117,22 @@ class ChordsController < ApplicationController
       ]
       relative_note_array = [
         "1",
-        "1#",
+        "1B",
         "2",
-        "3♭",
+        "3b",
         "3",
         "4",
-        "4#",
+        "4B",
         "5",
-        "6♭",
+        "6b",
         "6",
-        "7♭",
+        "7b",
         "7",
       ]
 
-      symbol_array = ["#","♭"]
-      no_change_symbol_array = ["m","+","*","<",">","w","f","t","/","|"]
-      begin_symbol = ["<","w","f","t","|","/"]
+      symbol_array = ["#","b"]
+      no_change_symbol_array = ["m","{","}","@","$","t","'","‘"]
+      begin_symbol = ["{","@","$","t","'"]
       
       chords = @chord.text.split("")
       key_note = params[:key_name].delete("key of ")
@@ -140,17 +140,14 @@ class ChordsController < ApplicationController
       key_index = absolute_note_array.index(key_note)
       output_array = []
       chords.each do |chord|
-      binding.pry
-
+        binding.pry
         if absolute_note_array.include? chord
           difference_index = absolute_note_array.index(chord)
           difference_index = difference_index - key_index
-          
           output_array << difference_index
-        # chord=就職記号のとき,前の文字が音階記号以外の場合は、無視する
-        elsif (difference_note_array.include? output_array.last.to_s)
-
-          if symbol_array.include? chord            
+        # chord=修飾記号のとき,前の文字が音階記号以外の場合は、無視する         
+        elsif symbol_array.include? chord
+          if (difference_note_array.include? output_array.last.to_s)            
             output_last = output_array.last
             if chord == "#"
               if output_last != 11
@@ -158,8 +155,7 @@ class ChordsController < ApplicationController
               elsif output_last == 11
                 output_last = 0
               end
-            elsif chord == "♭"
-              
+            elsif chord == "b"
               if output_last != 0
                 output_last = output_last - 1
               elsif output_last == 0
@@ -168,13 +164,14 @@ class ChordsController < ApplicationController
             end 
             output_array.pop
             output_array << output_last
-          elsif no_change_symbol_array.include? chord
-            output_array << chord
           end
+        elsif no_change_symbol_array.include? chord
+            output_array << chord
         elsif (begin_symbol.include? chord)
-          output_array << chord
+          output_array << chor
         end
       end
+
       output_array.each_with_index do |output,i|
         if symbol_array.include? output
         elsif no_change_symbol_array.include? output

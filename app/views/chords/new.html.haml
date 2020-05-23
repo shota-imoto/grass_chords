@@ -11,12 +11,11 @@
       %h2 バージョン名
       =f.text_field :version
     .form__key
-    =f.text_field :key_name, class: "key-display--registration"
+    = f.hidden_field :key_name, class: "key-display--registration"
     =f.fields_for :keys do |key_f|
       .chord-menu
         .chord-menu__key
           .key__key-display
-            = key_f.text_field :name, class: "key-display--dafault", value: "key of G"
             .key__key-display--now
               key of G
             .key__key-display--relative-key
@@ -47,7 +46,7 @@
               .palettes__palette.palettes__palette--three
                 \#
               .palettes__palette.palettes__palette--three
-                ♭
+                b
             .palettes__section
               .palettes__palette.palettes__palette--one
                 閉じる
@@ -62,19 +61,17 @@
       %input{type: "button", value: "E", class: "chord-btns--command"}
       %input{type: "button", value: "F", class: "chord-btns--command"}
       %input{type: "button", value: "#", class: "chord-btns--command"}
-      %input{type: "button", value: "♭", class: "chord-btns--command"}
+      %input{type: "button", value: "b", class: "chord-btns--command"}
       %input{type: "button", value: "m", class: "chord-btns--command"}
-      %input{type: "button", value: "|", class: "chord-btns--command"}
       %input{type: "button", value: "繰返し始点", class: "chord-btns--command"}
       %input{type: "button", value: "繰返し終点", class: "chord-btns--command"}
       %input{type: "button", value: "小節区切り", class: "chord-btns--command"}
-      %input{type: "button", value: "半小節", class: "chord-btns--command"}
-      %input{type: "button", value: "add", class: "chord-btns--command"}
       %input{type: "button", value: "2/4拍子", class: "chord-btns--command"}
       %input{type: "button", value: "4/4拍子", class: "chord-btns--command"}
       %input{type: "button", value: "3/4拍子", class: "chord-btns--command"}
-      %input{type: "button", value: "拍子", class: "chord-btns--command"}
       %input{type: "button", value: "削除", class: "chord-btns--command"}
+      %input{type: "button", value: "繰返し", class: "chord-btns--command"}
+      
     .content__option
       オプション
       .option__artist-name

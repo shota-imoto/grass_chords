@@ -10,6 +10,7 @@ class SongsController < ApplicationController
   # GET /songs/1
   # GET /songs/1.json
   def show
+    @song = Song.find(params[:id])
   end
 
   # GET /songs/new
@@ -82,15 +83,12 @@ class SongsController < ApplicationController
     end
     
   end
-
-
     # if (params[:keyword].nil?)
     # else
     #   keywords.each do |keyword|
     #     @songs = @songs.where("title like ?", "%#{keyword}%")
     #   end
     # end
-    
   end
 
   def search_page
