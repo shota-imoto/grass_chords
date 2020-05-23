@@ -1,0 +1,67 @@
+@font-face {
+  font-family: "score-base";
+  src: font-url("Musisync-qYy6_base.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "score-repeat";
+  src: font-url("Dvmarticulations-Yqpy.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "score-greek";
+  src: font-url("ancient-geek.regular.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+
+// フォント調整
+.font_alphabet {
+  font-family: sans-serif;
+  font-size: 112px;
+  letter-spacing: 20px;
+}
+
+.font_base {
+  font-family: "score-base";
+  font-size: 160px;
+}
+
+.font_repeat {
+  font-family: "score-repeat";
+  font-size: 128px;
+}
+
+.font_greek {
+  font-family: "score-greek";
+  display: inline-block;
+  margin-right: 1px;
+}
+
+.font_minor {
+  font-family: sans-serif;
+  font-size: 80px;
+}
+
+// 小節区切りのサイズ調整
+.font_bar {
+  display: inline-block;
+  transform: scale(1.1, 1.5);
+  margin: 10px 15px 10px 32px;
+}
+
+.font_wbar_begin {
+  display: inline-block;
+  transform: scale(1.5);
+  margin: 10px 0 10px 45px;
+}
+
+.font_wbar_end {
+  display: inline-block;
+  transform: scale(1.5);
+  margin: 10px 30px 10px 15px;
+}

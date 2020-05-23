@@ -10,10 +10,70 @@
   = @song.standard
 %p
   %strong Beginner:
+  .font_base
   = @song.beginner
-%p
-  %strong User:
-  = @song.user
+
+
 = link_to 'Edit', edit_song_path(@song)
 |
 = link_to 'Back', songs_path
+
+.content__add-key
+  %h2 定番キーを追加
+  =form_with url: keys_path, method: :post, local: true do |f|
+    = f.hidden_field :song_id, value: @song.id
+    = f.check_box :instrumental
+    = f.label :instrumental
+    = f.check_box :male
+    = f.label :male
+    = f.check_box :female
+    = f.label :female
+    .chord-menu
+      .chord-menu__key
+        .key__key-display
+          = f.text_field :name, id: "key_name", class: "key-display--default", value: "key of G"
+          .key__key-display--now
+            key of G
+          .key__key-display--relative-key
+            移動ド
+        #chord-menu.chord-menu__key--palettes
+          .palettes__section
+            .palettes__palette.palettes__palette--one
+              移動ド
+          .palettes__section
+            .palettes__palette.palettes__palette--four
+              G
+            .palettes__palette.palettes__palette--four
+              A
+            .palettes__palette.palettes__palette--four
+              B
+            .palettes__palette.palettes__palette--four
+              C
+          .palettes__section
+            .palettes__palette.palettes__palette--four
+              D
+            .palettes__palette.palettes__palette--four
+              E
+            .palettes__palette.palettes__palette--four
+              F
+          .palettes__section
+            .palettes__palette.palettes__palette--three
+              m
+            .palettes__palette.palettes__palette--three
+              \#
+            .palettes__palette.palettes__palette--three
+              b
+          .palettes__section
+            .palettes__palette.palettes__palette--one
+              閉じる
+    = f.submit "登録"
+.content__chord
+  - @song.chords.each do |chord|
+    - chord_array = chord.text.split(//)
+    .chord_text{id: "chord_#{chord.id}"}
+      - chord_array.each do |char|
+        %a.chord_text__chord_letter.hidden
+          =char
+        %a.chord_letter__display
+
+

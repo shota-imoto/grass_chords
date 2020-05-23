@@ -5,8 +5,7 @@
 @import "modules/contacts";
 @import "modules/pdfs";
 @import "modules/songs";
-
-//
+@import "modules/font_read";
 
 .wrapper {
   height: 100vh;
@@ -110,4 +109,8 @@
   &--four {
     width: calc(100% / 4 - 3px * 2);
   }
+}
+
+.hidden {
+  display: none;
 }

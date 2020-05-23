@@ -24,7 +24,10 @@
           =link_to "楽器", new_instrument_path
         %li.list--childlist
           =link_to "コード進行", new_chord_path
-        %li.list--childlist コード運指
+        %li.list--childlist
+          =link_to "コード運指", new_finger_all_path
+        %li.list--childlist
+          =link_to "チューニング", new_tuning_all_path
         %li.list--childlist
           =link_to "楽曲", new_song_path
       %li 譜面
@@ -33,7 +36,6 @@
         %li.list--childlist 譜面の作成
       %li.lists__list お問い合わせ
       %li.lists__list ログアウト 
-
   .contents__whats-new
     .whats-new__title What's new?
     - @chords.each do |chord|
