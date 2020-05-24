@@ -131,8 +131,8 @@ class ChordsController < ApplicationController
       ]
 
       symbol_array = ["#","b"]
-      no_change_symbol_array = ["m","{","}","@","$","t","'","‘"]
-      begin_symbol = ["{","@","$","t","'"]
+      no_change_symbol_array = ["m","{","}","@","$","#","'","‘"]
+      begin_symbol = ["{","@","$","#","'"]
       
       chords = @chord.text.split("")
       key_note = params[:key_name].delete("key of ")
@@ -149,7 +149,7 @@ class ChordsController < ApplicationController
         elsif symbol_array.include? chord
           if (difference_note_array.include? output_array.last.to_s)            
             output_last = output_array.last
-            if chord == "#"
+            if chord == "B"
               if output_last != 11
                 output_last = output_last + 1
               elsif output_last == 11

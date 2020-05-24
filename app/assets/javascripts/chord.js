@@ -3,9 +3,9 @@ $(function () {
   // コード表示の切替
 
   // 変換後のコードテキストをhtml形式で追加
-  function addChordHTML(letter) {
+  function addChordHTML(letter, next_letter) {
     // 書体の判定用
-    const array_font_base = ["'", "{", "}", "@", "$", "t", "B", "b"];
+    const array_font_base = ["'", "{", "}", "@", "$", "#", "B", "b"];
     const array_font_repeat = ["‘"];
     const array_font_number = ["1", "2", "3", "14", "4", "41", "42"];
     const array_font_alphabet = [
@@ -34,47 +34,63 @@ $(function () {
       "F",
       "FB",
     ];
-    const array_font_minor = ["m"];
-    var add_class = "none-font";
+    const symbol_not_note = ["'", "{", "}", "@", "$", "#"];
+    const symbol_beat = ["@", "$", "#"];
+    const symbol_border = ["'", "{", "}"];
 
-    if (array_font_base.includes(letter)) add_class = "font_base";
-    else if (array_font_repeat.includes(letter)) add_class = "font_repeat";
-    else if (array_font_number.includes(letter)) add_class = "font_greek";
-    else if (array_font_minor.includes(letter)) add_class = "font_minor";
+    var html = "";
 
-    // "#"と"B"のフォントかぶりを避けるためelse if ではなくif
+    if (array_font_base.includes(letter))
+      html = `<td class="chord_letter__display font_base">${letter}</td>`;
+    else if (array_font_repeat.includes(letter))
+      html = `<td class="chord_letter__display font_repeat">${letter}</td>`;
+    else if (array_font_number.includes(letter))
+      html = `<td class="chord_letter__display font_greek">${letter}</td>`;
+
+    if (symbol_not_note.includes(letter.charAt(0)) && letter.length == 2) {
+      letter_array = letter.split("");
+      html = `<td class="chord_letter__display font_base position_adjust">`;
+
+      $.each(letter_array, function (i, letter) {
+        if (letter == "'") html += `<span class="font_bar">'</span>`;
+        else if (letter == "{") {
+          html += `<span class="font_wbar_begin">{</span>`;
+        } else if (letter == "}")
+          html += `<span class="font_wbar_end">}</span>`;
+        else if (symbol_beat.includes(letter))
+          html += `<span class="font_beat">${letter}</span>`;
+      });
+      html += `</td>`;
+    }
+
     if (array_font_alphabet.includes(letter)) {
-      if (letter.length == 2) {
-        var first_letter = letter.charAt(0);
-        var second_letter = letter.charAt(1);
-
-        add_class = `font-alphabet">${first_letter}<a class="chord_letter__display font_base`;
-        letter = second_letter;
+      // "#"と"B"のフォントかぶりを避けるためelse if ではなくif
+      if (next_letter != "m") {
+        if (letter.length == 2)
+          html = `<td class="chord_letter__display font_base"><span class="font_alphabet">${letter.charAt(
+            0
+          )}</span><span class="font-base">${letter.charAt(1)}</span></td>`;
+        else
+          html = `<td class="chord_letter__display font_alphabet">${letter}</td>`;
       } else {
-        add_class = "font_alphabet";
+        if (letter.length == 2)
+          html = `<td class="chord_letter__display font_base"><span class="font_alphabet">${letter.charAt(
+            0
+          )}</span><span class="font-base">${letter.charAt(
+            1
+          )}</span><span class="font_minor">m</span></td>`;
+        else
+          html = `<td class="chord_letter__display"><span class ="font_alphabet">${letter}</span><span class="font_minor">m</span></td>`;
       }
     }
-    if (letter == "'") add_class = add_class + " font_bar";
-    if (letter == "{") add_class = add_class + " font_wbar_begin";
-    if (letter == "}") add_class = add_class + " font_wbar_end";
 
-    var html = `<a class="chord_letter__display ${add_class}">${letter}</a>`;
+    if (letter == "'")
+      html = `<td class="chord_letter__display font_base font_bar">${letter}</td>`;
+    else if (letter == "{")
+      html = `<td class="chord_letter__display font_base font_wbar_begin">${letter}</td>`;
+    else if (letter == "}")
+      html = `<td class="chord_letter__display font_base font_wbar_end">${letter}</td>`;
     return html;
-  }
-
-  function chordNewLine() {
-    const array_border = ["{", "}", "'"];
-    var counter = 0;
-
-    $(".chord_letter__display").each(function (index, element) {
-      if (array_border.includes($(element).text())) counter += 1;
-      console.log(counter);
-
-      if (counter == 3) {
-        counter = 0;
-        // $(element).append("<br></a><a display='inline-block'>'</a>");
-      }
-    });
   }
 
   // 移動ド表示するための関数
@@ -89,15 +105,31 @@ $(function () {
     if (letter == "7") letter = "42";
 
     var output = new Object();
-    output.letter = letter;
+    output.letter = html;
     output.delete_flag = delete_flag;
     return output;
   }
 
+  function note_relative_to_absolute(key_index, letter) {
+    // 度数の場合は、keyの音に対して何列後ろに該当する音があるのか計算。1~7それぞれについて足す値は次の通り。
+    // 1->+0, 2->+2, 3->+4, 4->+5, 5->+7, 6->+9, 7->+11
+    // 場合分けが可能な限り少なく済むように変換操作を行う
+
+    // 2倍して2を引くグループ
+    const relative_note_array1 = ["1", "2", "3"];
+    // 2倍して3を引くグループ
+    const relative_note_array2 = ["4", "5", "6", "7"];
+    if (relative_note_array1.includes(letter)) {
+      changed_index = key_index + (letter * 2 - 2);
+    } else if (relative_note_array2.includes(letter)) {
+      changed_index = key_index + (letter * 2 - 3);
+    }
+
+    return changed_index;
+  }
+
   // G~F表示するための関数
   function chord_display_absolute(key, letter, last_letter) {
-    var minor_flag = 0;
-
     // 現在のキー表示を算出
     // 「key of 」という文字列を削除
     key = key.replace(/key of /g, "");
@@ -167,23 +199,25 @@ $(function () {
     // keyがabsolute_note_arrayの何番目に位置するか検索
     key_index = absolute_note_array.indexOf(key);
 
-    // 度数の場合は、keyの音に対して何列後ろに該当する音があるのか計算。1~7それぞれについて足す値は次の通り。
-    // 1->+0, 2->+2, 3->+4, 4->+5, 5->+7, 6->+9, 7->+11
-    // 場合分けが可能な限り少なく済むように変換操作を行う
-
-    // 2倍して2を引くグループ
-    const relative_note_array1 = ["1", "2", "3"];
-    // 2倍して3を引くグループ
-    const relative_note_array2 = ["4", "5", "6", "7"];
-
     // keyに対して何度の音なのか、配列中の順番を表す値
     var changed_index;
+    var output_letter;
+
+    // 相対音のグループ(絶対音配列に変換する)
+    const relative_note_array = ["1", "2", "3", "4", "5", "6", "7"];
 
     // そのまま表記するグループ
-    const symbol_should_not_changed = ["'", "m", "{", "}", "@", "$", "t", "‘"];
+    const symbol_should_not_changed = ["m", "‘"];
+
+    // 区切り記号や拍子などのグループ(ひとまとめにする)
+    const symbol_not_note = ["'", "{", "}", "@", "$", "#"];
+    // 上記のグループの中で区切り記号を表すグループ
+    const symbol_beat = ["@", "$", "#"];
+    // 上記のグループの中で拍子を表すグループ
+    const symbol_border = ["'", "{", "}"];
 
     // #またはbに対して用いる変数 フォントの配列より#はBで表す。
-    const half_note_array = ["B", "b"];
+    const half_note_array = ["B", "b", "m"];
     var previous_index;
 
     // $.each(chord_array, function (index, value) {
@@ -191,29 +225,54 @@ $(function () {
     changed_index = 0;
 
     if (symbol_should_not_changed.includes(letter)) {
-    } else if (relative_note_array1.includes(letter)) {
-      changed_index = key_index + (letter * 2 - 2);
-      letter = absolute_note_array[changed_index];
-    } else if (relative_note_array2.includes(letter)) {
-      changed_index = key_index + (letter * 2 - 3);
-      letter = absolute_note_array[changed_index];
+      output_letter = letter;
+    } else if (symbol_not_note.includes(letter)) {
+      if (symbol_not_note.includes(last_letter)) {
+        delete_flag = 1;
+        if (symbol_beat.includes(letter) && symbol_beat.includes(last_letter)) {
+          output_letter = letter;
+        } else if (
+          symbol_border.includes(letter) &&
+          symbol_border.includes(last_letter)
+        ) {
+          output_letter = letter;
+        } else {
+          output_letter = last_letter + letter;
+        }
+      } else output_letter = letter;
+    } else if (relative_note_array.includes(letter)) {
+      changed_index = note_relative_to_absolute(key_index, letter);
+      output_letter = absolute_note_array[changed_index];
     } else if (half_note_array.includes(letter)) {
-      previous_index = absolute_note_array.indexOf(last_letter);
-      delete_flag = 1;
+      previous_index = absolute_note_array.indexOf(
+        absolute_note_array[last_letter]
+      );
 
-      if (letter == "B") previous_index = previous_index + 1;
+      if (letter == "B") {
+        delete_flag = 1;
 
-      if (letter == "b") previous_index = previous_index - 1;
+        previous_index = note_relative_to_absolute(key, letter);
+        previous_index = previous_index + 1;
+        output_letter = absolute_note_array[previous_index];
+      }
+      if (letter == "b") {
+        delete_flag = 1;
+        previous_index = note_relative_to_absolute(key, letter);
+        previous_index = previous_index - 1;
+        output_letter = absolute_note_array[previous_index];
+      }
       if (previous_index == -1) {
         previous_index = absolute_note_array.length - 1;
-        letter = absolute_note_array[previous_index];
+        output_letter = absolute_note_array[previous_index];
       }
+      if (letter == "m")
+        output_letter = absolute_note_array[previous_index] + "m";
     } else {
-      letter = "";
+      output_letter = "";
     }
 
     var output = new Object();
-    output.letter = letter;
+    output.letter = output_letter;
     output.delete_flag = delete_flag;
     return output;
   }
@@ -221,41 +280,75 @@ $(function () {
   // コード表示の切替 メイン関数
   function chord_display(key) {
     $(".chord_letter__display").remove();
-    $(".chord_text__chord_letter").each(function (i, element) {
-      var letter = $(element).text();
+    $(".chord_text").each(function (i, record) {
+      // 区切り記号のカウント→３カウントごとに新しい行に移行
+      var border_counter = 0;
 
-      var last_letter;
-      if (i == 0) {
-        last_letter = "";
-      } else if (i > 0) {
-        last_letter = $(".chord_text__chord_letter")[i - 1];
-        last_letter = last_letter.textContent;
-      }
+      chord_id = $(record).attr("id");
 
-      var letter = element;
-      letter = letter.textContent;
-      letter = letter.trim();
+      var tableHTML = `<table class="table_${chord_id}"><tbody><tr>`;
+      $(record)
+        .children()
+        .each(function (j, data) {
+          letter = $(data).text().trim();
 
-      var output;
-      // 移動ドがstyle属性を持っているか判定
-      if (
-        $(".key__key-display--relative-key").attr("style") == "display: flex;"
-      ) {
-        output = chord_display_relative(letter);
-      } else if (
-        $(".key__key-display--relative-key").attr("style") == "display: none;"
-      ) {
-        output = chord_display_absolute(key, letter, last_letter);
-      } else {
-        output = chord_display_absolute(key, letter, last_letter);
-      }
-      // $(".chord_letter__display")[i].textContent = output.letter;
+          // 前の文字を取得
+          var last_letter;
+          if (j == 0) {
+            last_letter = "";
+          } else if (j > 0) {
+            last_letter = $(".chord_text__chord_letter")[j - 1];
+            last_letter = $(last_letter).text().trim();
+          }
 
-      var insertHTML = addChordHTML(output.letter);
-      var chord_id = $(element).parent().attr("id");
-      $("#" + chord_id).before(insertHTML);
+          // 次の文字を取得
+          var next_letter;
+          var chord_length = $("#" + chord_id).children().length;
+          if (j == chord_length) next_letter = "";
+          else if (j < chord_length) {
+            next_letter = $(".chord_text__chord_letter")[j + 1];
+            next_letter = $(next_letter).text().trim();
+          }
+
+          var output;
+          // 移動ドがstyle属性を持っているか判定
+          if (
+            $(".key__key-display--relative-key").attr("style") ==
+            "display: flex;"
+          ) {
+            output = chord_display_relative(letter);
+          } else if (
+            $(".key__key-display--relative-key").attr("style") ==
+            "display: none;"
+          ) {
+            output = chord_display_absolute(key, letter, last_letter);
+          } else {
+            output = chord_display_absolute(key, letter, last_letter);
+          }
+
+          // delete_flag == 1、つまり#or♭処理をした場合は、前列の文字が不要となるので削除する
+          if (output.delete_flag == 1) {
+            var delete_index = tableHTML.lastIndexOf("<td ");
+            tableHTML = tableHTML.substring(0, delete_index);
+          }
+
+          tableHTML += addChordHTML(output.letter, next_letter);
+
+          // 列追加の判定＆処理
+          const array_border = ["{", "}", "'"];
+          if (array_border.includes(letter)) {
+            border_counter += 1;
+            if (border_counter % 3 == 0) {
+              tableHTML += `</tr><tr><td class="chord_letter__display font_base font_bar" new_row>'</td>`;
+              border_counter = 1;
+            }
+          }
+        });
+
+      tableHTML += `</tr></tbody></table>`;
+
+      $(".content__chord").append(tableHTML);
     });
-    chordNewLine();
   }
 
   //----------------------------------------------------------------------------//

@@ -67,6 +67,7 @@
             .palettes__palette.palettes__palette--one
               閉じる
     = f.submit "登録"
+    .space-for-dev
 .content__chord
   - @song.chords.each do |chord|
     - chord_array = chord.text.split(//)

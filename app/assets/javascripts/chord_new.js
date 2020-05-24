@@ -2,8 +2,6 @@ $(function () {
   $(document).on("touchend mouseup", ".chord-btns--command", function () {
     var input = $(this).val();
 
-    const half_note_array = ["#", "b"];
-
     // 半音の並びを定義
     const absolute_note_array = [
       "G",
@@ -37,7 +35,7 @@ $(function () {
     if (input == "小節区切り") input = "'";
     if (input == "2/4拍子") input = "@";
     if (input == "4/4拍子") input = "$";
-    if (input == "3/4拍子") input = "t";
+    if (input == "3/4拍子") input = "#";
     if (input == "繰返し") input = "‘";
     if (input == "削除") {
       input = $(".chord-text--form").text();
