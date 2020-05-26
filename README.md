@@ -69,13 +69,13 @@
 
 ### table
 
-| name      | type    | option                         |
-| --------- | ------- | ------------------------------ |
-| song_id   | integer | null: false, foreign_key: true |
-| artist_id | integer | foreign_key: true              |
-| album_id  | integer | foreign_key: true              |
-| user_id   | integer | foreign_key: true              |
-| text      | text    | null: false, unique: true      |
+| name        | type    | option                         |
+| ----------- | ------- | ------------------------------ |
+| song_id     | integer | null: false, foreign_key: true |
+| artist_id   | integer | foreign_key: true              |
+| album_id    | integer | foreign_key: true              |
+| user_id     | integer | foreign_key: true              |
+| text→delete | text    | null: false, unique: true      |
 
 ### asocciation
 
@@ -84,6 +84,24 @@
 - belongs_to :artist
 - belongs_to :album
 - has_many :likes, dependent: :destroy
+- has_many :chordunit
+
+## chordunit
+
+### table
+
+| name     | type    | option      |
+| -------- | ------- | ----------- |
+| address  | integer | null: false |
+| text     | text    |             |
+| leftbar  | string  |             |
+| rightbar | string  |             |
+| beat     | string  |             |
+| chord_id | integer | foreign_key |
+
+### asocciation
+
+- belongs_to :chord
 
 ## artist
 

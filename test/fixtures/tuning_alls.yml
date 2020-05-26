@@ -4,8 +4,10 @@
 # model remove the '{}' from the fixture names and add the columns immediately
 # below each fixture, per the syntax in the comments below
 #
-one: {}
+tuning_all1:
+  name: オープンGチューニング
 # column: value
 #
-two: {}
+tuning_all2:
+  name: 変則Dチューニング
 # column: value

@@ -1,13 +1,13 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-one:
-  song: one
+chord1:
+  song: song4
   artist: one
   album: one
-  text: MyText
+  user: user2
 
-two:
-  song: two
+chord2:
+  song: song4
   artist: two
   album: two
-  text: MyText
+  user: user2
