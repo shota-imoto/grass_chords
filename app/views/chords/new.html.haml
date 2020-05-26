@@ -1,6 +1,6 @@
 %h1 New Chord
 .content
-  =form_with url: chords_path, method: :post, local: true do |f|
+  =form_with model: @chord, local: true do |f|
     .contest__song-name
       =f.text_field :song_name, id: "search_song_name",class: "for_search-dont_send_this_data_to_action"
       =f.text_field :song_id, id: "selected_song_id"
@@ -10,48 +10,24 @@
     .content__version-name
       %h2 バージョン名
       =f.text_field :version
-    .form__key
-    = f.hidden_field :key_name, class: "key-display--registration"
-    =f.fields_for :keys do |key_f|
-      .chord-menu
-        .chord-menu__key
-          .key__key-display
-            .key__key-display--now
-              key of G
-            .key__key-display--relative-key
-              移動ド
-          #chord-menu.chord-menu__key--palettes
-            .palettes__section
-              .palettes__palette.palettes__palette--one
-                移動ド
-            .palettes__section
-              .palettes__palette.palettes__palette--four
-                G
-              .palettes__palette.palettes__palette--four
-                A
-              .palettes__palette.palettes__palette--four
-                B
-              .palettes__palette.palettes__palette--four
-                C
-            .palettes__section
-              .palettes__palette.palettes__palette--four
-                D
-              .palettes__palette.palettes__palette--four
-                E
-              .palettes__palette.palettes__palette--four
-                F
-            .palettes__section
-              .palettes__palette.palettes__palette--three
-                m
-              .palettes__palette.palettes__palette--three
-                \#
-              .palettes__palette.palettes__palette--three
-                b
-            .palettes__section
-              .palettes__palette.palettes__palette--one
-                閉じる
-    .content__chord-text
-      =f.text_area :text, class:"chord-text--form"
+    .chord_display
+      -12.times do |i|
+        .chord_display__row{id: "row_#{i}"}
+          -8.times do |j|
+            .chord_display__unit{id: "unit_#{i*8+j}"}
+              .unit--beat @
+              .unit--leftbar {
+              .unit--note B
+              .unit--half_note G
+              .unit--modifier m
+              .unit--rightbar }
+            =f.fields_for :chordunits do |unit_f|
+              =unit_f.hidden_field :address, value: i*8+j 
+              =unit_f.text_field :text
+              =unit_f.text_field :leftbar
+              =unit_f.text_field :rightbar
+              =unit_f.text_field :beat
+  
     .content__chord-btns
       %input{type: "button", value: "G", class: "chord-btns--command"}
       %input{type: "button", value: "A", class: "chord-btns--command"}

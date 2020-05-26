@@ -3,7 +3,9 @@ class ApplicationController < ActionController::Base
     before_action :set_current_user
 
     def set_current_user
-      @user = User.find(current_user_permit[:user_id])
+      if user_signed_in?
+        @user = User.find(current_user_permit[:user_id])
+      end
     end
 
     private

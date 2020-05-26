@@ -68,13 +68,9 @@
               閉じる
     = f.submit "登録"
     .space-for-dev
+.chord_link
+  -@song.chords.each do |chord|
+    =link_to chord.id, chord_path(chord.id)
 .content__chord
   - @song.chords.each do |chord|
-    - chord_array = chord.text.split(//)
-    .chord_text{id: "chord_#{chord.id}"}
-      - chord_array.each do |char|
-        %a.chord_text__chord_letter.hidden
-          =char
-        %a.chord_letter__display
-
-
+    =link_to "Reliable", likes_path(chord_id: chord.id),method: :post
