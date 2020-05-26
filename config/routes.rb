@@ -11,6 +11,7 @@ Rails.application.routes.draw do
     end
   end
   resources :chords, except: :index
+  resources :likes, only: :create
   resources :scores
   resources :practices, except: [:new, :edit, :show]
   resources :instruments, except: :index do

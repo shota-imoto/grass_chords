@@ -3,12 +3,29 @@
     =@chord.song.title
   %h2
     =@chord.version
+.like-btn
+  =link_to "Reliable", likes_path, method: :post
 .practice-btn
   .practice-btn__display 練習してるボタン
   =form_with url: practices_path, method: :post, local:true do |f|
     =f.text_field :song_id, value: @chord.song_id, class: "form_blind"
     =f.select :practice_key, [["なんでも","なんでも"],["G","G"],["A","A"],["B","B"],["C","C"],["D","D"],["E","E"],["F","F"],["Em","Em"],["Dm","Dm"],["Am","Am"],["Gm","Gm"]]
     =f.submit "OK"
+.chord_display
+  -12.times do |i|
+    .chord_display__row{id: "row_#{i}"}
+      -8.times do |j|
+        .chord_display__unit{id: "unit_#{i*8+j}"}
+          .unit--beat
+          .unit--leftbar
+          .unit--note
+          .unit--half_note
+          .unit--modifier
+          .unit--rightbar
+        
+    
+
+  
 .chord-menu
   .chord-menu__key
     .key__key-display
@@ -53,4 +70,3 @@
     .chord-display--chord-score
       
     .chord-display--text
-      =@chord.text

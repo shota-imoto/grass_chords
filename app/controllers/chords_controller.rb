@@ -11,12 +11,12 @@ class ChordsController < ApplicationController
   # GET /chords/1.json
   def show
     @chord = Chord.find(params[:id])
-
   end
 
   # GET /chords/new
   def new
     @chord = Chord.new
+    @chord.chordunits.build
   end
 
   # GET /chords/1/edit
@@ -26,18 +26,10 @@ class ChordsController < ApplicationController
   # POST /chords
   # POST /chords.json
   def create
-    
     @chord = Chord.new(chord_params)
-    chord_to_num
-    respond_to do |format|
-      if @chord.save
-        format.html { redirect_to @chord, notice: 'Chord was successfully created.' }
-        format.json { render :show, status: :created, location: @chord }
-      else
-        format.html { render :new }
-        format.json { render json: @chord.errors, status: :unprocessable_entity }
-      end
-    end
+    # 一意性制約をaddressカラムに設定しているため、違うコード進行中のコードユニットと重複して保存できない？？
+    @chord.save
+
   end
 
   # PATCH/PUT /chords/1
@@ -72,7 +64,7 @@ class ChordsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def chord_params
-      params.permit(:song_id, :artist_id, :album_id, :text, :version, :key_now_state).merge(user_id: current_user.id)
+      params.require(:chord).permit(:song_id, :artist_id, :album_id, :version, chordunits_attributes: [:address, :text, :leftbar, :rightbar, :beat]).merge(user_id: current_user.id)
     end
 
     def chord_to_num
