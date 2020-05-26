@@ -4,8 +4,12 @@
 # model remove the '{}' from the fixture names and add the columns immediately
 # below each fixture, per the syntax in the comments below
 #
-one: {}
+album1:
+  name: Bluegrass Banjo
+  artist: artist3
 # column: value
 #
-two: {}
+album2:
+  name: Foggy Mountain Special
+  artist: artist3
 # column: value

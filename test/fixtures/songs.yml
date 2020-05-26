@@ -1,15 +1,29 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-one:
-  title: MyString
-  jam: false
-  standard: 
+song1:
+  title: Why Did You Wonder
+  jam: true
+  standard: true
   beginner: false
-  user: one
+  user: user1
 
-two:
-  title: MyString
+song2:
+  title: She's only sleeping
   jam: false
-  standard: 
+  standard: true
   beginner: false
-  user: two
+  user: user1
+
+song3:
+  title: Little Cabin Home on the Hill
+  jam: true
+  standard: true
+  beginner: true
+  user: user2
+
+song4:
+  title: Foggy Moutain Breakdown
+  jam: true
+  standard: true
+  beginner: true
+  user: user3

@@ -4,8 +4,54 @@
 # model remove the '{}' from the fixture names and add the columns immediately
 # below each fixture, per the syntax in the comments below
 #
-one: {}
+tuning1:
+  string_num: 1
+  note_name: D
+  tuning_all: 1
+
 # column: value
 #
-two: {}
+tuning2:
+  string_num: 2
+  note_name: B
+  tuning_all: 1
+
+tuning3:
+  string_num: 3
+  note_name: G
+  tuning_all: 1
+
+tuning4:
+  string_num: 4
+  note_name: D
+  tuning_all: 1
 # column: value
+tuning5:
+  string_num: 5
+  note_name: G
+  tuning_all: 1
+
+tuning6:
+  string_num: 1
+  note_name: D
+  tuning_all: 2
+
+tuning7:
+  string_num: 2
+  note_name: A
+  tuning_all: 1
+
+tuning8:
+  string_num: 3
+  note_name: FB
+  tuning_all: 1
+
+tuning9:
+  string_num: 4
+  note_name: D
+  tuning_all: 1
+
+tuning10:
+  string_num: 5
+  note_name: FB
+  tuning_all: 1

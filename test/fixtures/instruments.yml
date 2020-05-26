@@ -4,8 +4,11 @@
 # model remove the '{}' from the fixture names and add the columns immediately
 # below each fixture, per the syntax in the comments below
 #
-one: {}
+instrument1:
+  name: 5 Strings Banjo
+  total_string: 5
 # column: value
 #
-two: {}
-# column: value
+instrument2:
+  name: Acoustic Guitar
+  total_string: 6
