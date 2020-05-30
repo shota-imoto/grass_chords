@@ -4,8 +4,8 @@ one:
   address: 1
   text: G
   leftbar: "{"
-  rightbar:
-  beat:
+  rightbar: ""
+  beat: ""
   chord: chord1
 
 two:
@@ -13,13 +13,13 @@ two:
   text: Em
   leftbar: "{"
   rightbar:
-  beat:
+  beat: ""
   chord: chord1
 
 three:
   address: 2
-  text:
-  leftbar:
+  text: ""
+  leftbar: ""
   rightbar: "|"
   beat: "#"
   chord: chord1

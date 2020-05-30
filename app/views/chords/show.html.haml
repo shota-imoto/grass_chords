@@ -1,68 +1,17 @@
-.chord-top
-  %h1
-    =@chord.song.title
-  %h2
-    =@chord.version
-.like-btn
-  =link_to "Reliable", likes_path, method: :post
-.practice-btn
-  .practice-btn__display 練習してるボタン
-  =form_with url: practices_path, method: :post, local:true do |f|
-    =f.text_field :song_id, value: @chord.song_id, class: "form_blind"
-    =f.select :practice_key, [["なんでも","なんでも"],["G","G"],["A","A"],["B","B"],["C","C"],["D","D"],["E","E"],["F","F"],["Em","Em"],["Dm","Dm"],["Am","Am"],["Gm","Gm"]]
-    =f.submit "OK"
-.chord_display
-  -12.times do |i|
-    .chord_display__row{id: "row_#{i}"}
-      -8.times do |j|
-        .chord_display__unit{id: "unit_#{i*8+j}"}
-          .unit--beat
-          .unit--leftbar
-          .unit--note
-          .unit--half_note
-          .unit--modifier
-          .unit--rightbar
-        
-    
-
-  
-.chord-menu
-  .chord-menu__key
-    .key__key-display
-      .key__key-display--now
-        key of G
-      .key__key-display--relative-key
-        移動ド
-    .chord-menu__key--palettes
-      .palettes__section
-        .palettes__palette.palettes__palette--one
-          移動ド
-      .palettes__section
-        .palettes__palette.palettes__palette--four
-          G
-        .palettes__palette.palettes__palette--four
-          A
-        .palettes__palette.palettes__palette--four
-          B
-        .palettes__palette.palettes__palette--four
-          C
-      .palettes__section
-        .palettes__palette.palettes__palette--four
-          D
-        .palettes__palette.palettes__palette--four
-          E
-        .palettes__palette.palettes__palette--four
-          F
-      .palettes__section
-        .palettes__palette.palettes__palette--three
-          m
-        .palettes__palette.palettes__palette--three
-          \#
-        .palettes__palette.palettes__palette--three
-          b
-      .palettes__section
-        .palettes__palette.palettes__palette--one
-          閉じる
+.wrapper__contents
+  .chord-top
+    %h1
+      =@chord.song.title
+    %h2
+      =@chord.version
+  .like-btn
+    =link_to "Reliable", likes_path, method: :post
+  .practice-btn
+    .practice-btn__display 練習してるボタン
+    =form_with url: practices_path, method: :post, local: true do |f|
+      =f.text_field :song_id, value: @chord.song_id, class: "form_blind"
+      =f.select :practice_key, [["なんでも","なんでも"],["G","G"],["A","A"],["B","B"],["C","C"],["D","D"],["E","E"],["F","F"],["Em","Em"],["Dm","Dm"],["Am","Am"],["Gm","Gm"]]
+      =f.submit "OK"
 
   .chord-menu__print
     印刷
@@ -70,3 +19,65 @@
     .chord-display--chord-score
       
     .chord-display--text
+.chord-menu__key
+  =form_with local: true do |f|
+    .key__key-display
+      = f.text_field :name, id: "key_name", class: "key-display--form hidden", value: "G"
+      .key__key-display--now
+        key of G
+  #chord-menu.chord-menu__key--palettes.hidden
+    .palettes__section
+      .palettes__palette.palettes__palette--one.palette--num
+        移動ド
+    .palettes__section
+      .palettes__palette.palettes__palette--four.palette--note
+        G
+      .palettes__palette.palettes__palette--four.palette--note
+        A
+      .palettes__palette.palettes__palette--four.palette--note
+        B
+      .palettes__palette.palettes__palette--four.palette--note
+        C
+    .palettes__section
+      .palettes__palette.palettes__palette--four.palette--note
+        D
+      .palettes__palette.palettes__palette--four.palette--note
+        E
+      .palettes__palette.palettes__palette--four.palette--note
+        F
+    .palettes__section
+      .palettes__palette.palettes__palette--three.palette--modifier
+        m
+      .palettes__palette.palettes__palette--three.palette--half.font_base-key
+        B
+      .palettes__palette.palettes__palette--three.palette--half.font_base-key
+        b
+    .palettes__section
+      .palettes__palette.palettes__palette--one.palette--close.font_
+        閉じる
+.chord_display
+  -12.times do |i|
+    .chord_display__row{id: "row_#{i}"}
+      -4.times do |j|
+        .chord_display__unit{id: "unit_#{i*4+j}"}
+          .unit--beat
+            =@chord.chordunits[i*4+j].beat
+          .unit--leftbar
+            -if @chord.chordunits[i*4+j].leftbar != ""
+              =@chord.chordunits[i*4+j].leftbar
+            - elsif (i*4+j)%4==0
+              ="'"
+          .unit__note
+            .unit__note--note_name
+            .unit__note--half_note
+            .unit__note--modifier
+          .unit--half_note
+          .unit--modifier
+          .unit--rightbar
+            -if @chord.chordunits[i*4+j].rightbar != ""
+              =@chord.chordunits[i*4+j].rightbar
+            - elsif (i*4+j)%4==3
+              ="'"
+          .unit--text.hidden{value: "#{@chord.chordunits[i*4+j].text}"}
+            =@chord.chordunits[i*4+j].text
+  

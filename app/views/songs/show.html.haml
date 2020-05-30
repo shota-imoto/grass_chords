@@ -1,76 +1,93 @@
-%p#notice= notice
-%p
-  %strong Title:
-  = @song.title
-%p
-  %strong Jam:
-  = @song.jam
-%p
-  %strong Standard:
-  = @song.standard
-%p
-  %strong Beginner:
-  .font_base
-  = @song.beginner
+.wrapper__contents
+  %p#notice= notice
+  %p
+    %strong Title:
+    = @song.title
 
+  = link_to 'Edit', edit_song_path(@song)
+  |
+  = link_to 'Back', songs_path
 
-= link_to 'Edit', edit_song_path(@song)
-|
-= link_to 'Back', songs_path
-
-.content__add-key
-  %h2 定番キーを追加
-  =form_with url: keys_path, method: :post, local: true do |f|
-    = f.hidden_field :song_id, value: @song.id
-    = f.check_box :instrumental
-    = f.label :instrumental
-    = f.check_box :male
-    = f.label :male
-    = f.check_box :female
-    = f.label :female
-    .chord-menu
-      .chord-menu__key
-        .key__key-display
-          = f.text_field :name, id: "key_name", class: "key-display--default", value: "key of G"
-          .key__key-display--now
-            key of G
-          .key__key-display--relative-key
-            移動ド
-        #chord-menu.chord-menu__key--palettes
-          .palettes__section
-            .palettes__palette.palettes__palette--one
-              移動ド
-          .palettes__section
-            .palettes__palette.palettes__palette--four
-              G
-            .palettes__palette.palettes__palette--four
-              A
-            .palettes__palette.palettes__palette--four
-              B
-            .palettes__palette.palettes__palette--four
-              C
-          .palettes__section
-            .palettes__palette.palettes__palette--four
-              D
-            .palettes__palette.palettes__palette--four
-              E
-            .palettes__palette.palettes__palette--four
-              F
-          .palettes__section
-            .palettes__palette.palettes__palette--three
-              m
-            .palettes__palette.palettes__palette--three
-              \#
-            .palettes__palette.palettes__palette--three
-              b
-          .palettes__section
-            .palettes__palette.palettes__palette--one
-              閉じる
-    = f.submit "登録"
-    .space-for-dev
-.chord_link
-  -@song.chords.each do |chord|
-    =link_to chord.id, chord_path(chord.id)
-.content__chord
-  - @song.chords.each do |chord|
-    =link_to "Reliable", likes_path(chord_id: chord.id),method: :post
+  .content__add-key
+    %h2 定番キーを追加
+    =form_with url: keys_path, method: :post, local: true do |f|
+      = f.hidden_field :song_id, value: @song.id
+      = f.check_box :instrumental
+      = f.label :instrumental
+      = f.check_box :male
+      = f.label :male
+      = f.check_box :female
+      = f.label :female
+      .chord-menu
+        .chord-menu__key
+          .key__key-display
+            = f.text_field :name, id: "key_name", class: "key-display--form hidden", value: "G"
+            .key__key-display--now
+              key of G
+          #chord-menu.chord-menu__key--palettes.hidden
+            .palettes__section
+              .palettes__palette.palettes__palette--one.palette--num
+                移動ド
+            .palettes__section
+              .palettes__palette.palettes__palette--four.palette--note
+                G
+              .palettes__palette.palettes__palette--four.palette--note
+                A
+              .palettes__palette.palettes__palette--four.palette--note
+                B
+              .palettes__palette.palettes__palette--four.palette--note
+                C
+            .palettes__section
+              .palettes__palette.palettes__palette--four.palette--note
+                D
+              .palettes__palette.palettes__palette--four.palette--note
+                E
+              .palettes__palette.palettes__palette--four.palette--note
+                F
+            .palettes__section
+              .palettes__palette.palettes__palette--three.palette--modifier
+                m
+              .palettes__palette.palettes__palette--three.palette--half.font_base-key
+                B
+              .palettes__palette.palettes__palette--three.palette--half.font_base-key
+                b
+            .palettes__section
+              .palettes__palette.palettes__palette--one.palette--close.font_
+                閉じる
+      = f.submit "登録"
+  .chord_link
+    -if (@song.chords.length > 0)
+      - chord = @song.chords.order(id: "DESC").first
+      =link_to chord_path(chord) do
+        .search-result__first-chord
+          .chord_display
+            -2.times do |i|
+              .chord_display__row{id: "row_#{i}"}
+                -8.times do |j|
+                  .chord_display__unit{id: "unit_#{i*8+j}"}
+                    .unit--beat.small--beat
+                      =chord.chordunits[i*8+j].beat
+                    .unit--leftbar.small--leftbar
+                      -if chord.chordunits[i*8+j].leftbar != ""
+                        =chord.chordunits[i*8+j].leftbar
+                      - elsif (i*8+j)%8==0
+                        ="'"
+                    .unit__note
+                      .unit__note--note_name.small--note_name
+                      .unit__note--half_note.small--note_half
+                      .unit__note--modifier.small--modifier
+                    .unit--rightbar.small--rightbar
+                      -if chord.chordunits[i*8+j].rightbar != ""
+                        =chord.chordunits[i*8+j].rightbar
+                      - elsif (i*8+j)%8==(8-1)
+                        ="'"
+                    .unit--text.hidden{value: "#{chord.chordunits[i*8+j].text}"}
+                      =chord.chordunits[i*8+j].text
+    -else
+      =link_to song_path(song) do
+        .search-result__song-info
+          =song.title
+      コード譜が登録されていません
+  .content__chord
+    - @song.chords.each do |chord|
+      =link_to "Reliable", likes_path(chord_id: chord.id),method: :post

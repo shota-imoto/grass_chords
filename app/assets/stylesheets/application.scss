@@ -13,30 +13,60 @@
 }
 
 .header {
-  height: 60px;
+  height: 90px;
   width: 100vw;
-  padding: 0 10px;
+  padding: 0 30px;
   background-color: lightblue;
   color: grey;
   display: flex;
   justify-content: space-between;
   align-items: center;
   position: fixed;
-  z-index: 1;
+  z-index: 2;
 }
 
 .header__logo {
   text-decoration: none;
+  color: white;
+  font-family: "title";
+  font-size: 64px;
 }
 
 .header__menu {
   margin-left: 10px;
 }
+
 .menu--search-icon {
+  cursor: pointer;
 }
 
-.contents {
-  padding: 60px 20px 0;
+.menu--bars-icon {
+  cursor: pointer;
+}
+
+.content__search-window {
+}
+
+.search-float {
+  position: fixed;
+  top: 80px;
+  left: 20%;
+  width: 60%;
+  z-index: 1;
+}
+
+.search-float input[type="text"] {
+  border-radius: 20px;
+  width: 70%;
+}
+
+.search-float input[type="submit"] {
+  border-radius: 20px;
+  width: 20%;
+}
+
+.wrapper__contents {
+  padding: 90px 20px 30px;
   box-sizing: border-box;
 }
 
@@ -53,15 +83,15 @@
 
 .chord-menu__key {
   position: relative;
+  z-index: 3;
 
   &--palettes {
     border: 1px solid lightgray;
     background-color: white;
     height: 250px;
     width: 200px;
-    display: none;
     position: absolute;
-    top: 30px;
+    top: 50px;
   }
 }
 
@@ -90,7 +120,6 @@
 .palettes__section {
   display: flex;
   width: 100%;
-  float: none;
 }
 
 .palettes__palette {
@@ -112,6 +141,17 @@
   }
 }
 
+// オーバーレイ
+.clear_overlay {
+  height: 120%;
+  width: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 2;
+}
+
+// 非表示
 .hidden {
   display: none;
 }
