@@ -11,6 +11,7 @@ class ChordsController < ApplicationController
   # GET /chords/1.json
   def show
     @chord = Chord.find(params[:id])
+    @chordunits = @chord.chordunits
   end
 
   # GET /chords/new

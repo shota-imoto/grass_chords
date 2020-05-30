@@ -1,7 +1,18 @@
 $(function () {
+  // 虫眼鏡ボタンによるウィンドウ表示
+  $(".menu--search-icon").on("touchend mouseup", function () {
+    $(".search-float").fadeIn("350").animate(
+      {
+        top: "100px",
+      },
+      { duration: 250, queue: false }
+    );
+  });
+
   // アクションで生成されたデータをviewに反映する
   function viewResult(result) {
-    if (result.chord_text.length > 0) {
+    // if (result.chord_text.length > 0) {
+    if (0) {
       var html = `<a href="/songs/${
         result.id
       }"><div class="search-result__song-info">タイトル: ${
@@ -57,6 +68,7 @@ $(function () {
 
   $("#search_song_name").on("keyup", function () {
     var input = $("#search_song_name").val();
+
     if (input == "") {
       $(".content__search-result").empty();
       return;
@@ -136,6 +148,8 @@ $(function () {
       $(".content__search-result").append(insertHTML);
     });
   });
+
+  // 楽曲インクリメンタルサーチ
   $(document).on(
     "touchend mouseup",
     ".search-result__instrument-candidate",

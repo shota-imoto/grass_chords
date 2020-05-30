@@ -12,14 +12,17 @@
   .header
     = link_to "GrassChords", root_path, class: "header__logo"
     -# ユーザー名表示 開発用
-    - if user_signed_in?
-      = @user.name
+    -# - if user_signed_in?
+    -#   = @user.name
+    
 
     .header__menu
       %i.fas.fa-search.menu--search-icon
       %i.fas.fa-bars.menu--bars-icon
-  .contents
-    = yield
+  = form_with url: search_songs_path, class: "content__search-window search-float hidden", method: :get, local: true do |f|
+    =f.text_field :keyword
+    =f.submit "検索"
+  = yield
   .footer
     .footer__copyright
       %a ©2020 GrassChords    

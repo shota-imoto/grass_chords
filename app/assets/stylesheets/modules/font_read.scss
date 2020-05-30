@@ -19,11 +19,17 @@
   font-style: normal;
 }
 
+@font-face {
+  font-family: "title";
+  src: font-url("title2_GuitarAcoustic-njzR.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+
 // フォント調整
 .font_alphabet {
   font-family: sans-serif;
   font-size: 112px;
-  // margin-right: 10px;
 }
 
 .font_base {
@@ -33,7 +39,6 @@
 
 .font_repeat {
   font-family: "score-repeat";
-  font-size: 128px;
 }
 
 .font_greek {
@@ -58,4 +63,17 @@
 .font_minor {
   font-family: sans-serif;
   font-size: 70px;
+}
+
+// キー選択パレット
+.font_base-key {
+  font-family: "score-base";
+  font-size: 26px;
+  padding-bottom: 12px;
+  padding-left: 0.05em;
+}
+
+.font_minor-key {
+  font-family: sans-serif;
+  font-size: 13px;
 }

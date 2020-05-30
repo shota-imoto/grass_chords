@@ -13,41 +13,23 @@
     .chord_display
       -12.times do |i|
         .chord_display__row{id: "row_#{i}"}
-          -8.times do |j|
-            .chord_display__unit{id: "unit_#{i*8+j}"}
-              .unit--beat @
-              .unit--leftbar {
-              .unit--note B
-              .unit--half_note G
-              .unit--modifier m
-              .unit--rightbar }
-            =f.fields_for :chordunits do |unit_f|
-              =unit_f.hidden_field :address, value: i*8+j 
-              =unit_f.text_field :text
-              =unit_f.text_field :leftbar
-              =unit_f.text_field :rightbar
-              =unit_f.text_field :beat
-  
-    .content__chord-btns
-      %input{type: "button", value: "G", class: "chord-btns--command"}
-      %input{type: "button", value: "A", class: "chord-btns--command"}
-      %input{type: "button", value: "B", class: "chord-btns--command"}
-      %input{type: "button", value: "C", class: "chord-btns--command"}
-      %input{type: "button", value: "D", class: "chord-btns--command"}
-      %input{type: "button", value: "E", class: "chord-btns--command"}
-      %input{type: "button", value: "F", class: "chord-btns--command"}
-      %input{type: "button", value: "#", class: "chord-btns--command"}
-      %input{type: "button", value: "b", class: "chord-btns--command"}
-      %input{type: "button", value: "m", class: "chord-btns--command"}
-      %input{type: "button", value: "繰返し始点", class: "chord-btns--command"}
-      %input{type: "button", value: "繰返し終点", class: "chord-btns--command"}
-      %input{type: "button", value: "小節区切り", class: "chord-btns--command"}
-      %input{type: "button", value: "2/4拍子", class: "chord-btns--command"}
-      %input{type: "button", value: "4/4拍子", class: "chord-btns--command"}
-      %input{type: "button", value: "3/4拍子", class: "chord-btns--command"}
-      %input{type: "button", value: "削除", class: "chord-btns--command"}
-      %input{type: "button", value: "繰返し", class: "chord-btns--command"}
-      
+          -4.times do |j|
+            .chord_display__unit{id: "unit_#{i*4+j}"}
+              .unit--beat 
+              .unit--leftbar
+              .unit__note
+                .unit__note--note_name
+                .unit__note--half_note
+                .unit__note--modifier
+              .unit--rightbar 
+              =f.fields_for :chordunits do |unit_f|
+                =unit_f.hidden_field :address, value: i*4+j 
+                =unit_f.text_field :text, class: "unit--text"
+                =unit_f.hidden_field :leftbar
+                =unit_f.hidden_field :rightbar
+                =unit_f.hidden_field :beat
+    .content__editer-btn
+      >> Editer
     .content__option
       オプション
       .option__artist-name
@@ -56,3 +38,33 @@
         =f.collection_select :album_id, Album.all, :id, :name, include_blank: false
     .content__registration
       =f.submit "登録"
+.content__chord-btns.hidden
+  .chord-btns__input
+    .chord-btns__row
+      .chord-btns__text_window
+    .chord-btns__row
+      %input{type: "button", value: "G", class: "chord-btns--command"}
+      %input{type: "button", value: "A", class: "chord-btns--command"}
+      %input{type: "button", value: "B", class: "chord-btns--command"}
+      %input{type: "button", value: "C", class: "chord-btns--command"}
+      %input{type: "button", value: "D", class: "chord-btns--command"}
+      %input{type: "button", value: "E", class: "chord-btns--command"}
+      %input{type: "button", value: "F", class: "chord-btns--command"}
+    .chord-btns__row
+      %input{type: "button", value: "#", class: "chord-btns--command"}
+      %input{type: "button", value: "b", class: "chord-btns--command"}
+      %input{type: "button", value: "m", class: "chord-btns--command"}
+      %input{type: "button", value: "7th", class: "chord-btns--command"}
+    .chord-btns__row
+      %input{type: "button", value: "繰返し始点", class: "chord-btns--command"}
+      %input{type: "button", value: "繰返し終点", class: "chord-btns--command"}
+      %input{type: "button", value: "|_", class: "chord-btns--command"}
+      %input{type: "button", value: "_|", class: "chord-btns--command"}
+    .chord-btns__row
+      %input{type: "button", value: "2/4拍子", class: "chord-btns--command"}
+      %input{type: "button", value: "4/4拍子", class: "chord-btns--command"}
+      %input{type: "button", value: "3/4拍子", class: "chord-btns--command"}
+      %input{type: "button", value: "削除", class: "chord-btns--command"}
+      %input{type: "button", value: "繰返し", class: "chord-btns--command"}
+  .chord-btns__close
+    ×
