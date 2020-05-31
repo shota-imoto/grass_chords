@@ -33,15 +33,14 @@
 }
 
 .header__menu {
-  margin-left: 10px;
+  margin: 0 40px;
+  display: flex;
 }
 
 .menu--search-icon {
+  font-size: 28px;
   cursor: pointer;
-}
-
-.menu--bars-icon {
-  cursor: pointer;
+  margin-right: 20px;
 }
 
 .content__search-window {
@@ -79,6 +78,190 @@
   align-items: center;
 }
 
+// hamburger menu
+.navi-menu {
+  position: relative;
+  & span {
+    background-color: gray;
+    display: block;
+    width: 35px;
+    height: 4px;
+    border-radius: 10px;
+    &:nth-child(1) {
+      position: absolute;
+      top: 0px;
+    }
+    &:nth-child(2) {
+      position: absolute;
+      top: 10px;
+    }
+    &:nth-child(3) {
+      position: absolute;
+      top: 20px;
+    }
+  }
+}
+
+#navi {
+  height: 100%;
+  width: 100%;
+  padding: 90px 120px;
+  margin-bottom: 90px;
+  position: absolute;
+  background-color: rgba(255, 255, 255, 0.6);
+  text-decoration: none;
+}
+
+.lists__list {
+  font-size: 20px;
+  height: 60px;
+  width: 100%;
+  margin: 20px 0 0;
+  padding: 0 20px;
+  line-height: 60px;
+  background-color: rgba(255, 255, 255, 0.8);
+}
+
+.list--childlist {
+  font-size: 20px;
+  height: 60px;
+  width: 100%;
+  padding: 0 40px;
+  line-height: 60px;
+  background-color: rgba(221, 221, 221, 0.8);
+}
+
+.list--text {
+  color: black;
+  text-decoration: none;
+}
+
+ul {
+  list-style: none;
+}
+
+@keyframes navi-pulldown {
+  0% {
+    top: -100%;
+  }
+  100% {
+    top: 0;
+  }
+}
+
+.open {
+  animation-name: navi-pulldown;
+  animation-duration: 1s;
+  animation-fill-mode: forwards;
+  z-index: 1;
+}
+
+@keyframes navi-pullup {
+  0% {
+    top: 0;
+  }
+  100% {
+    top: -100%;
+  }
+}
+
+.close {
+  animation-name: navi-pullup;
+  animation-duration: 1s;
+  animation-fill-mode: forwards;
+  z-index: 1;
+}
+
+@keyframes open-top {
+  0% {
+    transform: rotate(0deg) translateY(0px) translateX(0px);
+    top: 0;
+  }
+  100% {
+    transform: rotate(-45deg) translateY(14px) translateX(0px);
+    top: 10;
+  }
+}
+@keyframes open-middle {
+  0% {
+    opacity: 100%;
+  }
+  100% {
+    opacity: 0%;
+  }
+}
+@keyframes open-bottom {
+  0% {
+    transform: rotate(0deg) translateY(0px) translateX(0px);
+    bottom: 0;
+  }
+  100% {
+    transform: rotate(45deg) translateY(-14px) translateX(0px);
+    bottom: 10;
+  }
+}
+
+.open-top {
+  animation-name: open-top;
+  animation-duration: 0.3s;
+  animation-fill-mode: forwards;
+}
+.open-middle {
+  animation-name: open-middle;
+  animation-duration: 0.3s;
+  animation-fill-mode: forwards;
+}
+.open-bottom {
+  animation-name: open-bottom;
+  animation-duration: 0.3s;
+  animation-fill-mode: forwards;
+}
+
+@keyframes close-top {
+  0% {
+    transform: rotate(-45deg) translateY(14px) translateX(0px);
+    top: 0;
+  }
+  100% {
+    transform: rotate(0deg) translateY(0px) translateX(0px);
+    top: 10;
+  }
+}
+@keyframes close-middle {
+  0% {
+    opacity: 0%;
+  }
+  100% {
+    opacity: 100%;
+  }
+}
+@keyframes close-bottom {
+  0% {
+    transform: rotate(45deg) translateY(-14px) translateX(0px);
+    bottom: 0;
+  }
+  100% {
+    transform: rotate(0deg) translateY(0px) translateX(0px);
+    bottom: 10;
+  }
+}
+
+.close-top {
+  animation-name: close-top;
+  animation-duration: 0.3s;
+  animation-fill-mode: forwards;
+}
+.close-middle {
+  animation-name: close-middle;
+  animation-duration: 0.3s;
+  animation-fill-mode: forwards;
+}
+.close-bottom {
+  animation-name: close-bottom;
+  animation-duration: 0.3s;
+  animation-fill-mode: forwards;
+}
+
 // general css
 
 .chord-menu__key {
@@ -97,7 +280,6 @@
 
 .key__key-display {
   &--now {
-    background-color: yellow;
     height: 40px;
     width: 100px;
 
@@ -107,7 +289,6 @@
   }
   &--relative-key {
     display: none;
-    background-color: pink;
     height: 40px;
     width: 100px;
     position: absolute;
@@ -149,6 +330,19 @@
   top: 0;
   left: 0;
   z-index: 2;
+}
+
+.white_overlay {
+  height: 120%;
+  width: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  // ↓他との兼ね合いで調整。大きめに幅をとっておくこと↓
+  z-index: 1;
+}
+
+@keyframes {
 }
 
 // 非表示
