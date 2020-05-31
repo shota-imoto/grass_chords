@@ -3,7 +3,7 @@ $(function () {
 
   // キー選択パレットの表示・非表示
   //キー選択パレットを開く
-  $(".key__key-display").on("touchend mouseup", function () {
+  $(".key__key-display").on("touchend, mouseup", function () {
     $("#chord-menu").show();
     $(".wrapper").append(`<div class="clear_overlay"></div>`);
   });
@@ -20,7 +20,7 @@ $(function () {
 
   // キー表示切替
   // 絶対音
-  $(".palette--note").on("touchend mouseup", function () {
+  $(".palette--note").on("touchend, mouseup", function () {
     var selected = $(this).text().trim();
     var key_state = $(".key-display--form").val();
     console.log($("#key_name").val());
@@ -50,7 +50,7 @@ $(function () {
   });
 
   // #/b
-  $(".palette--half").on("touchend mouseup", function () {
+  $(".palette--half").on("touchend, mouseup", function () {
     var selected = $(this).text().trim();
     var key_state = $(".key-display--form").val();
 
@@ -100,7 +100,7 @@ $(function () {
   });
 
   // m
-  $(".palette--modifier").on("touchend mouseup", function () {
+  $(".palette--modifier").on("touchend, mouseup", function () {
     var key_state = $(".key-display--form").val();
 
     if (key_state.indexOf("m") == -1) {
