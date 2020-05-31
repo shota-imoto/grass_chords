@@ -266,7 +266,6 @@ ul {
 
 .chord-menu__key {
   position: relative;
-  z-index: 3;
 
   &--palettes {
     border: 1px solid lightgray;
@@ -279,9 +278,10 @@ ul {
 }
 
 .key__key-display {
+  width: 80px;
   &--now {
     height: 40px;
-    width: 100px;
+    width: 100%;
 
     display: flex;
     justify-content: center;
@@ -295,7 +295,11 @@ ul {
     top: 0;
     justify-content: center;
     align-items: center;
+    z-index: 20;
   }
+}
+
+#chord-menu {
 }
 
 .palettes__section {
