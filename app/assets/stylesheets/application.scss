@@ -274,10 +274,12 @@ ul {
     width: 200px;
     position: absolute;
     top: 50px;
+    z-index: 10;
   }
 }
 
 .key__key-display {
+  cursor: pointer;
   width: 80px;
   &--now {
     height: 40px;

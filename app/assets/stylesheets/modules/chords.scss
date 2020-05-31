@@ -46,19 +46,30 @@
   justify-content: center;
 }
 
+input {
+  height: 30px;
+  width: 80px;
+}
+
 .unit {
   &--beat {
     font-family: "score-base";
     font-size: 96px;
     position: relative;
     bottom: 10px;
+
+    background-color: magenta;
+    opacity: 0.5;
   }
   &--leftbar {
     font-family: "score-base";
     font-size: 108px;
     position: relative;
     left: 0px;
-    bottom: 15px;
+    bottom: 0px;
+
+    background-color: mediumaquamarine;
+    opacity: 0.5;
   }
   &__note {
     position: relative;
@@ -67,14 +78,19 @@
     &--note_name {
       font-family: sans-serif;
       font-size: 96px;
+      background-color: yellowgreen;
+      opacity: 0.5;
     }
     &--half_note {
       height: 50px;
       font-family: "score-base";
       font-size: 108px;
       position: absolute;
-      top: -60px;
-      right: -20px;
+      top: 0;
+      right: 0;
+
+      background-color: skyblue;
+      opacity: 0.5;
     }
     &--modifier {
       font-family: sans-serif;
@@ -82,6 +98,9 @@
       position: absolute;
       bottom: 10px;
       left: 65px;
+
+      background-color: beige;
+      opacity: 0.5;
     }
   }
 
@@ -89,8 +108,11 @@
     font-family: "score-base";
     font-size: 108px;
     position: relative;
-    right: 20px;
-    bottom: 15px;
+    right: 0px;
+    bottom: 0px;
+
+    background-color: gray;
+    opacity: 0.5;
   }
 }
 
@@ -132,10 +154,6 @@
     top: 0;
     left: 0;
   }
-}
-
-.unit--text {
-  display: none;
 }
 
 .cursor {

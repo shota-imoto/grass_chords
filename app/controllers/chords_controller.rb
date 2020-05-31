@@ -22,6 +22,7 @@ class ChordsController < ApplicationController
 
   # GET /chords/1/edit
   def edit
+    @chord = Chord.find(params[:id])
   end
 
   # POST /chords
