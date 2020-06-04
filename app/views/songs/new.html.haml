@@ -1,28 +1,29 @@
-.contents__title
-=form_with url: songs_path, class: "contents__form", method: :post, local: true do |f|
-  .form--title
-    = f.label "タイトル" do
-      = f.text_field :title
-  .form__class
-    =f.label :jam, class: "class--element" do
-      = f.check_box :jam, checked_value: "1", unchecked_value: "0"
-      ジャムセッション向け曲
-    =f.label :standard, class: "class--element" do
-      = f.check_box :standard, checked_value: "1", unchecked_value: "0"
-      スタンダード曲
-    =f.label :beginner, class: "class--element" do
-      = f.check_box :beginner, checked_value: "1", unchecked_value: "0"
-      初心者向け曲
+.wrapper__contents
+  .contents__title
+  =form_with url: songs_path, class: "contents__form", method: :post, local: true do |f|
+    .form--title
+      = f.label "タイトル" do
+        = f.text_field :title
+    .form__class
+      =f.label :jam, class: "class--element" do
+        = f.check_box :jam, checked_value: "1", unchecked_value: "0"
+        ジャムセッション向け曲
+      =f.label :standard, class: "class--element" do
+        = f.check_box :standard, checked_value: "1", unchecked_value: "0"
+        スタンダード曲
+      =f.label :beginner, class: "class--element" do
+        = f.check_box :beginner, checked_value: "1", unchecked_value: "0"
+        初心者向け曲
 
-      -# =key_f.label :instrumental, class: "class--element" do
-      -#   = key_f.check_box :instrumental, checked_value: "1", unchecked: "0"
-      -#   インストキー
-      -# =key_f.label :male, class: "class--element" do
-      -#   = key_f.check_box :male, checked_value: "1", unchecked: "0"
-      -#   男声キー
-      -# =key_f.label :female, class: "class--element" do
-      -#   = key_f.check_box :female, checked_value: "1", unchecked: "0"
-      -#   女声キー
-  .form--btn
-    = f.submit "登録"
+        -# =key_f.label :instrumental, class: "class--element" do
+        -#   = key_f.check_box :instrumental, checked_value: "1", unchecked: "0"
+        -#   インストキー
+        -# =key_f.label :male, class: "class--element" do
+        -#   = key_f.check_box :male, checked_value: "1", unchecked: "0"
+        -#   男声キー
+        -# =key_f.label :female, class: "class--element" do
+        -#   = key_f.check_box :female, checked_value: "1", unchecked: "0"
+        -#   女声キー
+    .form--btn
+      = f.submit "登録"
 

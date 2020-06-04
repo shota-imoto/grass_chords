@@ -1,10 +1,5 @@
-.contents__top--image {
-  margin: 90px 0 -90px;
-  height: 400px;
-  width: 100%;
-  object-fit: cover;
-  filter: sepia(50%);
-}
+// index
+
 .contetns__message {
 }
 .have-child {
@@ -13,6 +8,66 @@
 .contents__menu {
 }
 
+.contents__whats-new {
+  overflow: scroll;
+  width: calc(100% - 80px);
+  height: 160px;
+  background-color: rgba(216, 242, 235, 0.6);
+  padding: 20px 20px;
+  margin: 0 40px;
+  position: absolute;
+  bottom: 30px;
+  z-index: 40;
+  border-radius: 10px;
+}
+
+.whats-new__title {
+  color: #f2594b;
+  font-size: 18px;
+}
+
+.whats-new__content {
+  width: 100%;
+  padding: 5px;
+  margin: 10px;
+  letter-spacing: 1px;
+  line-height: 20px;
+  text-decoration: none;
+  opacity: 1;
+}
+
+.whats-new__text {
+  text-decoration: none;
+  color: #1b4859;
+  width: 100%;
+  &:hover {
+    color: #3285a3;
+  }
+}
+.text--chord_text {
+}
+
+.chord {
+  &_title {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    font-size: 1em;
+  }
+  &_made {
+    font-size: 1em;
+  }
+  &_date {
+    font-size: 1em;
+  }
+  &_guide {
+    border-bottom: dashed 1px #f2594b;
+    width: 110px;
+    padding-bottom: 0;
+    font-size: 1.2em;
+    -webkit-text-size-adjust: none;
+  }
+}
 // showビュー
 
 .chord-display {
@@ -43,43 +98,33 @@
   height: 100px;
   border-bottom: lightgray 1px solid;
   display: flex;
-  justify-content: center;
-}
 
-input {
-  height: 30px;
-  width: 80px;
+  position: relative;
 }
 
 .unit {
   &--beat {
     font-family: "score-base";
     font-size: 96px;
-    position: relative;
-    bottom: 10px;
-
-    background-color: magenta;
-    opacity: 0.5;
+    position: absolute;
+    top: 0;
+    left: -23px;
   }
   &--leftbar {
     font-family: "score-base";
-    font-size: 108px;
-    position: relative;
-    left: 0px;
-    bottom: 0px;
-
-    background-color: mediumaquamarine;
-    opacity: 0.5;
+    font-size: 96px;
+    position: absolute;
+    top: 0;
+    left: 0;
   }
   &__note {
-    position: relative;
-    left: -20px;
     vertical-align: top;
     &--note_name {
       font-family: sans-serif;
       font-size: 96px;
-      background-color: yellowgreen;
-      opacity: 0.5;
+      position: absolute;
+      top: 0;
+      left: 32px;
     }
     &--half_note {
       height: 50px;
@@ -87,32 +132,23 @@ input {
       font-size: 108px;
       position: absolute;
       top: 0;
-      right: 0;
-
-      background-color: skyblue;
-      opacity: 0.5;
+      left: 99px;
     }
     &--modifier {
       font-family: sans-serif;
-      font-size: 48px;
+      font-size: 36px;
       position: absolute;
       bottom: 10px;
-      left: 65px;
-
-      background-color: beige;
-      opacity: 0.5;
+      left: 99px;
     }
   }
 
   &--rightbar {
     font-family: "score-base";
-    font-size: 108px;
-    position: relative;
-    right: 0px;
-    bottom: 0px;
-
-    background-color: gray;
-    opacity: 0.5;
+    font-size: 96px;
+    position: absolute;
+    top: 0;
+    left: 142px;
   }
 }
 

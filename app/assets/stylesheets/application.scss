@@ -8,28 +8,28 @@
 @import "modules/font_read";
 
 .wrapper {
-  height: 100vh;
   width: 100vw;
+  position: relative;
 }
 
 .header {
   height: 90px;
   width: 100vw;
-  padding: 0 30px;
-  background-color: lightblue;
-  color: grey;
+  padding: 0 20px;
+  background-color: #73bcd9;
+  color: white;
   display: flex;
   justify-content: space-between;
   align-items: center;
   position: fixed;
-  z-index: 2;
+  z-index: 50;
 }
 
 .header__logo {
   text-decoration: none;
-  color: white;
+  color: rgb(240, 240, 245);
   font-family: "title";
-  font-size: 64px;
+  font-size: 36px;
 }
 
 .header__menu {
@@ -65,17 +65,35 @@
 }
 
 .wrapper__contents {
-  padding: 90px 20px 30px;
+  padding: 90px 30px 30px;
   box-sizing: border-box;
+  background-color: rgb(250, 250, 250);
 }
 
 .footer {
   height: 60px;
   width: 100vw;
-  background-color: lightseagreen;
+  color: #f2f0d8;
+  background-color: #065f73;
   display: flex;
   justify-content: center;
   align-items: center;
+  position: absolute;
+  bottom: 0px;
+  z-index: 0;
+}
+
+.contents__top {
+  position: relative;
+  z-index: 40;
+  &--image {
+    margin: 90px 0 0;
+    width: 100%;
+    height: calc(100vh - 90px);
+    object-fit: cover;
+    object-position: 33% 100%;
+    filter: sepia(20%);
+  }
 }
 
 // hamburger menu
@@ -110,6 +128,7 @@
   position: absolute;
   background-color: rgba(255, 255, 255, 0.6);
   text-decoration: none;
+  z-index: 45;
 }
 
 .lists__list {
@@ -297,7 +316,7 @@ ul {
     top: 0;
     justify-content: center;
     align-items: center;
-    z-index: 20;
+    z-index: 30;
   }
 }
 
@@ -335,7 +354,7 @@ ul {
   position: fixed;
   top: 0;
   left: 0;
-  z-index: 2;
+  z-index: 20;
 }
 
 .white_overlay {
@@ -345,7 +364,7 @@ ul {
   top: 0;
   left: 0;
   // ↓他との兼ね合いで調整。大きめに幅をとっておくこと↓
-  z-index: 1;
+  z-index: 20;
 }
 
 @keyframes {
