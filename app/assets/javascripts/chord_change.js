@@ -21,6 +21,7 @@ $(function () {
   // キー表示切替
   // 絶対音
   $(".palette--note").on("touchend, mouseup", function () {
+    console.log("hakka");
     var selected = $(this).text().trim();
     var key_state = $(".key-display--form").val();
     console.log($("#key_name").val());

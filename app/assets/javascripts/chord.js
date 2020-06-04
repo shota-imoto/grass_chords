@@ -101,7 +101,6 @@ $(function () {
         $("#" + unit_id + " > .unit__note > .unit__note--note_name").text(
           letter_array[i]
         );
-        console.log(letter_array[i]);
       }
       i = 1;
 
@@ -144,7 +143,11 @@ $(function () {
 
   $(document).ready(function () {
     $(".unit--text").each(function (i, text) {
-      text_display("unit_" + i, $(text).text().trim());
+      var letter = $(text).attr("value");
+      if (letter != undefined) {
+        letter = letter.trim();
+        text_display("unit_" + i, letter);
+      }
     });
   });
 });

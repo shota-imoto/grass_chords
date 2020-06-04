@@ -1,43 +1,44 @@
-%h1 New Chord
-.content
-  =form_with model: @chord, local: true do |f|
-    .contest__song-name
-      =f.text_field :song_name, id: "search_song_name",class: "for_search-dont_send_this_data_to_action"
-      =f.text_field :song_id, id: "selected_song_id"
-    .content__search-result
-    .content__song-help
-      =link_to "曲が存在しない場合は新しく登録してください", new_song_path, target: :_blank
-    .content__version-name
-      %h2 バージョン名
-      =f.text_field :version
-    .chord_display
-      -12.times do |i|
-        .chord_display__row{id: "row_#{i}"}
-          -4.times do |j|
-            .chord_display__unit{id: "unit_#{i*4+j}"}
-              .unit--beat 
-              .unit--leftbar
-              .unit__note
-                .unit__note--note_name
-                .unit__note--half_note
-                .unit__note--modifier
-              .unit--rightbar 
-              =f.fields_for :chordunits do |unit_f|
-                =unit_f.hidden_field :address, value: i*4+j 
-                =unit_f.text_field :text, class: "unit--text"
-                =unit_f.hidden_field :leftbar
-                =unit_f.hidden_field :rightbar
-                =unit_f.hidden_field :beat
-    .content__editer-btn
-      >> Editer
-    .content__option
-      オプション
-      .option__artist-name
-        =f.collection_select :artist_id, Artist.all, :id, :name, include_blank: false
-      .option__albumname
-        =f.collection_select :album_id, Album.all, :id, :name, include_blank: false
-    .content__registration
-      =f.submit "登録"
+.wrapper__contents
+  %h1 New Chord
+  .content
+    =form_with model: @chord, local: true do |f|
+      .contest__song-name
+        =f.text_field :song_name, id: "search_song_name",class: "for_search-dont_send_this_data_to_action"
+        =f.text_field :song_id, id: "selected_song_id"
+      .content__search-result
+      .content__song-help
+        =link_to "曲が存在しない場合は新しく登録してください", new_song_path, target: :_blank
+      .content__version-name
+        %h2 バージョン名
+        =f.text_field :version
+      .chord_display
+        -12.times do |i|
+          .chord_display__row{id: "row_#{i}"}
+            -4.times do |j|
+              .chord_display__unit{id: "unit_#{i*4+j}"}
+                .unit--beat 
+                .unit--leftbar
+                .unit__note
+                  .unit__note--note_name
+                  .unit__note--half_note
+                  .unit__note--modifier
+                .unit--rightbar 
+                =f.fields_for :chordunits do |unit_f|
+                  =unit_f.hidden_field :address, value: i*4+j 
+                  =unit_f.hidden_field :text, class: "unit--text"
+                  =unit_f.hidden_field :leftbar
+                  =unit_f.hidden_field :rightbar
+                  =unit_f.hidden_field :beat
+      .content__editer-btn
+        >> Editer
+      .content__option
+        オプション
+        .option__artist-name
+          =f.collection_select :artist_id, Artist.all, :id, :name, include_blank: false
+        .option__albumname
+          =f.collection_select :album_id, Album.all, :id, :name, include_blank: false
+      .content__registration
+        =f.submit "登録"
 .content__chord-btns.hidden
   .chord-btns__input
     .chord-btns__row

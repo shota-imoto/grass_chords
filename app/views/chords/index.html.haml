@@ -1,19 +1,26 @@
 %p#notice= notice
 .contents__top
   =image_tag src="tops/top05.jpeg", class: "contents__top--image"
-.contents__message
-  Jam with us??
-.wrapper__contents
-  = form_with url: search_songs_path, class: "content__search-window", method: :get, local: true do |f|
-    =f.text_field :keyword
-    =f.submit "検索"
-
-  .contents__whats-new
-    .whats-new__title What's new?
-    - @chords.each do |chord|
-      .whats-new__content
-        =link_to chord_path(chord) do
+-# .contents__message
+-#   Jam with us??
+  -# = form_with url: search_songs_path, class: "content__search-window", method: :get, local: true do |f|
+  -#   =f.text_field :keyword
+  -#   =f.submit "検索"
+.contents__whats-new
+  .whats-new__title What's new?
+  - @chords.each do |chord|
+    .whats-new__content
+      =link_to chord_path(chord), class: "whats-new__text" do
+        .chord_title
           =chord.song.title
+          ="/"
           =chord.version
-          =chord.user.name
-          =l chord.created_at, format: :short
+        .chord_made
+          ="by"
+          =chord.user.name+ "(created: "+ (l chord.created_at, format: :short)+")"
+
+        .chord_date
+          
+        .chord_guide
+          =">>さっそく見る"
+
