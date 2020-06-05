@@ -15,10 +15,11 @@ default: &default
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
   username: root
   password:
-  socket: /tmp/mysql.sock
 
 development:
   <<: *default
+  socket: /tmp/mysql.sock
+
   database: grass_chords_development
 
 # Warning: The database defined as "test" will be erased and
@@ -26,6 +27,8 @@ development:
 # Do not set this db to the same as development or production.
 test:
   <<: *default
+  socket: /tmp/mysql.sock
+
   database: grass_chords_test
 
 # As with config/secrets.yml, you never want to store sensitive information,
