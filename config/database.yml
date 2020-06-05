@@ -49,6 +49,7 @@ test:
 #
 production:
   <<: *default
+  host: <%= ENV['GRASS_CHORDS_DATABASE_ADDRESS'] %>
   database: grass_chords_production
   username: grass_chords
   password: <%= ENV['GRASS_CHORDS_DATABASE_PASSWORD'] %>
