@@ -19,7 +19,6 @@ default: &default
 development:
   <<: *default
   socket: /tmp/mysql.sock
-
   database: grass_chords_development
 
 # Warning: The database defined as "test" will be erased and
@@ -28,7 +27,6 @@ development:
 test:
   <<: *default
   socket: /tmp/mysql.sock
-
   database: grass_chords_test
 
 # As with config/secrets.yml, you never want to store sensitive information,
@@ -54,5 +52,5 @@ production:
   <<: *default
   host: <%= ENV['GRASS_CHORDS_DATABASE_ADDRESS'] %>
   database: grass_chords_production
-  username: root
+  username: grass_chords
   password: <%= ENV['GRASS_CHORDS_DATABASE_PASSWORD'] %>
