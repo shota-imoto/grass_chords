@@ -5,3 +5,7 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+
+
+Song.create(id:1, title: "Little Cabin Home on the Hill", jam: 1, standard:1, beginner:1, user_id:1)
+Chords.create(id: 1 song_id: 1, artist_id: 1, album_id:1, version: "traditional_version")
