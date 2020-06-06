@@ -63,7 +63,7 @@ group :test do
 end
 
 group :production do
-  gem 'unicorn-rails'
+  gem 'unicorn'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
