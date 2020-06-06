@@ -7,5 +7,5 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 
 
-Song.create(id:1, title: "Little Cabin Home on the Hill", jam: 1, standard:1, beginner:1, user_id:1)
+Song.create(id:1, title: "Little Maggie", jam: 0, standard:1, beginner:0, user_id:1)
 Chords.create(id: 1 song_id: 1, artist_id: 1, album_id:1, version: "traditional_version")
