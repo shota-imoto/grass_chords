@@ -11,10 +11,6 @@
 .wrapper
   .header
     = link_to "GrassChords", root_path, class: "header__logo"
-    -# ユーザー名表示 開発用
-    -# - if user_signed_in?
-    -#   = @user.name
-    
 
     .header__menu
       %i.fas.fa-search.menu--search-icon
@@ -50,7 +46,8 @@
       %li.lists__list 譜面の検索
       %li.lists__list お問い合わせ
       -if user_signed_in?
-        %li.lists__list ログアウト
+        %li.lists__list
+          =link_to "ログアウト", destroy_user_session_path, method: :delete
 
 
   = form_with url: search_songs_path, class: "content__search-window search-float hidden", method: :get, local: true do |f|
