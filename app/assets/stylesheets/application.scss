@@ -1,7 +1,22 @@
+// icon
 @import "font-awesome-sprockets";
 @import "font-awesome";
-@import "modules/reset";
-@import "modules/chords";
+
+// foundation
+@import "foundation/_reset";
+@import "foundation/_base";
+
+// layout
+@import "layout/_header";
+@import "layout/_contents";
+@import "layout/_navi";
+@import "layout/_footer";
+
+// project
+@import "object/project/_navi.scss";
+
+// utility
+@import "object/utility/_navi.scss";
 @import "modules/contacts";
 @import "modules/pdfs";
 @import "modules/songs";
@@ -14,18 +29,18 @@
   flex-flow: column;
 }
 
-.header {
-  height: 90px;
-  width: 100vw;
-  padding: 0 20px;
-  background-color: #73bcd9;
-  color: white;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  position: fixed;
-  z-index: 50;
-}
+// .header {
+//   height: 90px;
+//   width: 100vw;
+//   padding: 0 20px;
+//   background-color: #73bcd9;
+//   color: white;
+//   display: flex;
+//   justify-content: space-between;
+//   align-items: center;
+//   position: fixed;
+//   z-index: 50;
+// }
 
 .header__logo {
   text-decoration: none;
