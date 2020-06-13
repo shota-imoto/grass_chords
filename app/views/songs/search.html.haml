@@ -1,57 +1,99 @@
-.wrapper__contents
-  .content
-    .content__search-result
-      = form_with url: search_songs_path, method: :get, local: true do |f|
-        .seatch-result__search-window
-          =f.text_field :keyword, id: "incremental_text"
-          =f.submit "検索"
-        .search-result__search-option
-          =f.label :jam, id: "incremental_jam" do
-            =f.check_box :jam, checkd_value: "true", unchecked_value: "false"
-            ジャムセッション向け曲
-          =f.label :standard, id: "incremental_standard" do
-            =f.check_box :standard, checkd_value: "true", unchecked_value: "false"
-            スタンダード曲
-          =f.label :beginner, id: "incremental_beginner" do
-            =f.check_box :beginner, checkd_value: "true", unchecked_value: "false"
-            初心者向け曲
-      =link_to "詳細検索", search_page_songs_path
-      .search-results__search-result
+.p-search-result__wrapper
+  -# %figure
+  -#   =image_tag "/images/top.jpeg", class: "p-search-result__top"
+  %article.p-search-result__article
+    %section.p-search-result__section.c-window__clear
+      =render "components/search"
+      %hr{color: "black", size: "1px"}
+      .p-search-result__results
         - @songs.each do |song|
-          -if (song.chords.length > 0)
-            - chord = song.chords.order(id: "DESC").first
-            =link_to song_path(song) do
-              .search-result__song-info
-                =song.title
-              .search-result__first-chord
-                .chord_display
-                  -2.times do |i|
-                    .chord_display__row{id: "row_#{i}"}
-                      -8.times do |j|
-                        -# =chord.chordunits[i*4+j].leftbar
-                        .chord_display__unit{id: "unit_#{i*8+j}"}
-                          .unit--beat.small--beat
-                            =chord.chordunits[i*8+j].beat
-                          .unit--leftbar.small--leftbar
-                            -if chord.chordunits[i*8+j].leftbar != ""
-                              =chord.chordunits[i*8+j].leftbar
-                            - elsif (i*8+j)%8==0
-                              ="'"
-                          .unit__note
-                            .unit__note--note_name.small--note_name
-                            .unit__note--half_note.small--note_half
-                            .unit__note--modifier.small--modifier
-                          .unit--rightbar.small--rightbar
-                            -if chord.chordunits[i*8+j].rightbar != ""
-                              =chord.chordunits[i*8+j].rightbar
-                            - elsif (i*8+j)%8==(8-1)
-                              ="'"
-                          .unit--text.hidden{value: "#{chord.chordunits[i*8+j].text}"}
-                            =chord.chordunits[i*8+j].text
-          -else
-            =link_to song_path(song) do
-              .search-result__song-info
-                =song.title
-            コード譜が登録されていません
+          =link_to song_path(song) do
+            .p-search-result__result
+              .p-search__song-title
+                %h2
+                  =song.title
+              .c-icon__attributes
+                .c-icon__attribute
+                  .c-icon__inner--jam.u-position__icon-docking--jam
+                    %svg{class: "u-position__icon-docked--bottle u-svg_color", width: "19px", height: "22px"}
+                      =render "/svg/bottle"
+                    %svg{class: "u-position__icon-docked--strawberry u-svg_color", width: "10px", height: "10px"}
+                      =render "/svg/strawberry"
+                .c-icon__attribute
+                  %i.fas.fa-users.c-icon__inner--standard
+                .c-icon__attribute
+                  %svg{class: "u-svg_color c-icon__inner--beginner", width: "19px", height: "19px"}
+                    =render "/svg/beginner"
+                .c-icon__attribute
+                  %i.fas.fa-microphone-alt.c-icon__inner--vocal
+                .c-icon__attribute
+                  %i.fas.fa-guitar.c-icon__inner--instrumental
+              .c-review__btn
+                .c-review__icon
+                  %i.fas.fa-lightbulb.c-review__icon-practice
+                .c-review__amount
+                  10
+                .c-review__text
+                  練習してる？
+      .p-search-result__counter
+        =@songs.length.to_s + "results.."
+
+// old
+
+-# .wrapper__contents
+-#   .content
+-#     .content__search-result
+-#       = form_with url: search_songs_path, method: :get, local: true do |f|
+-#         .seatch-result__search-window
+-#           =f.text_field :keyword, id: "incremental_text"
+-#           =f.submit "検索"
+-#         .search-result__search-option
+-#           =f.label :jam, id: "incremental_jam" do
+-#             =f.check_box :jam, checkd_value: "true", unchecked_value: "false"
+-#             ジャムセッション向け曲
+-#           =f.label :standard, id: "incremental_standard" do
+-#             =f.check_box :standard, checkd_value: "true", unchecked_value: "false"
+-#             スタンダード曲
+-#           =f.label :beginner, id: "incremental_beginner" do
+-#             =f.check_box :beginner, checkd_value: "true", unchecked_value: "false"
+-#             初心者向け曲
+-#       =link_to "詳細検索", search_page_songs_path
+-#       .search-results__search-result
+-#         - @songs.each do |song|
+-#           -if (song.chords.length > 0)
+-#             - chord = song.chords.order(id: "DESC").first
+-#             =link_to song_path(song) do
+-#               .search-result__song-info
+-#                 =song.title
+-#               .search-result__first-chord
+-#                 .chord_display
+-#                   -2.times do |i|
+-#                     .chord_display__row{id: "row_#{i}"}
+-#                       -8.times do |j|
+-#                         -# =chord.chordunits[i*4+j].leftbar
+-#                         .chord_display__unit{id: "unit_#{i*8+j}"}
+-#                           .unit--beat.small--beat
+-#                             =chord.chordunits[i*8+j].beat
+-#                           .unit--leftbar.small--leftbar
+-#                             -if chord.chordunits[i*8+j].leftbar != ""
+-#                               =chord.chordunits[i*8+j].leftbar
+-#                             - elsif (i*8+j)%8==0
+-#                               ="'"
+-#                           .unit__note
+-#                             .unit__note--note_name.small--note_name
+-#                             .unit__note--half_note.small--note_half
+-#                             .unit__note--modifier.small--modifier
+-#                           .unit--rightbar.small--rightbar
+-#                             -if chord.chordunits[i*8+j].rightbar != ""
+-#                               =chord.chordunits[i*8+j].rightbar
+-#                             - elsif (i*8+j)%8==(8-1)
+-#                               ="'"
+-#                           .unit--text.hidden{value: "#{chord.chordunits[i*8+j].text}"}
+-#                             =chord.chordunits[i*8+j].text
+-#           -else
+-#             =link_to song_path(song) do
+-#               .search-result__song-info
+-#                 =song.title
+-#             コード譜が登録されていません
 
           

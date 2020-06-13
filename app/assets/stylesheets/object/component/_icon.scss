@@ -1,0 +1,44 @@
+.c-icon__attributes {
+  width: 100%;
+  margin-bottom: 10px;
+
+  border-radius: 2px;
+  display: flex;
+}
+
+.c-icon__attribute {
+  height: 27px;
+  width: 27px;
+  position: relative;
+  margin-right: 9px;
+  border-radius: 2px;
+  background-color: $color-icon-gray;
+}
+
+.c-icon__inner--jam {
+  position: absolute;
+  top: 13px;
+  left: 3px;
+}
+.c-icon__inner--standard {
+  position: absolute;
+  top: 7px;
+  left: 4px;
+}
+.c-icon__inner--beginner {
+  position: absolute;
+  top: 4px;
+  left: 4px;
+}
+.c-icon__inner--vocal {
+  font-size: 20px;
+  position: absolute;
+  top: 4px;
+  left: 6px;
+}
+.c-icon__inner--instrumental {
+  font-size: 20px;
+  position: absolute;
+  top: 3px;
+  left: 4px;
+}
