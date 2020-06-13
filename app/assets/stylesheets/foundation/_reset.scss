@@ -51,7 +51,7 @@ select {
   font: inherit;
 }
 img:not([alt]) {
-  filter: blur(10px);
+  // filter: blur(10px);
 }
 @media (prefers-reduced-motion: reduce) {
   * {

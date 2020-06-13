@@ -1,0 +1,14 @@
+.p-top {
+  // layout
+  height: 470px;
+  width: 100%;
+
+  // inner layout
+  display: flex;
+  align-items: flex-end;
+
+  // background image
+  background-image: url("top.jpeg");
+  background-size: 664px 880px;
+  background-position: 36% 64%;
+}

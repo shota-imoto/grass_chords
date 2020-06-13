@@ -1,0 +1,20 @@
+// make icon-jam
+.u-position__icon-docking--jam {
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+
+.u-position__icon-docked--bottle {
+  position: absolute;
+}
+.u-position__icon-docked--strawberry {
+  position: absolute;
+  top: -3px;
+  left: 5px;
+}
+
+// adjust position rightest icon
+.u-position__icon--margin-right {
+  margin-right: 0px;
+}

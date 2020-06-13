@@ -12,11 +12,23 @@
 @import "layout/_navi";
 @import "layout/_footer";
 
+// component
+@import "object/component/form";
+@import "object/component/icon";
+@import "object/component/section";
+@import "object/component/search";
+@import "object/component/window";
+
 // project
-@import "object/project/_navi.scss";
+@import "object/project/_top";
 
 // utility
+@import "object/utility/_color";
 @import "object/utility/_navi.scss";
+@import "object/utility/_size.scss";
+@import "object/utility/_position.scss";
+
+// old
 @import "modules/contacts";
 @import "modules/pdfs";
 @import "modules/songs";

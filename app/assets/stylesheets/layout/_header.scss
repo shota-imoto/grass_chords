@@ -2,10 +2,11 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: rgba(0, 0, 0, 0.25);
+  background-color: rgba(0, 0, 0, 0.5);
   height: 65px;
   width: 100vw;
   padding: 10px;
+  position: fixed;
 }
 
 .l-header__logo {
@@ -14,4 +15,42 @@
 
 .l-header__menu {
   display: flex;
+}
+
+// header menu
+.l-header__search-btn {
+  color: white;
+  font-size: 27px;
+}
+
+.l-header__opn-box {
+  display: flex;
+  align-items: center;
+}
+.l-header__opn-btn {
+  height: 5px;
+  width: 29px;
+  border-radius: 2px;
+  background-color: white;
+  position: relative;
+}
+
+.l-header__opn-btn::before {
+  content: "";
+  height: 100%;
+  width: 100%;
+  border-radius: inherit;
+  background-color: white;
+  position: absolute;
+  top: -10px;
+}
+
+.l-header__opn-btn::after {
+  content: "";
+  height: 100%;
+  width: 100%;
+  border-radius: inherit;
+  background-color: white;
+  position: absolute;
+  top: 10px;
 }
