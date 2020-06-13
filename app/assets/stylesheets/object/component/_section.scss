@@ -1,0 +1,14 @@
+.c-section__sentence-box {
+  position: relative;
+  margin-bottom: 30px;
+}
+
+.c-section__image-guitar {
+  position: absolute;
+  top: -30px;
+  right: 20px;
+
+  height: 100px;
+  width: 100px;
+  transform: rotate(240deg);
+}
