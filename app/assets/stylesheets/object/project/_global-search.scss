@@ -1,0 +1,14 @@
+.p-global-search__wrapper {
+  position: fixed;
+  top: 65px;
+  left: 0;
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  justify-content: center;
+}
+
+.p-global-search {
+  position: relative;
+  z-index: 70;
+}

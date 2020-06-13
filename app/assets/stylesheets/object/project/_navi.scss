@@ -1,0 +1,58 @@
+.p-navi__wrapper {
+  // layout
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  // background image
+  background-image: url("menu.jpeg");
+  background-size: 1218px 812px;
+  background-position: 38% 64%;
+
+  z-index: 30;
+}
+
+.p-navi__menu {
+  width: 50%;
+  color: $color-font-white;
+  z-index: 70;
+}
+.p-navi__content {
+  margin: 7px 0;
+}
+
+.p-navi__content__parent {
+  border-bottom: $color-accent-gold 2px solid;
+  padding: 0 5px 0 10px;
+
+  width: 100%;
+  font-size: 18px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.p-navi__content__child {
+  margin-top: 12px;
+  text-indent: 2em;
+}
+
+.p-navi__font__child {
+}
+
+.p-navi__icon-box {
+  margin-right: 5px;
+  width: 20px;
+}
+
+.p-navi__link-btn--parent {
+  display: flex;
+}
+
+.p-navi__menu-pulldown {
+  display: none;
+}

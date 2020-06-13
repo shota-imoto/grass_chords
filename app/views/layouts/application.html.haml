@@ -17,13 +17,17 @@
       .l-header__menu 
         .l-header__search-btn
           %i.fas.fa-search.l-search_btn
-        .l-header__opn-box.u-header__margin
-          .l-header__opn-btn
+        .l-header__opn-box.u-header__margin.c-js__menu-cls
+          %span
+          %span
+          %span
     .l-contents
       %main.l-main
         =yield
-      %navi.l-navi
-      .simple-search
+      %navi.l-navi.c-js__navi__fade-in
+        =render "/layouts/navi"
+      %navi.l-global-search.c-js__search__fade-in
+        =render "/layouts/search"
     %footer.l-footer
       %h1.u-size__footer-copyright ©2020 Grass Chords
       %h1.u-size__footer-name by Shota Imoto

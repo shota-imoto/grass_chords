@@ -15,11 +15,15 @@
 // component
 @import "object/component/form";
 @import "object/component/icon";
+@import "object/component/js";
+@import "object/component/layer";
 @import "object/component/section";
 @import "object/component/search";
 @import "object/component/window";
 
 // project
+@import "object/project/_global-search";
+@import "object/project/_navi";
 @import "object/project/_top";
 
 // utility
