@@ -1,0 +1,14 @@
+.l-footer {
+  // define footer layout
+  height: 75px;
+  width: 100vw;
+  margin-top: auto;
+  // define inner contents layout
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+  // define inner contents color
+  color: $color-font-white;
+  background-color: $color-dark-brown;
+}

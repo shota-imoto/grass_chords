@@ -2,6 +2,9 @@
 %html
   %head
     %meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
+    %meta{:name => "viewport", :content => "width=devise-width, initial-scale=1"}
+    %link{href: "https://fonts.googleapis.com/css2?family=M+PLUS+1p:wght@400;500&family=Nunito:wght@400;700&family=Rum+Raisin&family=Volkhov&display=swap", rel: "stylesheet"}
+
     %title Grass Chords
     = csrf_meta_tags
     = csp_meta_tag
@@ -12,17 +15,18 @@
       .l-header__logo
         %h1 Grass Chords
       .l-header__menu 
-        .p-navi__search-btn
-          %i.fas.fa-search.p-search_btn
-        .p-navi__opn-box.u-navi__margin
-          .p-navi__opn-btn
+        .l-header__search-btn
+          %i.fas.fa-search.l-search_btn
+        .l-header__opn-box.u-header__margin
+          .l-header__opn-btn
     .l-contents
       %main.l-main
         =yield
       %navi.l-navi
       .simple-search
     %footer.l-footer
-
+      %h1.u-size__footer-copyright ©2020 Grass Chords
+      %h1.u-size__footer-name by Shota Imoto
 
 -# 旧コード
 -# .wrapper

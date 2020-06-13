@@ -1,4 +1,66 @@
 %p#notice= notice
+%aside.p-top
+  %section.c-search.c-window__clear
+    .c-search__menu
+      .c-search__title コード譜を探す
+      =form_with  url: search_songs_path, method: :get, local: true do |f|
+        .c-form__search-box
+          =f.text_field :keyword, class: "c-form__textbox", placeholder: "Song Tittle"
+          =f.label :search, class:"c-search__send-btn c-form__position--box-btn" do
+            =f.submit "", class: "c-form__btn"
+            %i.fas.fa-search.c-form__btn-icon
+        .c-search__attribute.c-form__attributes
+          =f.label :jam, class:"c-form__attribute p-form__box--icon_jam" do
+            =f.check_box :jam
+            .p-form__inner--icon-jam
+              .u-position__icon-docking--jam
+                %svg{class: "u-position__icon-docked--bottle u-svg_color", width: "19px", height: "22px"}
+                  =render "/svg/bottle"
+                %svg{class: "u-position__icon-docked--strawberry u-svg_color", width: "10px", height: "10px"}
+                  =render "/svg/strawberry"
+            %a.c-search__attribute-text Jam
+          =f.label :standard, class: "c-form__attribute p-form__box--icon_standard" do
+            =f.check_box :standard
+            %i.fas.fa-users.p-form__inner--icon-standard
+            %a.c-search__attribute-text Standard
+          =f.label :beginner, class: "c-form__attribute p-form__box--icon_beginner u-position__icon--margin-right" do
+            =f.check_box :beginner
+            .p-form__inner--icon-beginner
+              %svg{class: "u-svg_color", width: "19px", height: "19px"}
+                =render "/svg/beginner"
+            %a.c-search__attribute-text Beginner
+          =f.label :vocal, class: "c-form__attribute p-form__box--icon_vocal" do
+            =f.check_box :vocal
+            %i.fas.fa-microphone-alt.p-form__inner--icon-vocal
+            %a.c-search__attribute-text Vocal
+          =f.label :instrumental, class: "c-form__attribute p-form__box--icon_instrumental" do
+            =f.check_box :instrumental
+            %i.fas.fa-guitar.p-form__inner--icon-instrumental
+            %a.c-search__attribute-text Instrumental
+%article
+  %section.c-section__sentence-box.u-section__red
+    %h2.heading Concept
+    .sentence
+      %p Bluegrassのジャムに参加してみたいけど、
+      %ul
+        %li コードが分からない…
+        %li どの曲を練習すればいいの？
+      %p というあなたのためのサービスです。
+  %section.c-section__sentence-box
+    %h2.heading How to Use
+    .sentence
+      %a
+        まずは気になる曲名を検索
+        %br
+        初心者向け曲をざっと知りたい方は、
+        %br
+        Beginner→検索の順にクリック
+    %figure
+      =image_tag "/assets/guitar.png", class: "c-section__image-guitar"
+
+          
+
+
 -# .contents__top
 -#   =image_tag src="tops/top05.jpeg", class: "contents__top--image"
   -# .contents__message
