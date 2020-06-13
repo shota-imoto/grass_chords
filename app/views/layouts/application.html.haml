@@ -12,8 +12,8 @@
     = javascript_include_tag 'application'
   %body
     %header.l-header
-      .l-header__logo
-        %h1 Grass Chords
+      %h1
+        =link_to "Grass Chords", root_path, class:"l-header__logo"
       .l-header__menu 
         .l-header__search-btn
           %i.fas.fa-search.l-search_btn
