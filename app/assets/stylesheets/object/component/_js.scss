@@ -1,0 +1,48 @@
+// animation for hamburger menu icon
+.c-js__menu-opn {
+  span {
+    transition: 200ms cubic-bezier(0.77, 0, 0.175, 1);
+    &:nth-child(1) {
+      transform: rotate(-225deg) translate(11px, -5px);
+    }
+    &:nth-child(2) {
+      opacity: 0;
+      transition: opacity 200ms;
+    }
+    &:nth-child(3) {
+      transform: rotate(225deg) translate(11px, 5px);
+    }
+  }
+}
+
+.c-js__menu-cls {
+  span {
+    transition: 200ms cubic-bezier(0.77, 0, 0.175, 1);
+    &:nth-child(1) {
+      transform: rotate(0deg) translate(0px, 0px);
+    }
+    &:nth-child(2) {
+      opacity: 1;
+      transition: opacity 200ms;
+    }
+    &:nth-child(3) {
+      transform: rotate(0deg) translate(0px, 0px);
+    }
+  }
+}
+
+.c-js__navi__fade-in {
+  display: none;
+}
+
+.c-js__menu__fade-in {
+  display: none;
+}
+
+.c-js__search__fade-in {
+  display: none;
+}
+
+.c-upside-down {
+  transform: rotate(180deg);
+}
