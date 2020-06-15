@@ -36,6 +36,13 @@
   justify-content: space-between;
 }
 
+.p-navi__string__parent {
+  & a {
+    text-decoration: none;
+    color: $color-font-white;
+  }
+}
+
 .p-navi__content__child {
   margin-top: 12px;
   text-indent: 2em;

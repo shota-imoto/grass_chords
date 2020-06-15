@@ -1,0 +1,28 @@
+.c-search__attribute.c-form__attributes
+  =f.label :jam, class:"c-form__attribute p-form__box--icon_jam" do
+    =f.check_box :jam
+    .p-form__inner--icon-jam
+      %p.p-song__icon-blank
+        %svg{class: "u-position__icon-docked--bottle u-svg_color", width: "19px", height: "22px"}
+          =render "/svg/bottle"
+        %svg{class: "u-position__icon-docked--strawberry u-svg_color", width: "10px", height: "10px"}
+          =render "/svg/strawberry"
+    %a.c-search__attribute-text Jam
+  =f.label :standard, class: "c-form__attribute p-form__box--icon_standard" do
+    =f.check_box :standard
+    %i.fas.fa-users.p-form__inner--icon-standard
+    %a.c-search__attribute-text Standard
+  =f.label :beginner, class: "c-form__attribute p-form__box--icon_beginner u-position__icon--margin-right" do
+    =f.check_box :beginner
+    .p-form__inner--icon-beginner
+      %svg{class: "u-svg_color", width: "19px", height: "19px"}
+        =render "/svg/beginner"
+    %a.c-search__attribute-text Beginner
+  =f.label :vocal, class: "c-form__attribute p-form__box--icon_vocal" do
+    =f.check_box :vocal
+    %i.fas.fa-microphone-alt.p-form__inner--icon-vocal
+    %a.c-search__attribute-text Vocal
+  =f.label :instrumental, class: "c-form__attribute p-form__box--icon_instrumental" do
+    =f.check_box :instrumental
+    %i.fas.fa-guitar.p-form__inner--icon-instrumental
+    %a.c-search__attribute-text Instrumental

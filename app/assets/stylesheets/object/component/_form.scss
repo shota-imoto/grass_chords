@@ -1,3 +1,8 @@
+.c-form__area {
+  margin: 10px 0;
+  padding: 10px;
+}
+
 .c-form__attributes {
   // layout
   display: flex;
@@ -37,13 +42,17 @@
 .c-form__textbox {
   padding: 0 8px;
   height: 1.8em;
-  width: calc(100% - 45px);
+
+  width: 100%;
 
   border-radius: 5px;
   border: none;
   background-color: $color-btn-normal;
   &::placeholder {
     color: $color-icon-gray;
+  }
+  &--search {
+    width: calc(100% - 45px);
   }
 }
 
@@ -67,6 +76,14 @@
     box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.3);
 
     font-size: 20px;
+  }
+
+  &--login {
+    height: 30px;
+    width: 80px;
+    box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.3);
+
+    font-size: 14px;
   }
 }
 
