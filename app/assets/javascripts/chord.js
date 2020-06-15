@@ -1,9 +1,13 @@
 $(function () {
   // カーソル表示
-  $(".chord_display__unit").on("touchend mouseup", function () {
-    $(".chord_display__unit").removeClass("cursor");
+  $(".c-chordunit").on("touchend mouseup", function () {
+    $(".c-chordunit").removeClass("cursor");
     var id = $(this).attr("id");
     $("#" + id).addClass("cursor");
+
+    // when user selects chordunit, load input text and indicate it.
+
+    input_text_display(id);
   });
 
   // エディター表示・非表示処理
@@ -12,30 +16,38 @@ $(function () {
   });
 
   $(".chord-btns__close").on("touchend mouseup", function () {
+    console.log($(this).text());
+
     $(".content__chord-btns").addClass("hidden");
   });
 
   // 入力処理
-  $(document).on("touchend mouseup", ".chord-btns--command", function () {
-    var input = $(this).val();
+  $(document).on("touchend, mouseup", ".chord-btns--command", function () {
+    var input = $(this).text();
 
     if ($(".cursor").length == 0) return false;
 
     var id = $(".cursor").attr("id");
-    id = id.replace("unit_", "");
+    id = id.replace("unit_0-", "");
+
+    // if some of command duplicates, under below judge statement resolves this problem.
+    if ($(this).hasClass("c-js__chord-editor-duplication")) {
+      if (input == "B") input = "sharp";
+      else if (input == "'") input = "rbar";
+    }
 
     // 入力コマンドに変換
-    if (input == "#") input_text(id, "s");
+    if (input == "sharp") input_text(id, "s");
     else if (input == "7th") input_text(id, "7");
-    else if (input == "繰返し始点") selected_text_edit("leftbar", id, "{");
-    else if (input == "繰返し終点") selected_text_edit("rightbar", id, "}");
-    else if (input == "|_") selected_text_edit("leftbar", id, "'");
-    else if (input == "_|") selected_text_edit("rightbar", id, "'");
-    else if (input == "2/4拍子") selected_text_edit("beat", id, "@");
-    else if (input == "4/4拍子") selected_text_edit("beat", id, "$");
-    else if (input == "3/4拍子") selected_text_edit("beat", id, "#");
-    else if (input == "繰返し") input_text(id, "‘");
-    else if (input == "削除") {
+    else if (input == "{") selected_text_edit("leftbar", id, "{");
+    else if (input == "}") selected_text_edit("rightbar", id, "}");
+    else if (input == "'") selected_text_edit("leftbar", id, "'");
+    else if (input == "rbar") selected_text_edit("rightbar", id, "'");
+    else if (input == "@") selected_text_edit("beat", id, "@");
+    else if (input == "$") selected_text_edit("beat", id, "$");
+    else if (input == "#") selected_text_edit("beat", id, "#");
+    else if (input == "くり返し") input_text(id, "‘");
+    else if (input == "BackSpace") {
       delete_text(id);
     } else {
       input_text(id, input);
@@ -44,15 +56,15 @@ $(function () {
 
   // 楽譜記号の処理(共通)
   function selected_text_edit(unit_name, id, input) {
-    if ($(".cursor > .unit--" + unit_name).text() == input) {
-      $(".cursor > .unit--" + unit_name).text("");
+    if ($(".cursor > .c-chordunit__" + unit_name).text() == input) {
+      $(".cursor > .c-chordunit__" + unit_name).text("");
     } else {
-      $(".cursor > .unit--" + unit_name).text("");
-      $(".cursor > .unit--" + unit_name).text(input);
+      $(".cursor > .c-chordunit__" + unit_name).text("");
+      $(".cursor > .c-chordunit__" + unit_name).text(input);
     }
 
     $(".cursor > #chord_chordunits_attributes_" + id + "_" + unit_name).val(
-      $(".cursor > .unit--" + unit_name).text()
+      $(".cursor > .c-chordunit__" + unit_name).text()
     );
   }
 
@@ -82,9 +94,15 @@ $(function () {
     const minor_note_array = ["m"];
 
     // クリア操作
-    $("#" + unit_id + " > .unit__note > .unit__note--note_name").text("");
-    $("#" + unit_id + " > .unit__note > .unit__note--half_note").text("");
-    $("#" + unit_id + " > .unit__note > .unit__note--modifier").text("");
+    $("#" + unit_id + " > .c-chordunit__note > .c-chordunit__note-name").text(
+      ""
+    );
+    $("#" + unit_id + " > .c-chordunit__note > .c-chordunit__half-note").text(
+      ""
+    );
+    $("#" + unit_id + " > .c-chordunit__note > .c-chordunit__modifier").text(
+      ""
+    );
 
     // データ処理用に文字列→配列変換
     var letter_array = letter.split("");
@@ -94,13 +112,13 @@ $(function () {
     if (note_name_array.includes(letter_array[i])) {
       if (letter_array[i] == "‘") {
         var html = `<span class="font_repeat">‘</span>`;
-        $("#" + unit_id + " > .unit__note > .unit__note--note_name").append(
-          html
-        );
+        $(
+          "#" + unit_id + " > .c-chordunit__note > .c-chordunit__note-name"
+        ).append(html);
       } else {
-        $("#" + unit_id + " > .unit__note > .unit__note--note_name").text(
-          letter_array[i]
-        );
+        $(
+          "#" + unit_id + " > .c-chordunit__note > .c-chordunit__note-name"
+        ).text(letter_array[i]);
       }
       i = 1;
 
@@ -110,43 +128,64 @@ $(function () {
         if (letter_array[i] == "s") display_letter = "B";
         else display_letter = letter_array[i];
 
-        $("#" + unit_id + " > .unit__note > .unit__note--half_note").text(
-          display_letter
-        );
+        $("#" + unit_id)
+          .find(".c-chordunit__half-note")
+          .text(display_letter);
+
         i = 2;
       }
       // マイナー処理、2列目以降に存在するときに一度だけ反映
       if (minor_note_array.includes(letter_array[i])) {
-        $("#" + unit_id + " > .unit__note > .unit__note--modifier").text(
-          letter_array[i]
-        );
+        $("#" + unit_id)
+          .find(".c-chordunit__modifier")
+          .text(letter_array[i]);
         i = i + 1;
       }
       // その他の処理。基本的に全てそのまま反映する。例外処理は随時追加。
       for (i; i < letter_array.length; i++) {
         // 7th処理
         if (letter_array[i] == "7") {
-          var display_letter = $(
-            "#" + unit_id + " > .unit__note > .unit__note--modifier"
-          ).text();
+          var display_letter = $("#" + unit_id)
+            .find(".c-chordunit__modifier")
+            .text();
 
           display_letter = display_letter + letter_array[i];
-          $("#" + unit_id + " > .unit__note > .unit__note--modifier").text(
-            display_letter
-          );
+          $("#" + unit_id)
+            .find(".c-chordunit__modifier")
+            .text(display_letter);
         }
       }
     } else {
       // １文字目に音名が存在しない場合は動作なし
     }
+    input_text_display(unit_id);
+  }
+
+  function input_text_display(unit_id) {
+    $(".chord-btns__text-window").text("");
+
+    var get_input = $("#" + unit_id)
+      .find(".c-chordunit__text")
+      .attr("value");
+    console.log(
+      $("#" + unit_id)
+        .find(".c-chordunit__text")
+        .attr("value")
+    );
+    $(".chord-btns__text-window").text(get_input);
   }
 
   $(document).ready(function () {
-    $(".unit--text").each(function (i, text) {
+    $(".c-chordunit__text").each(function (i, text) {
       var letter = $(text).attr("value");
+
+      var chord_num = Math.floor(i / 48);
+      var unit_num = i % 48;
+
       if (letter != undefined) {
         letter = letter.trim();
-        text_display("unit_" + i, letter);
+
+        text_display("unit_" + chord_num + "-" + unit_num, letter);
       }
     });
   });

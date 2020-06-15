@@ -1,0 +1,63 @@
+.content__chord-btns {
+  width: 100%;
+  height: 210px;
+  position: fixed;
+  display: flex;
+  justify-content: space-between;
+  left: 0;
+  bottom: 0;
+  z-index: 1;
+  padding: 10px 30px;
+}
+
+.chord-btns__input {
+  width: 100%;
+  color: $color-font-white;
+}
+
+.chord-btns__row {
+  padding: 0 7px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.chord-btns__text-window {
+  height: 1.8em;
+  width: 85%;
+  padding: 2px 7px;
+  font-size: 16px;
+
+  border: lightgray 1px solid;
+}
+
+.chord-btns__main {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.chord-btns--command {
+  // layout
+  margin: 7px;
+  border: 1px solid lightgray;
+  height: 33px;
+  width: calc(14% - 14px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  // design
+  box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.3);
+  color: $color-font-white;
+}
+
+.chord-btns__size-backspace {
+  width: calc(28% - 14px);
+}
+
+.chord-btns__close {
+  font-size: 24px;
+  margin-right: 7px;
+  margin-bottom: 10px;
+  cursor: pointer;
+}

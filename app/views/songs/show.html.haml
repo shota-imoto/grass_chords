@@ -1,93 +1,77 @@
-.wrapper__contents
-  %p#notice= notice
-  %p
-    %strong Title:
-    = @song.title
-
-  = link_to 'Edit', edit_song_path(@song)
-  |
-  = link_to 'Back', songs_path
-
-  .content__add-key
-    %h2 定番キーを追加
-    =form_with url: keys_path, method: :post, local: true do |f|
-      = f.hidden_field :song_id, value: @song.id
-      = f.check_box :instrumental
-      = f.label :instrumental
-      = f.check_box :male
-      = f.label :male
-      = f.check_box :female
-      = f.label :female
-      .chord-menu
-        .chord-menu__key
-          .key__key-display
-            = f.text_field :name, id: "key_name", class: "key-display--form hidden", value: "G"
-            .key__key-display--now
-              key of G
-          #chord-menu.chord-menu__key--palettes.hidden
-            .palettes__section
-              .palettes__palette.palettes__palette--one.palette--num
-                移動ド
-            .palettes__section
-              .palettes__palette.palettes__palette--four.palette--note
-                G
-              .palettes__palette.palettes__palette--four.palette--note
-                A
-              .palettes__palette.palettes__palette--four.palette--note
-                B
-              .palettes__palette.palettes__palette--four.palette--note
-                C
-            .palettes__section
-              .palettes__palette.palettes__palette--four.palette--note
-                D
-              .palettes__palette.palettes__palette--four.palette--note
-                E
-              .palettes__palette.palettes__palette--four.palette--note
-                F
-            .palettes__section
-              .palettes__palette.palettes__palette--three.palette--modifier
-                m
-              .palettes__palette.palettes__palette--three.palette--half.font_base-key
-                B
-              .palettes__palette.palettes__palette--three.palette--half.font_base-key
-                b
-            .palettes__section
-              .palettes__palette.palettes__palette--one.palette--close.font_
-                閉じる
-      = f.submit "登録"
-  .chord_link
-    -if (@song.chords.length > 0)
-      - chord = @song.chords.order(id: "DESC").first
-      =link_to chord_path(chord) do
-        .search-result__first-chord
-          .chord_display
-            -2.times do |i|
-              .chord_display__row{id: "row_#{i}"}
-                -8.times do |j|
-                  .chord_display__unit{id: "unit_#{i*8+j}"}
-                    .unit--beat.small--beat
-                      =chord.chordunits[i*8+j].beat
-                    .unit--leftbar.small--leftbar
-                      -if chord.chordunits[i*8+j].leftbar != ""
-                        =chord.chordunits[i*8+j].leftbar
-                      - elsif (i*8+j)%8==0
-                        ="'"
-                    .unit__note
-                      .unit__note--note_name.small--note_name
-                      .unit__note--half_note.small--note_half
-                      .unit__note--modifier.small--modifier
-                    .unit--rightbar.small--rightbar
-                      -if chord.chordunits[i*8+j].rightbar != ""
-                        =chord.chordunits[i*8+j].rightbar
-                      - elsif (i*8+j)%8==(8-1)
-                        ="'"
-                    .unit--text.hidden{value: "#{chord.chordunits[i*8+j].text}"}
-                      =chord.chordunits[i*8+j].text
-    -else
-      =link_to song_path(song) do
-        .search-result__song-info
-          =song.title
-      コード譜が登録されていません
-  .content__chord
-    - @song.chords.each do |chord|
-      =link_to "Reliable", likes_path(chord_id: chord.id),method: :post
+%p#notice= notice
+%aside.l-contents__top
+  %section.p-song__info.l-contents__section.c-window__clear
+    .p-song__title
+      %h2
+        =@song.title
+    .p-song__popular-key Popular key: A, B♭
+    .p-song__attributes.c-form__attributes
+      .p-song__attribute.c-form__attribute
+        %p.p-song__icon-blank
+          %svg{class: "u-position__icon-docked--bottle u-svg_color", width: "19px", height: "22px"}
+            =render "/svg/bottle"
+          %svg{class: "u-position__icon-docked--strawberry u-svg_color", width: "10px", height: "10px"}
+            =render "/svg/strawberry"
+        %a Jam
+      .p-song__attribute.c-form__attribute
+        %i.fas.fa-users
+        %a Standard
+      .p-song__attribute.c-form__attribute
+        %svg{class: "u-svg_color", width: "19px", height: "19px"}
+          =render "/svg/beginner"
+        %a Beginner
+      .p-song__attribute.c-form__attribute
+        %i.fas.fa-microphone-alt
+        %a Vocal
+      .p-song__attribute.c-form__attribute
+        %i.fas.fa-guitar
+        %a Instrumental
+%article.l-contents__main
+  - @song.chords.each_with_index do |chord, i|
+    %section.p-song__score-wrapper
+      .p-song__header
+        .p-song__key (key of A)
+        =link_to ">> 拡大ページ", chord_path(chord), class: "p-song__detail-page"
+      .p-song__score{id: "chord_#{i}"}
+        - chord.chordunits.each_with_index do |unit, j|
+          .c-chordunit.c-chordunit--small{id: "unit_#{i}-#{j}"}
+            .c-chordunit__beat.c-chordunit__beat--small
+              =chord.chordunits[j].beat
+            .c-chordunit__leftbar.c-chordunit__leftbar--small
+              -if chord.chordunits[j].leftbar != ""
+                =chord.chordunits[j].leftbar
+              - elsif j%4==0
+                ="'"
+            .c-chordunit__note
+              .c-chordunit__note-name.c-chordunit__note-name--small
+              .c-chordunit__half-note.c-chordunit__half-note--small
+              .c-chordunit__modifier.c-chordunit__modifier--small
+            .c-chordunit__rightbar.c-chordunit__rightbar--small
+              -if chord.chordunits[j].rightbar != ""
+                =chord.chordunits[j].rightbar
+              - elsif j%4==(4-1)
+                ="'"
+            .c-chordunit__text.hidden{value: "#{chord.chordunits[j].text}"}
+              =chord.chordunits[j].text          
+      .p-song__footer
+        %p.p-song__text-version
+          =chord.version + " version"
+        %p.p-song__text-writer
+          ="by "+ chord.user.name
+    .p-song__review
+      .c-review
+        .c-review__btn
+          .c-review__icon
+            %i.fas.fa-lightbulb.c-review__icon-practice
+          .c-review__amount
+            10
+          .c-review__text
+            練習してる？
+        .c-review__btn
+          .c-review__icon
+            %i.fas.fa-heart
+          .c-review__amount
+            10
+          .c-review__text
+            信頼できる？
+    %hr

@@ -1,5 +1,6 @@
 $color-theme-red: #a64951;
 $color-accent-gold: #a6a149;
+$color-accent-blue: #4997a6;
 $color-dark-brown: #593831;
 $color-font-black: #000000;
 $color-font-white: #ffffff;
@@ -16,7 +17,7 @@ body {
 }
 
 article {
-  padding: 8%;
+  padding: 20px 8%;
 }
 
 aside {
@@ -26,7 +27,6 @@ aside {
 section {
   width: 100%;
   border-radius: 10px;
-  margin-bottom: 30px;
   padding: 3% 5%;
   background-color: $color-section-beige;
 }
@@ -64,6 +64,16 @@ li:before {
 }
 
 hr {
-  color: $color-font-black;
-  size: 10;
+  border-bottom: $color-font-black 1px solid;
+  height: 1px;
+  width: 80%;
+  margin: 20px auto 30px;
+}
+
+input[type="submit"] {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  border: none;
+  outline: none;
 }

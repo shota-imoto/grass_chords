@@ -1,0 +1,92 @@
+.c-chordunit {
+  height: 48px;
+  border-bottom: $color-icon-gray 1px solid;
+  display: flex;
+  align-items: center;
+  position: relative;
+  margin-bottom: 12px;
+
+  &--large {
+    width: 25%;
+  }
+  &--small {
+    width: 12.5%;
+  }
+}
+
+.c-chordunit__beat {
+  font-family: "score-base";
+  text-align: right;
+  &--large {
+    font-size: 48px;
+    position: absolute;
+    left: -15px;
+  }
+
+  &--small {
+  }
+}
+.c-chordunit__leftbar {
+  font-family: "score-base";
+  width: 20%;
+
+  &--large {
+    font-size: 36px;
+  }
+  &--small {
+    font-size: 18px;
+  }
+}
+
+.c-chordunit__note {
+  width: 60%;
+  display: flex;
+}
+
+.c-chordunit__note-name {
+  font-family: sans-serif;
+
+  &--large {
+    font-size: 36px;
+  }
+  &--small {
+    font-size: 18px;
+  }
+}
+.c-chordunit__half-note {
+  // height: 50px;
+  font-family: "score-base";
+
+  &--large {
+    font-size: 36px;
+  }
+  &--small {
+    font-size: 28px;
+  }
+}
+.c-chordunit__modifier {
+  font-family: sans-serif;
+  vertical-align: bottom;
+
+  &--large {
+    position: absolute;
+    left: 58%;
+    bottom: 2px;
+    font-size: 18px;
+  }
+  &--small {
+    font-size: 9px;
+  }
+}
+
+.c-chordunit__rightbar {
+  font-family: "score-base";
+  text-align: right;
+  width: 20%;
+
+  &--large {
+    font-size: 36px;
+  }
+  &--small {
+  }
+}

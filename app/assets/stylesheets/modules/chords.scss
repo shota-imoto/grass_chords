@@ -93,64 +93,6 @@
   display: flex;
   justify-content: space-between;
 }
-.chord_display__unit {
-  width: 25%;
-  height: 100px;
-  border-bottom: lightgray 1px solid;
-  display: flex;
-
-  position: relative;
-}
-
-.unit {
-  &--beat {
-    font-family: "score-base";
-    font-size: 96px;
-    position: absolute;
-    top: 0;
-    left: -23px;
-  }
-  &--leftbar {
-    font-family: "score-base";
-    font-size: 96px;
-    position: absolute;
-    top: 0;
-    left: 0;
-  }
-  &__note {
-    vertical-align: top;
-    &--note_name {
-      font-family: sans-serif;
-      font-size: 96px;
-      position: absolute;
-      top: 0;
-      left: 32px;
-    }
-    &--half_note {
-      height: 50px;
-      font-family: "score-base";
-      font-size: 108px;
-      position: absolute;
-      top: 0;
-      left: 99px;
-    }
-    &--modifier {
-      font-family: sans-serif;
-      font-size: 36px;
-      position: absolute;
-      bottom: 10px;
-      left: 99px;
-    }
-  }
-
-  &--rightbar {
-    font-family: "score-base";
-    font-size: 96px;
-    position: absolute;
-    top: 0;
-    left: 142px;
-  }
-}
 
 // 省略表記時
 .small {
@@ -172,7 +114,7 @@
     top: 0;
     left: 0;
   }
-  &--note_half {
+  &--half_note {
     font-size: 32px;
     position: absolute;
     top: 0;
@@ -205,44 +147,4 @@
   50% {
     opacity: 0;
   }
-}
-.content__chord-btns {
-  width: 100vw;
-  height: 140px;
-  position: fixed;
-  display: flex;
-  justify-content: space-between;
-  left: 0;
-  bottom: 0;
-  background-color: skyblue;
-  z-index: 1;
-  padding: 10px 30px;
-}
-
-.chord-btns {
-  &__row {
-    color: lightgray;
-  }
-  &__text_window {
-    background-color: white;
-    height: 1em;
-    width: 50%;
-  }
-  &__close {
-    cursor: pointer;
-  }
-}
-
-.content__editer-btn {
-  width: 100px;
-  height: 50px;
-  border-radius: 50%;
-  color: white;
-  background-color: lightseagreen;
-  position: fixed;
-  bottom: 80px;
-  right: 50px;
-  cursor: pointer;
-  text-align: center;
-  line-height: 50px;
 }

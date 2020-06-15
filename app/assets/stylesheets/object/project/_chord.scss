@@ -1,0 +1,81 @@
+.p-chord__section {
+  margin-top: 50px;
+}
+
+.p-chord__review {
+  width: 95%;
+  margin: 10px 0 5px;
+}
+
+.p-chord__info {
+  display: flex;
+  align-items: flex-end;
+}
+
+.p-chord__key {
+  margin-top: -5px;
+}
+
+.p-chord__text-version {
+  max-width: 60%;
+  font-size: 12px;
+  font-weight: bold;
+}
+
+.p-chord__text-writer {
+  max-width: 40%;
+  margin-left: 0.6em;
+  font-size: 10px;
+}
+
+// pdf button
+.p-chord__pdf-btn {
+  height: 37px;
+  width: 95%;
+
+  margin: 0 auto;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background-color: $color-accent-blue;
+  border-radius: 5px;
+  box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.3);
+  & a {
+    text-decoration: none;
+    color: $color-font-white;
+    font-size: 20px;
+  }
+}
+
+// main content
+
+.p-chord__key-change {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.c-key-change__guide {
+  color: $color-theme-red;
+}
+.p-chord__manage-score {
+  text-align: right;
+  & a {
+    text-decoration: none;
+    color: $color-accent-blue;
+  }
+}
+
+.p-chord__return {
+  text-align: center;
+  & a {
+    text-decoration: none;
+    color: $color-theme-red;
+  }
+}
+
+.c-key-change__close-layer {
+  display: none;
+}

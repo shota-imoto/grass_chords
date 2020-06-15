@@ -1,0 +1,18 @@
+.l-contents__top {
+  width: 100%;
+
+  // inner layout
+  display: flex;
+  align-items: flex-end;
+
+  //background image
+  background-image: url("/images/top.jpeg");
+  background-size: 664px 880px;
+  background-position: 36% 70%;
+}
+.l-contents__main {
+}
+
+.l-contents__section {
+  margin-top: 100px;
+}

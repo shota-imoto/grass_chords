@@ -10,9 +10,11 @@
           %i.fas.fa-chevron-down
       .ul.p-navi__menu-pulldown
         .li.p-navi__content__child
-          %span.p-navi__font__child 楽曲の登録
+          %span.p-navi__font__child
+            =link_to "楽曲の登録", new_song_path
         .li.p-navi__content__child
-          %span.p-navi__font__child コード譜
+          %span.p-navi__font__child
+            =link_to "コード譜", new_chord_path
     .p-navi__content.c-js__menu__fade-in
       .p-navi__content__parent
         .p-navi__link-btn--parent

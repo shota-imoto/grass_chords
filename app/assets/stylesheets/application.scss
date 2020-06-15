@@ -7,15 +7,20 @@
 @import "foundation/_base";
 
 // layout
+@import "layout/contents";
 @import "layout/_header";
 @import "layout/_contents";
 @import "layout/_navi";
 @import "layout/_footer";
 
 // component
+@import "object/component/chord-edit";
+@import "object/component/chordunit";
+@import "object/component/font";
 @import "object/component/form";
 @import "object/component/icon";
 @import "object/component/js";
+@import "object/component/key-change";
 @import "object/component/layer";
 @import "object/component/review";
 @import "object/component/section";
@@ -23,10 +28,13 @@
 @import "object/component/window";
 
 // project
-@import "object/project/_global-search";
-@import "object/project/_navi";
+@import "object/project/chord";
+@import "object/project/chord-new";
+@import "object/project/global-search";
+@import "object/project/navi";
 @import "object/project/search-result";
-@import "object/project/_top";
+@import "object/project/song";
+@import "object/project/top";
 
 // utility
 @import "object/utility/_color";
@@ -35,6 +43,7 @@
 @import "object/utility/_position.scss";
 
 // old
+@import "modules/chords";
 @import "modules/contacts";
 @import "modules/pdfs";
 @import "modules/songs";
@@ -192,194 +201,6 @@ ul {
   list-style: none;
 }
 
-@keyframes navi-pulldown {
-  0% {
-    top: -100%;
-  }
-  100% {
-    top: 0;
-  }
-}
-
-.open {
-  animation-name: navi-pulldown;
-  animation-duration: 1s;
-  animation-fill-mode: forwards;
-  z-index: 1;
-}
-
-@keyframes navi-pullup {
-  0% {
-    top: 0;
-  }
-  100% {
-    top: -100%;
-  }
-}
-
-.close {
-  animation-name: navi-pullup;
-  animation-duration: 1s;
-  animation-fill-mode: forwards;
-  z-index: 1;
-}
-
-@keyframes open-top {
-  0% {
-    transform: rotate(0deg) translateY(0px) translateX(0px);
-    top: 0;
-  }
-  100% {
-    transform: rotate(-45deg) translateY(14px) translateX(0px);
-    top: 10;
-  }
-}
-@keyframes open-middle {
-  0% {
-    opacity: 100%;
-  }
-  100% {
-    opacity: 0%;
-  }
-}
-@keyframes open-bottom {
-  0% {
-    transform: rotate(0deg) translateY(0px) translateX(0px);
-    bottom: 0;
-  }
-  100% {
-    transform: rotate(45deg) translateY(-14px) translateX(0px);
-    bottom: 10;
-  }
-}
-
-.open-top {
-  animation-name: open-top;
-  animation-duration: 0.3s;
-  animation-fill-mode: forwards;
-}
-.open-middle {
-  animation-name: open-middle;
-  animation-duration: 0.3s;
-  animation-fill-mode: forwards;
-}
-.open-bottom {
-  animation-name: open-bottom;
-  animation-duration: 0.3s;
-  animation-fill-mode: forwards;
-}
-
-@keyframes close-top {
-  0% {
-    transform: rotate(-45deg) translateY(14px) translateX(0px);
-    top: 0;
-  }
-  100% {
-    transform: rotate(0deg) translateY(0px) translateX(0px);
-    top: 10;
-  }
-}
-@keyframes close-middle {
-  0% {
-    opacity: 0%;
-  }
-  100% {
-    opacity: 100%;
-  }
-}
-@keyframes close-bottom {
-  0% {
-    transform: rotate(45deg) translateY(-14px) translateX(0px);
-    bottom: 0;
-  }
-  100% {
-    transform: rotate(0deg) translateY(0px) translateX(0px);
-    bottom: 10;
-  }
-}
-
-.close-top {
-  animation-name: close-top;
-  animation-duration: 0.3s;
-  animation-fill-mode: forwards;
-}
-.close-middle {
-  animation-name: close-middle;
-  animation-duration: 0.3s;
-  animation-fill-mode: forwards;
-}
-.close-bottom {
-  animation-name: close-bottom;
-  animation-duration: 0.3s;
-  animation-fill-mode: forwards;
-}
-
-// general css
-
-.chord-menu__key {
-  position: relative;
-
-  &--palettes {
-    border: 1px solid lightgray;
-    background-color: white;
-    height: 250px;
-    width: 200px;
-    position: absolute;
-    top: 50px;
-    z-index: 10;
-  }
-}
-
-.key__key-display {
-  cursor: pointer;
-  width: 80px;
-  &--now {
-    height: 40px;
-    width: 100%;
-
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-  &--relative-key {
-    display: none;
-    height: 40px;
-    width: 100px;
-    position: absolute;
-    top: 0;
-    justify-content: center;
-    align-items: center;
-    z-index: 30;
-  }
-}
-
-#chord-menu {
-}
-
-.palettes__section {
-  display: flex;
-  width: 100%;
-}
-
-.palettes__palette {
-  border: 1px solid lightgray;
-  height: 25px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin: 3px;
-
-  &--one {
-    width: 100%;
-  }
-  &--three {
-    width: 33%;
-  }
-  &--four {
-    width: calc(100% / 4 - 3px * 2);
-  }
-}
-
 // オーバーレイ
 .clear_overlay {
   height: 120%;
@@ -398,9 +219,6 @@ ul {
   left: 0;
   // ↓他との兼ね合いで調整。大きめに幅をとっておくこと↓
   z-index: 20;
-}
-
-@keyframes {
 }
 
 // 非表示

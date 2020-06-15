@@ -1,0 +1,70 @@
+.p-song__popular-key {
+  margin-bottom: 10px;
+}
+
+.p-song__attribute {
+  // layout
+  background-color: $color-icon-gray;
+  box-shadow: 0 0 0 #444444;
+}
+
+.p-song__score-wrapper {
+  padding: 10px 25px;
+  background: linear-gradient(
+    0deg,
+    $color-accent-gold 0%,
+    $color-accent-gold 40px,
+    $color-section-beige 40px,
+    $color-section-beige 100%
+  );
+}
+
+.p-song__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  margin-bottom: 10px;
+}
+
+.p-song__score {
+  display: flex;
+  flex-wrap: wrap;
+  margin-bottom: 20px;
+}
+
+.p-song__footer {
+  color: $color-font-white;
+  display: flex;
+  align-items: flex-end;
+  width: 100%;
+}
+
+.p-song__key {
+  font-size: 12px;
+  color: $color-icon-gray;
+}
+
+.p-song__detail-page {
+  color: $color-theme-red;
+}
+
+.p-song__text-version {
+  max-width: 60%;
+  font-size: 14px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.p-song__text-writer {
+  max-width: 40%;
+  margin-left: 0.6em;
+  font-size: 10px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.p-song__review {
+  padding: 0 10%;
+}
