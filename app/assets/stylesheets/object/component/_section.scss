@@ -6,8 +6,28 @@
   position: absolute;
   top: -30px;
   right: 20px;
+  transform: rotate(240deg);
 
   height: 100px;
   width: 100px;
-  transform: rotate(240deg);
+}
+
+.c-section__image-fiddle {
+  position: absolute;
+  top: -60px;
+  right: 50px;
+  transform: rotate(-60deg);
+
+  height: 158px;
+  width: 80px;
+}
+
+.c-section__image-banjo {
+  position: absolute;
+  top: -60px;
+  right: 50px;
+  transform: rotate(-60deg);
+
+  height: 147px;
+  width: 70px;
 }

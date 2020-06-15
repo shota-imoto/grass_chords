@@ -41,6 +41,24 @@ $(function () {
           queue: false,
         }
       );
+      $(".c-js__menu__fade-in").eq(3).fadeToggle(1600).animate(
+        {
+          marginBottom: "+=10px",
+        },
+        {
+          duration: 500,
+          queue: false,
+        }
+      );
+      $(".c-js__menu__fade-in").eq(4).fadeToggle(1800).animate(
+        {
+          marginBottom: "+=10px",
+        },
+        {
+          duration: 500,
+          queue: false,
+        }
+      );
     } else {
       $(".c-js__navi__fade-in").fadeToggle();
       $(".c-js__menu__fade-in").fadeToggle();

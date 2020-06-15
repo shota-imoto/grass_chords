@@ -4,6 +4,20 @@
       .p-navi__content__parent.p-navi__btn-pulldown
         .p-navi__link-btn--parent
           .p-navi__icon-box
+            %i.fas.fa-sign-in-alt
+          %span.p-navi__string__parent
+            =link_to "ログイン", new_user_session_path
+    .p-navi__content.c-js__menu__fade-in
+      .p-navi__content__parent.p-navi__btn-pulldown
+        .p-navi__link-btn--parent
+          .p-navi__icon-box
+            %i.fas.fa-user-plus
+          %span.p-navi__string__parent
+            =link_to "ユーザ登録", new_user_registration_path
+    .p-navi__content.c-js__menu__fade-in
+      .p-navi__content__parent.p-navi__btn-pulldown
+        .p-navi__link-btn--parent
+          .p-navi__icon-box
             %i.fas.fa-drafting-compass
           %span.p-navi__string__parent データ作成
         .p-navi__icon-box.p-navi__icon-box
@@ -26,6 +40,7 @@
         .p-navi__link-btn--parent
           .p-navi__icon-box
             %i.fas.fa-sign-out-alt
-          %span.p-navi__string__parent ログアウト
+          %span.p-navi__string__parent
+            =link_to "ログアウト", destroy_user_session_path
   .c-layer__black
     .c-layer__black-sub
