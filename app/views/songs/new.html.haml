@@ -1,21 +1,17 @@
-.wrapper__contents
-  .contents__title
-  =form_with url: songs_path, class: "contents__form", method: :post, local: true do |f|
-    .form--title
-      = f.label "タイトル" do
-        = f.text_field :title
-    .form__class
-      =f.label :jam, class: "class--element" do
-        = f.check_box :jam, checked_value: "1", unchecked_value: "0"
-        ジャムセッション向け曲
-      =f.label :standard, class: "class--element" do
-        = f.check_box :standard, checked_value: "1", unchecked_value: "0"
-        スタンダード曲
-      =f.label :beginner, class: "class--element" do
-        = f.check_box :beginner, checked_value: "1", unchecked_value: "0"
-        初心者向け曲
-
-
-    .form--btn
-      = f.submit "登録"
-
+%aside.l-contents__top.l-contents__top--low-volume.l-contents__top
+%article.c-user__position-article
+  %section.c-section__sentence-box
+    .c-song-new__logo
+      %h2 Song Registration
+      %a - 楽曲を登録する -
+    .c-song-new__form
+      =form_with local: true do |f|
+        .c-form__area
+          =f.text_field :title, placeholder:"tittle", class:"c-form__textbox"
+        .c-form__area
+          =render "/application/song-attributes", f: f
+        .c-form__area
+          =f.submit "登録", class:"c-form__btn c-form__btn--login"
+    
+    %figure
+      =image_tag "/images/banjo.png", class: "c-section__image-banjo"
