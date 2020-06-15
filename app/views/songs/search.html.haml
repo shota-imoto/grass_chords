@@ -1,9 +1,7 @@
 .p-search-result__wrapper
-  -# %figure
-  -#   =image_tag "/images/top.jpeg", class: "p-search-result__top"
   %article.p-search-result__article
     %section.p-search-result__section.c-window__clear
-      =render "components/search"
+      =render "application/search"
       %hr{color: "black", size: "1px"}
       .p-search-result__results
         - @songs.each do |song|
@@ -14,11 +12,12 @@
                   =song.title
               .c-icon__attributes
                 .c-icon__attribute
-                  .c-icon__inner--jam.u-position__icon-docking--jam
-                    %svg{class: "u-position__icon-docked--bottle u-svg_color", width: "19px", height: "22px"}
-                      =render "/svg/bottle"
-                    %svg{class: "u-position__icon-docked--strawberry u-svg_color", width: "10px", height: "10px"}
-                      =render "/svg/strawberry"
+                  .c-icon__inner--jam
+                    .p-song__icon-blank
+                      %svg{class: "u-position__icon-docked--bottle u-svg_color", width: "19px", height: "22px"}
+                        =render "/svg/bottle"
+                      %svg{class: "u-position__icon-docked--strawberry u-svg_color", width: "10px", height: "10px"}
+                        =render "/svg/strawberry"
                 .c-icon__attribute
                   %i.fas.fa-users.c-icon__inner--standard
                 .c-icon__attribute
@@ -71,24 +70,24 @@
 -#                     .chord_display__row{id: "row_#{i}"}
 -#                       -8.times do |j|
 -#                         -# =chord.chordunits[i*4+j].leftbar
--#                         .chord_display__unit{id: "unit_#{i*8+j}"}
--#                           .unit--beat.small--beat
+-#                         .c-chordunit{id: "unit_#{i*8+j}"}
+-#                           .c-chordunit__beat.c-chordunit__beat
 -#                             =chord.chordunits[i*8+j].beat
--#                           .unit--leftbar.small--leftbar
+-#                           .c-chordunit__leftbar.c-chordunit__leftbar
 -#                             -if chord.chordunits[i*8+j].leftbar != ""
 -#                               =chord.chordunits[i*8+j].leftbar
 -#                             - elsif (i*8+j)%8==0
 -#                               ="'"
--#                           .unit__note
--#                             .unit__note--note_name.small--note_name
--#                             .unit__note--half_note.small--note_half
--#                             .unit__note--modifier.small--modifier
--#                           .unit--rightbar.small--rightbar
+-#                           .c-chordunit__note
+-#                             .c-chordunit__note-name.c-chordunit__note-name
+-#                             .c-chordunit__half-note..c-chordunit__half-note
+-#                             .c-chordunit__modifier..c-chordunit__modifier
+-#                           .c-chordunit__rightbar..c-chordunit__rightbar
 -#                             -if chord.chordunits[i*8+j].rightbar != ""
 -#                               =chord.chordunits[i*8+j].rightbar
 -#                             - elsif (i*8+j)%8==(8-1)
 -#                               ="'"
--#                           .unit--text.hidden{value: "#{chord.chordunits[i*8+j].text}"}
+-#                           .c-chordunit__text.hidden{value: "#{chord.chordunits[i*8+j].text}"}
 -#                             =chord.chordunits[i*8+j].text
 -#           -else
 -#             =link_to song_path(song) do

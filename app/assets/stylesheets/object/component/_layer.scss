@@ -10,5 +10,14 @@
   z-index: 50;
 }
 
-.c-layer__black {
+.c-layer__skeleton {
+  background-color: rgba(0, 0, 0, 0);
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+
+  z-index: 30;
 }

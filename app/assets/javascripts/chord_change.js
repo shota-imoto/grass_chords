@@ -3,24 +3,26 @@ $(function () {
 
   // キー選択パレットの表示・非表示
   //キー選択パレットを開く
-  $(".key__key-display").on("touchend, mouseup", function () {
+  $(".c-key-change__display").on("touchend, mouseup", function () {
     $("#chord-menu").show();
+    $(".c-key-change__close-layer").show();
+
     $(".wrapper").append(`<div class="clear_overlay"></div>`);
   });
 
   // キー選択パレットを閉じる
   $(document).on(
     "touchend mouseup",
-    ".clear_overlay, .palette--close",
+    ".c-key-change__close-layer, .c-key-change__close",
     function () {
       $("#chord-menu").hide();
-      $(".clear_overlay").remove();
+      $(".c-key-change__close-layer").hide();
     }
   );
 
   // キー表示切替
   // 絶対音
-  $(".palette--note").on("touchend, mouseup", function () {
+  $(".c-key-change__btn--note").on("touchend, mouseup", function () {
     console.log("hakka");
     var selected = $(this).text().trim();
     var key_state = $(".key-display--form").val();
@@ -44,14 +46,14 @@ $(function () {
     key_state = key_state.replace("m", "");
     var key_index = absolute_note_array.indexOf(key_state);
 
-    $(".key__key-display--now").text("key of " + selected);
+    $(".c-key-change__present ").text("key of " + selected);
     $(".key-display--form").val(selected);
 
     key_change(key_index);
   });
 
   // #/b
-  $(".palette--half").on("touchend, mouseup", function () {
+  $(".c-key-change__btn--half").on("touchend, mouseup", function () {
     var selected = $(this).text().trim();
     var key_state = $(".key-display--form").val();
 
@@ -89,23 +91,23 @@ $(function () {
     $(".key-display--form").val(key_state);
 
     if (key_state.length == 2) {
-      $(".key__key-display--now").text("key of " + key_state.charAt(0));
-      $(".key__key-display--now ").append(
+      $(".c-key-change__present ").text("key of " + key_state.charAt(0));
+      $(".c-key-change__present  ").append(
         `<span class="font_base-key">${key_state.charAt(1)}</span>`
       );
     } else {
-      $(".key__key-display--now").text("key of " + key_state);
+      $(".c-key-change__present ").text("key of " + key_state);
     }
 
     key_change(key_index);
   });
 
   // m
-  $(".palette--modifier").on("touchend, mouseup", function () {
+  $(".c-key-change__btn--modifier").on("touchend, mouseup", function () {
     var key_state = $(".key-display--form").val();
 
     if (key_state.indexOf("m") == -1) {
-      $(".key__key-display--now").append(
+      $(".c-key-change__present ").append(
         `<span class="font_minor-key">m</span>`
       );
       key_state = key_state + "m";
@@ -137,9 +139,9 @@ $(function () {
     var now_key_index = absolute_note_array.indexOf(key_state);
     var key_difference = now_key_index - before_key_index;
 
-    $(".unit__note").each(function (i, value) {
-      var note = $(value).children(".unit__note--note_name").text();
-      note = note + $(value).children(".unit__note--half_note").text();
+    $(".c-chordunit__note").each(function (i, value) {
+      var note = $(value).children(".c-chordunit__note-name").text();
+      note = note + $(value).children(".c-chordunit__half-note").text();
 
       // 異常表記または別表記を変換する
       if (note == "Ab") {
@@ -175,11 +177,11 @@ $(function () {
 
       if (note_index == "空欄");
       else if (note.length == 2) {
-        $(value).children(".unit__note--note_name").text(note.charAt(0));
-        $(value).children(".unit__note--half_note").text(note.charAt(1));
+        $(value).children(".c-chordunit__note-name").text(note.charAt(0));
+        $(value).children(".c-chordunit__half-note").text(note.charAt(1));
       } else if (note.length == 1) {
-        $(value).children(".unit__note--note_name").text(note.charAt(0));
-        $(value).children(".unit__note--half_note").text("");
+        $(value).children(".c-chordunit__note-name").text(note.charAt(0));
+        $(value).children(".c-chordunit__half-note").text("");
       } else {
       }
     });
@@ -187,7 +189,7 @@ $(function () {
 
   // // ページ読み込み時の挙動
   // $(document).ready(function () {
-  //   var key_now_state = $(".key__key-display--now").text();
+  //   var key_now_state = $(".c-key-change__present ").text();
   //   key_now_state = $.trim(key_now_state);
   //   chord_display(key_now_state);
   //   key_for_registration(key_now_state);
