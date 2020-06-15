@@ -1,0 +1,66 @@
+.c-key-change__wrapper {
+  position: relative;
+}
+
+.c-key-change__editor {
+  height: 170px;
+  width: 260px;
+  border-radius: 5px;
+
+  position: absolute;
+  top: 50px;
+
+  z-index: 40;
+}
+
+.c-key-change__layout {
+  display: flex;
+  color: $color-font-white;
+}
+
+.c-key-change__main {
+  padding: 7px;
+
+  display: flex;
+  flex-wrap: wrap;
+  font-size: 20px;
+}
+
+.c-key-change__close {
+  font-size: 24px;
+  margin: 0 12px 0 -10px;
+}
+
+.c-key-change__btn {
+  border: 1px solid lightgray;
+  height: 37px;
+  width: calc(25% - 16px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 7px;
+  box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.3);
+}
+
+.c-key-change__display {
+  cursor: pointer;
+  margin-right: 10px;
+}
+
+.c-key-change__present {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  height: 40px;
+  width: 95px;
+
+  // box decoration
+  background-color: $color-theme-red;
+  border-radius: 5px;
+  box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.3);
+
+  // text decoration
+  color: $color-font-white;
+  font-size: 20px;
+}

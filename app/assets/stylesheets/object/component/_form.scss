@@ -36,10 +36,15 @@
 
 .c-form__textbox {
   padding: 0 8px;
+  height: 1.8em;
   width: calc(100% - 45px);
+
   border-radius: 5px;
   border: none;
   background-color: $color-btn-normal;
+  &::placeholder {
+    color: $color-icon-gray;
+  }
 }
 
 .c-form__position--box-btn {
@@ -50,11 +55,19 @@
 }
 
 .c-form__btn {
-  border: none;
   height: 27px;
   width: 45px;
-  background-color: $color-theme-red;
   border-radius: 5px;
+
+  background-color: $color-theme-red;
+  color: $color-font-white;
+  &--registration {
+    height: 38px;
+    width: 82px;
+    box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.3);
+
+    font-size: 20px;
+  }
 }
 
 .c-form__btn-icon {

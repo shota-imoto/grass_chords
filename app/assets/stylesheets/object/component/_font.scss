@@ -1,0 +1,66 @@
+@font-face {
+  font-family: "score-base";
+  src: font-url("Musisync_custom.otf") format("opentype");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "score-repeat";
+  src: font-url("Dvmarticulations-Yqpy_custom.otf") format("opentype");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "score-greek";
+  src: font-url("ancient-geek.regular.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "title";
+  src: font-url("title2_GuitarAcoustic-njzR.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+
+// adjust font size like 14px
+.c-font__size-base {
+  font-size: 2em;
+}
+.c-font__size-half {
+  padding-top: 16px;
+}
+
+.c-font__base {
+  font-family: "score-base";
+}
+
+.c-font__repeat {
+  font-family: "score-repeat";
+}
+
+.font_greek {
+  font-family: "score-greek";
+  display: inline-block;
+  margin-right: 1px;
+}
+
+// 小節区切りのサイズ調整
+.font_minor {
+  font-family: sans-serif;
+  font-size: 70px;
+}
+
+// キー選択パレット
+.font_base-key {
+  font-size: 26px;
+  padding-top: 15px;
+}
+
+.font_minor-key {
+  font-family: sans-serif;
+  font-size: 13px;
+}

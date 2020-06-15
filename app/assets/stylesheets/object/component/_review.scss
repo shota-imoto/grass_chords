@@ -1,18 +1,21 @@
+.c-review {
+  width: 100;
+  display: flex;
+  justify-content: space-between;
+}
+
 .c-review__btn {
   height: 30px;
-  width: 125px;
+  width: 120px;
   padding: 6px;
 
   display: flex;
+  justify-content: center;
   align-items: center;
 
   background-color: $color-btn-normal;
   box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.3);
-  font-size: 12px;
-}
-
-.c-review__icon-practice {
-  font-size: 20px;
+  font-size: 11px;
 }
 
 .c-review__amount {

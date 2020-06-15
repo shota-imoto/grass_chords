@@ -39,6 +39,11 @@
 .p-navi__content__child {
   margin-top: 12px;
   text-indent: 2em;
+
+  & a {
+    text-decoration: none;
+    color: $color-font-white;
+  }
 }
 
 .p-navi__font__child {

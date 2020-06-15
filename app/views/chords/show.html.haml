@@ -1,87 +1,62 @@
-.wrapper__contents
-  .chord-top
-    %h1
-      =@chord.song.title
-    %h2
-      =@chord.version
-  .like-btn
-    =link_to "Reliable", likes_path, method: :post
-  .practice-btn
-    .practice-btn__display 練習してるボタン
-    =form_with url: practices_path, method: :post, local: true do |f|
-      =f.text_field :song_id, value: @chord.song_id, class: "form_blind"
-      =f.select :practice_key, [["なんでも","なんでも"],["G","G"],["A","A"],["B","B"],["C","C"],["D","D"],["E","E"],["F","F"],["Em","Em"],["Dm","Dm"],["Am","Am"],["Gm","Gm"]]
-      =f.submit "OK"
+%aside.l-contents__top
+  %section.l-contents__section.c-window__clear.p-chord__section
+    .p-chord__title
+      %h2
+        =@chord.song.title
+      .p-chord__key key of G
+    .p-chord__review
+      .c-review
+        .c-review__btn
+          .c-review__icon
+            %i.fas.fa-lightbulb.c-review__icon-practice
+          .c-review__amount
+            10
+          .c-review__text
+            練習してる？
+        .c-review__btn
+          .c-review__icon
+            %i.fas.fa-heart
+          .c-review__amount
+            10
+          .c-review__text
+            信頼できる？
+    .p-chord__info
+      %p.p-chord__text-version
+        =@chord.version + " version"
+      %p.p-chord__text-writer
+        ="by "+ @chord.user.name
+%article.l-contents__main
+  .p-chord__pdf-btn
+    =link_to "PDF Download", url:"#"
+  %section.p-chord__wrapper
+    .p-chord__key-change
+      =render "/application/key-change"
 
-  .chord-menu__print
-    印刷
-  .content__edit
-    =link_to "編集", edit_chord_path
-  .content__delete
-    =link_to "削除"
-  .chord-display
-    .chord-display--chord-score
-      
-    .chord-display--text
-.chord-menu__key
-  =form_with local: true do |f|
-    .key__key-display
-      = f.text_field :name, id: "key_name", class: "key-display--form hidden", value: "G"
-      .key__key-display--now
-        key of G
-  #chord-menu.chord-menu__key--palettes.hidden
-    .palettes__section
-      .palettes__palette.palettes__palette--one.palette--num
-        移動ド
-    .palettes__section
-      .palettes__palette.palettes__palette--four.palette--note
-        G
-      .palettes__palette.palettes__palette--four.palette--note
-        A
-      .palettes__palette.palettes__palette--four.palette--note
-        B
-      .palettes__palette.palettes__palette--four.palette--note
-        C
-    .palettes__section
-      .palettes__palette.palettes__palette--four.palette--note
-        D
-      .palettes__palette.palettes__palette--four.palette--note
-        E
-      .palettes__palette.palettes__palette--four.palette--note
-        F
-    .palettes__section
-      .palettes__palette.palettes__palette--three.palette--modifier
-        m
-      .palettes__palette.palettes__palette--three.palette--half.font_base-key
-        B
-      .palettes__palette.palettes__palette--three.palette--half.font_base-key
-        b
-    .palettes__section
-      .palettes__palette.palettes__palette--one.palette--close.font_
-        閉じる
-.chord_display
-  -12.times do |i|
-    .chord_display__row{id: "row_#{i}"}
-      -4.times do |j|
-        .chord_display__unit{id: "unit_#{i*4+j}"}
-          .unit--beat
-            =@chord.chordunits[i*4+j].beat
-          .unit--leftbar
-            -if @chord.chordunits[i*4+j].leftbar != ""
-              =@chord.chordunits[i*4+j].leftbar
-            - elsif (i*4+j)%4==0
+    .p-song__score
+      - @chord.chordunits.each_with_index do |unit, i|
+        .c-chordunit.c-chordunit--large{id: "unit_0-#{i}"}
+          .c-chordunit__beat.c-chordunit__beat--large
+            =@chord.chordunits[i].beat
+          .c-chordunit__leftbar.c-chordunit__leftbar--large
+            -if @chord.chordunits[i].leftbar != ""
+              =@chord.chordunits[i].leftbar
+            - elsif i%4==0
               ="'"
-          .unit__note
-            .unit__note--note_name
-            .unit__note--half_note
-            .unit__note--modifier
-          .unit--half_note
-          .unit--modifier
-          .unit--rightbar
-            -if @chord.chordunits[i*4+j].rightbar != ""
-              =@chord.chordunits[i*4+j].rightbar
-            - elsif (i*4+j)%4==3
+          .c-chordunit__note
+            .c-chordunit__note-name.c-chordunit__note-name--large
+            .c-chordunit__half-note.c-chordunit__half-note--large
+            .c-chordunit__modifier.c-chordunit__modifier--large
+          .c-chordunit__rightbar.c-chordunit__rightbar--large
+            -if @chord.chordunits[i].rightbar != ""
+              =@chord.chordunits[i].rightbar
+            - elsif i%4==(4-1)
               ="'"
-          .unit--text.hidden{value: "#{@chord.chordunits[i*4+j].text}"}
-            =@chord.chordunits[i*4+j].text
-  
+          .c-chordunit__text.hidden{value: "#{@chord.chordunits[i].text}"}
+            =@chord.chordunits[i].text
+    .p-chord__manage-score
+      =link_to "Edit", edit_chord_path
+      %a
+        |
+      =link_to "Delete", chord_path, method: :delete
+  .p-chord__return
+    =link_to "コード譜一覧に戻る", song_path(@chord.song)
