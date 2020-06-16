@@ -1,6 +1,6 @@
 .c-search__attribute.c-form__attributes
-  =f.label :jam, class:"c-form__attribute p-form__box--icon_jam" do
-    =f.check_box :jam
+  =f.label :jam, class:"c-form__attribute p-form__box--icon_jam c-js__search-jam" do
+    =f.check_box :jam, {class: "c-js__value-jam"}, true, false
     .p-form__inner--icon-jam
       %p.p-song__icon-blank
         %svg{class: "u-position__icon-docked--bottle u-svg_color", width: "19px", height: "22px"}
@@ -8,21 +8,21 @@
         %svg{class: "u-position__icon-docked--strawberry u-svg_color", width: "10px", height: "10px"}
           =render "/svg/strawberry"
     %a.c-search__attribute-text Jam
-  =f.label :standard, class: "c-form__attribute p-form__box--icon_standard" do
-    =f.check_box :standard
+  =f.label :standard, class: "c-form__attribute p-form__box--icon_standard c-js__search-standard" do
+    =f.check_box :standard, {class: "c-js__value-standard"}, true, false
     %i.fas.fa-users.p-form__inner--icon-standard
     %a.c-search__attribute-text Standard
-  =f.label :beginner, class: "c-form__attribute p-form__box--icon_beginner u-position__icon--margin-right" do
-    =f.check_box :beginner
+  =f.label :beginner, class: "c-form__attribute p-form__box--icon_beginner u-position__icon--margin-right c-js__search-beginner" do
+    =f.check_box :beginner, {class:"c-js__value-beginner"}, true, false
     .p-form__inner--icon-beginner
       %svg{class: "u-svg_color", width: "19px", height: "19px"}
         =render "/svg/beginner"
     %a.c-search__attribute-text Beginner
-  =f.label :vocal, class: "c-form__attribute p-form__box--icon_vocal" do
-    =f.check_box :vocal
+  =f.label :vocal, class: "c-form__attribute p-form__box--icon_vocal c-js__search-vocal" do
+    =f.check_box :vocal, {class: "c-js__value-vocal"}, true, false
     %i.fas.fa-microphone-alt.p-form__inner--icon-vocal
     %a.c-search__attribute-text Vocal
-  =f.label :instrumental, class: "c-form__attribute p-form__box--icon_instrumental" do
-    =f.check_box :instrumental
+  =f.label :instrumental, class: "c-form__attribute p-form__box--icon_instrumental c-js__search-instrumental" do
+    =f.check_box :instrumental, {class: "c-js__value-instrumental"}, true, false
     %i.fas.fa-guitar.p-form__inner--icon-instrumental
     %a.c-search__attribute-text Instrumental

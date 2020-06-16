@@ -2,7 +2,7 @@
   .c-search__title コード譜を探す
   =form_with  url: search_songs_path, method: :get, local: true do |f|
     .c-form__search-box
-      =f.text_field :keyword, class: "c-form__textbox c-form__textbox--search", placeholder: "Song Tittle"
+      =f.text_field :keyword, class: "c-form__textbox c-form__textbox--search c-js__search-text", placeholder: "Song Tittle"
       =f.label :search, class:"c-search__send-btn c-form__position--box-btn" do
         =f.submit "", class: "c-form__btn"
         %i.fas.fa-search.c-form__btn-icon

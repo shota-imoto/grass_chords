@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_05_26_092824) do
+ActiveRecord::Schema.define(version: 2020_06_16_212537) do
 
   create_table "albums", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name", null: false
@@ -28,15 +28,12 @@ ActiveRecord::Schema.define(version: 2020_05_26_092824) do
 
   create_table "chords", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.bigint "song_id"
-    t.bigint "artist_id"
-    t.bigint "album_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "user_id"
     t.string "version"
     t.integer "likes_count", default: 0
-    t.index ["album_id"], name: "index_chords_on_album_id"
-    t.index ["artist_id"], name: "index_chords_on_artist_id"
+    t.integer "practices_count", default: 0
     t.index ["song_id"], name: "index_chords_on_song_id"
     t.index ["user_id"], name: "index_chords_on_user_id"
   end
@@ -100,12 +97,11 @@ ActiveRecord::Schema.define(version: 2020_05_26_092824) do
   end
 
   create_table "practices", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
-    t.bigint "song_id"
     t.bigint "user_id"
-    t.integer "practice_key"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["song_id"], name: "index_practices_on_song_id"
+    t.bigint "chord_id"
+    t.index ["chord_id"], name: "index_practices_on_chord_id"
     t.index ["user_id"], name: "index_practices_on_user_id"
   end
 
@@ -126,6 +122,8 @@ ActiveRecord::Schema.define(version: 2020_05_26_092824) do
     t.bigint "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.boolean "vocal", null: false
+    t.boolean "instrumental", null: false
     t.index ["user_id"], name: "index_songs_on_user_id"
   end
 
@@ -173,8 +171,6 @@ ActiveRecord::Schema.define(version: 2020_05_26_092824) do
   end
 
   add_foreign_key "albums", "artists"
-  add_foreign_key "chords", "albums"
-  add_foreign_key "chords", "artists"
   add_foreign_key "chords", "songs"
   add_foreign_key "chords", "users"
   add_foreign_key "chordunits", "chords"
@@ -184,7 +180,7 @@ ActiveRecord::Schema.define(version: 2020_05_26_092824) do
   add_foreign_key "keys", "songs"
   add_foreign_key "likes", "chords"
   add_foreign_key "likes", "users"
-  add_foreign_key "practices", "songs"
+  add_foreign_key "practices", "chords"
   add_foreign_key "practices", "users"
   add_foreign_key "scores", "songs"
   add_foreign_key "songs", "users"
