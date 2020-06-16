@@ -4,13 +4,15 @@
 
 ### table
 
-| name     | type    | option      |
-| -------- | ------- | ----------- |
-| title    | string  | null: false |
-| jam      | boolean | null: false |
-| standard | boolean | null: false |
-| beginner | boolean | null: false |
-| user_id  | integer | null: false |
+| name         | type    | option      |
+| ------------ | ------- | ----------- |
+| title        | string  | null: false |
+| jam          | boolean | null: false |
+| standard     | boolean | null: false |
+| beginner     | boolean | null: false |
+| vocal        | boolean | null: false |
+| instrumental | boolean | null: false |
+| user_id      | integer | null: false |
 
 ### association
 
@@ -54,36 +56,36 @@
 
 ### table
 
-| name         | type    | option                   |
-| ------------ | ------- | ------------------------ |
-| song_id      | integer | null: false, foreign_key |
-| user_id      | integer | null: false, foreign_key |
-| practice_key | integer |                          |
+| name     | type    | option                   |
+| -------- | ------- | ------------------------ |
+| chord_id | integer | null: false, foreign_key |
+| user_id  | integer | null: false, foreign_key |
 
 ### asocciation
 
-- belongs_to :song
+- belongs_to :chord, counter_cache: true
 - belongs_to :user
 
 ## chord
 
 ### table
 
-| name        | type    | option                         |
-| ----------- | ------- | ------------------------------ |
-| song_id     | integer | null: false, foreign_key: true |
-| artist_id   | integer | foreign_key: true              |
-| album_id    | integer | foreign_key: true              |
-| user_id     | integer | foreign_key: true              |
-| text→delete | text    | null: false, unique: true      |
+| name           | type    | option                         |
+| -------------- | ------- | ------------------------------ |
+| song_id        | integer | null: false, foreign_key: true |
+| user_id        | integer | foreign_key: true              |
+| version        | string  |                                |
+| like_count     | integer | null: false                    |
+| practice_count | integer | null:false                     |
 
 ### asocciation
 
 - belongs_to :song
 - belongs_to :user
-- belongs_to :artist
-- belongs_to :album
+- has_many :chordunits, dependent: :destroy
+- accepts_nested_attributes_for :chordunits
 - has_many :likes, dependent: :destroy
+- has_many :practices, dependent: :destroy
 - has_many :chordunit
 
 ## chordunit
@@ -163,7 +165,7 @@
 
 ### asocciation
 
-- belongs_to :chord
+- belongs_to :chord, counter_cache: true
 - belongs_to :user
 
 ## instrument
