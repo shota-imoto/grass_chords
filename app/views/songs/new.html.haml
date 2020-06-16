@@ -5,7 +5,7 @@
       %h2 Song Registration
       %a - 楽曲を登録する -
     .c-song-new__form
-      =form_with local: true do |f|
+      =form_with ,local: true do |f|
         .c-form__area
           =f.text_field :title, placeholder:"tittle", class:"c-form__textbox"
         .c-form__area
