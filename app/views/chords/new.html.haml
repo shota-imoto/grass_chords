@@ -4,9 +4,8 @@
       %h2 Chord Score Creater
       .p-chord-new__subtitle -コード譜を作成する-
 
-
-%article.l-contents__main
-  =form_with model: @chord, local: true do |f|
+=form_with url: chords_path, method: :post, model: @chord, local: true do |f|
+  %article.l-contents__main
     %section.c-window__skeleton
       .content__song-name
         .c-song-candidate__wrapper
@@ -41,10 +40,10 @@
               =unit_f.hidden_field :leftbar
               =unit_f.hidden_field :rightbar
               =unit_f.hidden_field :beat
+    .content__registration
+      =f.submit "登録", class:"c-form__btn c-form__btn--registration"
     .content__editer-btn
       >> Editor
-    .content__registration
-      =f.submit "登録",class:"c-form__btn c-form__btn--registration"
 
         
 .content__chord-btns.c-window__clear-black.hidden

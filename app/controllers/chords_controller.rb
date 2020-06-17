@@ -29,33 +29,24 @@ class ChordsController < ApplicationController
   # POST /chords.json
   def create
     @chord = Chord.new(chord_params)
-    # 一意性制約をaddressカラムに設定しているため、違うコード進行中のコードユニットと重複して保存できない？？
     @chord.save
+    redirect_to(@chord) 
 
   end
 
   # PATCH/PUT /chords/1
   # PATCH/PUT /chords/1.json
   def update
-    respond_to do |format|
-      if @chord.update(chord_params)
-        format.html { redirect_to @chord, notice: 'Chord was successfully updated.' }
-        format.json { render :show, status: :ok, location: @chord }
-      else
-        format.html { render :edit }
-        format.json { render json: @chord.errors, status: :unprocessable_entity }
-      end
-    end
+    @chord.update(chord_params)
+    redirect_to(@chord) 
   end
 
   # DELETE /chords/1
   # DELETE /chords/1.json
   def destroy
     @chord.destroy
-    respond_to do |format|
-      format.html { redirect_to chords_url, notice: 'Chord was successfully destroyed.' }
-      format.json { head :no_content }
-    end
+    redirect_to root_path
+
   end
 
   private
@@ -66,7 +57,7 @@ class ChordsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def chord_params
-      params.require(:chord).permit(:song_id, :artist_id, :album_id, :version, chordunits_attributes: [:address, :text, :leftbar, :rightbar, :beat]).merge(user_id: current_user.id)
+      params.require(:chord).permit(:song_id, :artist_id, :album_id, :version, chordunits_attributes: [:address, :text, :leftbar, :rightbar, :beat, :id]).merge(user_id: current_user.id)
     end
 
     def chord_to_num
