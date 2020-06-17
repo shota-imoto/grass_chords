@@ -105,7 +105,9 @@ class SongsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def song_params
-      params.permit(:title, :jam, :standard, :beginner, keys: [:name, :instrumental, :male, :female]).merge(user_id: current_user.id)
+      binding.pry
+
+      params.permit(:title, :jam, :standard, :beginner, :vocal, :instrumental).merge(user_id: current_user.id)
     end
 
 end

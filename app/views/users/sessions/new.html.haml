@@ -6,10 +6,10 @@
       %h2 Login
       %a - ログイン -
     .c-user__form
-      =form_with local: true do |f|
+      = form_for(resource, as: resource_name, url: session_path(resource_name)) do |f|
         .c-form__area
-          =f.email_field :email, placeholder: "email", class:"c-form__textbox c-user__textbox"
-          =f.password_field :password, placeholder: "password", class:"c-form__textbox"
+          =f.email_field :email, autofocus: true, autocomplete: "email", placeholder: "email", class:"c-form__textbox c-user__textbox"
+          =f.password_field :password, autocomplete: "current-password", placeholder: "password", class:"c-form__textbox"
         .c-form__area
           =f.submit "ログイン", class:"c-form__btn c-form__btn--login"
     %figure

@@ -1,72 +1,78 @@
-.wrapper__contents
-  %h1 Edit Chord
-  .content
-    =form_with model: @chord, local: true do |f|
-      .contest__song-name
-        =f.text_field :song_name, id: "search_song_name",class: "for_search-dont_send_this_data_to_action"
-        =f.text_field :song_id, id: "selected_song_id"
+
+%aside.l-contents__top
+  %section.l-contents__section.c-window__clear.p-chord__section
+    .p-chord-new__title
+      %h2 Chord Score Edit
+      .p-chord-new__subtitle -コード譜をへん週する-
+
+=form_with url: chord_path, method: :patch, model: @chord, local: true do |f|
+  %article.l-contents__main
+    %section.c-window__skeleton
+      .content__song-name
+        .c-song-candidate__wrapper
+          .c-song-candidate__form
+            =f.text_field :song_name, autocomplete:"off", id: "search_song_name", placeholder: "曲名",class: "c-form__textbox p-chord-new__textbox c-js__song-candidate"
+            =f.text_field :song_id, id: "selected_song_id", class: "hidden"
+          .c-song-candidate__lists.c-window__clear-black.hidden           
+
       .content__search-result
-      .content__song-help
-        =link_to "曲が存在しない場合は新しく登録してください", new_song_path, target: :_blank
-      .content__version-name
-        %h2 バージョン名
-        =f.text_field :version
-      .content__editer-btn
-        >> Editer
-      .content__option
-        オプション
-        .option__artist-name
-          =f.collection_select :artist_id, Artist.all, :id, :name, include_blank: false
-        .option__albumname
-          =f.collection_select :album_id, Album.all, :id, :name, include_blank: false
-      .content__registration
-        =f.submit "登録"
-      .chord_display
-        -12.times do |i|
-          .chord_display__row{id: "row_#{i}"}
-            -4.times do |j|
-              .c-chordunit{id: "unit_#{i*4+j}"}
-                .c-chordunit__beat 
-                .c-chordunit__leftbar
-                .c-chordunit__note
-                  .c-chordunit__note-name
-                  .c-chordunit__half-note
-                  .c-chordunit__modifier
-                .c-chordunit__rightbar 
-        =f.fields_for :chordunits do |unit_f|
-          =unit_f.hidden_field :address
-          -# , value: i*4+j 
-          =unit_f.hidden_field :text, class: "c-chordunit__text"
-          =unit_f.hidden_field :leftbar
-          =unit_f.hidden_field :rightbar
-          =unit_f.hidden_field :beat
-.content__chord-btns.hidden
+      .content__version-name.c-form__search-box
+        .content__version-name--form
+          =f.text_field :version, placeholder: "コード譜の名前", class: "c-form__textbox"
+        .content__version-name--help.form__textbox
+          %a version
+    %section.p-chord__wrapper
+      .p-chord__key-change
+        =render "/application/key-change"
+
+      .chord_display.p-song__score
+        -48.times do |i|
+          .c-chordunit.c-chordunit--large{id: "unit_0-#{i}"}
+            .c-chordunit__beat.c-chordunit__beat--large
+            .c-chordunit__leftbar.c-chordunit__leftbar--large
+            .c-chordunit__note
+              .c-chordunit__note-name.c-chordunit__note-name--large
+              .c-chordunit__half-note.c-chordunit__half-note--large
+              .c-chordunit__modifier.c-chordunit__modifier--large
+            .c-chordunit__rightbar.c-chordunit__rightbar--large
+      =f.fields_for :chordunits do |unit_f|
+        =unit_f.hidden_field :address
+        =unit_f.hidden_field :text, class: "c-chordunit__text"
+        =unit_f.hidden_field :leftbar
+        =unit_f.hidden_field :rightbar
+        =unit_f.hidden_field :beat
+    .content__registration
+      =f.submit "登録", class:"c-form__btn c-form__btn--registration"
+    .content__editer-btn
+      >> Editor
+
+        
+.content__chord-btns.c-window__clear-black.hidden
   .chord-btns__input
     .chord-btns__row
-      .chord-btns__text_window
+      .chord-btns__text-window
       .chord-btns__close
         ×
-    .chord-btns__row
-      %input{type: "button", value: "G", class: "chord-btns--command"}
-      %input{type: "button", value: "A", class: "chord-btns--command"}
-      %input{type: "button", value: "B", class: "chord-btns--command"}
-      %input{type: "button", value: "C", class: "chord-btns--command"}
-      %input{type: "button", value: "D", class: "chord-btns--command"}
-      %input{type: "button", value: "E", class: "chord-btns--command"}
-      %input{type: "button", value: "F", class: "chord-btns--command"}
-    .chord-btns__row
-      %input{type: "button", value: "#", class: "chord-btns--command"}
-      %input{type: "button", value: "b", class: "chord-btns--command"}
-      %input{type: "button", value: "m", class: "chord-btns--command"}
-      %input{type: "button", value: "7th", class: "chord-btns--command"}
-    .chord-btns__row
-      %input{type: "button", value: "繰返し始点", class: "chord-btns--command"}
-      %input{type: "button", value: "繰返し終点", class: "chord-btns--command"}
-      %input{type: "button", value: "|_", class: "chord-btns--command"}
-      %input{type: "button", value: "_|", class: "chord-btns--command"}
-    .chord-btns__row
-      %input{type: "button", value: "2/4拍子", class: "chord-btns--command"}
-      %input{type: "button", value: "4/4拍子", class: "chord-btns--command"}
-      %input{type: "button", value: "3/4拍子", class: "chord-btns--command"}
-      %input{type: "button", value: "削除", class: "chord-btns--command"}
-      %input{type: "button", value: "繰返し", class: "chord-btns--command"}
+    .chord-btns__main
+      .chord-btns--command G
+      .chord-btns--command A
+      .chord-btns--command B
+      .chord-btns--command C
+      .chord-btns--command D
+      .chord-btns--command E
+      .chord-btns--command F
+      .chord-btns--command.c-font__base.c-font__size-base.c-font__size-half.c-js__chord-editor-duplication B
+      .chord-btns--command.c-font__base.c-font__size-base.c-font__size-half b
+      .chord-btns--command m
+      .chord-btns--command 7th
+      .chord-btns--command.c-font__base {
+      .chord-btns--command.c-font__base }
+      .chord-btns--command.c-font__base ' 
+      .chord-btns--command.c-font__base.c-js__chord-editor-duplication  '
+      .chord-btns--command.c-font__base.c-font__size-base @
+      .chord-btns--command.c-font__base.c-font__size-base $
+      .chord-btns--command.c-font__base.c-font__size-base #
+      .chord-btns--command.c-font__repeat ‘
+      .chord-btns--command.chord-btns__size-backspace BackSpace
+
+   
