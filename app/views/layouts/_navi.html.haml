@@ -41,6 +41,6 @@
           .p-navi__icon-box
             %i.fas.fa-sign-out-alt
           %span.p-navi__string__parent
-            =link_to "ログアウト", destroy_user_session_path
+            =link_to "ログアウト", destroy_user_session_path, method: :delete
   .c-layer__black
     .c-layer__black-sub
