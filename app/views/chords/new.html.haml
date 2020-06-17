@@ -9,8 +9,12 @@
   =form_with model: @chord, local: true do |f|
     %section.c-window__skeleton
       .content__song-name
-        =f.text_field :song_name, autocomplete:"off", id: "search_song_name", placeholder: "曲名",class: "c-form__textbox p-chord-new__textbox for_search-dont_send_this_data_to_action"
-        =f.text_field :song_id, id: "selected_song_id", class: "hidden"
+        .c-song-candidate__wrapper
+          .c-song-candidate__form
+            =f.text_field :song_name, autocomplete:"off", id: "search_song_name", placeholder: "曲名",class: "c-form__textbox p-chord-new__textbox c-js__song-candidate"
+            =f.text_field :song_id, id: "selected_song_id", class: "hidden"
+          .c-song-candidate__lists.c-window__clear-black.hidden           
+
       .content__search-result
       .content__version-name.c-form__search-box
         .content__version-name--form
@@ -70,6 +74,9 @@
       .chord-btns--command.c-font__base.c-font__size-base #
       .chord-btns--command.c-font__repeat ‘
       .chord-btns--command.chord-btns__size-backspace BackSpace
+
+    
+
       
 
 

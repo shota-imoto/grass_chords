@@ -12,13 +12,12 @@ $(function () {
   function sendForm() {
     // 検索ページがincremental_text。コード登録画面が#search_song_name
     var input = $(".c-js__search-text").val();
-    var jam = $(".c-js__value-jam").prop("checked");
-    var standard = $(".c-js__value-standard").prop("checked");
-    var beginner = $(".c-js__value-beginner").prop("checked");
-    var vocal = $(".c-js__value-vocal").prop("checked");
-    var instrumental = $(".c-js__value-instrumental").prop("checked");
+    var jam = $(".c-js__search-jam").prop("checked");
+    var standard = $(".c-js__search-standard").prop("checked");
+    var beginner = $(".c-js__search-beginner").prop("checked");
+    var vocal = $(".c-js__search-vocal").prop("checked");
+    var instrumental = $(".c-js__search-instrumental").prop("checked");
 
-    console.log(beginner);
     $.ajax({
       type: "get",
       url: "/songs/search",
@@ -44,15 +43,16 @@ $(function () {
 
   // コード作成画面用 曲検索
   function songCandidate(result) {
-    var html = `<div class="search-result__song-candidate", data-song_id="${result.id}">${result.title}</div>`;
+    var html = `<div class="c-song-candidate__list", data-song_id="${result.id}">${result.title}</div>`;
     return html;
   }
 
-  $("#search_song_name").on("keyup", function () {
-    var input = $("#search_song_name").val();
+  $(".c-js__song-candidate").on("keyup", function () {
+    var input = $(this).val();
+    $(".c-song-candidate__lists").empty();
+    $(".c-song-candidate__lists").addClass("hidden");
 
     if (input == "") {
-      $(".content__search-result").empty();
       return;
     }
     $.ajax({
@@ -63,29 +63,30 @@ $(function () {
       },
       dataType: "json",
     }).done(function (results) {
-      $(".content__search-result").empty();
       var insertHTML = "";
+
+      if (results.length == 0) {
+        $(".c-song-candidate__lists").addClass("hidden");
+        return;
+      }
 
       $.each(results, function (i, result) {
         insertHTML += songCandidate(result);
         if (i == 4) return false;
       });
-
-      $(".content__search-result").append(insertHTML);
+      $(".c-song-candidate__lists").removeClass("hidden");
+      $(".c-song-candidate__lists").append(insertHTML);
     });
   });
 
-  $(document).on(
-    "touchend mouseup",
-    ".search-result__song-candidate",
-    function () {
-      var song_id = $(this).data("song_id");
-      var song_name = $(this).text();
-      $("#selected_song_id").val(song_id);
-      $("#search_song_name").val(song_name);
-      $(".content__search-result").empty();
-    }
-  );
+  $(document).on("touchend mouseup", ".c-song-candidate__list", function () {
+    var song_id = $(this).data("song_id");
+    var song_name = $(this).text();
+    $("#selected_song_id").val(song_id);
+    $("#search_song_name").val(song_name);
+    $(".c-song-candidate__lists").empty();
+    $(".c-song-candidate__lists").addClass("hidden");
+  });
   // チューニング作成画面用 楽器検索
   function instrumentCandidate(result) {
     var html = `<div class="search-result__instrument-candidate", data-instrument_id="${result.id}", data-instrument_string="${result.total_string}">${result.name}</div>`;
