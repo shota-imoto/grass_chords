@@ -1,0 +1,24 @@
+.c-song-candidate__wrapper {
+  position: relative;
+}
+
+.c-song-candidate__lists {
+  // box layout
+  width: 100%;
+  position: absolute;
+  top: 31px;
+  z-index: 20;
+
+  //inner layout
+  padding: 10px;
+
+  // design
+  border-radius: 2px;
+  color: $color-font-white;
+}
+
+.c-song-candidate__list {
+  border-bottom: $color-font-white 1px solid;
+  margin-bottom: 5px;
+  font-size: 16px;
+}
