@@ -24,7 +24,7 @@
       .p-chord__key-change
         =render "/application/key-change"
 
-      .chord_display.p-song__score
+      .p-song__score
         -48.times do |i|
           .c-chordunit.c-chordunit--large{id: "unit_0-#{i}"}
             .c-chordunit__beat.c-chordunit__beat--large
@@ -73,79 +73,3 @@
       .chord-btns--command.c-font__base.c-font__size-base #
       .chord-btns--command.c-font__repeat ‘
       .chord-btns--command.chord-btns__size-backspace BackSpace
-
-    
-
-      
-
-
-
--# .wrapper__contents
--#   %h1 New Chord
--#   .content
--#     =form_with model: @chord, local: true do |f|
--#       .contest__song-name
--#         =f.text_field :song_name, id: "search_song_name",class: "for_search-dont_send_this_data_to_action"
--#         =f.text_field :song_id, id: "selected_song_id"
--#       .content__search-result
--#       .content__song-help
--#         =link_to "曲が存在しない場合は新しく登録してください", new_song_path, target: :_blank
--#       .content__version-name
--#         %h2 バージョン名
--#         =f.text_field :version, placeholder: "Score Version Name"
--#       .chord_display
--#         -48.times do |i|
--#           .c-chordunit{id: "unit_0-#{i}"}
--#             .c-chordunit__beat 
--#             .c-chordunit__leftbar
--#             .c-chordunit__note
--#               .c-chordunit__note-name
--#               .c-chordunit__half-note
--#               .c-chordunit__modifier
--#             .c-chordunit__rightbar 
--#             =f.fields_for :chordunits do |unit_f|
--#               =unit_f.hidden_field :address, value: i
--#               =unit_f.hidden_field :text, class: "c-chordunit__text"
--#               =unit_f.hidden_field :leftbar
--#               =unit_f.hidden_field :rightbar
--#               =unit_f.hidden_field :beat
--#       .content__editer-btn
--#         >> Editer
--#       .content__option
--#         オプション
--#         .option__artist-name
--#           =f.collection_select :artist_id, Artist.all, :id, :name, include_blank: false
--#         .option__albumname
--#           =f.collection_select :album_id, Album.all, :id, :name, include_blank: false
--#       .content__registration
--#         =f.submit "登録"
--# .content__chord-btns.hidden
--#   .chord-btns__input
--#     .chord-btns__row
--#       .chord-btns__text_window
--#     .chord-btns__row
--#       %input{type: "button", value: "G", class: "chord-btns--command"}
--#       %input{type: "button", value: "A", class: "chord-btns--command"}
--#       %input{type: "button", value: "B", class: "chord-btns--command"}
--#       %input{type: "button", value: "C", class: "chord-btns--command"}
--#       %input{type: "button", value: "D", class: "chord-btns--command"}
--#       %input{type: "button", value: "E", class: "chord-btns--command"}
--#       %input{type: "button", value: "F", class: "chord-btns--command"}
--#     .chord-btns__row
--#       %input{type: "button", value: "#", class: "chord-btns--command"}
--#       %input{type: "button", value: "b", class: "chord-btns--command"}
--#       %input{type: "button", value: "m", class: "chord-btns--command"}
--#       %input{type: "button", value: "7th", class: "chord-btns--command"}
--#     .chord-btns__row
--#       %input{type: "button", value: "繰返し始点", class: "chord-btns--command"}
--#       %input{type: "button", value: "繰返し終点", class: "chord-btns--command"}
--#       %input{type: "button", value: "|_", class: "chord-btns--command"}
--#       %input{type: "button", value: "_|", class: "chord-btns--command"}
--#     .chord-btns__row
--#       %input{type: "button", value: "2/4拍子", class: "chord-btns--command"}
--#       %input{type: "button", value: "4/4拍子", class: "chord-btns--command"}
--#       %input{type: "button", value: "3/4拍子", class: "chord-btns--command"}
--#       %input{type: "button", value: "削除", class: "chord-btns--command"}
--#       %input{type: "button", value: "繰返し", class: "chord-btns--command"}
--#   .chord-btns__close
--#     ×
