@@ -187,18 +187,4 @@ $(function () {
     });
   }
 
-  // // ページ読み込み時の挙動
-  // $(document).ready(function () {
-  //   var key_now_state = $(".c-key-change__present ").text();
-  //   key_now_state = $.trim(key_now_state);
-  //   chord_display(key_now_state);
-  //   key_for_registration(key_now_state);
-  // });
-
-  // コード作成画面用
-  // function key_for_registration(key_now_state) {
-  //   if ($("#key_name").get(0) != undefined) {
-  //     $("#key_name").val(key_now_state);
-  //   }
-  // }
 });

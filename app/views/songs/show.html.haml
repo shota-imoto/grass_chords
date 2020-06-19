@@ -48,7 +48,7 @@
             .c-chordunit__rightbar.c-chordunit__rightbar--small
               -if chord.chordunits[j].rightbar != ""
                 =chord.chordunits[j].rightbar
-              - elsif j%4==(4-1)
+              - elsif j%8==(8-1)
                 ="'"
             .c-chordunit__text.hidden{value: "#{chord.chordunits[j].text}"}
               =chord.chordunits[j].text          

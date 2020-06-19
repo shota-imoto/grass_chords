@@ -61,7 +61,7 @@
     font-size: 36px;
   }
   &--small {
-    font-size: 28px;
+    font-size: 18px;
   }
 }
 .c-chordunit__modifier {
@@ -75,6 +75,9 @@
     font-size: 18px;
   }
   &--small {
+    position: absolute;
+    left: 60%;
+    bottom: 14px;
     font-size: 9px;
   }
 }

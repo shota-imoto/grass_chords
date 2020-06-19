@@ -1,5 +1,7 @@
 class SongsController < ApplicationController
   before_action :set_song, only: [:show, :edit, :update, :destroy]
+  before_action :authority_login, except: [:index, :show, :search]
+  before_action :authority_user, only: [:edit, :update, :destroy]
 
   # GET /songs
   # GET /songs.json
@@ -104,6 +106,20 @@ class SongsController < ApplicationController
     # Only allow a list of trusted parameters through.
     def song_params
       params.permit(:title, :jam, :standard, :beginner, :vocal, :instrumental).merge(user_id: current_user.id)
+    end
+
+    def authority_login
+      if user_signed_in?
+      else
+        redirect_to root_path, notice: 'ログイン後、操作してください'
+      end
+    end
+
+    def authority_user
+      if (current_user.id == params[:user_id]) | (current_user.id == 1)
+      else
+        redirect_back fallback_location: root_path, notice: 'あなたが作成したデータではありません。'
+      end
     end
 
 end
