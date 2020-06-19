@@ -6,24 +6,24 @@
         =@song.title
     .p-song__popular-key Popular key: A, B♭
     .p-song__attributes.c-form__attributes
-      .p-song__attribute.c-form__attribute
+      .p-song__attribute.c-form__attribute.c-js__attribute{value: "#{@song.jam}"}
         %p.p-song__icon-blank
           %svg{class: "u-position__icon-docked--bottle u-svg_color", width: "19px", height: "22px"}
             =render "/svg/bottle"
           %svg{class: "u-position__icon-docked--strawberry u-svg_color", width: "10px", height: "10px"}
             =render "/svg/strawberry"
         %a Jam
-      .p-song__attribute.c-form__attribute
+      .p-song__attribute.c-form__attribute.c-js__attribute{value: "#{@song.standard}"}
         %i.fas.fa-users
         %a Standard
-      .p-song__attribute.c-form__attribute
+      .p-song__attribute.c-form__attribute.c-js__attribute{value: "#{@song.beginner}"}
         %svg{class: "u-svg_color", width: "19px", height: "19px"}
           =render "/svg/beginner"
         %a Beginner
-      .p-song__attribute.c-form__attribute
+      .p-song__attribute.c-form__attribute.c-js__attribute{value: "#{@song.vocal}"}
         %i.fas.fa-microphone-alt
         %a Vocal
-      .p-song__attribute.c-form__attribute
+      .p-song__attribute.c-form__attribute.c-js__attribute{value: "#{@song.instrumental}"}
         %i.fas.fa-guitar
         %a Instrumental
 %article.l-contents__main

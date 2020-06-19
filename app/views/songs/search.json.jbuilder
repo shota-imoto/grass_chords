@@ -4,5 +4,7 @@ json.array! @songs do |song|
   json.jam song.jam
   json.standard song.standard
   json.beginner song.beginner
+  json.vocal song.vocal
+  json.instrumental song.instrumental
 end
 

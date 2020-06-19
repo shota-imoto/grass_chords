@@ -39,10 +39,11 @@
 @import "object/project/top";
 
 // utility
-@import "object/utility/_color";
-@import "object/utility/_navi.scss";
-@import "object/utility/_size.scss";
-@import "object/utility/_position.scss";
+@import "object/utility/js";
+@import "object/utility/color";
+@import "object/utility/navi.scss";
+@import "object/utility/size.scss";
+@import "object/utility/position.scss";
 
 // old
 @import "modules/chords";
