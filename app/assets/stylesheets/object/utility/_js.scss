@@ -1,0 +1,11 @@
+.u-js__attribute-color {
+  background-color: $color-theme-red;
+  color: $color-font-white;
+
+  & path {
+    fill: $color-font-white;
+  }
+  & polygon {
+    fill: $color-font-white;
+  }
+}

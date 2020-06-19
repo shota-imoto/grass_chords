@@ -6,7 +6,7 @@
       </h2>
     </div>
     <div class="c-icon__attributes">
-      <div class="c-icon__attribute">
+      <div class="c-icon__attribute c-js__attribute" value="${result.jam}">
         <div class="c-icon__inner--jam">
           <div class="p-song__icon-blank">
             <svg
@@ -114,10 +114,10 @@
           </div>
         </div>
       </div>
-      <div class="c-icon__attribute">
+      <div class="c-icon__attribute c-js__attribute" value="${result.standard}">
         <i class="fas fa-users c-icon__inner--standard"></i>
       </div>
-      <div class="c-icon__attribute">
+      <div class="c-icon__attribute c-js__attribute" value="${result.beginner}">
         <svg
           class="u-svg_color c-icon__inner--beginner"
           height="19px"
@@ -150,10 +150,13 @@
           </svg>
         </svg>
       </div>
-      <div class="c-icon__attribute">
+      <div class="c-icon__attribute c-js__attribute" value="${result.vocal}">
         <i class="fas fa-microphone-alt c-icon__inner--vocal"></i>
       </div>
-      <div class="c-icon__attribute">
+      <div
+        class="c-icon__attribute c-js__attribute"
+        value="${result.instrumental}"
+      >
         <i class="fas fa-guitar c-icon__inner--instrumental"></i>
       </div>
     </div>

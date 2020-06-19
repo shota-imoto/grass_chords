@@ -12,12 +12,12 @@ $(function () {
   function sendForm() {
     // 検索ページがincremental_text。コード登録画面が#search_song_name
     var input = $(".c-js__search-text").val();
-    var jam = $(".c-js__search-jam").prop("checked");
-    var standard = $(".c-js__search-standard").prop("checked");
-    var beginner = $(".c-js__search-beginner").prop("checked");
-    var vocal = $(".c-js__search-vocal").prop("checked");
-    var instrumental = $(".c-js__search-instrumental").prop("checked");
-
+    var jam = $(".c-js__value-jam").prop("checked");
+    var standard = $(".c-js__value-standard").prop("checked");
+    var beginner = $(".c-js__value-beginner").prop("checked");
+    var vocal = $(".c-js__value-vocal").prop("checked");
+    var instrumental = $(".c-js__value-instrumental").prop("checked");
+    console.log(input);
     $.ajax({
       type: "get",
       url: "/songs/search",
@@ -32,12 +32,27 @@ $(function () {
       dataType: "json",
     }).done(function (results) {
       $(".p-search-result__results").empty();
+
       var insertHTML = "";
       $.each(results, function (i, result) {
+        console.log(result);
+
         insertHTML += viewResult(result);
       });
 
       $(".p-search-result__results").append(insertHTML);
+      icon_color();
+    });
+  }
+
+  // change the color of song attribute icons
+  // this function duplicates with icon.js
+  function icon_color() {
+    $(".c-js__attribute").each(function (i, element) {
+      if ($(element).attr("value") == "true") {
+        $(element).addClass("u-js__attribute-color");
+      } else {
+      }
     });
   }
 
@@ -168,7 +183,7 @@ $(function () {
         </h2>
       </div>
       <div class="c-icon__attributes">
-        <div class="c-icon__attribute">
+        <div class="c-icon__attribute c-js__attribute" value="${result.jam}">
           <div class="c-icon__inner--jam">
             <div class="p-song__icon-blank">
               <svg
@@ -276,10 +291,10 @@ $(function () {
             </div>
           </div>
         </div>
-        <div class="c-icon__attribute">
+        <div class="c-icon__attribute c-js__attribute" value="${result.standard}">
           <i class="fas fa-users c-icon__inner--standard"></i>
         </div>
-        <div class="c-icon__attribute">
+        <div class="c-icon__attribute c-js__attribute" value="${result.beginner}">
           <svg
             class="u-svg_color c-icon__inner--beginner"
             height="19px"
@@ -312,10 +327,10 @@ $(function () {
             </svg>
           </svg>
         </div>
-        <div class="c-icon__attribute">
+        <div class="c-icon__attribute  c-js__attribute" value="${result.vocal}">
           <i class="fas fa-microphone-alt c-icon__inner--vocal"></i>
         </div>
-        <div class="c-icon__attribute">
+        <div class="c-icon__attribute c-js__attribute" value="${result.instrumental}">
           <i class="fas fa-guitar c-icon__inner--instrumental"></i>
         </div>
       </div>

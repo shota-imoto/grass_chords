@@ -66,7 +66,6 @@ class SongsController < ApplicationController
     params[:keyword].strip!
     keywords = params[:keyword].split(/\s+/)
     @songs = Song.all.includes(:chords)
-    
     # 条件検索
     # ifによって条件にチェックされているときのみandで絞り込み
     @songs = @songs.where(jam: params[:jam])  if (params[:jam] == "true")
@@ -75,7 +74,6 @@ class SongsController < ApplicationController
     @songs = @songs.where(vocal: params[:vocal])  if (params[:vocal] == "true")
     @songs = @songs.where(instrumental: params[:instrumental])  if (params[:instrumental] == "true")
     # キーワード検索
-
     keywords.each do |keyword| unless (params[:keyword].nil?)
       @songs = @songs.where("title like ?", "%#{keyword}%")
     end
@@ -105,9 +103,7 @@ class SongsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def song_params
-      binding.pry
-
-      params.permit(:title, :jam, :standard, :beginner, :vocal, :instrumental).merge(user_id: current_user.id)
+      params.permit(:title, :jam, :standard, :beginner, keys: [:name, :instrumental, :male, :female]).merge(user_id: current_user.id)
     end
 
 end
