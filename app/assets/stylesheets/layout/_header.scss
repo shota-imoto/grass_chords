@@ -40,3 +40,29 @@
     border-radius: 2px;
   }
 }
+
+// notice
+.l-header__notice {
+  // layout
+  width: 100vw;
+  position: fixed;
+  z-index: 65;
+  top: 0px;
+
+  // design
+  background-color: $color-theme-red;
+  color: $color-font-white;
+  text-indent: 10px;
+
+  animation: fadeout_css 4s forwards;
+  animation-delay: 4s;
+}
+
+@keyframes fadeout_css {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}

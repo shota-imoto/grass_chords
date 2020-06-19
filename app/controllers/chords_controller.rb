@@ -29,8 +29,11 @@ class ChordsController < ApplicationController
   # POST /chords.json
   def create
     @chord = Chord.new(chord_params)
-    @chord.save
-    redirect_to(@chord) 
+    if @chord.save
+      redirect_to @chord, notice: 'コード譜を作成しました' 
+    else
+      redirect_to @chord
+    end
 
   end
 
@@ -38,14 +41,14 @@ class ChordsController < ApplicationController
   # PATCH/PUT /chords/1.json
   def update
     @chord.update(chord_params)
-    redirect_to(@chord) 
+    redirect_to @chord, notice: 'コード譜を編集しました'
   end
 
   # DELETE /chords/1
   # DELETE /chords/1.json
   def destroy
     @chord.destroy
-    redirect_to root_path
+    redirect_to root_path, notice: 'コード譜を削除しました'
 
   end
 
