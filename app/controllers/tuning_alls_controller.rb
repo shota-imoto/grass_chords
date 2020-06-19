@@ -24,7 +24,6 @@ class TuningAllsController < ApplicationController
 
     #＜編集メモ＞ 一旦、配列化成功 続きはここから
 
-    binding.pry
     tuning_params_array.each do |tuning_params_permitted|
       @tuning = Tuning.new(tuning_params_permitted)
       @tuning[:tuning_all_id]=@tuning_all.id

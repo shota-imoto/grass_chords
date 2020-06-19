@@ -11,6 +11,7 @@
     = stylesheet_link_tag    'application', media: 'all'
     = javascript_include_tag 'application'
   %body
+    =csrf_meta_tag
     %header.l-header
       %h1
         =link_to "Grass Chords", root_path, class:"l-header__logo"
@@ -32,3 +33,4 @@
     %footer.l-footer
       %h1.u-size__footer-copyright ©2020 Grass Chords
       %h1.u-size__footer-name by Shota Imoto
+    
