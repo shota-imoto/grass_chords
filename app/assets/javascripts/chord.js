@@ -6,7 +6,6 @@ $(function () {
     $("#" + id).addClass("cursor");
 
     // when user selects chordunit, load input text and indicate it.
-
     input_text_display(id);
   });
 

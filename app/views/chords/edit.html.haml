@@ -3,7 +3,7 @@
   %section.l-contents__section.c-window__clear.p-chord__section
     .p-chord-new__title
       %h2 Chord Score Edit
-      .p-chord-new__subtitle -コード譜をへん週する-
+      .p-chord-new__subtitle -コード譜を編集する-
 
 =form_with url: chord_path, method: :patch, model: @chord, local: true do |f|
   %article.l-contents__main
@@ -25,7 +25,7 @@
       .p-chord__key-change
         =render "/application/key-change"
 
-      .chord_display.p-song__score
+      .p-song__score
         -48.times do |i|
           .c-chordunit.c-chordunit--large{id: "unit_0-#{i}"}
             .c-chordunit__beat.c-chordunit__beat--large
