@@ -1,5 +1,16 @@
-%h1 Editing Song
-= render 'form', song: @song
-= link_to 'Show', @song
-|
-= link_to 'Back', songs_path
+%aside.l-contents__top.l-contents__top--low-volume.l-contents__top
+%article.c-user__position-article
+  %section.c-section__sentence-box
+    .c-song-new__logo
+      %h2 Song Edit
+      %a - 楽曲を編集する -
+    .c-song-new__form
+      =form_with url: song_path, model: @song, method: :patch, local: true do |f|
+        .c-form__area
+          =f.text_field :title, placeholder:"tittle", class:"c-form__textbox"
+        .c-form__area
+          =render "/application/song-attributes", f: f
+        .c-form__area
+          =f.submit "登録", class:"c-form__btn c-form__btn--login"
+    %figure
+      =image_tag "/images/banjo.png", class: "c-section__image-banjo"
