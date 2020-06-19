@@ -38,19 +38,13 @@
           .c-chordunit__beat.c-chordunit__beat--large
             =@chord.chordunits[i].beat
           .c-chordunit__leftbar.c-chordunit__leftbar--large
-            -if @chord.chordunits[i].leftbar != ""
-              =@chord.chordunits[i].leftbar
-            - elsif i%4==0
-              ="'"
+            =@chord.chordunits[i].leftbar
           .c-chordunit__note
             .c-chordunit__note-name.c-chordunit__note-name--large
             .c-chordunit__half-note.c-chordunit__half-note--large
             .c-chordunit__modifier.c-chordunit__modifier--large
           .c-chordunit__rightbar.c-chordunit__rightbar--large
-            -if @chord.chordunits[i].rightbar != ""
-              =@chord.chordunits[i].rightbar
-            - elsif i%4==(4-1)
-              ="'"
+            =@chord.chordunits[i].rightbar
           .c-chordunit__text.hidden{value: "#{@chord.chordunits[i].text}"}
             =@chord.chordunits[i].text
     .p-chord__manage-score
