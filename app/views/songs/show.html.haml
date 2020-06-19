@@ -25,6 +25,11 @@
       .p-song__attribute.c-form__attribute.c-js__attribute{value: "#{@song.instrumental}"}
         %i.fas.fa-guitar
         %a Instrumental
+    .p-chord__manage-score
+      =link_to "Edit", edit_song_path
+      %a
+        |
+      =link_to "Delete", song_path, method: :delete
 %article.l-contents__main
   - @song.chords.each_with_index do |chord, i|
     %section.p-song__score-wrapper
