@@ -15,8 +15,6 @@ $(function () {
   });
 
   $(".chord-btns__close").on("touchend mouseup", function () {
-    console.log($(this).text());
-
     $(".content__chord-btns").addClass("hidden");
   });
 
@@ -166,11 +164,7 @@ $(function () {
     var get_input = $("#" + unit_id)
       .find(".c-chordunit__text")
       .attr("value");
-    console.log(
-      $("#" + unit_id)
-        .find(".c-chordunit__text")
-        .attr("value")
-    );
+
     $(".chord-btns__text-window").text(get_input);
   }
 

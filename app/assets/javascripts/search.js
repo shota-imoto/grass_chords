@@ -17,7 +17,6 @@ $(function () {
     var beginner = $(".c-js__value-beginner").prop("checked");
     var vocal = $(".c-js__value-vocal").prop("checked");
     var instrumental = $(".c-js__value-instrumental").prop("checked");
-    console.log(input);
     $.ajax({
       type: "get",
       url: "/songs/search",
@@ -35,7 +34,6 @@ $(function () {
 
       var insertHTML = "";
       $.each(results, function (i, result) {
-        console.log(result);
 
         insertHTML += viewResult(result);
       });
