@@ -23,10 +23,8 @@ $(function () {
   // キー表示切替
   // 絶対音
   $(".c-key-change__btn--note").on("touchend, mouseup", function () {
-    console.log("hakka");
     var selected = $(this).text().trim();
     var key_state = $(".key-display--form").val();
-    console.log($("#key_name").val());
     const absolute_note_array = [
       "G",
       "GB",
@@ -91,12 +89,12 @@ $(function () {
     $(".key-display--form").val(key_state);
 
     if (key_state.length == 2) {
-      $(".c-key-change__present ").text("key of " + key_state.charAt(0));
-      $(".c-key-change__present  ").append(
-        `<span class="font_base-key">${key_state.charAt(1)}</span>`
+      $(".c-key-change__present").text("key of " + key_state.charAt(0));
+      $(".c-key-change__present").append(
+        `<span class="font_base-key c-font__base">${key_state.charAt(1)}</span>`
       );
     } else {
-      $(".c-key-change__present ").text("key of " + key_state);
+      $(".c-key-change__present").text("key of " + key_state);
     }
 
     key_change(key_index);
@@ -166,8 +164,6 @@ $(function () {
       if (note == "") note_index = "空欄";
       else {
         note_index = absolute_note_array.indexOf(note);
-        console.log(note + "[" + note_index + "]");
-
         note_index = note_index + key_difference;
         if (note_index > 12) note_index = note_index - 12;
         else if (note_index < 0) note_index = note_index + 12;
@@ -186,5 +182,4 @@ $(function () {
       }
     });
   }
-
 });
