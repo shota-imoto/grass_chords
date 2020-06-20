@@ -42,19 +42,13 @@
             .c-chordunit__beat.c-chordunit__beat--small
               =chord.chordunits[j].beat
             .c-chordunit__leftbar.c-chordunit__leftbar--small
-              -if chord.chordunits[j].leftbar != ""
-                =chord.chordunits[j].leftbar
-              - elsif j%4==0
-                ="'"
+              =chord.chordunits[j].leftbar
             .c-chordunit__note
               .c-chordunit__note-name.c-chordunit__note-name--small
               .c-chordunit__half-note.c-chordunit__half-note--small
               .c-chordunit__modifier.c-chordunit__modifier--small
             .c-chordunit__rightbar.c-chordunit__rightbar--small
-              -if chord.chordunits[j].rightbar != ""
-                =chord.chordunits[j].rightbar
-              - elsif j%8==(8-1)
-                ="'"
+              =chord.chordunits[j].rightbar
             .c-chordunit__text.hidden{value: "#{chord.chordunits[j].text}"}
               =chord.chordunits[j].text          
       .p-song__footer
