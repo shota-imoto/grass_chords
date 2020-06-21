@@ -7,8 +7,5 @@ class User < ApplicationRecord
   has_many :chords
   has_many :likes, dependent: :destroy
   has_many :practices, dependent: :destroy
-  has_many :instruments, through: :user_instruments
-  has_many :user_instruments
-  has_many :tuning_alls
-  has_many :finger_alls
+
 end
