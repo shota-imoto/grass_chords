@@ -106,7 +106,7 @@ $(function () {
 
     if (key_state.indexOf("m") == -1) {
       $(".c-key-change__present ").append(
-        `<span class="font_minor-key">m</span>`
+        `<span class="c-js__key-change--minor">m</span>`
       );
       key_state = key_state + "m";
       $(".key-display--form").val(key_state);

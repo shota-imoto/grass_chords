@@ -94,19 +94,19 @@
 }
 
 // adjsut position between blind check box and icon, and size inner icon.
-.p-form__box--icon_jam {
+.c-form__box--icon_jam {
   position: relative;
 }
 
-.p-form__inner--icon-jam {
+.c-form__inner--icon-jam {
   position: absolute;
   left: 5px;
 }
 
-.p-form__box--icon_standard {
+.c-form__box--icon_standard {
   position: relative;
 }
-.p-form__inner--icon-standard {
+.c-form__inner--icon-standard {
   // position
   position: absolute;
   left: 4px;
@@ -114,10 +114,10 @@
   font-size: 16px;
 }
 
-.p-form__box--icon_beginner {
+.c-form__box--icon_beginner {
   position: relative;
 }
-.p-form__inner--icon-beginner {
+.c-form__inner--icon-beginner {
   // position
   position: absolute;
   top: 7px;
@@ -127,10 +127,10 @@
   width: 20px;
 }
 
-.p-form__box--icon_vocal {
+.c-form__box--icon_vocal {
   position: relative;
 }
-.p-form__inner--icon-vocal {
+.c-form__inner--icon-vocal {
   // position
   position: absolute;
   left: 9px;
@@ -138,10 +138,10 @@
   font-size: 19px;
 }
 
-.p-form__box--icon_instrumental {
+.c-form__box--icon_instrumental {
   position: relative;
 }
-.p-form__inner--icon-instrumental {
+.c-form__inner--icon-instrumental {
   // position
   position: absolute;
   left: 9px;
@@ -149,7 +149,7 @@
   font-size: 19px;
 }
 
-.p-form__icon-blank {
+.c-form__icon-blank {
   height: 20px;
   width: 20px;
 }
