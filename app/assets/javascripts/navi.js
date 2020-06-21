@@ -77,6 +77,6 @@ $(function () {
   // opne accordion menu
   $(".p-navi__btn-pulldown").on("touched, mouseup", function () {
     $(this).next().slideToggle();
-    $(this).find(".p-navi__icon-box").eq(1).toggleClass("c-upside-down");
+    $(this).find(".p-navi__icon-box").eq(1).toggleClass("c-js__upside-down");
   });
 });

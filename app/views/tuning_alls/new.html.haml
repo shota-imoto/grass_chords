@@ -1,22 +1,4 @@
--# nestedありバージョン試し
--# .content
--#   =form_with url: tuning_alls_path, method: :post, local: true do |f|
--#     .content__instrument-name
--#       =f.text_field :instrument_name, id: "search_instrument_name", placeholder: "楽器名称"
--#       =f.text_field :instrument_id, id: "selected_instrument_id", class: "form_blind"
--#     .content__search-result
-  
--#     .content__strings
--#       =f.fields_for :tunings do |tuning|
--#         .strings__string
--#           =tuning.hidden_field :string_num, value: 5
--#           =tuning.text_field :note_name, placeholder: "string"
--#     .content__name
--#       名称
--#       =f.text_field :name
--#     .content__btn
--#       =f.submit "登録"
--# nestedなしバージョン
+
 .content
   =form_with url: tuning_alls_path, method: :post, local: true do |f|
     .content__instrument-name

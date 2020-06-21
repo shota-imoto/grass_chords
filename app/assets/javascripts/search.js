@@ -34,7 +34,6 @@ $(function () {
 
       var insertHTML = "";
       $.each(results, function (i, result) {
-
         insertHTML += viewResult(result);
       });
 
@@ -63,7 +62,7 @@ $(function () {
   $(".c-js__song-candidate").on("keyup", function () {
     var input = $(this).val();
     $(".c-song-candidate__lists").empty();
-    $(".c-song-candidate__lists").addClass("hidden");
+    $(".c-song-candidate__lists").addClass("u-display__hidden");
 
     if (input == "") {
       return;
@@ -79,7 +78,7 @@ $(function () {
       var insertHTML = "";
 
       if (results.length == 0) {
-        $(".c-song-candidate__lists").addClass("hidden");
+        $(".c-song-candidate__lists").addClass("u-display__hidden");
         return;
       }
 
@@ -87,7 +86,7 @@ $(function () {
         insertHTML += songCandidate(result);
         if (i == 4) return false;
       });
-      $(".c-song-candidate__lists").removeClass("hidden");
+      $(".c-song-candidate__lists").removeClass("u-display__hidden");
       $(".c-song-candidate__lists").append(insertHTML);
     });
   });
@@ -98,7 +97,7 @@ $(function () {
     $("#selected_song_id").val(song_id);
     $("#search_song_name").val(song_name);
     $(".c-song-candidate__lists").empty();
-    $(".c-song-candidate__lists").addClass("hidden");
+    $(".c-song-candidate__lists").addClass("u-display__hidden");
   });
   // チューニング作成画面用 楽器検索
   function instrumentCandidate(result) {
@@ -171,8 +170,6 @@ $(function () {
 
   // アクションで生成されたデータをviewに反映する
   function viewResult(result) {
-    // if (result.chord_text.length > 0) {
-
     var html = `<a href="/songs/${result.id}"
     ><div class="p-search-result__result">
       <div class="p-search__song-title">

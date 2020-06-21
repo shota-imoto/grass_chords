@@ -43,12 +43,30 @@
   display: none;
 }
 
-.c-upside-down {
+.c-js__upside-down {
   transform: rotate(180deg);
 }
 
 // define song attribute icon color when song has the class
 
-// define for chord editor
-.c-js__chord-editor-duplication {
+// chord_editor
+.c-js__cursor {
+  background-color: lightgoldenrodyellow;
+  animation: cursor 1s linear infinite;
+}
+
+@keyframes cursor {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
+}
+
+// key_change
+.c-js__key-change--minor {
+  font-family: sans-serif;
+  font-size: 13px;
 }
