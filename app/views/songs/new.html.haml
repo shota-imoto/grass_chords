@@ -7,7 +7,7 @@
     .c-song-new__form
       =form_with url:songs_path, method: :post, local: true do |f|
         .c-form__area
-          =f.text_field :title, placeholder:"tittle", class:"c-form__textbox"
+          =f.text_field :title, autocomplete:"off", placeholder:"tittle", class:"c-form__textbox"
         .c-form__area
           =render "/application/song-attributes", f: f
         .c-form__area

@@ -8,7 +8,6 @@ class SongsController < ApplicationController
   end
 
   def show
-    @song = Song.find(params[:id])
   end
 
   def new
@@ -17,40 +16,29 @@ class SongsController < ApplicationController
   end
 
   def edit
-    @song = Song.find(params[:id])
   end
 
   def create
     @song = Song.new(song_params)
-    respond_to do |format|
-      if @song.save
-        format.html { redirect_to @song, notice: '楽曲を登録しました' }
-        format.json { render :show, status: :created, location: @song }
-      else
-        format.html { render :new }
-        format.json { render json: @song.errors, status: :unprocessable_entity }
-      end
+    if @song.save
+      redirect_to @song, notice: '楽曲を登録しました'
+    else
+      flash.now[:notice] = @song.errors.full_messages
+      render :new
     end
   end
 
   def update
-    respond_to do |format|
-      if @song.update(update_song_params)
-        format.html { redirect_to @song, notice: '楽曲を更新しました' }
-        format.json { render :show, status: :ok, location: @song }
-      else
-        format.html { render :edit }
-        format.json { render json: @song.errors, status: :unprocessable_entity }
-      end
+    if @song.update(update_song_params)
+      redirect_to @song, notice: '楽曲を更新しました'
+    else
+      render :edit
     end
   end
 
   def destroy
     @song.destroy
-    respond_to do |format|
-      format.html { redirect_to root_path, notice: '楽曲を削除しました' }
-      format.json { head :no_content }
-    end
+    redirect_to root_path, notice: '楽曲を削除しました'
   end
 
   def search
@@ -75,29 +63,19 @@ class SongsController < ApplicationController
     end
     
   end
-    # if (params[:keyword].nil?)
-    # else
-    #   keywords.each do |keyword|
-    #     @songs = @songs.where("title like ?", "%#{keyword}%")
-    #   end
-    # end
+
   end
 
-  def search_page
-  end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
     def set_song
       @song = Song.find(params[:id])
     end
 
-    # Only allow a list of trusted parameters through.
     def song_params
       params.permit(:title, :jam, :standard, :beginner, :vocal, :instrumental).merge(user_id: current_user.id)
     end
 
-        # Only allow a list of trusted parameters through.
     def update_song_params
       params.require(:song).permit(:title, :jam, :standard, :beginner, :vocal, :instrumental).merge(user_id: current_user.id)
     end
