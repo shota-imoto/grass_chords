@@ -12,7 +12,6 @@ class SongsController < ApplicationController
 
   def new
     @song = Song.new
-    @song.keys.build
   end
 
   def edit
