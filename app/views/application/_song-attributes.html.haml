@@ -3,7 +3,7 @@
     =f.check_box :jam, {class: "c-js__value-jam u-display__hidden"}, "true", "false"
     .c-form__icon-blank
     .c-form__inner--icon-jam
-      %p.p-song__icon-blank
+      %p.c-form__icon-blank
         %svg{class: "u-position__icon-docked--bottle", width: "19px", height: "22px"}
           =render "/svg/bottle"
         %svg{class: "u-position__icon-docked--strawberry", width: "10px", height: "10px"}
@@ -18,7 +18,7 @@
     =f.check_box :beginner, {class:"c-js__value-beginner u-display__hidden"}, "true", "false"
     .c-form__icon-blank
     .c-form__inner--icon-beginner
-      %svg{class: "u-svg_color", width: "19px", height: "19px"}
+      %svg{width: "19px", height: "19px"}
         =render "/svg/beginner"
     %a.c-search__attribute-text Beginner
   =f.label :vocal, class: "c-form__attribute c-form__box--icon_vocal c-js__search-vocal" do

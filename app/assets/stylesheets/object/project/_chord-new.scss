@@ -1,20 +1,20 @@
-.content__song-name {
+.p-chord-new__song {
   font-size: 15px;
   margin-bottom: 10px;
   width: 100%;
 }
 
-.content__version-name {
+.p-chord-new__version {
   display: flex;
   font-size: 15px;
   margin-bottom: 10px;
 }
 
-.content__version-name--form {
+.p-chord-new__version--form {
   width: 100%;
 }
 
-.content__version-name--help {
+.p-chord-new__version--help {
   color: $color-icon-gray;
   padding: 0 8px;
 }
@@ -23,7 +23,7 @@
   width: 100%;
 }
 
-.content__editer-btn {
+.p-chord-new__editor-btn {
   //layout
   width: 97px;
   height: 37px;

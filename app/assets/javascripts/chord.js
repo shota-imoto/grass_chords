@@ -10,7 +10,7 @@ $(function () {
   });
 
   // エディター表示・非表示処理
-  $(".content__editer-btn").on("touchend mouseup", function () {
+  $(".p-chord-new__editor-btn").on("touchend mouseup", function () {
     $(".c-chord-edit__wrapper").removeClass("u-display__hidden");
   });
 

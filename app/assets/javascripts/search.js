@@ -180,9 +180,9 @@ $(function () {
       <div class="c-icon__attributes">
         <div class="c-icon__attribute c-js__attribute" value="${result.jam}">
           <div class="c-icon__inner--jam">
-            <div class="p-song__icon-blank">
+            <div class="c-form__icon-blank">
               <svg
-                class="u-position__icon-docked--bottle u-svg_color"
+                class="u-position__icon-docked--bottle"
                 height="22px"
                 width="19px"
               >
@@ -202,7 +202,6 @@ $(function () {
                 >
                   <g>
                     <path
-                      class="u-svg_color"
                       d="M463.24,197.597c-6.281-11.285-14.002-20.115-21.354-27.411c-11.107-10.906-21.153-18.868-27.121-26.38
         c-3.04-3.748-5.179-7.23-6.683-11.139c-1.488-3.925-2.453-8.397-2.469-14.614h-41.179c-0.008,9.571,1.448,18.458,4.15,26.436
         c4.713,14.051,13.022,24.684,21.153,33.056c6.145,6.33,12.289,11.63,17.807,16.769c8.332,7.714,15.112,14.872,19.962,23.751
@@ -227,7 +226,7 @@ $(function () {
                 </svg>
               </svg>
               <svg
-                class="u-position__icon-docked--strawberry u-svg_color"
+                class="u-position__icon-docked--strawberry"
                 height="10px"
                 width="10px"
               >
@@ -247,13 +246,12 @@ $(function () {
                 >
                   <g>
                     <polygon
-                      class="u-svg_color"
                       points="512,230.427 453.046,186.849 472.924,134.5 477.682,122.074 477.643,122.07 477.702,121.914 
         399.752,112.409 391.784,49.226 389.944,34.337 389.907,34.349 389.887,34.185 325.358,59.029 296.776,20.76 281.465,0.113 
         281.429,0.207 281.316,0.055 262.164,51.35 462.294,249.305 494.435,237.098 511.906,230.555 511.824,230.493 	"
                     ></polygon>
                     <path
-                      class="u-svg_color"
+                      class=""
                       d="M284.185,96.922c-9.375-9.38-28.158-18.734-50.886-23.571c-0.248-0.051-0.488-0.109-0.738-0.164
         c-9.544-1.979-19.696-3.24-30.246-3.24c-29.43,0-73.41,8.893-115.774,51.256c-1.729,1.725-3.254,3.619-4.919,5.399
         c-1.417,1.518-2.816,3.045-4.187,4.598c-3.49,3.947-6.824,8.003-10.025,12.16c-0.841,1.097-1.687,2.194-2.51,3.302
@@ -291,7 +289,7 @@ $(function () {
         </div>
         <div class="c-icon__attribute c-js__attribute" value="${result.beginner}">
           <svg
-            class="u-svg_color c-icon__inner--beginner"
+            class="c-icon__inner--beginner"
             height="19px"
             width="19px"
           >

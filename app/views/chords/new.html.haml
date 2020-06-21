@@ -7,7 +7,7 @@
 =form_with url: chords_path, method: :post, model: @chord, local: true do |f|
   %article.l-contents__main
     %section.c-window__skeleton
-      .content__song-name
+      .p-chord-new__song
         .c-song-candidate__wrapper
           .c-song-candidate__form
             =f.text_field :song_name, autocomplete:"off", id: "search_song_name", placeholder: "曲名",class: "c-form__textbox p-chord-new__textbox c-js__song-candidate"
@@ -15,10 +15,10 @@
           .c-song-candidate__lists.c-window__clear-black.u-display__hidden           
 
       .content__search-result
-      .content__version-name.c-form__search-box
-        .content__version-name--form
+      .p-chord-new__version.c-form__search-box
+        .p-chord-new__version--form
           =f.text_field :version, placeholder: "コード譜の名前", class: "c-form__textbox"
-        .content__version-name--help.form__textbox
+        .p-chord-new__version--help.form__textbox
           %a version
     %section.p-chord__wrapper
       .p-chord__key-change
@@ -42,7 +42,7 @@
               =unit_f.hidden_field :beat
     .content__registration
       =f.submit "登録", class:"c-form__btn c-form__btn--registration"
-    .content__editer-btn
+    .p-chord-new__editor-btn
       >> Editor
 
         
