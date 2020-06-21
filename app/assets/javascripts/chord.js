@@ -11,15 +11,15 @@ $(function () {
 
   // エディター表示・非表示処理
   $(".content__editer-btn").on("touchend mouseup", function () {
-    $(".content__chord-btns").removeClass("hidden");
+    $(".c-chord-edit__wrapper").removeClass("hidden");
   });
 
-  $(".chord-btns__close").on("touchend mouseup", function () {
-    $(".content__chord-btns").addClass("hidden");
+  $(".c-chord-edit__close").on("touchend mouseup", function () {
+    $(".c-chord-edit__wrapper").addClass("hidden");
   });
 
   // 入力処理
-  $(document).on("touchend, mouseup", ".chord-btns--command", function () {
+  $(document).on("touchend, mouseup", ".c-chord-edit__btn", function () {
     var input = $(this).text();
 
     if ($(".cursor").length == 0) return false;
@@ -159,13 +159,13 @@ $(function () {
   }
 
   function input_text_display(unit_id) {
-    $(".chord-btns__text-window").text("");
+    $(".c-chord-edit__text-window").text("");
 
     var get_input = $("#" + unit_id)
       .find(".c-chordunit__text")
       .attr("value");
 
-    $(".chord-btns__text-window").text(get_input);
+    $(".c-chord-edit__text-window").text(get_input);
   }
 
   $(document).ready(function () {
