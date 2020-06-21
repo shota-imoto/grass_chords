@@ -10,10 +10,8 @@
     %section.c-window__skeleton
       .content__song-name
         .c-song-candidate__wrapper
-          -# .c-song-candidate__form
-          -#   =f.text_field :song_name, autocomplete:"off", id: "search_song_name", placeholder: "曲名",class: "c-form__textbox p-chord-new__textbox c-js__song-candidate"
-          -#   =f.text_field :song_id, id: "selected_song_id", class: "hidden"
-          .c-song-candidate__lists.c-window__clear-black.hidden           
+
+          .c-song-candidate__lists.c-window__clear-black.u-display__hidden           
 
       .content__search-result
       .content__version-name.c-form__search-box
@@ -47,32 +45,32 @@
       >> Editor
 
         
-.content__chord-btns.c-window__clear-black.hidden
-  .chord-btns__input
-    .chord-btns__row
-      .chord-btns__text-window
-      .chord-btns__close
+.c-chord-edit__wrapper.c-window__clear-black.u-display__hidden
+  .c-chord-edit__editor
+    .c-chord-edit__sub
+      .c-chord-edit__text-window
+      .c-chord-edit__close
         ×
-    .chord-btns__main
-      .chord-btns--command G
-      .chord-btns--command A
-      .chord-btns--command B
-      .chord-btns--command C
-      .chord-btns--command D
-      .chord-btns--command E
-      .chord-btns--command F
-      .chord-btns--command.c-font__base.c-font__size-base.c-font__size-half.c-js__chord-editor-duplication B
-      .chord-btns--command.c-font__base.c-font__size-base.c-font__size-half b
-      .chord-btns--command m
-      .chord-btns--command 7th
-      .chord-btns--command.c-font__base {
-      .chord-btns--command.c-font__base }
-      .chord-btns--command.c-font__base ' 
-      .chord-btns--command.c-font__base.c-js__chord-editor-duplication  '
-      .chord-btns--command.c-font__base.c-font__size-base @
-      .chord-btns--command.c-font__base.c-font__size-base $
-      .chord-btns--command.c-font__base.c-font__size-base #
-      .chord-btns--command.c-font__repeat ‘
-      .chord-btns--command.chord-btns__size-backspace BackSpace
+    .c-chord-edit__main
+      .c-chord-edit__btn G
+      .c-chord-edit__btn A
+      .c-chord-edit__btn B
+      .c-chord-edit__btn C
+      .c-chord-edit__btn D
+      .c-chord-edit__btn E
+      .c-chord-edit__btn F
+      .c-chord-edit__btn.c-font__base.c-font__size-base.c-font__size-half.c-js__chord-editor-duplication B
+      .c-chord-edit__btn.c-font__base.c-font__size-base.c-font__size-half b
+      .c-chord-edit__btn m
+      .c-chord-edit__btn 7th
+      .c-chord-edit__btn.c-font__base {
+      .c-chord-edit__btn.c-font__base }
+      .c-chord-edit__btn.c-font__base ' 
+      .c-chord-edit__btn.c-font__base.c-js__chord-editor-duplication  '
+      .c-chord-edit__btn.c-font__base.c-font__size-base @
+      .c-chord-edit__btn.c-font__base.c-font__size-base $
+      .c-chord-edit__btn.c-font__base.c-font__size-base #
+      .c-chord-edit__btn.c-font__repeat ‘
+      .c-chord-edit__btn.c-chord-edit__size-backspace BackSpace
 
    

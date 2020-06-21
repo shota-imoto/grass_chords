@@ -45,7 +45,7 @@
             .c-chordunit__modifier.c-chordunit__modifier--large
           .c-chordunit__rightbar.c-chordunit__rightbar--large
             =@chord.chordunits[i].rightbar
-          .c-chordunit__text.hidden{value: "#{@chord.chordunits[i].text}"}
+          .c-chordunit__text.u-display__hidden{value: "#{@chord.chordunits[i].text}"}
             =@chord.chordunits[i].text
     .p-chord__manage-score
       =link_to "Edit", edit_chord_path

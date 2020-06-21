@@ -1,9 +1,9 @@
 $(function () {
   // カーソル表示
   $(".c-chordunit").on("touchend mouseup", function () {
-    $(".c-chordunit").removeClass("cursor");
+    $(".c-chordunit").removeClass("c-js__cursor");
     var id = $(this).attr("id");
-    $("#" + id).addClass("cursor");
+    $("#" + id).addClass("c-js__cursor");
 
     // when user selects chordunit, load input text and indicate it.
     input_text_display(id);
@@ -11,20 +11,20 @@ $(function () {
 
   // エディター表示・非表示処理
   $(".content__editer-btn").on("touchend mouseup", function () {
-    $(".content__chord-btns").removeClass("hidden");
+    $(".c-chord-edit__wrapper").removeClass("u-display__hidden");
   });
 
-  $(".chord-btns__close").on("touchend mouseup", function () {
-    $(".content__chord-btns").addClass("hidden");
+  $(".c-chord-edit__close").on("touchend mouseup", function () {
+    $(".c-chord-edit__wrapper").addClass("u-display__hidden");
   });
 
   // 入力処理
-  $(document).on("touchend, mouseup", ".chord-btns--command", function () {
+  $(document).on("touchend, mouseup", ".c-chord-edit__btn", function () {
     var input = $(this).text();
 
-    if ($(".cursor").length == 0) return false;
+    if ($(".c-js__cursor").length == 0) return false;
 
-    var id = $(".cursor").attr("id");
+    var id = $(".c-js__cursor").attr("id");
     id = id.replace("unit_0-", "");
 
     // if some of command duplicates, under below judge statement resolves this problem.
@@ -53,16 +53,16 @@ $(function () {
 
   // 楽譜記号の処理(共通)
   function selected_text_edit(unit_name, id, input) {
-    if ($(".cursor > .c-chordunit__" + unit_name).text() == input) {
-      $(".cursor > .c-chordunit__" + unit_name).text("");
+    if ($(".c-js__cursor > .c-chordunit__" + unit_name).text() == input) {
+      $(".c-js__cursor > .c-chordunit__" + unit_name).text("");
     } else {
-      $(".cursor > .c-chordunit__" + unit_name).text("");
-      $(".cursor > .c-chordunit__" + unit_name).text(input);
+      $(".c-js__cursor > .c-chordunit__" + unit_name).text("");
+      $(".c-js__cursor > .c-chordunit__" + unit_name).text(input);
     }
 
-    $(".cursor > #chord_chordunits_attributes_" + id + "_" + unit_name).val(
-      $(".cursor > .c-chordunit__" + unit_name).text()
-    );
+    $(
+      ".c-js__cursor > #chord_chordunits_attributes_" + id + "_" + unit_name
+    ).val($(".c-js__cursor > .c-chordunit__" + unit_name).text());
   }
 
   // 音名の入力処理
@@ -71,7 +71,7 @@ $(function () {
 
     text_value = text_value + letter;
     $("#chord_chordunits_attributes_" + id + "_text").val(text_value);
-    var unit_id = $(".cursor").attr("id");
+    var unit_id = $(".c-js__cursor").attr("id");
     text_display(unit_id, text_value);
   }
 
@@ -80,7 +80,7 @@ $(function () {
     var text_value = $("#chord_chordunits_attributes_" + id + "_text").val();
     text_value = text_value.slice(0, -1);
     $("#chord_chordunits_attributes_" + id + "_text").val(text_value);
-    var unit_id = $(".cursor").attr("id");
+    var unit_id = $(".c-js__cursor").attr("id");
     text_display(unit_id, text_value);
   }
 
@@ -159,13 +159,13 @@ $(function () {
   }
 
   function input_text_display(unit_id) {
-    $(".chord-btns__text-window").text("");
+    $(".c-chord-edit__text-window").text("");
 
     var get_input = $("#" + unit_id)
       .find(".c-chordunit__text")
       .attr("value");
 
-    $(".chord-btns__text-window").text(get_input);
+    $(".c-chord-edit__text-window").text(get_input);
   }
 
   $(document).ready(function () {
