@@ -1,6 +1,5 @@
 Rails.application.routes.draw do
   root to: "chords#index"
-  resources :contact, only: :index
   resources :pdf, only: :new
   devise_for :users, except: :index
   resources :songs do
