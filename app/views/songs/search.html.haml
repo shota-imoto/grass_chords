@@ -13,15 +13,15 @@
               .c-icon__attributes
                 .c-icon__attribute.c-js__attribute{value: "#{song.jam}"}
                   .c-icon__inner--jam
-                    .p-song__icon-blank
-                      %svg{class: "u-position__icon-docked--bottle u-svg_color", width: "19px", height: "22px"}
+                    .c-form__icon-blank
+                      %svg{class: "u-position__icon-docked--bottle", width: "19px", height: "22px"}
                         =render "/svg/bottle"
-                      %svg{class: "u-position__icon-docked--strawberry u-svg_color", width: "10px", height: "10px"}
+                      %svg{class: "u-position__icon-docked--strawberry", width: "10px", height: "10px"}
                         =render "/svg/strawberry"
                 .c-icon__attribute.c-js__attribute{value: "#{song.standard}"}
                   %i.fas.fa-users.c-icon__inner--standard
                 .c-icon__attribute.c-js__attribute{value: "#{song.beginner}"}
-                  %svg{class: "u-svg_color c-icon__inner--beginner", width: "19px", height: "19px"}
+                  %svg{class: "c-icon__inner--beginner", width: "19px", height: "19px"}
                     =render "/svg/beginner"
                 .c-icon__attribute.c-js__attribute{value: "#{song.vocal}"}
                   %i.fas.fa-microphone-alt.c-icon__inner--vocal
