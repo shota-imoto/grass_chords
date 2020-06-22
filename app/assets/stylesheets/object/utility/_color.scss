@@ -2,3 +2,8 @@
   background-color: $color-theme-red;
   color: $color-font-white;
 }
+
+.u-color__skeleton-cover {
+  background-color: rgba(0, 0, 0, 0);
+  position: absolute;
+}

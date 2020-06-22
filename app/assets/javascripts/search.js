@@ -49,8 +49,7 @@ $(function () {
   function icon_color() {
     $(".c-js__attribute-state").each(function (i, element) {
       if ($(element).attr("value") == "true") {
-        $(element).addClass("u-js__attribute-color");
-      } else {
+        $(element).parent().addClass("u-js__attribute-color");
       }
     });
   }
@@ -180,8 +179,8 @@ $(function () {
         </h2>
       </div>
       <div class="c-icon__attributes">
-        <div class="c-icon__attribute c-js__attribute-state" value="${result.jam}">
-          <div class="c-icon__inner--jam">
+        <div class="c-icon__attribute">
+          <div class="c-icon__inner--jam c-js__attribute-state" value="${result.jam}">
             <div class="c-form__icon-blank">
               <svg
                 class="u-position__icon-docked--bottle"
@@ -286,12 +285,12 @@ $(function () {
             </div>
           </div>
         </div>
-        <div class="c-icon__attribute c-js__attribute-state" value="${result.standard}">
-          <i class="fas fa-users c-icon__inner--standard"></i>
+        <div class="c-icon__attribute">
+          <i class="fas fa-users c-icon__inner--standard c-js__attribute-state" value="${result.standard}"></i>
         </div>
-        <div class="c-icon__attribute c-js__attribute-state" value="${result.beginner}">
+        <div class="c-icon__attribute">
           <svg
-            class="c-icon__inner--beginner"
+            class="c-icon__inner--beginner c-js__attribute-state" value="${result.beginner}"
             height="19px"
             width="19px"
           >
@@ -322,11 +321,11 @@ $(function () {
             </svg>
           </svg>
         </div>
-        <div class="c-icon__attribute c-js__attribute-state" value="${result.vocal}">
-          <i class="fas fa-microphone-alt c-icon__inner--vocal"></i>
+        <div class="c-icon__attribute">
+          <i class="fas fa-microphone-alt c-icon__inner--vocal c-js__attribute-state" value="${result.vocal}"></i>
         </div>
-        <div class="c-icon__attribute c-js__attribute-state" value="${result.instrumental}">
-          <i class="fas fa-guitar c-icon__inner--instrumental"></i>
+        <div class="c-icon__attribute">
+          <i class="fas fa-guitar c-icon__inner--instrumental c-js__attribute-state" value="${result.instrumental}"></i>
         </div>
       </div>
       <div class="c-review__btn">

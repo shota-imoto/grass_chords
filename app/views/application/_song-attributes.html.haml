@@ -1,39 +1,34 @@
 .c-search__attribute.c-form__attributes
-  .c-js__attribute-state.c-form__attribute.c-form__box--icon_jam.c-js__attribute-btn{value: "#{@song.jam}"}
-    =f.label :jam, class:"c-form__flex" do
-      =f.check_box :jam, {class: "u-display__hidden"}, "true", "false"
-      .c-form__icon-blank
-      .c-form__inner--icon-jam
-        %p.c-form__icon-blank
-          %svg{class: "u-position__icon-docked--bottle", width: "19px", height: "22px"}
-            =render "/svg/bottle"
-          %svg{class: "u-position__icon-docked--strawberry", width: "10px", height: "10px"}
-            =render "/svg/strawberry"
-      %a.c-search__attribute-text Jam
-  .c-js__attribute-state.c-form__attribute.c-form__box--icon_standard.c-js__attribute-btn{value: "#{@song.standard}"}
-    =f.label :standard, class: "c-form__flex" do
-      =f.check_box :standard, {class: "u-display__hidden"}, "true", "false"
-      .c-form__icon-blank
-      %i.fas.fa-users.c-form__inner--icon-standard
-      %a.c-search__attribute-text Standard
-  .c-js__attribute-state.c-form__attribute.c-form__box--icon_beginner.c-js__attribute-btn{value: "#{@song.beginner}"}
-    =f.label :beginner, class: "c-form__flex" do
-      =f.check_box :beginner, {class:"u-display__hidden"}, "true", "false"
-      .c-form__icon-blank
-      .c-form__inner--icon-beginner
-        %svg{width: "19px", height: "19px"}
-          =render "/svg/beginner"
-      %a.c-search__attribute-text Beginner
-  .c-js__attribute-state.c-form__attribute.c-form__box--icon_vocal.c-js__attribute-btn{value: "#{@song.vocal}"} 
-    =f.label :vocal, class: "c-form__flex" do
-      =f.check_box :vocal, {class: "u-display__hidden"}, "true", "false"
-      .c-form__icon-blank
-      %i.fas.fa-microphone-alt.c-form__inner--icon-vocal
-      %a.c-search__attribute-text Vocal
-  .c-js__attribute-state.c-form__attribute.c-form__box--icon_instrumental.c-js__attribute-btn{value: "#{@song.instrumental}"} 
-    =f.label :instrumental, class: "c-form__flex" do
-      =f.check_box :instrumental, {class: "u-display__hidden"}, "true", "false"
-      .c-form__icon-blank
-      %i.fas.fa-guitar.c-form__inner--icon-instrumental
-      %a.c-search__attribute-text Instrumental
+  =f.label :jam, class:"c-form__flex c-js__attribute-btn c-form__attribute c-form__box--icon_jam" do
+    =f.check_box :jam, {class: "u-display__hidden"}, "true", "false"
+    .c-form__icon-blank
+    .c-form__inner--icon-jam
+      %p.c-form__icon-blank
+        %svg{class: "u-position__icon-docked--bottle", width: "19px", height: "22px"}
+          =render "/svg/bottle"
+        %svg{class: "u-position__icon-docked--strawberry", width: "10px", height: "10px"}
+          =render "/svg/strawberry"
+    %a.c-search__attribute-text.c-js__attribute-state{value: "#{@song.jam}"} Jam
+  =f.label :standard, class: "c-form__flex c-js__attribute-btn c-form__attribute c-form__box--icon_standard" do
+    =f.check_box :standard, {class: "u-display__hidden"}, "true", "false"
+    .c-form__icon-blank
+    %i.fas.fa-users.c-form__inner--icon-standard
+    %a.c-search__attribute-text.c-js__attribute-state{value: "#{@song.standard}"} Standard
+  =f.label :beginner, class: "c-form__flex c-js__attribute-btn c-form__attribute c-form__box--icon_beginner" do
+    =f.check_box :beginner, {class:"u-display__hidden"}, "true", "false"
+    .c-form__icon-blank
+    .c-form__inner--icon-beginner
+      %svg{width: "19px", height: "19px"}
+        =render "/svg/beginner"
+    %a.c-search__attribute-text.c-js__attribute-state{value: "#{@song.beginner}"} Beginner
+  =f.label :vocal, class: "c-form__flex c-js__attribute-btn c-form__attribute c-form__box--icon_vocal" do
+    =f.check_box :vocal, {class: "u-display__hidden"}, "true", "false"
+    .c-form__icon-blank
+    %i.fas.fa-microphone-alt.c-form__inner--icon-vocal
+    %a.c-search__attribute-text.c-js__attribute-state{value: "#{@song.vocal}"}  Vocal
+  =f.label :instrumental, class: "c-form__flex c-js__attribute-btn c-form__attribute c-form__box--icon_instrumental" do
+    =f.check_box :instrumental, {class: "u-display__hidden"}, "true", "false"
+    .c-form__icon-blank
+    %i.fas.fa-guitar.c-form__inner--icon-instrumental
+    %a.c-search__attribute-text.c-js__attribute-state{value: "#{@song.instrumental}"}  Instrumental
       
