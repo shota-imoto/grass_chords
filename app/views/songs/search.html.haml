@@ -11,21 +11,21 @@
                 %h2
                   =song.title
               .c-icon__attributes
-                .c-icon__attribute.c-js__attribute{value: "#{song.jam}"}
+                .c-icon__attribute.c-js__attribute-state{value: "#{song.jam}"}
                   .c-icon__inner--jam
                     .c-form__icon-blank
                       %svg{class: "u-position__icon-docked--bottle", width: "19px", height: "22px"}
                         =render "/svg/bottle"
                       %svg{class: "u-position__icon-docked--strawberry", width: "10px", height: "10px"}
                         =render "/svg/strawberry"
-                .c-icon__attribute.c-js__attribute{value: "#{song.standard}"}
+                .c-icon__attribute.c-js__attribute-state{value: "#{song.standard}"}
                   %i.fas.fa-users.c-icon__inner--standard
-                .c-icon__attribute.c-js__attribute{value: "#{song.beginner}"}
+                .c-icon__attribute.c-js__attribute-state{value: "#{song.beginner}"}
                   %svg{class: "c-icon__inner--beginner", width: "19px", height: "19px"}
                     =render "/svg/beginner"
-                .c-icon__attribute.c-js__attribute{value: "#{song.vocal}"}
+                .c-icon__attribute.c-js__attribute-state{value: "#{song.vocal}"}
                   %i.fas.fa-microphone-alt.c-icon__inner--vocal
-                .c-icon__attribute.c-js__attribute{value: "#{song.instrumental}"}
+                .c-icon__attribute.c-js__attribute-state{value: "#{song.instrumental}"}
                   %i.fas.fa-guitar.c-icon__inner--instrumental
               .c-review__btn
                 .c-review__icon
@@ -34,5 +34,5 @@
                   10
                 .c-review__text
                   練習してる？
-      .p-search-result__counter
-        =@songs.length.to_s + "results.."
+      .p-search-result__counter.c-js__result-counter
+        =@songs.length.to_s + " results.."

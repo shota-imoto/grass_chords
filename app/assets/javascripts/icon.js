@@ -1,5 +1,5 @@
 $(function () {
-  $(".c-form__attribute").on("touchend, mouseup", function () {
+  $(".c-js__attribute-btn").on("touchend, mouseup", function () {
     if ($(this).hasClass("u-js__attribute-color") == 0) {
       $(this).addClass("u-js__attribute-color");
     } else {
@@ -8,12 +8,13 @@ $(function () {
   });
 
   function icon_color() {
-    $(".c-js__attribute").each(function (i, element) {
+    $(".c-js__attribute-state").each(function (i, element) {
       if ($(element).attr("value") == "true") {
         $(element).addClass("u-js__attribute-color");
       }
     });
   }
+
   $(document).ready(function () {
     icon_color();
   });
