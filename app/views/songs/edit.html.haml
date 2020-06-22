@@ -9,7 +9,7 @@
         .c-form__area
           =f.text_field :title, placeholder:"tittle", class:"c-form__textbox"
         .c-form__area
-          =render "/application/song-attributes", f: f
+          =render "/application/song-attributes", f: f, collection: @song
         .c-form__area
           =f.submit "登録", class:"c-form__btn c-form__btn--login"
     %figure
