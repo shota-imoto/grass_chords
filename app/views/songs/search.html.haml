@@ -11,22 +11,22 @@
                 %h2
                   =song.title
               .c-icon__attributes
-                .c-icon__attribute.c-js__attribute-state{value: "#{song.jam}"}
-                  .c-icon__inner--jam
+                .c-icon__attribute
+                  .c-icon__inner--jam.c-js__attribute-state{value: "#{song.jam}"}
                     .c-form__icon-blank
                       %svg{class: "u-position__icon-docked--bottle", width: "19px", height: "22px"}
                         =render "/svg/bottle"
                       %svg{class: "u-position__icon-docked--strawberry", width: "10px", height: "10px"}
                         =render "/svg/strawberry"
-                .c-icon__attribute.c-js__attribute-state{value: "#{song.standard}"}
-                  %i.fas.fa-users.c-icon__inner--standard
-                .c-icon__attribute.c-js__attribute-state{value: "#{song.beginner}"}
-                  %svg{class: "c-icon__inner--beginner", width: "19px", height: "19px"}
+                .c-icon__attribute
+                  %i.fas.fa-users.c-icon__inner--standard.c-js__attribute-state{value: "#{song.standard}"}
+                .c-icon__attribute
+                  %svg{class: "c-icon__inner--beginner c-js__attribute-state", width: "19px", height: "19px", value: "#{song.beginner}"}
                     =render "/svg/beginner"
-                .c-icon__attribute.c-js__attribute-state{value: "#{song.vocal}"}
-                  %i.fas.fa-microphone-alt.c-icon__inner--vocal
-                .c-icon__attribute.c-js__attribute-state{value: "#{song.instrumental}"}
-                  %i.fas.fa-guitar.c-icon__inner--instrumental
+                .c-icon__attribute
+                  %i.fas.fa-microphone-alt.c-icon__inner--vocal.c-js__attribute-state{value: "#{song.vocal}"}
+                .c-icon__attribute
+                  %i.fas.fa-guitar.c-icon__inner--instrumental.c-js__attribute-state{value: "#{song.instrumental}"}
               .c-review__btn
                 .c-review__icon
                   %i.fas.fa-lightbulb.c-review__icon-practice

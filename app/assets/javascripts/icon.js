@@ -10,7 +10,7 @@ $(function () {
   function icon_color() {
     $(".c-js__attribute-state").each(function (i, element) {
       if ($(element).attr("value") == "true") {
-        $(element).addClass("u-js__attribute-color");
+        $(element).parent().addClass("u-js__attribute-color");
       }
     });
   }
