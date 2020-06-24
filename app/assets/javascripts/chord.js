@@ -1,7 +1,7 @@
 $(function () {
   // カーソル表示
-  $(".c-chordunit").on("touchend mouseup", function () {
-    $(".c-chordunit").removeClass("c-js__cursor");
+  $(".c-js__cursor-marker").on("touchend, mouseup", function () {
+    $(".c-js__cursor-marker").removeClass("c-js__cursor");
     var id = $(this).attr("id");
     $("#" + id).addClass("c-js__cursor");
 
@@ -60,9 +60,9 @@ $(function () {
       $(".c-js__cursor > .c-chordunit__" + unit_name).text(input);
     }
 
-    $(
-      ".c-js__cursor > #chord_chordunits_attributes_" + id + "_" + unit_name
-    ).val($(".c-js__cursor > .c-chordunit__" + unit_name).text());
+    $("#chord_chordunits_attributes_" + id + "_" + unit_name).val(
+      $(".c-js__cursor > .c-chordunit__" + unit_name).text()
+    );
   }
 
   // 音名の入力処理
@@ -161,9 +161,11 @@ $(function () {
   function input_text_display(unit_id) {
     $(".c-chord-edit__text-window").text("");
 
-    var get_input = $("#" + unit_id)
-      .find(".c-chordunit__text")
-      .attr("value");
+    unit_id = unit_id.replace("unit_0-", "");
+
+    var get_input = $("#chord_chordunits_attributes_" + unit_id + "_text").attr(
+      "value"
+    );
 
     $(".c-chord-edit__text-window").text(get_input);
   }
