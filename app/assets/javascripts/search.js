@@ -100,12 +100,6 @@ $(function () {
     $(".c-song-candidate__lists").empty();
     $(".c-song-candidate__lists").addClass("u-display__hidden");
   });
-  // チューニング作成画面用 楽器検索
-  function instrumentCandidate(result) {
-    var html = `<div class="search-result__instrument-candidate", data-instrument_id="${result.id}", data-instrument_string="${result.total_string}">${result.name}</div>`;
-
-    return html;
-  }
   function stringForm(i) {
     var html = `<div class="strings__string">
     <input value="${i}" type="hidden" name="[tunings_attributes][${
@@ -118,32 +112,6 @@ $(function () {
 
     return html;
   }
-
-  $("#search_instrument_name").on("keyup", function () {
-    var input = $("#search_instrument_name").val();
-    if (input == "") {
-      $(".content__search-result").empty();
-      return;
-    }
-    $.ajax({
-      type: "get",
-      url: "/instruments/search",
-      data: {
-        keyword: input,
-      },
-      dataType: "json",
-    }).done(function (results) {
-      $(".content__search-result").empty();
-      var insertHTML = "";
-
-      $.each(results, function (i, result) {
-        insertHTML += instrumentCandidate(result);
-        if (i == 4) return false;
-      });
-
-      $(".content__search-result").append(insertHTML);
-    });
-  });
 
   // 楽曲インクリメンタルサーチ
   $(document).on(
@@ -180,7 +148,9 @@ $(function () {
       </div>
       <div class="c-icon__attributes">
         <div class="c-icon__attribute">
-          <div class="c-icon__inner--jam c-js__attribute-state" value="${result.jam}">
+          <div class="c-icon__inner--jam c-js__attribute-state" value="${
+            result.jam
+          }">
             <div class="c-form__icon-blank">
               <svg
                 class="u-position__icon-docked--bottle"
@@ -286,11 +256,15 @@ $(function () {
           </div>
         </div>
         <div class="c-icon__attribute">
-          <i class="fas fa-users c-icon__inner--standard c-js__attribute-state" value="${result.standard}"></i>
+          <i class="fas fa-users c-icon__inner--standard c-js__attribute-state" value="${
+            result.standard
+          }"></i>
         </div>
         <div class="c-icon__attribute">
           <svg
-            class="c-icon__inner--beginner c-js__attribute-state" value="${result.beginner}"
+            class="c-icon__inner--beginner c-js__attribute-state" value="${
+              result.beginner
+            }"
             height="19px"
             width="19px"
           >
@@ -322,10 +296,14 @@ $(function () {
           </svg>
         </div>
         <div class="c-icon__attribute">
-          <i class="fas fa-microphone-alt c-icon__inner--vocal c-js__attribute-state" value="${result.vocal}"></i>
+          <i class="fas fa-microphone-alt c-icon__inner--vocal c-js__attribute-state" value="${
+            result.vocal
+          }"></i>
         </div>
         <div class="c-icon__attribute">
-          <i class="fas fa-guitar c-icon__inner--instrumental c-js__attribute-state" value="${result.instrumental}"></i>
+          <i class="fas fa-guitar c-icon__inner--instrumental c-js__attribute-state" value="${
+            result.instrumental
+          }"></i>
         </div>
       </div>
       <div class="c-review__btn">
@@ -333,7 +311,10 @@ $(function () {
           <i class="fas fa-lightbulb c-review__icon-practice"></i>
         </div>
         <div class="c-review__amount">
-          10
+          ${result.chords.reduce(
+            (sum, chord) => sum + chord.practices_count,
+            0
+          )}
         </div>
         <div class="c-review__text">
           練習してる？

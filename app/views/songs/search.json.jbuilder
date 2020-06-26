@@ -6,5 +6,6 @@ json.array! @songs do |song|
   json.beginner song.beginner
   json.vocal song.vocal
   json.instrumental song.instrumental
+  json.chords song.chords
 end
 
