@@ -1,0 +1,2 @@
+$(".c-review").find(".c-js__not-practice").remove();
+$(".c-review").prepend("<a class='c-review__link c-js__practice' data-remote='true' rel='nofollow' data-method='delete' href='/practices/<%= @practice.id %>?chord_id=<%= @chord.id %>'><div class='c-review__btn c-review__btn--red c-js__review'><div class='c-review__icon'><i class='fas fa-lightbulb c-review__icon-practice'></i></div><div class='c-review__amount'><%= @chord.practices_count %></div><div class='c-review__text'>練習してる!</div></div></a>");

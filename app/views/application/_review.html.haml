@@ -1,0 +1,37 @@
+.c-review
+  - if Practice.exists?(chord_id: chord.id, user_id: current_user.id)
+    =link_to practice_path(chord_id: chord.id), class: "c-review__link c-js__practice", method: :delete, remote: true do
+      .c-review__btn.c-review__btn--red.c-js__review
+        .c-review__icon
+          %i.fas.fa-lightbulb.c-review__icon-practice
+        .c-review__amount
+          =chord.practices_count
+        .c-review__text
+          練習してる！
+  - else
+    =link_to practices_path(chord_id: chord.id), class: "c-review__link c-js__not-practice", method: :post, remote: true do
+      .c-review__btn.c-js__review
+        .c-review__icon
+          %i.fas.fa-lightbulb.c-review__icon-practice
+        .c-review__amount
+          =chord.practices_count
+        .c-review__text
+          練習してる？
+  - if Like.exists?(chord_id: chord.id, user_id: current_user.id)
+    =link_to like_path(chord_id: chord.id), class: "c-review__link c-js__like", method: :delete, remote: true do
+      .c-review__btn.c-review__btn--red.c-js__review
+        .c-review__icon
+          %i.fas.fa-heart
+        .c-review__amount
+          =chord.likes_count
+        .c-review__text
+          信頼できる！
+  - else
+    =link_to likes_path(chord_id: chord.id), class: "c-review__link c-js__not-like", method: :post, remote: true do
+      .c-review__btn.c-js__review
+        .c-review__icon
+          %i.fas.fa-heart
+        .c-review__amount
+          =chord.likes_count
+        .c-review__text
+          信頼できる？
