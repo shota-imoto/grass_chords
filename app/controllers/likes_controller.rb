@@ -4,8 +4,15 @@ class LikesController < ApplicationController
     @like.save
     @chord = Chord.find(@like.chord_id)
 
-    redirect_back(fallback_location: chord_path(@chord))
   end
+
+  def destroy
+    @like = Like.find_by(like_params)
+    @like.destroy
+
+    @chord = @like.chord
+  end
+
 
   private
     def like_params

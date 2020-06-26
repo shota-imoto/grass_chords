@@ -5,21 +5,7 @@
         =@chord.song.title
       .p-chord__key key of G
     .p-chord__review
-      .c-review
-        .c-review__btn
-          .c-review__icon
-            %i.fas.fa-lightbulb.c-review__icon-practice
-          .c-review__amount
-            10
-          .c-review__text
-            練習してる？
-        .c-review__btn
-          .c-review__icon
-            %i.fas.fa-heart
-          .c-review__amount
-            10
-          .c-review__text
-            信頼できる？
+      =render "/application/review", chord: @chord
     .p-chord__info
       %p.p-chord__text-version
         =@chord.version + " version"

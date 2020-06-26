@@ -7,6 +7,6 @@ Rails.application.routes.draw do
     end
   end
   resources :chords, except: :index
-  resources :likes, only: :create
-  resources :practices, except: [:new, :edit, :show]
+  resources :likes, only: [:create, :destroy]
+  resources :practices, only: [:create, :destroy]
 end

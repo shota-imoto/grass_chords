@@ -16,6 +16,13 @@
   background-color: $color-btn-normal;
   box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.3);
   font-size: 11px;
+
+  color: $color-font-black;
+}
+
+.c-review__btn--red {
+  background-color: $color-theme-red;
+  color: $color-font-white;
 }
 
 .c-review__amount {
@@ -24,4 +31,8 @@
 
 .c-review__text {
   white-space: nowrap;
+}
+
+.c-review__link {
+  text-decoration: none;
 }
