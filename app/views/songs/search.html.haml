@@ -31,8 +31,8 @@
                 .c-review__icon
                   %i.fas.fa-lightbulb.c-review__icon-practice
                 .c-review__amount
-                  10
+                  =song.chords.sum(:practices_count)
                 .c-review__text
-                  練習してる？
+                  練習してる人の数
       .p-search-result__counter.c-js__result-counter
         =@songs.length.to_s + " results.."
