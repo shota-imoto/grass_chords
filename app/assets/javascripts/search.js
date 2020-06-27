@@ -17,6 +17,7 @@ $(function () {
     var beginner = $(".c-js__value-beginner").prop("checked");
     var vocal = $(".c-js__value-vocal").prop("checked");
     var instrumental = $(".c-js__value-instrumental").prop("checked");
+    var sort = $("input[name=sort]:checked").val();
     $.ajax({
       type: "get",
       url: "/songs/search",
@@ -27,6 +28,7 @@ $(function () {
         beginner: beginner,
         vocal: vocal,
         instrumental: instrumental,
+        sort: sort,
       },
       dataType: "json",
     }).done(function (results) {

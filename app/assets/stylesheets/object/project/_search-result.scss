@@ -19,6 +19,11 @@
   padding: 5%;
 }
 
+.p-search-result__sort-btn {
+  background-color: $color-btn-normal;
+  margin: 10px;
+}
+
 .p-search-result__results {
   // height => header: 65px, search box: 126px, article margin: about 32px(not fixed)
   height: calc(85vh - 65px - 126px - 32px);

@@ -44,6 +44,13 @@ class SongsController < ApplicationController
     params[:keyword].strip!
     keywords = params[:keyword].split(/\s+/)
     @songs = Song.all.includes(:chords)
+
+    if params[:sort] == "practice"
+      @songs = @songs.order("chords.practices_count desc")
+    else
+      @songs = @songs.order("title asc")
+    end
+
     # 条件検索
     # ifによって条件にチェックされているときのみandで絞り込み
     @songs = @songs.where(jam: params[:jam])  if (params[:jam] == "true")
@@ -52,6 +59,7 @@ class SongsController < ApplicationController
     @songs = @songs.where(vocal: params[:vocal])  if (params[:vocal] == "true")
     @songs = @songs.where(instrumental: params[:instrumental])  if (params[:instrumental] == "true")
     # キーワード検索
+
     keywords.each do |keyword| unless (params[:keyword].nil?)
       @songs = @songs.where("title like ?", "%#{keyword}%")
     end
