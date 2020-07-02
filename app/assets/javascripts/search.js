@@ -306,7 +306,7 @@ $(function () {
           ${result.practice_songs_count}
         </div>
         <div class="c-review__text">
-          練習してる？
+          練習してる人の数
         </div>
       </div>
     </div>

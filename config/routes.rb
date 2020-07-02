@@ -4,6 +4,7 @@ Rails.application.routes.draw do
   resources :songs do
     collection do
       get :search
+      get :global_search
     end
   end
   resources :chords, except: :index

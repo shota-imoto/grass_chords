@@ -1,6 +1,6 @@
 .c-search__attribute.c-form__attributes
   =f.label :jam, class:"c-form__attribute c-form__box--icon_jam c-js__search-jam c-js__attribute-btn" do
-    =f.check_box :jam,  {checked: ("checked" if params[:jam] == "true"), class: "c-js__value c-js__value-jam u-display__hiddena"}, "true", "false"
+    =f.check_box :jam,  {checked: ("checked" if params[:jam] == "true"), class: "c-js__value c-js__value-jam u-display__hidden"}, "true", "false"
     .c-form__icon-blank
     .c-form__inner--icon-jam
       %p.c-form__icon-blank
@@ -10,24 +10,24 @@
           =render "/svg/strawberry"
     %a.c-search__attribute-text Jam
   =f.label :standard, class: "c-form__attribute c-form__box--icon_standard c-js__search-standard c-js__attribute-btn" do
-    =f.check_box :standard, {checked: ("checked" if params[:standard] == "true"), class: "c-js__value c-js__value-standard u-display__hiddena"}, "true", "false"
+    =f.check_box :standard, {checked: ("checked" if params[:standard] == "true"), class: "c-js__value c-js__value-standard u-display__hidden"}, "true", "false"
     .c-form__icon-blank
     %i.fas.fa-users.c-form__inner--icon-standard
     %a.c-search__attribute-text Standard
   =f.label :beginner, class: "c-form__attribute c-form__box--icon_beginner c-js__search-beginner c-js__attribute-btn" do
-    =f.check_box :beginner, {checked: ("checked" if params[:beginner] == "true"), class:"c-js__value c-js__value-beginner u-display__hiddena"}, "true", "false"
+    =f.check_box :beginner, {checked: ("checked" if params[:beginner] == "true"), class:"c-js__value c-js__value-beginner u-display__hidden"}, "true", "false"
     .c-form__icon-blank
     .c-form__inner--icon-beginner
       %svg{width: "19px", height: "19px"}
         =render "/svg/beginner"
     %a.c-search__attribute-text Beginner
   =f.label :vocal, class: "c-form__attribute c-form__box--icon_vocal c-js__search-vocal c-js__attribute-btn" do
-    =f.check_box :vocal, {checked: ("checked" if params[:vocal] == "true"), class: "c-js__value c-js__value-vocal u-display__hiddena"}, "true", "false"
+    =f.check_box :vocal, {checked: ("checked" if params[:vocal] == "true"), class: "c-js__value c-js__value-vocal u-display__hidden"}, "true", "false"
     .c-form__icon-blank
     %i.fas.fa-microphone-alt.c-form__inner--icon-vocal
     %a.c-search__attribute-text Vocal
   =f.label :instrumental, class: "c-form__attribute c-form__box--icon_instrumental c-js__search-instrumental c-js__attribute-btn" do
-    =f.check_box :instrumental, {checked: ("checked" if params[:instrumental] == "true"), class: "c-js__value c-js__value-instrumental u-display__hiddena"}, "true", "false"
+    =f.check_box :instrumental, {checked: ("checked" if params[:instrumental] == "true"), class: "c-js__value c-js__value-instrumental u-display__hidden"}, "true", "false"
     .c-form__icon-blank
     %i.fas.fa-guitar.c-form__inner--icon-instrumental
     %a.c-search__attribute-text Instrumental

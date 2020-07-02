@@ -1,0 +1,44 @@
+%section.c-search.p-global-search__wrapper.c-window__skeleton
+  %article.p-global-search
+    =form_with  url: global_search_songs_path, method: :get, local: true do |f|
+      .c-form__search-box
+        =f.text_field :keyword, value: (params[:keyword] if params[:keyword]),  class: "c-form__textbox c-form__textbox--search c-js__search-text", placeholder: "Song Tittle"
+        =f.label :search, class:"c-search__send-btn c-form__position--box-btn" do
+          .c-form__btn
+          %i.fas.fa-search.c-form__btn-icon
+          =f.submit "", class: "c-form__btn u-color__skeleton-cover"
+      .c-search__attribute.c-form__attributes
+        =f.label :jam_global, class:"c-form__attribute c-form__box--icon_jam c-js__search-jam c-js__attribute-btn" do
+          =f.check_box :jam_global,  {checked: ("checked" if params[:jam] == "true"), class: "c-js__value c-js__value-jam u-display__hidden"}, "true", "false"
+          .c-form__icon-blank
+          .c-form__inner--icon-jam
+            %p.c-form__icon-blank
+              %svg{class: "u-position__icon-docked--bottle", width: "19px", height: "22px"}
+                =render "/svg/bottle"
+              %svg{class: "u-position__icon-docked--strawberry", width: "10px", height: "10px"}
+                =render "/svg/strawberry"
+          %a.c-search__attribute-text Jam
+        =f.label :standard_global, class: "c-form__attribute c-form__box--icon_standard c-js__search-standard c-js__attribute-btn" do
+          =f.check_box :standard_global, {checked: ("checked" if params[:standard] == "true"), class: "c-js__value c-js__value-standard u-display__hidden"}, "true", "false"
+          .c-form__icon-blank
+          %i.fas.fa-users.c-form__inner--icon-standard
+          %a.c-search__attribute-text Standard
+        =f.label :beginner_global, class: "c-form__attribute c-form__box--icon_beginner c-js__search-beginner c-js__attribute-btn" do
+          =f.check_box :beginner_global, {checked: ("checked" if params[:beginner] == "true"), class:"c-js__value c-js__value-beginner u-display__hidden"}, "true", "false"
+          .c-form__icon-blank
+          .c-form__inner--icon-beginner
+            %svg{width: "19px", height: "19px"}
+              =render "/svg/beginner"
+          %a.c-search__attribute-text Beginner
+        =f.label :vocal_global, class: "c-form__attribute c-form__box--icon_vocal c-js__search-vocal c-js__attribute-btn" do
+          =f.check_box :vocal_global, {checked: ("checked" if params[:vocal] == "true"), class: "c-js__value c-js__value-vocal u-display__hidden"}, "true", "false"
+          .c-form__icon-blank
+          %i.fas.fa-microphone-alt.c-form__inner--icon-vocal
+          %a.c-search__attribute-text Vocal
+        =f.label :instrumental_global, class: "c-form__attribute c-form__box--icon_instrumental c-js__search-instrumental c-js__attribute-btn" do
+          =f.check_box :instrumental_global, {checked: ("checked" if params[:instrumental] == "true"), class: "c-js__value c-js__value-instrumental u-display__hidden"}, "true", "false"
+          .c-form__icon-blank
+          %i.fas.fa-guitar.c-form__inner--icon-instrumental
+          %a.c-search__attribute-text Instrumental
+  .c-layer__black
+    .c-layer__black-sub
