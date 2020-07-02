@@ -1,4 +1,4 @@
-.c-review{id: "c-review--#{i}"}
+.c-review{class: "c-review-#{chord.id}"}
   - if Practice.exists?(chord_id: chord.id, user_id: current_user.id)
     =link_to practice_path(chord_id: chord.id), class: "c-review__link c-js__practice", method: :delete, remote: true do
       .c-review__btn.c-review__btn--red.c-js__review

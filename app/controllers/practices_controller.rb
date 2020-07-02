@@ -5,8 +5,6 @@ class PracticesController < ApplicationController
     @practice.save
 
     @chord = Chord.find(@practice.chord_id)
-    @form_id = FormId.new(form_id: params[:form_id])
-
   end
 
   
