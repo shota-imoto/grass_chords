@@ -150,9 +150,7 @@ $(function () {
       </div>
       <div class="c-icon__attributes">
         <div class="c-icon__attribute">
-          <div class="c-icon__inner--jam c-js__attribute-state" value="${
-            result.jam
-          }">
+          <div class="c-icon__inner--jam c-js__attribute-state" value="${result.jam}">
             <div class="c-form__icon-blank">
               <svg
                 class="u-position__icon-docked--bottle"
@@ -258,15 +256,11 @@ $(function () {
           </div>
         </div>
         <div class="c-icon__attribute">
-          <i class="fas fa-users c-icon__inner--standard c-js__attribute-state" value="${
-            result.standard
-          }"></i>
+          <i class="fas fa-users c-icon__inner--standard c-js__attribute-state" value="${result.standard}"></i>
         </div>
         <div class="c-icon__attribute">
           <svg
-            class="c-icon__inner--beginner c-js__attribute-state" value="${
-              result.beginner
-            }"
+            class="c-icon__inner--beginner c-js__attribute-state" value="${result.beginner}"
             height="19px"
             width="19px"
           >
@@ -298,14 +292,10 @@ $(function () {
           </svg>
         </div>
         <div class="c-icon__attribute">
-          <i class="fas fa-microphone-alt c-icon__inner--vocal c-js__attribute-state" value="${
-            result.vocal
-          }"></i>
+          <i class="fas fa-microphone-alt c-icon__inner--vocal c-js__attribute-state" value="${result.vocal}"></i>
         </div>
         <div class="c-icon__attribute">
-          <i class="fas fa-guitar c-icon__inner--instrumental c-js__attribute-state" value="${
-            result.instrumental
-          }"></i>
+          <i class="fas fa-guitar c-icon__inner--instrumental c-js__attribute-state" value="${result.instrumental}"></i>
         </div>
       </div>
       <div class="c-review__btn">
@@ -313,10 +303,7 @@ $(function () {
           <i class="fas fa-lightbulb c-review__icon-practice"></i>
         </div>
         <div class="c-review__amount">
-          ${result.chords.reduce(
-            (sum, chord) => sum + chord.practices_count,
-            0
-          )}
+          ${result.practice_songs_count}
         </div>
         <div class="c-review__text">
           練習してる？

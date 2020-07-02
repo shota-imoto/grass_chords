@@ -43,6 +43,8 @@ group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
   gem "pry-rails"
   gem "pry-byebug"
+  gem 'hirb'
+  gem 'hirb-unicode'
 end
 
 group :development do

@@ -98,6 +98,10 @@ GEM
       haml (>= 4.0.6, < 6.0)
       html2haml (>= 1.0.1)
       railties (>= 5.1)
+    hirb (0.7.3)
+    hirb-unicode (0.0.5)
+      hirb (~> 0.5)
+      unicode-display_width (~> 0.1.1)
     html2haml (2.2.0)
       erubis (~> 2.7.0)
       haml (>= 4.0, < 6)
@@ -224,6 +228,7 @@ GEM
       thread_safe (~> 0.1)
     uglifier (4.2.0)
       execjs (>= 0.3.0, < 3)
+    unicode-display_width (0.1.1)
     unicorn (5.4.1)
       kgio (~> 2.6)
       raindrops (~> 0.7)
@@ -252,6 +257,8 @@ DEPENDENCIES
   devise
   font-awesome-sass
   haml-rails
+  hirb
+  hirb-unicode
   jbuilder (~> 2.5)
   jquery-rails
   listen (>= 3.0.5, < 3.2)

@@ -46,7 +46,7 @@ class SongsController < ApplicationController
     @songs = Song.all.includes(:chords)
 
     if params[:sort] == "practice"
-      @songs = @songs.order("chords.practices_count desc")
+      @songs = @songs.order("practice_song_id desc")
     else
       @songs = @songs.order("title asc")
     end

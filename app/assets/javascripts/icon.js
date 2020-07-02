@@ -1,6 +1,7 @@
 $(function () {
   // when users click attribute btn, it changes own color
   $(".c-js__attribute-btn").on("touchend, mouseup", function () {
+    console.log($(this).find(".c-js__value").prop("checked"));
     if ($(this).find(".c-js__value").prop("checked") == 0) {
       $(this).addClass("u-js__attribute-color");
     } else {
