@@ -2,8 +2,8 @@ class PracticesController < ApplicationController
   def create
     @practice = Practice.new(practice_params)
     @practice.save
-    @chord = Chord.find(@practice.chord_id)
 
+    @chord = Chord.find(@practice.chord_id)
   end
 
   def destroy
