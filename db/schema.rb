@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_06_21_203528) do
+ActiveRecord::Schema.define(version: 2020_07_01_073908) do
 
   create_table "chords", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.bigint "song_id"
@@ -45,12 +45,23 @@ ActiveRecord::Schema.define(version: 2020_06_21_203528) do
     t.index ["user_id"], name: "index_likes_on_user_id"
   end
 
+  create_table "practice_songs", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.bigint "song_id"
+    t.bigint "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["song_id"], name: "index_practice_songs_on_song_id"
+    t.index ["user_id"], name: "index_practice_songs_on_user_id"
+  end
+
   create_table "practices", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.bigint "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "chord_id"
+    t.bigint "practice_song_id"
     t.index ["chord_id"], name: "index_practices_on_chord_id"
+    t.index ["practice_song_id"], name: "index_practices_on_practice_song_id"
     t.index ["user_id"], name: "index_practices_on_user_id"
   end
 
@@ -64,6 +75,7 @@ ActiveRecord::Schema.define(version: 2020_06_21_203528) do
     t.datetime "updated_at", null: false
     t.boolean "vocal", null: false
     t.boolean "instrumental", null: false
+    t.integer "practice_songs_count", default: 0
     t.index ["user_id"], name: "index_songs_on_user_id"
   end
 
@@ -86,7 +98,10 @@ ActiveRecord::Schema.define(version: 2020_06_21_203528) do
   add_foreign_key "chordunits", "chords"
   add_foreign_key "likes", "chords"
   add_foreign_key "likes", "users"
+  add_foreign_key "practice_songs", "songs"
+  add_foreign_key "practice_songs", "users"
   add_foreign_key "practices", "chords"
+  add_foreign_key "practices", "practice_songs"
   add_foreign_key "practices", "users"
   add_foreign_key "songs", "users"
 end

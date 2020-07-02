@@ -1,6 +1,8 @@
 %aside.p-top
   %section.c-search.c-window__clear
-    =render "/application/search"
+    .c-search__title コード譜を探す
+    =form_with  url: search_songs_path, method: :get, local: true do |f|
+      =render "/application/search", f: f
 %article
   %section.c-section__sentence-box.u-color__section-red
     %h2.heading Concept
@@ -21,3 +23,4 @@
         Beginner→検索の順にクリック
     %figure
       =image_tag "/images/guitar.png", class: "c-section__image-guitar"
+      

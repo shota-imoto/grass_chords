@@ -9,7 +9,7 @@
         .c-review__text
           練習してる！
   - else
-    =link_to practices_path(chord_id: chord.id), class: "c-review__link c-js__not-practice", method: :post, remote: true do
+    =link_to practices_path(chord_id: chord.id, form_id: i), class: "c-review__link c-js__not-practice", method: :post, remote: true do
       .c-review__btn.c-js__review
         .c-review__icon
           %i.fas.fa-lightbulb.c-review__icon-practice

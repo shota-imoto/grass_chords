@@ -1,7 +1,15 @@
 .p-search-result__wrapper
   %article.p-search-result__article
     %section.p-search-result__section.c-window__clear
-      =render "application/search"
+      .c-search__title コード譜を探す
+      =form_with  url: search_songs_path, method: :get, local: true do |f|
+        =render "application/search", f: f
+        =f.label :asc, class: "p-search-result__sort-btn" do
+          =f.radio_button :sort, :asc, checked: "checked"
+        =f.label :practice, class: "p-search-result__sort-btn" do
+          =f.radio_button :sort, :practice
+        =f.hidden_field :song_practices
+
       %hr{color: "black", size: "1px"}
       .p-search-result__results
         - @songs.each do |song|
@@ -31,8 +39,9 @@
                 .c-review__icon
                   %i.fas.fa-lightbulb.c-review__icon-practice
                 .c-review__amount
-                  =song.chords.sum(:practices_count)
+                  =song.practice_songs_count
                 .c-review__text
                   練習してる人の数
       .p-search-result__counter.c-js__result-counter
         =@songs.length.to_s + " results.."
+

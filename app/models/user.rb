@@ -7,5 +7,6 @@ class User < ApplicationRecord
   has_many :chords
   has_many :likes, dependent: :destroy
   has_many :practices, dependent: :destroy
+  has_many :practices, dependent: :destroy
 
 end

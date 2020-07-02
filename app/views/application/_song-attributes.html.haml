@@ -1,6 +1,6 @@
 .c-search__attribute.c-form__attributes
   =f.label :jam, class:"c-form__flex c-js__attribute-btn c-form__attribute c-form__box--icon_jam" do
-    =f.check_box :jam, {class: "u-display__hidden"}, "true", "false"
+    =f.check_box :jam, {class: "c-js__value u-display__hidden"}, "true", "false"
     .c-form__icon-blank
     .c-form__inner--icon-jam
       %p.c-form__icon-blank
@@ -10,24 +10,24 @@
           =render "/svg/strawberry"
     %a.c-search__attribute-text.c-js__attribute-state{value: "#{@song.jam}"} Jam
   =f.label :standard, class: "c-form__flex c-js__attribute-btn c-form__attribute c-form__box--icon_standard" do
-    =f.check_box :standard, {class: "u-display__hidden"}, "true", "false"
+    =f.check_box :standard, {class: "c-js__value u-display__hidden"}, "true", "false"
     .c-form__icon-blank
     %i.fas.fa-users.c-form__inner--icon-standard
     %a.c-search__attribute-text.c-js__attribute-state{value: "#{@song.standard}"} Standard
   =f.label :beginner, class: "c-form__flex c-js__attribute-btn c-form__attribute c-form__box--icon_beginner" do
-    =f.check_box :beginner, {class:"u-display__hidden"}, "true", "false"
+    =f.check_box :beginner, {class: "c-js__value u-display__hidden"}, "true", "false"
     .c-form__icon-blank
     .c-form__inner--icon-beginner
       %svg{width: "19px", height: "19px"}
         =render "/svg/beginner"
     %a.c-search__attribute-text.c-js__attribute-state{value: "#{@song.beginner}"} Beginner
   =f.label :vocal, class: "c-form__flex c-js__attribute-btn c-form__attribute c-form__box--icon_vocal" do
-    =f.check_box :vocal, {class: "u-display__hidden"}, "true", "false"
+    =f.check_box :vocal, {class: "c-js__value u-display__hidden"}, "true", "false"
     .c-form__icon-blank
     %i.fas.fa-microphone-alt.c-form__inner--icon-vocal
     %a.c-search__attribute-text.c-js__attribute-state{value: "#{@song.vocal}"}  Vocal
   =f.label :instrumental, class: "c-form__flex c-js__attribute-btn c-form__attribute c-form__box--icon_instrumental" do
-    =f.check_box :instrumental, {class: "u-display__hidden"}, "true", "false"
+    =f.check_box :instrumental, {class: "c-js__value u-display__hidden"}, "true", "false"
     .c-form__icon-blank
     %i.fas.fa-guitar.c-form__inner--icon-instrumental
     %a.c-search__attribute-text.c-js__attribute-state{value: "#{@song.instrumental}"}  Instrumental
