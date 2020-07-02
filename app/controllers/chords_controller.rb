@@ -42,7 +42,7 @@ class ChordsController < ApplicationController
 
   def destroy
     @chord.destroy
-    redirect_to root_path, notice: 'コード譜を削除しました'
+    redirect_to song_path(@chord.song_id), notice: 'コード譜を削除しました'
 
   end
 
@@ -63,7 +63,7 @@ class ChordsController < ApplicationController
     end
 
     def authority_user
-      if (current_user.id == params[:user_id]) | (current_user.id == 1)
+      if (current_user.id == @chord.user_id) | (current_user.id == 1)
       else
         redirect_back fallback_location: root_path, notice: 'あなたが作成したデータではありません。'
       end
