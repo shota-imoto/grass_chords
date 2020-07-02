@@ -4,3 +4,4 @@ class RemoveReferencesFromPracticeSong < ActiveRecord::Migration[5.2]
     remove_reference :practice_songs, :practice
   end
 end
+

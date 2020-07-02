@@ -3,3 +3,4 @@ class AddPracticeSongsToSong < ActiveRecord::Migration[5.2]
     add_column :songs, :practice_songs_count, :integer
   end
 end
+

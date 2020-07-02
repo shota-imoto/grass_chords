@@ -57,6 +57,7 @@ class SongsController < ApplicationController
     end
   end
 
+  
   def global_search
     @songs = Song.all.includes(:chords)
 

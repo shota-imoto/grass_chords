@@ -3,3 +3,4 @@ class AddDefaultSongPracticeCountToSong < ActiveRecord::Migration[5.2]
     change_column :songs, :practice_songs_count, :integer, default: 0 
   end
 end
+

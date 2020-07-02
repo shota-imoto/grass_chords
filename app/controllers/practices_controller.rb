@@ -3,13 +3,13 @@ class PracticesController < ApplicationController
     PracticeSong.create(practice_song_params) unless PracticeSong.where(practice_song_params).exists?
     @practice = Practice.new(practice_params)
     @practice.save
-    binding.pry
 
     @chord = Chord.find(@practice.chord_id)
     @form_id = FormId.new(form_id: params[:form_id])
 
   end
 
+  
   def destroy
     @practice = Practice.find_by(practice_params)
 
