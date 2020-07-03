@@ -25,7 +25,12 @@
           .c-key-change__display
             = f.text_field :key, id: "key_name", class: "key-display--form c-key-change__form u-display__hidden", value: "#{@chord.key}"
             .c-key-change__present
-              = "key of " + @chord.key 
+              - if ["B","b"].include?(@chord.key[1])
+                = "key of "+ @chord.key[0]
+                %a{class: "font_base-key c-font__base"}
+                  = @chord.key[1]
+              - else
+                = "key of " + @chord.key 
           =render "/application/key-change"
         .c-key-change__guide << key change!!
         .c-key-change__close-layer
