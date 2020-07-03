@@ -1,0 +1,6 @@
+=f.fields_for :chordunits, @chordunits do |unit_f|
+  =unit_f.hidden_field :address
+  =unit_f.hidden_field :text, class: "c-chordunit__text"
+  =unit_f.hidden_field :leftbar
+  =unit_f.hidden_field :rightbar
+  =unit_f.hidden_field :beat

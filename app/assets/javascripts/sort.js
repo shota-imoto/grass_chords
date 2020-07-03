@@ -8,7 +8,7 @@ $(function () {
   // when page reloads, make btn colored
   $(document).ready(function () {
     var btn = $("input[name= 'sort']:checked").parent();
-    change_sort_color($(btn));
+    change_sort_color(btn);
   });
 
   function change_sort_color(btn) {

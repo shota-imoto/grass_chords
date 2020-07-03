@@ -1,0 +1,13 @@
+.c-chordunit.c-js__cursor-marker.c-chordunit--large{id: "unit_0-#{i}"}
+  .c-chordunit__beat.c-chordunit__beat--large
+    =@chord.chordunits[i].beat
+  .c-chordunit__leftbar.c-chordunit__leftbar--large
+    =@chord.chordunits[i].leftbar
+  .c-chordunit__note
+    .c-chordunit__note-name.c-chordunit__note-name--large
+    .c-chordunit__half-note.c-chordunit__half-note--large
+    .c-chordunit__modifier.c-chordunit__modifier--large
+  .c-chordunit__rightbar.c-chordunit__rightbar--large
+    =@chord.chordunits[i].rightbar
+  .c-chordunit__text.u-display__hidden{value: "#{@chord.chordunits[i].text}"}
+    =@chord.chordunits[i].text
