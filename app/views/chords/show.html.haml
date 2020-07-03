@@ -3,7 +3,8 @@
     .p-chord__title
       %h2
         =@chord.song.title
-      .p-chord__key key of G
+      .p-chord__key
+        = "key of "+@chord.key 
     .p-chord__review
       =render "/application/review", chord: @chord
     .p-chord__info
@@ -16,9 +17,22 @@
     =link_to "PDF Download", url:"#"
   %section.p-chord__wrapper
     .p-chord__key-change
-      =render "/application/key-change"
+      .c-key-change__wrapper
+        .c-key-change__display
+          .key-display--form.c-key-change__form.u-display__hidden{value: "#{@chord.key}"}
+          .c-key-change__present
+            - if ["B","b"].include?(@chord.key[1])
+              = "key of "+ @chord.key[0]
+              %a{class: "font_base-key c-font__base"}
+                = @chord.key[1]
+            - else
+              = "key of " + @chord.key 
+        =render "/application/key-change"
+      .c-key-change__guide << key change!!
+      .c-key-change__close-layer
+        .c-layer__skeleton
 
-    .p-song__score
+    .p-song__score.c-js__key-change.c-js__able
       - @chord.chordunits.each_with_index do |unit, i|
         .c-chordunit.c-chordunit--large{id: "unit_0-#{i}"}
           .c-chordunit__beat.c-chordunit__beat--large

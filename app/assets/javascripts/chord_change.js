@@ -24,7 +24,7 @@ $(function () {
   // 絶対音
   $(".c-key-change__btn--note").on("touchend, mouseup", function () {
     var selected = $(this).text().trim();
-    var key_state = $(".key-display--form").val();
+    var key_state = $(".key-display--form").attr("value");
     const absolute_note_array = [
       "G",
       "GB",
@@ -45,15 +45,14 @@ $(function () {
     var key_index = absolute_note_array.indexOf(key_state);
 
     $(".c-key-change__present ").text("key of " + selected);
-    $(".key-display--form").val(selected);
-
-    key_change(key_index);
+    $(".key-display--form").attr("value", selected);
+    if ($(".c-js__key-change").hasClass("c-js__able")) key_change(key_index);
   });
 
   // #/b
   $(".c-key-change__btn--half").on("touchend, mouseup", function () {
     var selected = $(this).text().trim();
-    var key_state = $(".key-display--form").val();
+    var key_state = $(".key-display--form").attr("value");
 
     // マイナー記号を削除する工程が必要
     key_state = key_state.replace("m", "");
@@ -86,7 +85,7 @@ $(function () {
 
     key_state = absolute_note_array[new_index];
 
-    $(".key-display--form").val(key_state);
+    $(".key-display--form").attr("value", key_state);
 
     if (key_state.length == 2) {
       $(".c-key-change__present").text("key of " + key_state.charAt(0));
@@ -97,19 +96,19 @@ $(function () {
       $(".c-key-change__present").text("key of " + key_state);
     }
 
-    key_change(key_index);
+    if ($(".c-js__key-change").hasClass("c-js__able")) key_change(key_index);
   });
 
   // m
   $(".c-key-change__btn--modifier").on("touchend, mouseup", function () {
-    var key_state = $(".key-display--form").val();
-
+    var key_state = $(".key-display--form").attr("value");
+    console.log(key_state);
     if (key_state.indexOf("m") == -1) {
       $(".c-key-change__present ").append(
         `<span class="c-js__key-change--minor">m</span>`
       );
       key_state = key_state + "m";
-      $(".key-display--form").val(key_state);
+      $(".key-display--form").attr("value", key_state);
     }
   });
 
@@ -130,13 +129,12 @@ $(function () {
       "G",
     ];
 
-    var key_state = $(".key-display--form").val();
+    var key_state = $(".key-display--form").attr("value");
 
     key_state = key_state.replace("m", "");
 
     var now_key_index = absolute_note_array.indexOf(key_state);
     var key_difference = now_key_index - before_key_index;
-
     $(".c-chordunit__note").each(function (i, value) {
       var note = $(value).children(".c-chordunit__note-name").text();
       note = note + $(value).children(".c-chordunit__half-note").text();
