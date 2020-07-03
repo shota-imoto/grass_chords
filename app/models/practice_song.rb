@@ -6,4 +6,5 @@ class PracticeSong < ApplicationRecord
 
   def self.common_practice_songs(practice_song)
     self.find_by(practice_song_params)
+  end
 end
