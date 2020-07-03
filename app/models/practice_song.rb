@@ -4,5 +4,6 @@ class PracticeSong < ApplicationRecord
   has_many :practices, dependent: :destroy
 
 
-
+  def self.common_practice_songs(practice_song)
+    self.find_by(practice_song_params)
 end

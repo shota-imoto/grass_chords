@@ -14,7 +14,12 @@ class ChordsController < ApplicationController
 
   def new
     @chord = Chord.new
-    @chord.chordunits.build
+
+    @chordunits = []
+    48.times do |i|
+      @chordunit = @chord.chordunits.build(address: i)
+      @chordunits << @chordunit
+    end
   end
 
   def edit
@@ -23,7 +28,6 @@ class ChordsController < ApplicationController
 
   def create
     @chord = Chord.new(chord_params)
-    
     if @chord.save
       redirect_to @chord, notice: 'コード譜を作成しました' 
     else
