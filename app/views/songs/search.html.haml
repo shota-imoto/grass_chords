@@ -4,10 +4,13 @@
       .c-search__title コード譜を探す
       =form_with  url: search_songs_path, method: :get, local: true do |f|
         =render "application/search", f: f
-        =f.label :asc, class: "p-search-result__sort-btn" do
-          =f.radio_button :sort, :asc, checked: "checked"
-        =f.label :practice, class: "p-search-result__sort-btn" do
-          =f.radio_button :sort, :practice
+        .p-search-result__sort-btns
+          =f.label :sort, value: :asc, class: "p-search-result__sort-btn" do
+            =f.radio_button :sort, :asc, checked: "checked", class: "c-js__sort u-display__hidden"
+            アルファベット 順
+          =f.label :sort, value: :practice, class: "p-search-result__sort-btn" do
+            =f.radio_button :sort, :practice, checked: ("checked" if params[:sort] == "practice"), class: "c-js__sort u-display__hidden"
+            練習してる人数 順
         =f.hidden_field :song_practices
 
       %hr{color: "black", size: "1px"}

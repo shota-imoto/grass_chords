@@ -34,7 +34,14 @@
   - @song.chords.each_with_index do |chord, i|
     %section.p-song__score-wrapper
       .p-song__header
-        .p-song__key (key of A)
+        .p-song__key
+          - if ["B","b"].include?(chord.key[1])
+            = "(key of "+ chord.key[0]
+            %a{class: "font_base-key c-font__base"}
+              = chord.key[1]
+            %a )
+          - else
+            = "(key of " + chord.key + ")" 
         =link_to ">> 拡大ページ", chord_path(chord), class: "p-song__detail-page"
       .p-song__score{id: "chord_#{i}"}
         - chord.chordunits.each_with_index do |unit, j|

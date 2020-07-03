@@ -19,9 +19,23 @@
   padding: 5%;
 }
 
+.p-search-result__sort-btns {
+  margin: 14px 0;
+  height: 40px;
+  display: flex;
+  align-items: center;
+}
+
 .p-search-result__sort-btn {
+  width: calc(50% + 24px / 2);
+  margin-right: 24px;
+  padding: 3px;
   background-color: $color-btn-normal;
-  margin: 10px;
+  border-radius: 2px;
+  box-shadow: 2px 2px 4px #444444;
+
+  text-align: center;
+  font-size: 12px;
 }
 
 .p-search-result__results {
