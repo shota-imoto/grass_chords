@@ -23,7 +23,6 @@ class ChordsController < ApplicationController
 
   def create
     @chord = Chord.new(chord_params)
-    binding.pry
     
     if @chord.save
       redirect_to @chord, notice: 'コード譜を作成しました' 
