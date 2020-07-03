@@ -21,9 +21,16 @@
           %a version
     %section.p-chord__wrapper
       .p-chord__key-change
-        =render "/application/key-change"
-
-      .p-song__score
+        .c-key-change__wrapper
+          .c-key-change__display
+            = f.text_field :key, id: "key_name", class: "key-display--form c-key-change__form u-display__hidden", value: "#{@chord.key}"
+            .c-key-change__present
+              = "key of " + @chord.key 
+          =render "/application/key-change"
+        .c-key-change__guide << key change!!
+        .c-key-change__close-layer
+          .c-layer__skeleton
+      .p-song__score.c-js__key-change.c-js__disable
         -48.times do |i|
           .c-chordunit.c-js__cursor-marker.c-chordunit--large{id: "unit_0-#{i}"}
             .c-chordunit__beat.c-chordunit__beat--large

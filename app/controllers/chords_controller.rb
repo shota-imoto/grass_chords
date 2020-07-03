@@ -23,6 +23,7 @@ class ChordsController < ApplicationController
 
   def create
     @chord = Chord.new(chord_params)
+    binding.pry
     
     if @chord.save
       redirect_to @chord, notice: 'コード譜を作成しました' 
@@ -52,7 +53,7 @@ class ChordsController < ApplicationController
     end
 
     def chord_params
-      params.require(:chord).permit(:song_id, :artist_id, :album_id, :version, chordunits_attributes: [:address, :text, :leftbar, :rightbar, :beat, :id]).merge(user_id: current_user.id)
+      params.require(:chord).permit(:song_id, :artist_id, :album_id, :version, :key, chordunits_attributes: [:address, :text, :leftbar, :rightbar, :beat, :id]).merge(user_id: current_user.id)
     end
 
     def authority_login
