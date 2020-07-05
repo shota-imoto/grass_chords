@@ -7,7 +7,7 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 
 
-Song.create(id: 1, title: "Little Maggie", jam: 0, standard: 1, beginner: 0, user_id: 2)
-User.create(id: 2, name: "dammy", place:"space", email: "dammy@com", password: "11111111")
+Song.create(id: 1, title: "Little Maggie", jam: 0, standard: 1, beginner: 0, vocal: 1, instrumental: 0, practice_songs_count: 0, user_id: 1)
+User.create(id: 0, name: "テストユーザー", place: "火星", email: "test@exam.com", password: "19920818", admin: "false")
 
 

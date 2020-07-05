@@ -1,6 +1,6 @@
 class SongsController < ApplicationController
   before_action :set_song, only: [:show, :edit, :update, :destroy]
-  before_action :authority_login, except: [:index, :show, :search]
+  before_action :authority_login, except: [:index, :show, :search, :global_search]
   before_action :authority_user, only: [:edit, :update, :destroy]
 
   def index
@@ -8,6 +8,7 @@ class SongsController < ApplicationController
   end
 
   def show
+    @chords = @song.chords.order("likes_count desc")
   end
 
   def new
@@ -44,7 +45,7 @@ class SongsController < ApplicationController
     @songs = Song.all.includes(:chords)
 
     if params[:sort] == "practice"
-      @songs = @songs.order("practice_songs_count desc")
+      @songs = @songs.order("practice_songs_count desc, title asc")
     else
       @songs = @songs.order("title asc")
     end
@@ -94,7 +95,7 @@ class SongsController < ApplicationController
     end
 
     def authority_user
-      if (current_user.id == params[:user_id]) | (current_user.id == 1)
+      if (current_user.id == params[:user_id]) | (current_user.admin == 1)
       else
         redirect_back fallback_location: root_path, notice: 'あなたが作成したデータではありません。'
       end
