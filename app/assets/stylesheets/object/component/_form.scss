@@ -75,10 +75,11 @@
 
   background-color: $color-theme-red;
   color: $color-font-white;
+  box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.3);
+
   &--registration {
     height: 38px;
     width: 82px;
-    box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.3);
 
     font-size: 20px;
   }
@@ -86,9 +87,25 @@
   &--login {
     height: 30px;
     width: 80px;
-    box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.3);
 
     font-size: 14px;
+  }
+}
+
+.c-form__btn-area {
+  display: flex;
+  justify-content: space-between;
+}
+
+.c-form__btn-test {
+  width: 120px;
+  background-color: $color-accent-blue;
+  text-align: center;
+
+  & a {
+    line-height: 30px;
+    text-decoration: none;
+    color: $color-font-white;
   }
 }
 

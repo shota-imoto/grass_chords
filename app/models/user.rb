@@ -9,4 +9,8 @@ class User < ApplicationRecord
   has_many :practices, dependent: :destroy
   has_many :practices, dependent: :destroy
 
+  def self.test_user_find
+    self.find_by(name: "テストユーザー")
+  end
+
 end

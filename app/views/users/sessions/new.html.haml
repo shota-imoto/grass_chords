@@ -10,7 +10,11 @@
         .c-form__area
           =f.email_field :email, autofocus: true, autocomplete: "email", placeholder: "email", class:"c-form__textbox c-user__textbox"
           =f.password_field :password, autocomplete: "current-password", placeholder: "password", class:"c-form__textbox"
-        .c-form__area
-          =f.submit "ログイン", class:"c-form__btn c-form__btn--login"
+        .c-form__btn-area
+          .c-form__area
+            =f.submit "ログイン", class: "c-form__btn c-form__btn--login"
+          .c-form__area
+            .c-form__btn.c-form__btn--login.c-form__btn-test
+              =link_to "お試しログイン", users_test_sign_in_path
     %figure
       =image_tag "/images/fiddle.png", class: "c-section__image-fiddle"

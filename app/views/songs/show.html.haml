@@ -31,7 +31,7 @@
         |
       =link_to "Delete", song_path, method: :delete
 %article.l-contents__main
-  - @song.chords.each_with_index do |chord, i|
+  - @chords.each_with_index do |chord, i|
     %section.p-song__score-wrapper
       .p-song__header
         .p-song__key
