@@ -5,6 +5,13 @@
         .p-navi__content__parent.p-navi__btn-pulldown
           .p-navi__link-btn--parent
             .p-navi__icon-box
+              %i.fas.fa-user
+            %span.p-navi__string__parent
+              =link_to "マイページ", user_path(current_user.id)
+      .p-navi__content.c-js__menu__fade-in
+        .p-navi__content__parent.p-navi__btn-pulldown
+          .p-navi__link-btn--parent
+            .p-navi__icon-box
               %i.fas.fa-drafting-compass
             %span.p-navi__string__parent データ作成
           .p-navi__icon-box.p-navi__icon-box

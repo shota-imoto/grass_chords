@@ -1,0 +1,10 @@
+.c-form__area
+  =f.text_field :name, placeholder:"name", class:"c-form__textbox c-user__textbox"
+  =f.email_field :email, autofocus: true, autocomplete: "email", placeholder: "email", class:"c-form__textbox c-user__textbox"
+  %a (#{@minimum_password_length} characters minimum)
+  =f.password_field :password, autocomplete: "new-password", placeholder: "password", class:"c-form__textbox c-user__textbox"
+  =f.password_field :password_confirmation, autocomplete: "new-password", placeholder: "password(確認)", class:"c-form__textbox c-user__textbox"
+.c-form__area
+  =f.submit "登録", class:"c-form__btn c-form__btn--login"
+
+

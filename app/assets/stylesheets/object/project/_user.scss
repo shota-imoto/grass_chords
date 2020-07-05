@@ -1,0 +1,32 @@
+.p-user__section-header {
+  display: flex;
+  color: $color-font-white;
+  font-size: 18px;
+}
+
+.p-user__section {
+  background: linear-gradient(
+    180deg,
+    $color-theme-red 0%,
+    $color-theme-red 40px,
+    $color-section-beige 40px,
+    $color-section-beige 100%
+  );
+}
+
+.p-user__section-footer {
+  display: flex;
+  justify-content: space-between;
+}
+
+.p-user__info-list {
+  display: flex;
+}
+
+.p-user__info-item {
+  width: 50px;
+}
+
+.p-user__icon-heart {
+  color: $color-theme-red;
+}

@@ -4,8 +4,7 @@ Rails.application.routes.draw do
   devise_scope :user do
     get "users/test_sign_in", to: "users/sessions#test_create"
   end
-  # テストログイン用のアクションをsessionコントローラに作りたい。そのためにルーティングをしたい
-
+  resources :users, only: :show
   resources :songs do
     collection do
       get :search

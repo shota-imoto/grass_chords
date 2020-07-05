@@ -58,7 +58,7 @@ class SongsController < ApplicationController
     end
   end
 
-  
+
   def global_search
     @songs = Song.all.includes(:chords)
 
@@ -104,7 +104,7 @@ class SongsController < ApplicationController
     def search_song
       params[:keyword].strip!
       keywords = params[:keyword].split(/\s+/)
-  
+
       # 条件検索
       # ifによって条件にチェックされているときのみandで絞り込み
       @songs = @songs.where(jam: params[:jam])  if (params[:jam] == "true")
@@ -113,7 +113,7 @@ class SongsController < ApplicationController
       @songs = @songs.where(vocal: params[:vocal])  if (params[:vocal] == "true")
       @songs = @songs.where(instrumental: params[:instrumental])  if (params[:instrumental] == "true")
       # キーワード検索
-  
+
       keywords.each do |keyword| unless (params[:keyword].nil?)
         @songs = @songs.where("title like ?", "%#{keyword}%")
       end

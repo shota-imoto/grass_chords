@@ -102,7 +102,6 @@ $(function () {
   // m
   $(".c-key-change__btn--modifier").on("touchend, mouseup", function () {
     var key_state = $(".key-display--form").attr("value");
-    console.log(key_state);
     if (key_state.indexOf("m") == -1) {
       $(".c-key-change__present ").append(
         `<span class="c-js__key-change--minor">m</span>`
