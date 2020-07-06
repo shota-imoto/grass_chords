@@ -27,7 +27,6 @@ class ApplicationController < ActionController::Base
     end
 
     def authority_user
-      binding.pry
       if (current_user.id == @user.id) | (current_user.admin == 1)
       else
         redirect_back fallback_location: root_path, notice: 'あなたが作成したデータではありません。'
