@@ -6,6 +6,17 @@
       %a - ユーザ情報の編集 -
     .c-user__form
       =form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f|
-        =render "application/user-form", f: f
+        .c-form__area
+          =f.text_field :name, placeholder:"name", class:"c-form__textbox c-user__textbox"
+          =f.email_field :email, autofocus: true, autocomplete: "email", placeholder: "email", class:"c-form__textbox c-user__textbox"
+          %a (#{@minimum_password_length} characters minimum)
+          =f.password_field :password, autocomplete: "new-password", placeholder: "パスワード", class:"c-form__textbox c-user__textbox"
+          =f.password_field :password_confirmation, autocomplete: "new-password", placeholder: "パスワード(確認用)", class:"c-form__textbox c-user__textbox"
+          =f.password_field :current_password, autocomplete: "current-password", placeholder: "現在のパスワード", class:"c-form__textbox c-user__textbox"
+        .c-form__area
+          =f.submit "登録", class:"c-form__btn c-form__btn--login"
+        %hr
+      .c-form__area
+        = button_to "ユーザ削除する", registration_path(resource_name), data: { confirm: "本当によろしいですか？" }, method: :delete, class:"c-form__btn c-form__btn-blue"
     %figure
       =image_tag "/images/fiddle.png", class: "c-section__image-fiddle"

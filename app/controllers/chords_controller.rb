@@ -29,7 +29,7 @@ class ChordsController < ApplicationController
   def create
     @chord = Chord.new(chord_params)
     if @chord.save
-      redirect_to @chord, notice: 'コード譜を作成しました' 
+      redirect_to @chord, notice: 'コード譜を作成しました'
     else
       render :new
     end
@@ -57,20 +57,6 @@ class ChordsController < ApplicationController
 
     def chord_params
       params.require(:chord).permit(:song_id, :artist_id, :album_id, :version, :key, chordunits_attributes: [:address, :text, :leftbar, :rightbar, :beat, :id]).merge(user_id: current_user.id)
-    end
-
-    def authority_login
-      if user_signed_in?
-      else
-        redirect_to root_path, notice: 'ログイン後、操作してください'
-      end
-    end
-
-    def authority_user
-      if (current_user.id == @chord.user_id) | (current_user.admin == 1)
-      else
-        redirect_back fallback_location: root_path, notice: 'あなたが作成したデータではありません。'
-      end
     end
 
 end
