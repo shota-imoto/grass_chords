@@ -12,8 +12,6 @@ $(function () {
   });
 
   function checked_color(element) {
-    console.log($(element).find(".c-js__value").prop("checked"));
-
     if ($(element).find(".c-js__value").prop("checked") == true) {
       $(element).addClass("u-js__attribute-color");
     } else {

@@ -1,0 +1,67 @@
+.p-user__section {
+  background: linear-gradient(
+    180deg,
+    $color-theme-red 0%,
+    $color-theme-red 45px,
+    $color-section-beige 45px,
+    $color-section-beige 100%
+  );
+}
+
+.p-user__section-header {
+  margin-bottom: 10px;
+  display: flex;
+  color: $color-font-white;
+  font-size: 18px;
+}
+
+.p-user__section-content {
+  margin: 20px 0;
+}
+
+.p-user__section-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+
+  margin-bottom: 10px;
+}
+
+.p-user__icon--user {
+  margin-right: 10px;
+}
+
+.p-user__info-list {
+  height: 28px;
+  display: flex;
+  align-items: flex-end;
+}
+
+.p-user__info-item {
+  width: 50px;
+}
+
+.p-user__info-data {
+  font-size: 18px;
+  &--email {
+    font-size: 12px;
+  }
+}
+
+.p-user__edit a {
+  text-decoration: none;
+  color: $color-accent-blue;
+}
+
+.p-user__song {
+  margin-bottom: 30px;
+}
+
+.p-user__song-menu a {
+  text-decoration: none;
+  color: $color-accent-blue;
+}
+
+.p-user__icon-heart {
+  color: $color-theme-red;
+}

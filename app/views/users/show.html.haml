@@ -1,0 +1,58 @@
+%aside.l-contents__top.l-contents__top--low-volume.l-contents__top--sub
+  %section.l-contents__section.c-window__clear
+    .p-user__title
+      %h2 User Information
+      .p-user__subtitle -ユーザ情報-
+%article.c-user__position-article
+  %section.c-section__sentence-box.p-user__section
+    .p-user__section-header
+      .p-user__icon--user
+        %i.fas.fa-user
+      .p-user__section-title
+        基本情報
+    .p-user__section-content
+      .p-user__info-list
+        .p-user__info-item name:
+        .p-user__info-data
+          = @user.name
+      - if @user.id == current_user.id
+        .p-user__info-list
+          .p-user__info-item email:
+          .p-user__info-data.p-user__info-data--email
+            = @user.email
+    .p-user__section-footer
+      .p-user__review_icon.c-review__btn
+        .c-review__icon
+          %i.fas.fa-heart.p-user__icon-heart
+        .c-review__amount
+          = @user.chords.sum(:likes_count)
+        .c-review__text
+          コード譜の信頼数
+      .p-user__edit
+        =link_to "Edit", edit_user_registration_path(user_id: @user.id)
+  %section.c-section__sentence-box.p-user__section
+    .p-user__section-header
+      .p-user__icon--user
+        %i.fas.fa-lightbulb
+      .p-user__section-title
+        練習曲一覧
+    .p-user__section-content
+      - if @practices.size > 0
+        - @practices.each do |practice|
+          .p-user__song{class: "c-js__practice-list--#{practice.chord.id}"}
+            .p-user__song-title
+              %h2
+                = practice.chord.song.title
+            .p-user__song-menu
+              = link_to "コード譜を見る", chord_path(practice.chord)
+              %a
+                ="|"
+              = link_to "リストから削除する", practice_path(practice, chord_id: practice.chord.id), method: :delete, remote: true
+      -else
+        ="練習曲に登録している楽曲がありません"
+
+
+
+
+
+

@@ -1,7 +1,10 @@
 class SongsController < ApplicationController
   before_action :set_song, only: [:show, :edit, :update, :destroy]
-  before_action :authority_login, except: [:index, :show, :search, :global_search]
+  before_action :owner_user, only: [:edit, :update, :destroy]
+  before_action :authority_login, only: [:edit, :update, :destroy]
   before_action :authority_user, only: [:edit, :update, :destroy]
+
+
 
   def index
     @songs = Song.all
@@ -58,12 +61,13 @@ class SongsController < ApplicationController
     end
   end
 
-  
+
   def global_search
     @songs = Song.all.includes(:chords)
+    @songs = @songs.order("title asc")
 
-    exchange_global_search_params()
-    search_song()
+    exchange_global_params
+    search_song
 
     respond_to do |format|
       format.html{render :search}
@@ -79,6 +83,10 @@ class SongsController < ApplicationController
       @song = Song.find(params[:id])
     end
 
+    def owner_user
+      @user = User.find(@song.user_id)
+    end
+
     def song_params
       params.permit(:title, :jam, :standard, :beginner, :vocal, :instrumental).merge(user_id: current_user.id)
     end
@@ -87,24 +95,10 @@ class SongsController < ApplicationController
       params.require(:song).permit(:title, :jam, :standard, :beginner, :vocal, :instrumental).merge(user_id: current_user.id)
     end
 
-    def authority_login
-      if user_signed_in?
-      else
-        redirect_to root_path, notice: 'ログイン後、操作してください'
-      end
-    end
-
-    def authority_user
-      if (current_user.id == params[:user_id]) | (current_user.admin == 1)
-      else
-        redirect_back fallback_location: root_path, notice: 'あなたが作成したデータではありません。'
-      end
-    end
-
     def search_song
       params[:keyword].strip!
       keywords = params[:keyword].split(/\s+/)
-  
+
       # 条件検索
       # ifによって条件にチェックされているときのみandで絞り込み
       @songs = @songs.where(jam: params[:jam])  if (params[:jam] == "true")
@@ -113,13 +107,13 @@ class SongsController < ApplicationController
       @songs = @songs.where(vocal: params[:vocal])  if (params[:vocal] == "true")
       @songs = @songs.where(instrumental: params[:instrumental])  if (params[:instrumental] == "true")
       # キーワード検索
-  
+
       keywords.each do |keyword| unless (params[:keyword].nil?)
         @songs = @songs.where("title like ?", "%#{keyword}%")
       end
     end
 
-    def exchange_global_search_params
+    def exchange_global_params
       params[:jam] = params[:jam_global]
       params[:standard] = params[:standard_global]
       params[:beginner] = params[:beginner_global]

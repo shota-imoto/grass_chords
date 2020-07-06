@@ -3,6 +3,9 @@
 class Users::RegistrationsController < Devise::RegistrationsController
   # before_action :configure_sign_up_params, only: [:create]
   # before_action :configure_account_update_params, only: [:update]
+  before_action :authority_login, except: [:new, :create, :show, :global_search]
+  before_action :authority_user, only: [:edit, :update, :destroy]
+  before_action :test_user_protection, only: [:update, :destroy]
 
   # GET /resource/sign_up
   # def new
@@ -25,9 +28,11 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # end
 
   # DELETE /resource
-  # def destroy
-  #   super
-  # end
+  def destroy
+    # super
+    @user.destroy
+    redirect_to new_user_registration_path, notice: 'ご利用ありがとうございました。アカウント情報が削除されました'
+  end
 
   # GET /resource/cancel
   # Forces the session data which is usually expired after sign
@@ -38,7 +43,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
   #   super
   # end
 
-  # protected
+  protected
 
   # If you have extra params to permit, append them to the sanitizer.
   # def configure_sign_up_params
@@ -57,6 +62,10 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   def after_update_path_for(resource)
     root_path(resource)
+  end
+
+  def test_user_protection
+    redirect_back fallback_location: root_path, notice: 'テストユーザーは編集できません'
   end
 
   # The path used after sign up for inactive accounts.
