@@ -29,7 +29,43 @@
 
   //background image
   background-image: url("/images/top_sub.jpeg");
-  background-size: 375px 280px;
+  background-size: 480px 320px;
   background-position: 10% 0%;
   filter: sepia(35%);
+}
+
+@media screen and (min-width: 481px) {
+  /* 481px以上に適用されるCSS（タブレット用） */
+  .l-contents__top {
+    height: 300px;
+    background-image: url("/images/top10.jpeg");
+    // background-size: 960px 1280px;
+    // background-image: url("/images/top_sub.jpeg");
+
+    background-size: cover;
+    background-position: 36% 20%;
+  }
+
+  .l-contents__top--sub {
+    height: 300px;
+    background-image: url("/images/top_sub.jpeg");
+    background-size: cover;
+    background-position: 30% 50%;
+  }
+}
+@media screen and (min-width: 721px) {
+  // .l-contents__top {
+  //   background-position: 36% 50%;
+  // }
+}
+
+@media screen and (min-width: 961px) {
+  .l-contents__top {
+    height: 300px;
+    background-size: cover;
+    background-position: 36% 40%;
+  }
+
+  .l-contents__top--sub {
+  }
 }

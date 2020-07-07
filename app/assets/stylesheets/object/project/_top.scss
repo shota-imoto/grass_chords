@@ -10,5 +10,33 @@
   // background image
   background-image: url("/images/top.jpeg");
   background-size: 664px 880px;
-  background-position: 36% 64%;
+  background-position: 20% 64%;
+}
+
+@media screen and (min-width: 481px) {
+  .p-top {
+    background-image: url("/images/top10.jpeg");
+    background-size: cover;
+    background-position: 40% 40%;
+
+    // background-size: 960px 1280px;
+  }
+}
+
+@media screen and (min-width: 961px) {
+  .p-top {
+    // same scss as 480px width
+  }
+  .p-top__section {
+    display: flex;
+    align-items: center;
+  }
+  .heading {
+    text-align: right;
+    width: 100px;
+    margin-right: 30px;
+  }
+  .p-top__how-to-user {
+    display: flex;
+  }
 }

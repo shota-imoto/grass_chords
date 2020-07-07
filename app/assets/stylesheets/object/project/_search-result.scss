@@ -7,12 +7,17 @@
 
   // background image
   background-image: url("/images/top.jpeg");
-  background-size: 726px 947px;
-  background-position: 40% 60%;
+  // background-size: 726px 947px;
+  background-size: cover;
+
+  background-position: 20% 60%;
 }
 
 .p-search-result__article {
-  margin-top: 65px;
+  margin: 65px 0 20px;
+  height: 100vh;
+  position: relative;
+  z-index: 2px;
 }
 
 .p-search-result__section {
@@ -63,4 +68,9 @@
 
 .p-search-result__counter {
   padding: 0 20px;
+}
+@media screen and (min-width: 961px) {
+  .p-search-result__wrapper {
+    background-size: cover;
+  }
 }
