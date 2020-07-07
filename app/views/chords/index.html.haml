@@ -4,7 +4,7 @@
     =form_with  url: search_songs_path, method: :get, local: true do |f|
       =render "/application/search", f: f
 %article
-  %section.c-section__sentence-box.u-color__section-red
+  %section.c-section__sentence-box.p-top__section.u-color__section-red
     %h2.heading Concept
     .sentence
       %p Bluegrassのジャムに参加してみたいけど、
@@ -12,14 +12,13 @@
         %li コードが分からない…
         %li どの曲を練習すればいいの？
       %p というあなたのためのサービスです。
-  %section.c-section__sentence-box
+  %section.c-section__sentence-box.p-top__section
     %h2.heading How to Use
     .sentence
-      %a
+      %p
         まずは気になる曲名を検索
-        %br
-        初心者向け曲をざっと知りたい方は、
-        %br
-        Beginner→検索の順にクリック
+      %p.p-top__how-to-user
+        %p 初心者向け曲をざっと知りたい方は、
+        %p Beginner→検索の順にクリック
     %figure
       =image_tag "/images/guitar.png", class: "c-section__image-guitar"

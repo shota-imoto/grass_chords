@@ -1,50 +1,50 @@
 .p-search-result__wrapper
-  %article.p-search-result__article
-    %section.p-search-result__section.c-window__clear
-      .c-search__title コード譜を探す
-      =form_with  url: search_songs_path, method: :get, local: true do |f|
-        =render "application/search", f: f
-        .p-search-result__sort-btns
-          =f.label :sort, value: :asc, class: "p-search-result__sort-btn" do
-            =f.radio_button :sort, :asc, checked: "checked", class: "c-js__sort u-display__hidden"
-            アルファベット 順
-          =f.label :sort, value: :practice, class: "p-search-result__sort-btn" do
-            =f.radio_button :sort, :practice, checked: ("checked" if params[:sort] == "practice"), class: "c-js__sort u-display__hidden"
-            練習してる人数 順
-        =f.hidden_field :song_practices
+%article.p-search-result__article
+  %section.p-search-result__section.c-window__clear
+    .c-search__title コード譜を探す
+    =form_with  url: search_songs_path, method: :get, local: true do |f|
+      =render "application/search", f: f
+      .p-search-result__sort-btns
+        =f.label :sort, value: :asc, class: "p-search-result__sort-btn" do
+          =f.radio_button :sort, :asc, checked: "checked", class: "c-js__sort u-display__hidden"
+          アルファベット 順
+        =f.label :sort, value: :practice, class: "p-search-result__sort-btn" do
+          =f.radio_button :sort, :practice, checked: ("checked" if params[:sort] == "practice"), class: "c-js__sort u-display__hidden"
+          練習してる人数 順
+      =f.hidden_field :song_practices
 
-      %hr{color: "black", size: "1px"}
-      .p-search-result__results
-        - @songs.each do |song|
-          =link_to song_path(song) do
-            .p-search-result__result
-              .p-search__song-title
-                %h2
-                  =song.title
-              .c-icon__attributes
-                .c-icon__attribute
-                  .c-icon__inner--jam.c-js__attribute-state{value: "#{song.jam}"}
-                    .c-form__icon-blank
-                      %svg{class: "u-position__icon-docked--bottle", width: "19px", height: "22px"}
-                        =render "/svg/bottle"
-                      %svg{class: "u-position__icon-docked--strawberry", width: "10px", height: "10px"}
-                        =render "/svg/strawberry"
-                .c-icon__attribute
-                  %i.fas.fa-users.c-icon__inner--standard.c-js__attribute-state{value: "#{song.standard}"}
-                .c-icon__attribute
-                  %svg{class: "c-icon__inner--beginner c-js__attribute-state", width: "19px", height: "19px", value: "#{song.beginner}"}
-                    =render "/svg/beginner"
-                .c-icon__attribute
-                  %i.fas.fa-microphone-alt.c-icon__inner--vocal.c-js__attribute-state{value: "#{song.vocal}"}
-                .c-icon__attribute
-                  %i.fas.fa-guitar.c-icon__inner--instrumental.c-js__attribute-state{value: "#{song.instrumental}"}
-              .c-review__btn
-                .c-review__icon
-                  %i.fas.fa-lightbulb.c-review__icon-practice
-                .c-review__amount
-                  =song.practice_songs_count
-                .c-review__text
-                  練習してる人の数
-      .p-search-result__counter.c-js__result-counter
-        =@songs.length.to_s + " results.."
+    %hr{color: "black", size: "1px"}
+    .p-search-result__results
+      - @songs.each do |song|
+        =link_to song_path(song) do
+          .p-search-result__result
+            .p-search__song-title
+              %h2
+                =song.title
+            .c-icon__attributes
+              .c-icon__attribute
+                .c-icon__inner--jam.c-js__attribute-state{value: "#{song.jam}"}
+                  .c-form__icon-blank
+                    %svg{class: "u-position__icon-docked--bottle", width: "19px", height: "22px"}
+                      =render "/svg/bottle"
+                    %svg{class: "u-position__icon-docked--strawberry", width: "10px", height: "10px"}
+                      =render "/svg/strawberry"
+              .c-icon__attribute
+                %i.fas.fa-users.c-icon__inner--standard.c-js__attribute-state{value: "#{song.standard}"}
+              .c-icon__attribute
+                %svg{class: "c-icon__inner--beginner c-js__attribute-state", width: "19px", height: "19px", value: "#{song.beginner}"}
+                  =render "/svg/beginner"
+              .c-icon__attribute
+                %i.fas.fa-microphone-alt.c-icon__inner--vocal.c-js__attribute-state{value: "#{song.vocal}"}
+              .c-icon__attribute
+                %i.fas.fa-guitar.c-icon__inner--instrumental.c-js__attribute-state{value: "#{song.instrumental}"}
+            .c-review__btn
+              .c-review__icon
+                %i.fas.fa-lightbulb.c-review__icon-practice
+              .c-review__amount
+                =song.practice_songs_count
+              .c-review__text
+                練習してる人の数
+    .p-search-result__counter.c-js__result-counter
+      =@songs.length.to_s + " results.."
 

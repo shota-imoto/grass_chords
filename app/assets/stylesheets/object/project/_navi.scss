@@ -11,18 +11,22 @@
 
   // background image
   background-image: url("/images/menu.jpeg");
-  background-size: 1218px 812px;
+  background-size: cover;
   background-position: 38% 64%;
 
   z-index: 30;
 }
 
 .p-navi__menu {
-  width: 50%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
   color: $color-font-white;
   z-index: 70;
 }
 .p-navi__content {
+  width: 50%;
   margin: 7px 0;
 }
 
@@ -65,4 +69,24 @@
 
 .p-navi__menu-pulldown {
   display: none;
+}
+
+@media screen and (min-width: 481px) {
+  .p-navi__content {
+    max-width: 240px;
+  }
+}
+
+@media screen and (min-width: 961px) {
+  .p-navi__menu {
+    height: 60px;
+    flex-direction: row;
+    justify-content: center;
+    align-items: flex-start;
+  }
+  .p-navi__content {
+    width: 20%;
+    margin: 20px;
+    max-width: 210px;
+  }
 }

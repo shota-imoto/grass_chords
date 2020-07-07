@@ -44,6 +44,7 @@
 .c-chordunit__note {
   width: 60%;
   display: flex;
+  position: relative;
 }
 
 .c-chordunit__note-name {
@@ -73,14 +74,14 @@
 
   &--large {
     position: absolute;
-    left: 58%;
+    left: 30px;
     bottom: 2px;
     font-size: 18px;
   }
   &--small {
     position: absolute;
-    left: 60%;
-    bottom: 14px;
+    left: 15px;
+    bottom: 2px;
     font-size: 9px;
   }
 }
@@ -92,5 +93,16 @@
 
   &--large {
     font-size: 36px;
+  }
+  &--small {
+    font-size: 18px;
+  }
+}
+
+@media screen and (min-width: 481px) {
+  .c-chordunit__modifier {
+    &--large {
+      left: 30px;
+    }
   }
 }

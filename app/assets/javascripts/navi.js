@@ -1,6 +1,21 @@
 $(function () {
   // open global search window
   $(".l-header__search-btn").on("touchend, mouseup", function () {
+    if ($(".c-js__menu__fade-in").css("display") == "block") {
+      $(".c-js__navi__fade-in").fadeOut();
+      $(".c-js__menu__fade-in").fadeOut();
+      $(".c-js__menu__fade-in").animate(
+        {
+          marginBottom: "-=10px",
+        },
+        {
+          duration: 500,
+          queue: false,
+        }
+      );
+      $(".l-header__opn-box").removeClass("c-js__menu-opn");
+      $(".l-header__opn-box").addClass("c-js__menu-cls");
+    }
     $(".c-js__search__fade-in").fadeToggle(100);
   });
 
@@ -12,6 +27,10 @@ $(function () {
 
   // open accordion menu
   $(".l-header__opn-box").on("touchend, mouseup", function () {
+    if ($(".c-js__search__fade-in").css("display") == "block") {
+      $(".c-js__search__fade-in").fadeOut(100);
+    }
+
     if ($(".c-js__navi__fade-in").css("display") == "none") {
       $(".c-js__navi__fade-in").fadeToggle("fast");
       $(".c-js__menu__fade-in").eq(0).fadeToggle(1000).animate(

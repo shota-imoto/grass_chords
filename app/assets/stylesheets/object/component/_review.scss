@@ -1,5 +1,5 @@
 .c-review {
-  width: 100;
+  width: 100%;
   display: flex;
   justify-content: space-between;
 }
@@ -35,4 +35,14 @@
 
 .c-review__link {
   text-decoration: none;
+}
+@media screen and (min-width: 481px) {
+  .c-review__link {
+    width: 40%;
+    font-size: 14px;
+  }
+  .c-review__btn {
+    width: 100%;
+    max-width: 260px;
+  }
 }
