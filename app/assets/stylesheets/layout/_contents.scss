@@ -34,6 +34,11 @@
   filter: sepia(35%);
 }
 
+.l-contents__global-search {
+  display: flex;
+  justify-content: center;
+}
+
 @media screen and (min-width: 481px) {
   /* 481px以上に適用されるCSS（タブレット用） */
   .l-contents__top {
