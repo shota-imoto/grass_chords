@@ -65,7 +65,9 @@ class Users::RegistrationsController < Devise::RegistrationsController
   end
 
   def test_user_protection
-    redirect_back fallback_location: root_path, notice: 'テストユーザーは編集できません'
+    if User.test_user_find.id == current_user.id || current_user.admin.present?
+      redirect_back fallback_location: root_path, notice: 'テストユーザーは編集できません'
+    end
   end
 
   # The path used after sign up for inactive accounts.

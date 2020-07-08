@@ -4,8 +4,6 @@ class SongsController < ApplicationController
   before_action :authority_login, only: [:edit, :update, :destroy]
   before_action :authority_user, only: [:edit, :update, :destroy]
 
-
-
   def index
     @songs = Song.all
   end

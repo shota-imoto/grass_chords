@@ -34,11 +34,12 @@
 .p-user__info-list {
   height: 28px;
   display: flex;
-  align-items: flex-end;
+  align-items: center;
+  margin-bottom: 5px;
 }
 
 .p-user__info-item {
-  width: 50px;
+  width: 80px;
 }
 
 .p-user__info-data {
