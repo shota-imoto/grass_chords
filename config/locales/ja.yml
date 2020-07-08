@@ -6,6 +6,22 @@ ja:
         restrict_dependent_destroy:
           has_one: "%{record}が存在しているので削除できません"
           has_many: "%{record}が存在しているので削除できません"
+    attributes:
+      chord:
+        version: "バージョン名"
+      chordunit:
+        address: "アドレスデータ"
+        text: "テキストデータ(エディターの編集ウィンドウに表示される文字列)"
+        beat: "拍子記号"
+        leftbar: "終始線(左)"
+        rightbar: "終始線(右)"
+      song:
+        title: "タイトル"
+      user:
+        name: 名前
+        email: そのメールアドレス
+        password: パスワード
+        password_confirmation: 確認用のパスワード
   date:
     abbr_day_names:
       - 日

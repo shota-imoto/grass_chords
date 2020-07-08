@@ -22,7 +22,11 @@
           %span
           %span
           %span
-    %p.l-header__notice= notice
+
+    %p.l-header__notice= flash[:error]
+    %p.l-header__notice= flash[:alert]
+    %p.l-header__notice= flash[:notice]
+
     .l-contents
       %main.l-main
         =yield

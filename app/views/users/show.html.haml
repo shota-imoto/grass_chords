@@ -12,14 +12,18 @@
         基本情報
     .p-user__section-content
       .p-user__info-list
-        .p-user__info-item name:
+        .p-user__info-item 名前:
         .p-user__info-data
           = @user.name
       - if @user.id == current_user.id
         .p-user__info-list
-          .p-user__info-item email:
+          .p-user__info-item メール:
           .p-user__info-data.p-user__info-data--email
             = @user.email
+      .p-user__info-list
+        .p-user__info-item 活動拠点:
+        .p-user__info-data
+          = @user.place
     .p-user__section-footer
       .p-user__review_icon.c-review__btn
         .c-review__icon

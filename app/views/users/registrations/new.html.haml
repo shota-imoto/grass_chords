@@ -1,3 +1,6 @@
+- @user.errors.full_messages.each do |msg|
+  %p.l-header__notice
+    =msg
 %aside.l-contents__top.l-contents__top--low-volume.l-contents__top--sub
 %article.c-user__position-article
   %section.c-section__sentence-box
@@ -7,11 +10,13 @@
     .c-user__form
       =form_for(resource, as: resource_name, url: registration_path(resource_name))  do |f|
         .c-form__area
-          =f.text_field :name, placeholder:"name", class:"c-form__textbox c-user__textbox"
-          =f.email_field :email, autofocus: true, autocomplete: "email", placeholder: "email", class:"c-form__textbox c-user__textbox"
+          =f.text_field :name, placeholder:"名前", class:"c-form__textbox c-user__textbox"
+          =f.text_field :place, placeholder: "主な活動地域", class:"c-form__textbox c-user__textbox"
+
+          =f.email_field :email, autofocus: true, autocomplete: "email", placeholder: "メール", class:"c-form__textbox c-user__textbox"
           %a (#{@minimum_password_length} characters minimum)
-          =f.password_field :password, autocomplete: "new-password", placeholder: "password", class:"c-form__textbox c-user__textbox"
-          =f.password_field :password_confirmation, autocomplete: "new-password", placeholder: "password(確認)", class:"c-form__textbox c-user__textbox"
+          =f.password_field :password, autocomplete: "new-password", placeholder: "パスワード", class:"c-form__textbox c-user__textbox"
+          =f.password_field :password_confirmation, autocomplete: "new-password", placeholder: "パスワード(確認)", class:"c-form__textbox c-user__textbox"
         .c-form__area
           =f.submit "登録", class:"c-form__btn c-form__btn--login"
     %figure

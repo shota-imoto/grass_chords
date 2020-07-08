@@ -7,7 +7,7 @@
     .c-song-new__form
       =form_with url: song_path, model: @song, method: :patch, local: true do |f|
         .c-form__area
-          =f.text_field :title, placeholder:"tittle", class:"c-form__textbox"
+          =f.text_field :title, placeholder:"タイトル", class:"c-form__textbox"
         .c-form__area
           =render "/application/song-attributes", f: f, collection: @song
         .c-form__area

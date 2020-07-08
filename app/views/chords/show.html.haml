@@ -4,7 +4,7 @@
       %h2
         =@chord.song.title
       .p-chord__key
-        = "key of "+@chord.key 
+        = "key of "+@chord.key
     .p-chord__review
       =render "/application/review", chord: @chord
     .p-chord__info
@@ -26,7 +26,7 @@
               %a{class: "font_base-key c-font__base"}
                 = @chord.key[1]
             - else
-              = "key of " + @chord.key 
+              = "key of " + @chord.key
         =render "/application/key-change"
       .c-key-change__guide << key change!!
       .c-key-change__close-layer
@@ -39,6 +39,6 @@
       =link_to "Edit", edit_chord_path
       %a
         |
-      =link_to "Delete", chord_path, method: :delete
+      =link_to "Delete", chord_path, method: :delete, data: { confirm: "本当によろしいですか？" }
   .p-chord__return
     =link_to "コード譜一覧に戻る", song_path(@chord.song)
