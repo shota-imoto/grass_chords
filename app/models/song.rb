@@ -1,6 +1,6 @@
 class Song < ApplicationRecord
-
-  validates :title, presence: true, uniqueness: {case_sensitive: false}
+  validates :title, uniqueness: {case_sensitive: false, message: "%{value}は既に登録されています"}
+  validates :title, presence: {message: "タイトルを入力してください"}
 
   has_many :chords, dependent: :destroy
   has_many :scores, dependent: :destroy

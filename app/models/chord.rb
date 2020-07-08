@@ -1,5 +1,4 @@
 class Chord < ApplicationRecord
-
   belongs_to :song
   belongs_to :user
   has_many :chordunits, dependent: :destroy
