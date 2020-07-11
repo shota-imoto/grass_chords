@@ -1,6 +1,6 @@
 class Chord < ApplicationRecord
   validates :version, length: {maximum: 50, message: "は50文字以内で設定してください"}
-  validates :key, length: {in: 1..3, message: "は20文字以内で設定してください：システムエラー：管理者に連絡してください"}
+  validates :key, length: {maximum: 3, message: "は3文字以内で設定してください：システムエラー：管理者に連絡してください"}
   validates_associated :chordunits
 
   belongs_to :song

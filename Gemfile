@@ -46,6 +46,7 @@ group :development, :test do
   gem 'hirb'
   gem 'hirb-unicode'
   gem 'rspec-rails', '~>3.6.0'
+  gem 'factory_bot_rails'
 end
 
 group :development do
