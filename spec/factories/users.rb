@@ -19,5 +19,13 @@ FactoryBot.define do
       email {"Roanoke@bluegrass.com"}
       password {"imfather"}
     end
+
+    trait :with_likes do
+      after(:create) {|user| create_list(:like, 10, user: user)}
+    end
+
+    trait :with_practices do
+      after(:create) {|user| create_list(:practice, 10, user: user)}
+    end
   end
 end

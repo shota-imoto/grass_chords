@@ -18,7 +18,6 @@ FactoryBot.define do
       vocal {true}
       instrumental {false}
       practice_songs_count {10}
-      association :user
     end
 
     trait :with_chords do
