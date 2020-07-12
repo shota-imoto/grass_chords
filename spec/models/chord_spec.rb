@@ -47,7 +47,7 @@ RSpec.describe Chord, type: :model do
     end
   end
 
-  describe "chordレコード削除時に子レコードの一括削削除" do
+  describe "chordレコード削除時に子レコードの一括削除" do
     let(:chord) {FactoryBot.create(:chord, :with_chordunits, :with_likes, :with_practices)}
     let(:chord2) {FactoryBot.create(:chord2, :with_chordunits, :with_likes, :with_practices)}
     subject{->{chord.destroy}}
