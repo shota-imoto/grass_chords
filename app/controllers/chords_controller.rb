@@ -4,7 +4,6 @@ class ChordsController < ApplicationController
   before_action :authority_user, only: [:edit, :update, :destroy]
 
   def index
-    @chords = Chord.all.includes(:song, :user).order(id: "DESC").limit(5)
   end
 
   def show
@@ -14,7 +13,6 @@ class ChordsController < ApplicationController
 
   def new
     @chord = Chord.new
-
     @chordunits = []
     48.times do |i|
       @chordunit = @chord.chordunits.build(address: i)
@@ -23,7 +21,6 @@ class ChordsController < ApplicationController
   end
 
   def edit
-    @chord = Chord.find(params[:id])
   end
 
   def create
@@ -47,7 +44,6 @@ class ChordsController < ApplicationController
   def destroy
     @chord.destroy
     redirect_to song_path(@chord.song_id), notice: 'コード譜を削除しました'
-
   end
 
   private
