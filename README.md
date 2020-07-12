@@ -3,7 +3,6 @@
 "Bluegrass"という音楽の「初心者向けジャムセッション支援アプリ」 です。
 
 ジャムセッションとは、「みんなが知っている定番曲」をその場にいる人で即興で演奏することです。
-![jamsession](https://user-images.githubusercontent.com/62494531/87237476-b0fc7c80-c431-11ea-801e-322d550cc0f3.jpg)
 
 このサービスでは
 
@@ -45,6 +44,7 @@
 - フロントエンド(javascript, jQuery, HTML/CSS, HAML, SASS)
 - バックエンド(Ruby on Rails)
 - インフラ(MySQL, nginx, unicorn)
+- テスト(RSpec, FactoryBot)
 - AWS EC2(Web サーバ 1 台, DB サーバ 1 台)
 
 # このアプリで解決したい課題
@@ -78,6 +78,8 @@
 - 練習しているユーザの表示機能
 - youtube、Spotify などの参考リンク登録機能
 - 流行り曲の集計表示機能
+
+![jamsession](https://user-images.githubusercontent.com/62494531/87237476-b0fc7c80-c431-11ea-801e-322d550cc0f3.jpg)
 
 # table_setting
 
