@@ -8,4 +8,6 @@ class Chord < ApplicationRecord
   accepts_nested_attributes_for :chordunits
   has_many :likes, dependent: :destroy
   has_many :practices, dependent: :destroy
+
+
 end

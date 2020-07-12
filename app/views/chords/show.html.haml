@@ -4,7 +4,7 @@
       %h2
         =@chord.song.title
       .p-chord__key
-        = "key of "+@chord.key
+        = "key of "+ @chord.key
     .p-chord__review
       =render "/application/review", chord: @chord
     .p-chord__info
@@ -22,11 +22,11 @@
           .key-display--form.c-key-change__form.u-display__hidden{value: "#{@chord.key}"}
           .c-key-change__present
             - if ["B","b"].include?(@chord.key[1])
-              = "key of "+ @chord.key[0]
+              = key_of(@chord.key[0])
               %a{class: "font_base-key c-font__base"}
                 = @chord.key[1]
             - else
-              = "key of " + @chord.key
+              = key_of(@chord.key)
         =render "/application/key-change"
       .c-key-change__guide << key change!!
       .c-key-change__close-layer

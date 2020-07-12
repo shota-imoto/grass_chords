@@ -4,10 +4,8 @@
     .c-form__icon-blank
     .c-form__inner--icon-jam
       %p.c-form__icon-blank
-        %svg{class: "u-position__icon-docked--bottle", width: "19px", height: "22px"}
-          =render "/svg/bottle"
-        %svg{class: "u-position__icon-docked--strawberry", width: "10px", height: "10px"}
-          =render "/svg/strawberry"
+        %svg{class: "u-position__icon-docked--bottle", width: "19px", height: "22px"}= render "/svg/bottle"
+        %svg{class: "u-position__icon-docked--strawberry", width: "10px", height: "10px"}= render "/svg/strawberry"
     %a.c-search__attribute-text Jam
   =f.label :standard, class: "c-form__attribute c-form__box--icon_standard c-js__search-standard c-js__attribute-btn" do
     =f.check_box :standard, {checked: ("checked" if params[:standard] == "true"), class: "c-js__value c-js__value-standard u-display__hidden"}, "true", "false"
@@ -18,8 +16,7 @@
     =f.check_box :beginner, {checked: ("checked" if params[:beginner] == "true"), class:"c-js__value c-js__value-beginner u-display__hidden"}, "true", "false"
     .c-form__icon-blank
     .c-form__inner--icon-beginner
-      %svg{width: "19px", height: "19px"}
-        =render "/svg/beginner"
+      %svg{width: "19px", height: "19px"}= render "/svg/beginner"
     %a.c-search__attribute-text Beginner
   =f.label :vocal, class: "c-form__attribute c-form__box--icon_vocal c-js__search-vocal c-js__attribute-btn" do
     =f.check_box :vocal, {checked: ("checked" if params[:vocal] == "true"), class: "c-js__value c-js__value-vocal u-display__hidden"}, "true", "false"
@@ -31,4 +28,3 @@
     .c-form__icon-blank
     %i.fas.fa-guitar.c-form__inner--icon-instrumental
     %a.c-search__attribute-text Instrumental
-    

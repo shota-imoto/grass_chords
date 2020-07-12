@@ -10,7 +10,7 @@
           =f.text_field :name, placeholder:"名前", class:"c-form__textbox c-user__textbox"
           =f.text_field :place, placeholder: "主な活動地域", class:"c-form__textbox c-user__textbox"
           =f.email_field :email, autofocus: true, autocomplete: "email", placeholder: "メール", class:"c-form__textbox c-user__textbox"
-          %a (#{@minimum_password_length} characters minimum)
+          %a 6文字以上
           =f.password_field :password, autocomplete: "new-password", placeholder: "パスワード", class:"c-form__textbox c-user__textbox"
           =f.password_field :password_confirmation, autocomplete: "new-password", placeholder: "パスワード(確認)", class:"c-form__textbox c-user__textbox"
           =f.password_field :current_password, autocomplete: "current-password", placeholder: "現在のパスワード", class:"c-form__textbox c-user__textbox"

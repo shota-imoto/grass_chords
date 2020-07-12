@@ -11,7 +11,7 @@
       .p-chord-new__song
         .c-song-candidate__wrapper
 
-          .c-song-candidate__lists.c-window__clear-black.u-display__hidden           
+          .c-song-candidate__lists.c-window__clear-black.u-display__hidden
 
       .content__search-result
       .p-chord-new__version.c-form__search-box
@@ -26,11 +26,11 @@
             = f.text_field :key, id: "key_name", class: "key-display--form c-key-change__form u-display__hidden", value: "#{@chord.key}"
             .c-key-change__present
               - if ["B","b"].include?(@chord.key[1])
-                = "key of "+ @chord.key[0]
+                = key_of(@chord.key[0])
                 %a{class: "font_base-key c-font__base"}
                   = @chord.key[1]
               - else
-                = "key of " + @chord.key 
+                = key_of(@chord.key)
           =render "/application/key-change"
         .c-key-change__guide << key change!!
         .c-key-change__close-layer

@@ -5,7 +5,6 @@ class SongsController < ApplicationController
   before_action :authority_user, only: [:edit, :update, :destroy]
 
   def index
-    @songs = Song.all
   end
 
   def show
@@ -51,7 +50,7 @@ class SongsController < ApplicationController
       @songs = @songs.order("title asc")
     end
 
-    search_song()
+    search_song
 
     respond_to do |format|
       format.html
@@ -105,7 +104,6 @@ class SongsController < ApplicationController
       @songs = @songs.where(vocal: params[:vocal])  if (params[:vocal] == "true")
       @songs = @songs.where(instrumental: params[:instrumental])  if (params[:instrumental] == "true")
       # キーワード検索
-
       keywords.each do |keyword| unless (params[:keyword].nil?)
         @songs = @songs.where("title like ?", "%#{keyword}%")
       end
