@@ -1,7 +1,5 @@
 class PracticesController < ApplicationController
   before_action :authority_login
-  before_action :authority_user
-
   def create
     PracticeSong.create(practice_song_params) unless PracticeSong.where(practice_song_params).exists?
     @practice = Practice.new(practice_params)
@@ -33,5 +31,4 @@ class PracticesController < ApplicationController
     def practice_destroy_params
       params.permit(:chord_id).merge(user_id: current_user.id)
     end
-
 end

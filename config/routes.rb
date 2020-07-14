@@ -5,7 +5,7 @@ Rails.application.routes.draw do
     get "users/test_sign_in", to: "users/sessions#test_create"
   end
   resources :users, only: :show
-  resources :songs do
+  resources :songs, except: :index do
     collection do
       get :search
       get :global_search

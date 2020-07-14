@@ -27,5 +27,6 @@ FactoryBot.define do
     trait :with_practices do
       after(:create) {|user| create_list(:practice, 10, user: user)}
     end
+
   end
 end
