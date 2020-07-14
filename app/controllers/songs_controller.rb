@@ -1,14 +1,10 @@
 class SongsController < ApplicationController
   before_action :set_song, only: [:show, :edit, :update, :destroy]
-  before_action :owner_user, only: [:edit, :update, :destroy]
-  before_action :authority_login, only: [:edit, :update, :destroy]
+  before_action :set_owner, only: [:edit, :update, :destroy]
+  before_action :authority_login, except: [:index, :show]
   before_action :authority_user, only: [:edit, :update, :destroy]
 
   def index
-  end
-
-  def show
-    @chords = @song.chords.order("likes_count desc")
   end
 
   def new
@@ -29,7 +25,7 @@ class SongsController < ApplicationController
   end
 
   def update
-    if @song.update(update_song_params)
+    if @song.update(song_params)
       redirect_to @song, notice: '楽曲を更新しました'
     else
       render :edit
@@ -39,6 +35,10 @@ class SongsController < ApplicationController
   def destroy
     @song.destroy
     redirect_to root_path, notice: '楽曲を削除しました'
+  end
+
+  def show
+    @chords = @song.chords.order("likes_count desc")
   end
 
   def search
@@ -80,15 +80,11 @@ class SongsController < ApplicationController
       @song = Song.find(params[:id])
     end
 
-    def owner_user
-      @user = User.find(@song.user_id)
+    def set_owner
+      @owner = User.find(@song.user_id)
     end
 
     def song_params
-      params.permit(:title, :jam, :standard, :beginner, :vocal, :instrumental).merge(user_id: current_user.id)
-    end
-
-    def update_song_params
       params.require(:song).permit(:title, :jam, :standard, :beginner, :vocal, :instrumental).merge(user_id: current_user.id)
     end
 

@@ -1,5 +1,6 @@
 class ChordsController < ApplicationController
   before_action :set_chord, only: [:show, :edit, :update, :destroy]
+  before_action :set_owner, only: [:edit, :update, :destroy]
   before_action :authority_login, except: [:index, :show]
   before_action :authority_user, only: [:edit, :update, :destroy]
 
@@ -53,6 +54,10 @@ class ChordsController < ApplicationController
 
     def chord_params
       params.require(:chord).permit(:song_id, :artist_id, :album_id, :version, :key, chordunits_attributes: [:address, :text, :leftbar, :rightbar, :beat, :id]).merge(user_id: current_user.id)
+    end
+
+    def set_owner
+      @owner = User.find(@chord.user_id)
     end
 
 end

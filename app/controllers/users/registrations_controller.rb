@@ -3,8 +3,9 @@
 class Users::RegistrationsController < Devise::RegistrationsController
   # before_action :configure_sign_up_params, only: [:create]
   # before_action :configure_account_update_params, only: [:update]
-  before_action :authority_login, except: [:new, :create, :show, :global_search]
-  before_action :authority_user, only: [:edit, :update, :destroy]
+  # before_action :set_owner, only: [:edit, :update, :destroy]
+  before_action :authority_login, only:[:edit, :update, :destroy]
+  # before_action :authority_user, only: [:edit, :update, :destroy]
   before_action :test_user_protection, only: [:update, :destroy]
 
   # GET /resource/sign_up
@@ -13,9 +14,9 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # end
 
   # POST /resource
-  # def create
-  #   super
-  # end
+  def create
+    super
+  end
 
   # GET /resource/edit
   # def edit
@@ -23,9 +24,9 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # end
 
   # PUT /resource
-  # def update
-  #   super
-  # end
+  def update
+    super
+  end
 
   # DELETE /resource
   def destroy

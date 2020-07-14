@@ -20,10 +20,11 @@ class Users::SessionsController < Devise::SessionsController
   # end
 
   def test_create
+    sign_in @user
     if current_user
       redirect_to root_path, notice: "お試しログインに成功しました"
     else
-      redirect_back fallback_location: :new, notice: "お試しログインに失敗しました"
+      redirect_back fallback_location: :new, notice: "お試しログインに失敗しました：システムエラー：管理者に連絡してください"
     end
   end
 
@@ -31,7 +32,6 @@ class Users::SessionsController < Devise::SessionsController
 
   def test_user_call
     @user = User.test_user_find
-    sign_in @user
   end
   # If you have extra params to permit, append them to the sanitizer.
   # def configure_sign_in_params

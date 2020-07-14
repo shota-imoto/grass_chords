@@ -17,6 +17,8 @@ class ApplicationController < ActionController::Base
 
     def configure_permitted_parameters
       devise_parameter_sanitizer.permit(:sign_up, keys: [:name, :place])
+      devise_parameter_sanitizer.permit(:account_update, keys: [:name, :place])
+
     end
 
     def authority_login
@@ -27,7 +29,7 @@ class ApplicationController < ActionController::Base
     end
 
     def authority_user
-      if current_user.id == @user.id || current_user.admin.present?
+      if current_user.id == @owner.id || current_user.admin.present?
       else
         redirect_back fallback_location: root_path, notice: 'あなたが作成したデータではありません。'
       end

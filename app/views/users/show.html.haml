@@ -31,7 +31,8 @@
           = @user.chords.sum(:likes_count)
         .c-review__text コード譜の信頼数
       .p-user__edit
-        =link_to "Edit", edit_user_registration_path(user_id: @user.id)
+        - if current_user.id == @user.id
+          =link_to "Edit", edit_user_registration_path
   %section.c-section__sentence-box.p-user__section
     .p-user__section-header
       .p-user__icon--user
@@ -45,8 +46,9 @@
               %h2= practice.chord.song.title
             .p-user__song-menu
               = link_to "コード譜を見る", chord_path(practice.chord)
-              %a= "|"
-              = link_to "リストから削除する", practice_path(practice, chord_id: practice.chord.id), method: :delete, remote: true
+              - if current_user.id == @user.id
+                %a= "|"
+                = link_to "リストから削除する", practice_path(practice, chord_id: practice.chord.id), method: :delete, remote: true
       -else
         ="練習曲に登録している楽曲がありません"
 
