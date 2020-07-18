@@ -1,7 +1,7 @@
 require 'rails_helper'
 
-RSpec.feature "Chords", type: :feature, js: true do
-  scenario "コード譜の作成" do
+RSpec.feature "Chords", type: :feature do
+  scenario "コード譜の作成", js: true do
     user = FactoryBot.create(:user)
     song = FactoryBot.create(:song, title: "Blue Ridge Cabin Home")
     other_song = FactoryBot.create(:song, title: "Blue Moon of Kentucky")
@@ -14,137 +14,289 @@ RSpec.feature "Chords", type: :feature, js: true do
     fill_in "パスワード", with: user.password
     click_button "ログイン"
 
+    expect{
+      find(".l-header__opn-box").click
+      all(".p-navi__content")[1].click
+      click_link "コード譜"
+      fill_in "曲名", with: "Blue"
+      all(".c-song-candidate__list")[1].click
+      fill_in "コード譜の名前", with: "standard"
 
+      find(".c-key-change__present").click
+      all(".c-key-change__btn")[9].click
+
+      expect(find(".c-key-change__present")).to have_content "key of F"
+      expect(find(".c-key-change__present").find(".font_base-key")).to have_content "B"
+
+      all(".c-key-change__btn")[6].click
+      all(".c-key-change__btn")[8].click
+      all(".c-key-change__btn")[8].click
+      all(".c-key-change__btn")[7].click
+
+      expect(find(".c-key-change__present")).to have_content "key of G"
+      expect(find(".c-key-change__present").find(".c-js__key-change--minor")).to have_content "m"
+
+      find(".c-layer__skeleton").click
+
+
+      all(".c-chordunit")[0].click
+
+      find(".p-chord-new__editor-btn").click
+      all(".c-chord-edit__btn")[15].click
+      all(".c-chord-edit__btn")[1].click
+      all(".c-chord-edit__btn")[8].click
+      all(".c-chord-edit__btn")[9].click
+      all(".c-chord-edit__btn")[10].click
+      all(".c-chord-edit__btn")[2].click
+      all(".c-chord-edit__btn")[11].click
+      all(".c-chord-edit__btn")[12].click
+
+      expect(all(".c-chordunit__beat")[0]).to have_content "@"
+      expect(all(".c-chordunit__note-name")[0]).to have_content "A"
+      expect(all(".c-chordunit__half-note")[0]).to have_content "b"
+      expect(all(".c-chordunit__modifier")[0]).to have_content "m7"
+      expect(all(".c-chordunit__leftbar")[0]).to have_content "{"
+      expect(all(".c-chordunit__rightbar")[0]).to have_content "}"
+
+      expect(find(".c-chord-edit__text-window")).to have_content "Abm7B"
+
+      find(".c-chord-edit__close").click
+      all(".c-chordunit")[47].click
+      find(".p-chord-new__editor-btn").click
+
+      all(".c-chord-edit__btn")[3].click
+      all(".c-chord-edit__btn")[7].click
+      all(".c-chord-edit__btn")[7].click
+      all(".c-chord-edit__btn")[9].click
+      all(".c-chord-edit__btn")[12].click
+      all(".c-chord-edit__btn")[12].click
+      all(".c-chord-edit__btn")[16].click
+      all(".c-chord-edit__btn")[17].click
+      all(".c-chord-edit__btn")[4].click
+      all(".c-chord-edit__btn")[19].click
+
+      expect(find(".c-chord-edit__text-window")).to have_content "Cssm"
+
+      find(".c-chord-edit__close").click
+      # expect(all(".c-chordunit__beat")[47]).to have_content "#"
+      expect(all(".c-chordunit__note-name")[47]).to have_content "C"
+      expect(all(".c-chordunit__half-note")[47]).to have_content "B"
+      expect(all(".c-chordunit__modifier")[47]).to have_content ""
+      expect(all(".c-chordunit__rightbar")[47]).to have_content ""
+
+      click_button "登録"
+
+      expect(page).to have_content "コード譜を作成しました"
+      expect(page).to have_content "Blue Ridge Cabin Home"
+      expect(page).to have_content "standard version"
+
+
+      expect(find(".c-key-change__present")).to have_content "key of Gm"
+
+      expect(all(".c-chordunit__beat")[0]).to have_content "@"
+      expect(all(".c-chordunit__note-name")[0]).to have_content "A"
+      expect(all(".c-chordunit__half-note")[0]).to have_content "b"
+      expect(all(".c-chordunit__modifier")[0]).to have_content "m7"
+      expect(all(".c-chordunit__leftbar")[0]).to have_content "{"
+      expect(all(".c-chordunit__rightbar")[0]).to have_content "}"
+
+      # expect(all(".c-chordunit__beat")[47]).to have_content "#"
+      expect(all(".c-chordunit__note-name")[47]).to have_content "C"
+      expect(all(".c-chordunit__half-note")[47]).to have_content "B"
+      expect(all(".c-chordunit__modifier")[47]).to have_content ""
+      expect(all(".c-chordunit__rightbar")[47]).to have_content ""
+    }.to change(song.chords, :count).by(1)
+  end
+
+  scenario "ユーザーがコード譜を編集する", js: true do
+    user = FactoryBot.create(:user)
+    song = FactoryBot.create(:song, title: "Blue Ridge Cabin Home")
+    chord = FactoryBot.create(:chord, song_id: song.id, user_id: user.id)
+
+    47.times do |i|
+      FactoryBot.create(:chordunit, address: i, chord_id: chord.id)
+    end
+    chordunit = FactoryBot.create(:chordunit, address: 47, chord_id: chord.id)
+
+    visit root_path
     find(".l-header__opn-box").click
-    all(".p-navi__content")[1].click
-    click_link "コード譜"
-    fill_in "曲名", with: "Blue"
-    all(".c-song-candidate__list")[1].click
-    fill_in "コード譜の名前", with: "standard"
-    all(".c-chordunit")[0].click
+    click_link "ログイン"
 
-    find(".p-chord-new__editor-btn").click
-    all(".c-chord-edit__btn")[15].click
-    all(".c-chord-edit__btn")[1].click
-    all(".c-chord-edit__btn")[8].click
-    all(".c-chord-edit__btn")[9].click
-    all(".c-chord-edit__btn")[10].click
-    all(".c-chord-edit__btn")[2].click
-    all(".c-chord-edit__btn")[11].click
-    all(".c-chord-edit__btn")[12].click
+    fill_in "メール", with: user.email
+    fill_in "パスワード", with: user.password
+    click_button "ログイン"
 
-    expect(all(".c-chordunit__beat")[0]).to have_content "@"
-    expect(all(".c-chordunit__note-name")[0]).to have_content "A"
-    expect(all(".c-chordunit__half-note")[0]).to have_content "b"
-    expect(all(".c-chordunit__modifier")[0]).to have_content "m7"
-    expect(all(".c-chordunit__leftbar")[0]).to have_content "{"
-    expect(all(".c-chordunit__rightbar")[0]).to have_content "}"
+    visit "chords/#{chord.id}"
 
-    expect(find(".c-chord-edit__text-window")).to have_content "Abm7B"
+    click_link "Edit"
 
-    find(".c-chord-edit__close").click
+    fill_in "コード譜の名前", with: "new"
+
+    find(".c-key-change__present").click
+    all(".c-key-change__btn")[9].click
+
+    find(".c-layer__skeleton").click
+
     all(".c-chordunit")[47].click
     find(".p-chord-new__editor-btn").click
 
+    all(".c-chord-edit__btn")[19].click
+    all(".c-chord-edit__btn")[19].click
+    all(".c-chord-edit__btn")[19].click
 
+    all(".c-chord-edit__btn")[6].click
+    all(".c-chord-edit__btn")[7].click
 
-  #   F→＃３回→7の順にクリック
-  # chordunitの４８個目が正しく表示されていることを確認（G＃7）
-  #   keyボタンをクリック
-  #   F→＃３回の順番にクリック
-  #   keyが正しく表示されていることを確認する（G＃）
-  #   登録ボタンをクリック
-  #   画面遷移を確認
-  #   メッセージの表示を確認
-  #   タイトルが一致していることを確認
-  #   keyが登録したC＃となっているか確認
-  #   chordunitの1つ目に適切に文字が表示されていることを確認
-  #   chordunitの48個目に適切に文字が表示されていることを確認
-  # }.to chordレコードの生成を確認
+    find(".c-chord-edit__close").click
+    click_button "登録"
+
+    expect(page).to have_content "コード譜を編集しました"
+    expect(page).to have_content "new version"
+
+    expect(find(".c-key-change__present")).to have_content "key of F"
+    expect(find(".c-key-change__present").find(".font_base-key")).to have_content "B"
+
+    expect(all(".c-chordunit__beat")[0]).to have_content "@"
+    expect(all(".c-chordunit__leftbar")[0]).to have_content "{"
+    expect(all(".c-chordunit__note-name")[0]).to have_content "G"
+    expect(all(".c-chordunit__half-note")[0]).to have_content "B"
+    expect(all(".c-chordunit__modifier")[0]).to have_content "m"
+    expect(all(".c-chordunit__rightbar")[0]).to have_content "}"
+
+    expect(all(".c-chordunit__beat")[47]).to have_content "@"
+    expect(all(".c-chordunit__leftbar")[47]).to have_content "{"
+    expect(all(".c-chordunit__note-name")[47]).to have_content "F"
+    expect(all(".c-chordunit__half-note")[47]).to have_content "B"
+    expect(all(".c-chordunit__modifier")[47]).to have_content ""
+    expect(all(".c-chordunit__rightbar")[47]).to have_content "}"
 
   end
-  scenario "ユーザーがコード譜を編集する w/js" do
-  #   user = FactoryBot.create(:user)
-  #   chord譜データを作成
-  #   chordunitデータを作成(address1個目48個目)
-  #   ログイン操作（コピペ）
-  #   expect{
-  #     検索ウィンドウに文字列を入力
-  #     表示された楽曲データをクリック
-  #     編集ボタンをクリック
-  #     chordunitの48個目をクリック
-  #     バックスペースボタンを3回クリック
-  #     F→＃クリック
-  #     登録ボタンをクリック
-  #     メッセージの表示を確認
-  #     キーと48個目が変更されているか確認
-  #     1個目が変更されていないことを確認
-  # }.to　データの変更を確認
-  end
+
   scenario "ユーザーがコード譜を編集しようとするも、オーナー権がなく更新できない" do
-      #   chord譜データを作成
-  #   chordunitデータを作成(address1個目48個目)
-  #   ログイン操作（コピペ）
-  #   expect{
-      #     検索ウィンドウに文字列を入力
-  #     表示された楽曲データをクリック
-  #     編集ボタンをクリック
-  # オーナー権限がなくリダイレクトバックされる
-  # メッセージの表示を確認
-  # 画面が楽曲個別ページであることを確認
-  # }.to データの変更がないことを確認
+    user = FactoryBot.create(:user)
+    other_user = FactoryBot.create(:user)
+    song = FactoryBot.create(:song, title: "Blue Ridge Cabin Home")
+    chord = FactoryBot.create(:chord, user_id: other_user.id)
 
+    visit root_path
+    click_link "ログイン"
+
+    fill_in "メール", with: user.email
+    fill_in "パスワード", with: user.password
+    click_button "ログイン"
+
+    visit "chords/#{chord.id}"
+
+    click_link "Edit"
+
+    expect(page).to have_content "あなたが作成したデータではありません"
+    expect(page).to have_content "Edit"
   end
 
 
   scenario "コード譜の削除" do
-    # userデータを生成
-          #   chord譜データを作成
-  #   chordunitデータを作成(address1個目48個目)
-  #   ログイン操作（コピペ）
-  #   expect{
-      #     検索ウィンドウに文字列を入力
-  #     表示された楽曲データをクリック
-  # 削除ボタンをクリック
-  # 画面遷移
-  # メッセージの表示を確認
-  # リダイレクト先の画面表示を確認
-  # }.to データの削除を確認
+    user = FactoryBot.create(:user)
+    song = FactoryBot.create(:song, title: "Blue Ridge Cabin Home")
+    chord = FactoryBot.create(:chord, song_id: song.id, user_id: user.id)
+
+    visit root_path
+    click_link "ログイン"
+
+    fill_in "メール", with: user.email
+    fill_in "パスワード", with: user.password
+    click_button "ログイン"
+
+    visit "chords/#{chord.id}"
+
+    expect {
+      click_link "Delete"
+
+      expect(page).to have_content "コード譜を削除しました"
+      expect(page).to have_current_path("/songs/#{song.id}")
+    }.to change(song.chords, :count).by(-1)
   end
+
   scenario "ユーザーがコード譜を削除しようとするも削除できない" do
-    # userデータを生成
-    # other_userデータを生成
-              #   chord譜データを作成
-  #   chordunitデータを作成(address1個目48個目)
-  #   ログイン操作（コピペ）
-  #   expect{
-      #     検索ウィンドウに文字列を入力
-  #     表示された楽曲データをクリック
-  # 削除ボタンをクリック
-  # 画面遷移
-  # メッセージの表示を確認
-  # リダイレクト先の画面表示を確認
-  # }.to データの削除を確認
+    user = FactoryBot.create(:user)
+    other_user = FactoryBot.create(:user)
+    song = FactoryBot.create(:song, title: "Blue Ridge Cabin Home")
+    chord = FactoryBot.create(:chord, song_id: song.id, user_id: other_user.id)
+
+    visit root_path
+    click_link "ログイン"
+
+    fill_in "メール", with: user.email
+    fill_in "パスワード", with: user.password
+    click_button "ログイン"
+
+    visit "chords/#{chord.id}"
+
+    expect{
+    click_link "Delete"
+
+    expect(page).to have_content "あなたが作成したデータではありません"
+    expect(page).to have_current_path("/chords/#{chord.id}")
+     }.to change(song.chords, :count).by(0)
   end
 
   scenario "ユーザーがコード譜を削除しようとするもログインをしていないため削除できない" do
-              #   chord譜データを作成
-  #   chordunitデータを作成(address1個目48個目)
-    #   ログイン操作（コピペ）
-  #   expect{
-      #     検索ウィンドウに文字列を入力
-  #     表示された楽曲データをクリック
-  # 削除ボタンをクリック
-  # 画面遷移
-  # メッセージの表示を確認
-  # リダイレクト先の画面表示を確認
-  # }.to データの削除を確認
+    song = FactoryBot.create(:song, title: "Blue Ridge Cabin Home")
+    chord = FactoryBot.create(:chord, song_id: song.id)
+
+    visit "chords/#{chord.id}"
+    click_link "Delete"
+
+    expect {
+      expect(page).to have_content "ログイン後、操作してください"
+      expect(page).to have_current_path(root_path)
+    }.to change(song.chords, :count).by(0)
   end
-  scenario "コード譜表示画面でキーを変更" do
-                  #   chord譜データを作成
-  #   chordunitデータを作成(address1個目48個目)
-  # キーボタンをクリック
-  # キーを変更
-  # chordunitの表示値を確認:F＃を半音上げるとGになること、mは変更されていないこと、Gを半音下げるとF＃になること
+
+  scenario "コード譜表示画面でキーを変更", js: true do
+    user = FactoryBot.create(:user)
+    song = FactoryBot.create(:song, title: "Blue Ridge Cabin Home")
+    chord = FactoryBot.create(:chord, song_id: song.id, user_id: user.id)
+
+    48.times do |i|
+      FactoryBot.create(:chordunit, address: i, chord_id: chord.id)
+    end
+
+    visit "chords/#{chord.id}"
+
+    find(".c-key-change__present").click
+    all(".c-key-change__btn")[9].click
+    all(".c-key-change__btn")[9].click
+
+    expect(find(".c-key-change__present")).to have_content "key of F"
+
+    expect(all(".c-chordunit__beat")[0]).to have_content "@"
+    expect(all(".c-chordunit__note-name")[0]).to have_content "F"
+    expect(all(".c-chordunit__half-note")[0]).to have_content "B"
+    expect(all(".c-chordunit__modifier")[0]).to have_content "m"
+    expect(all(".c-chordunit__leftbar")[0]).to have_content "{"
+    expect(all(".c-chordunit__rightbar")[0]).to have_content "}"
+
+    all(".c-key-change__btn")[8].click
+
+    expect(find(".c-key-change__present")).to have_content "key of F"
+    expect(find(".c-key-change__present").find(".font_base-key")).to have_content "B"
+
+    expect(all(".c-chordunit__beat")[0]).to have_content "@"
+    expect(all(".c-chordunit__note-name")[0]).to have_content "G"
+    expect(all(".c-chordunit__half-note")[0]).to have_content ""
+    expect(all(".c-chordunit__modifier")[0]).to have_content "m"
+    expect(all(".c-chordunit__leftbar")[0]).to have_content "{"
+    expect(all(".c-chordunit__rightbar")[0]).to have_content "}"
+
+    all(".c-key-change__btn")[3].click
+
+    expect(find(".c-key-change__present")).to have_content "key of C"
+
+    expect(all(".c-chordunit__beat")[0]).to have_content "@"
+    expect(all(".c-chordunit__note-name")[0]).to have_content "C"
+    expect(all(".c-chordunit__half-note")[0]).to have_content ""
+    expect(all(".c-chordunit__modifier")[0]).to have_content "m"
+    expect(all(".c-chordunit__leftbar")[0]).to have_content "{"
+    expect(all(".c-chordunit__rightbar")[0]).to have_content "}"
   end
 end
