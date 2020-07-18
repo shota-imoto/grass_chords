@@ -1,7 +1,7 @@
 class SongsController < ApplicationController
   before_action :set_song, only: [:show, :edit, :update, :destroy]
   before_action :set_owner, only: [:edit, :update, :destroy]
-  before_action :authority_login, except: [:index, :show]
+  before_action :authority_login, except: [:index, :show, :search, :global_search]
   before_action :authority_user, only: [:edit, :update, :destroy]
 
   def index

@@ -22,5 +22,17 @@ FactoryBot.define do
     trait :with_practices do
       after(:create) {|chord| create_list(:practice, 10, chord: chord)}
     end
+
+    trait :with_5_practices do
+      after(:create) {|chord| create_list(:practice, 5, chord: chord)}
+    end
+
+    trait :with_10_practices do
+      after(:create) {|chord| create_list(:practice, 10, chord: chord)}
+    end
+
+    trait :with_15_practices do
+      after(:create) {|chord| create_list(:practice, 15, chord: chord)}
+    end
   end
 end

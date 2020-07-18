@@ -174,7 +174,7 @@ RSpec.describe User, type: :model do
       end
       context "passwordがない場合" do
         let(:password) {nil}
-        let(:password_confirmation) {"nil"}
+        let(:password_confirmation) {nil}
         it {is_expected.to include("を入力してください")}
       end
       context "passwordが存在してもpassword_confirmationが一致しない場合" do
