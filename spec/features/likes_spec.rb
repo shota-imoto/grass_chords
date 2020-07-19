@@ -1,36 +1,80 @@
 require 'rails_helper'
 
 RSpec.feature "Likes", type: :feature do
-  scenario "信頼ボタンの選択、userマイページの確認" do
-      # userレコードを生成
-      # otheruserレコードを生成
-      # 楽曲レコードを生成　アソシエーション先はotheruser
-      # コード譜レコードを作成
-      # ログイン操作
-      # 検索ボタンをクリック
-      # 楽曲を選択
-      # コード譜の信頼してるボタンをクリック
-      # ログアウトをクリック
-      # otherユーザーでログイン
-      # メニューからマイページをクリック
-      # 信頼度の数字が1になっていることを確認
+  scenario "信頼ボタンの選択、userマイページの確認", js: true do
+    user = FactoryBot.create(:user)
+    other_user = FactoryBot.create(:user)
+    song = FactoryBot.create(:song, user_id: other_user.id)
+    chord = FactoryBot.create(:chord, song_id: song.id, user_id: other_user.id, likes_count: 10)
 
+    visit root_path
+    find(".l-header__opn-box").click
+    click_link "ログイン"
+
+    fill_in "メール", with: user.email
+    fill_in "パスワード", with: user.password
+    click_button "ログイン"
+
+    visit "songs/#{song.id}"
+
+    all(".c-review__link")[1].click
+    expect(page).to have_css(".c-js__like")
+    expect(find(".c-js__like")).to have_content "11"
+
+    all(".c-review__link")[1].click
+    expect(page).to have_css(".c-js__not-like")
+    expect(find(".c-js__not-like")).to have_content "10"
+
+    all(".c-review__link")[1].click
+
+    find(".l-header__opn-box").click
+    click_link "ログアウト"
+
+    find(".l-header__opn-box").click
+    click_link "ログイン"
+
+    fill_in "メール", with: other_user.email
+    fill_in "パスワード", with: other_user.password
+    click_button "ログイン"
+
+    find(".l-header__opn-box").click
+    click_link "マイページ"
+
+    expect(find(".c-review__btn")).to have_content "11"
   end
-  scenario "信頼ボタンの解除" do
-    # ユーザデータを１つ生成
-    # 楽曲データを３つ生成
-    # 楽曲ページをvisit
-    # 信頼ボタンをクリック
-    # 変色確認（変わらない）
-    # 人数確認
-    # ログイン操作
-    # 再度楽曲ページをvisit
-    # 信頼ボタンをウリック
-    # 変色確認（押したボタンが変わる）
-    # 信頼数確認　同上
-    # 拡大ボタンを押してコード譜個別ページに移動
-    # 信頼ボタンをウリック
-    # 変色確認（押したボタンが変わる）
-    # 信頼数確認　同上
+
+  scenario "ログイン時の信頼ボタンの動作確認", js: true do
+    user = FactoryBot.create(:user)
+    song = FactoryBot.create(:song)
+
+    3.times do |i|
+      chord =FactoryBot.create(:chord, song_id: song.id, likes_count: 10)
+    end
+
+    visit "songs/#{song.id}"
+
+    all(".c-review__btn")[3].click
+    expect(page).to_not have_css(".c-js__like")
+    expect(all(".c-review__btn")[3]).to have_content "10"
+
+    find(".l-header__opn-box").click
+    click_link "ログイン"
+
+    fill_in "メール", with: user.email
+    fill_in "パスワード", with: user.password
+    click_button "ログイン"
+
+    visit "songs/#{song.id}"
+
+    all(".c-review__link")[3].click
+    expect(page).to have_css(".c-js__like")
+    expect(all(".c-review__btn")[3]).to have_content "11"
+
+    within(all(".p-song__score-wrapper")[1]) do
+      click_link ">> 拡大ページ"
+    end
+    all(".c-review__link")[1].click
+    expect(page).to_not have_css(".c-js__like")
+    expect(all(".c-review__btn")[1]).to have_content "10"
   end
 end

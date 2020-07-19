@@ -66,7 +66,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
   end
 
   def test_user_protection
-    if User.test_user_find.id == current_user.id || current_user.admin.present?
+    if current_user.id == 0 || current_user.admin.present?
       redirect_back fallback_location: root_path, notice: 'テストユーザーは編集できません'
     end
   end

@@ -22,6 +22,7 @@ RSpec.feature "Chords", type: :feature do
       all(".c-song-candidate__list")[1].click
       fill_in "コード譜の名前", with: "standard"
 
+      # キー切替テスト
       find(".c-key-change__present").click
       all(".c-key-change__btn")[9].click
 
@@ -38,7 +39,7 @@ RSpec.feature "Chords", type: :feature do
 
       find(".c-layer__skeleton").click
 
-
+      # コード譜入力テスト
       all(".c-chordunit")[0].click
 
       find(".p-chord-new__editor-btn").click

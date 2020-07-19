@@ -1,34 +1,98 @@
 require 'rails_helper'
 
 RSpec.feature "Practices", type: :feature do
-  scenario "練習ボタンの選択、userマイページの確認" do
-    # userレコードを生成
-    # 楽曲レコードを生成
-    # コード譜レコードを作成
-    # ログイン操作
-    # 検索ボタンをクリック
-    # 楽曲を選択
-    # コード譜の練習してるボタンをクリック
-    # メニューからマイページをクリック
-    # 練習してるボタンを押した楽曲名が表示されていることを確認
-    # 削除ボタンをクリック
-    # 何も表示されていないことを確認
+
+  scenario "練習ボタンの選択、userマイページの確認", js: true do
+    user = FactoryBot.create(:user)
+
+    song = FactoryBot.create(:song)
+    chord = FactoryBot.create(:chord, song_id: song.id, practices_count: 10)
+
+    song2 = FactoryBot.create(:song)
+    chord2 = FactoryBot.create(:chord, song_id: song2.id, practices_count: 10)
+
+    visit root_path
+    find(".l-header__opn-box").click
+    click_link "ログイン"
+
+    fill_in "メール", with: user.email
+    fill_in "パスワード", with: user.password
+    click_button "ログイン"
+
+    visit "songs/#{song.id}"
+
+    all(".c-review__link")[0].click
+    expect(page).to have_css(".c-js__practice")
+    expect(find(".c-js__practice")).to have_content "11"
+
+    all(".c-review__link")[0].click
+    expect(page).to have_css(".c-js__not-practice")
+    expect(find(".c-js__not-practice")).to have_content "10"
+
+    all(".c-review__link")[0].click
+
+    visit "songs/#{song2.id}"
+    all(".c-review__link")[0].click
+
+    find(".l-header__opn-box").click
+    click_link "マイページ"
+
+    expect(page).to have_content song.title
+    expect(page).to have_content song2.title
+
+    within(all(".p-user__song")[1]) do
+      click_link "コード譜を見る"
+    end
+    expect(page).to have_current_path("/chords/#{chord2.id}")
+    expect(page).to have_content song2.title
+
+    find(".l-header__opn-box").click
+    click_link "マイページ"
+
+    within(all(".p-user__song")[0]) do
+      click_link "リストから削除する"
+    end
+
+    expect(page).to_not have_content song.title
+
+    visit "songs/#{song.id}"
+
+    expect(page).to_not have_css(".c-js__practice")
+    expect(find(".c-js__not-practice")).to have_content "10"
   end
-  scenario "ログイン時の練習ボタンの動作確認" do
-    # ユーザデータを１つ生成
-    # 楽曲データを３つ生成
-    # 楽曲ページをvisit
-    # 練習ボタンをクリック
-    # 変色確認（変わらない）
-    # 人数確認
-    # ログイン操作
-    # 再度楽曲ページをvisit
-    # 練習ボタンをウリック
-    # 変色確認（押したボタンが変わる）
-    # 人数確認　同上
-    # 拡大ボタンを押してコード譜個別ページに移動
-    # 練習ボタンをウリック
-    # 変色確認（押したボタンが変わる）
-    # 人数確認　同上
+
+  scenario "ログイン時の練習ボタンの動作確認", js: true do
+    user = FactoryBot.create(:user)
+    song = FactoryBot.create(:song)
+
+    3.times do |i|
+      chord =FactoryBot.create(:chord, song_id: song.id, practices_count: 10)
+    end
+
+    visit "songs/#{song.id}"
+
+    all(".c-review__btn")[2].click
+    expect(page).to_not have_css(".c-js__practice")
+    expect(all(".c-review__btn")[2]).to have_content "10"
+
+    find(".l-header__opn-box").click
+    click_link "ログイン"
+
+    fill_in "メール", with: user.email
+    fill_in "パスワード", with: user.password
+    click_button "ログイン"
+
+    visit "songs/#{song.id}"
+
+    all(".c-review__link")[2].click
+    expect(page).to have_css(".c-js__practice")
+    expect(all(".c-review__btn")[2]).to have_content "11"
+
+    within(all(".p-song__score-wrapper")[0]) do
+      click_link ">> 拡大ページ"
+    end
+    all(".c-review__link")[1].click
+    expect(page).to_not have_css(".c-js__practice")
+    expect(all(".c-review__btn")[0]).to have_content "10"
   end
 end

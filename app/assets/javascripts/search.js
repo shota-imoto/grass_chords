@@ -82,6 +82,7 @@ $(function () {
 
       if (results.length == 0) {
         $(".c-song-candidate__lists").addClass("u-display__hidden");
+
         return;
       }
 
