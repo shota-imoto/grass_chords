@@ -2,12 +2,12 @@ FactoryBot.define do
   factory :song do
     sequence(:id) {|n| n}
     sequence(:title) {|n| "Foggy Mountain Special#{n}"}
-    jam {true}
-    standard {true}
+    jam {false}
+    standard {false}
     beginner {false}
     vocal {false}
-    instrumental {true}
-    practice_songs_count {10}
+    instrumental {false}
+    practice_songs_count {0}
     association :user
 
     factory :song2, class: Song do
