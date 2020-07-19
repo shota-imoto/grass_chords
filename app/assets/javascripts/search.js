@@ -64,12 +64,12 @@ $(function () {
 
   $(".c-js__song-candidate").on("keyup", function () {
     var input = $(this).val();
-    $(".c-song-candidate__lists").empty();
     $(".c-song-candidate__lists").addClass("u-display__hidden");
 
     if (input == "") {
       return;
     }
+
     $.ajax({
       type: "get",
       url: "/songs/search",
@@ -91,11 +91,19 @@ $(function () {
         if (i == 4) return false;
       });
       $(".c-song-candidate__lists").removeClass("u-display__hidden");
-      $(".c-song-candidate__lists").append(insertHTML);
+
+      // if user input text too quickly, before 1st ajax communication hasn't conpleted, 2nd ajax communication has started.
+      // if 2nd communication finish empty process before 1st communication finishe append process, both of their results is shown at the same time.
+      // so i wrote under below, in order to control this phenomenon.
+      setTimeout(function () {
+        $(".c-song-candidate__lists").empty();
+        $(".c-song-candidate__lists").append(insertHTML);
+      }, 8);
     });
   });
 
-  $(document).on("touchend mouseup", ".c-song-candidate__list", function () {
+  // 楽曲の選択
+  $(document).on("touchend, mouseup", ".c-song-candidate__list", function () {
     var song_id = $(this).data("song_id");
     var song_name = $(this).text();
     $("#selected_song_id").val(song_id);
