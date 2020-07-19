@@ -8,6 +8,7 @@ require 'rspec/rails'
 require 'capybara/rspec'
 
 Capybara.javascript_driver = :selenium_chrome
+Capybara.default_max_wait_time = 2
 
 # Add additional requires below this line. Rails is not loaded until this point!
 

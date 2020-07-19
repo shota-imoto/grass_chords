@@ -92,6 +92,7 @@ class SongsController < ApplicationController
       params[:keyword].strip!
       keywords = params[:keyword].split(/\s+/)
 
+
       # 条件検索
       # ifによって条件にチェックされているときのみandで絞り込み
       @songs = @songs.where(jam: params[:jam])  if (params[:jam] == "true")
