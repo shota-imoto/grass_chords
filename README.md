@@ -50,7 +50,7 @@
 - バックエンド(Ruby on Rails)
 - インフラ(MySQL, nginx, unicorn)
 - テスト(RSpec, FactoryBot)
-- AWS VPC, EC2, ELB, ACM(Web サーバ 1 台, DB サーバ 1 台)
+- AWS VPC, EC2, Route53, ELB, ACM(Web サーバ 1 台, DB サーバ 1 台)
 
 # このアプリで解決したい課題
 
