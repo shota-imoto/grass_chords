@@ -37,7 +37,8 @@
 - エラーハンドリング
 - モデル単体テスト(rspec)
 - CSS の flocss 対応
-- AWS VPC, EC2, ELB, ACM(Web サーバ 1 台＋ DB サーバ 1 台)
+- AWS インフラ(Web サーバ 1 台＋ DB サーバ 1 台)
+- HTTPS 接続
 
 ※音楽用語。曲全体の音の高さのこと(日本語呼称:ハ長調やト短調)
 女声であれば楽曲全体の音程(=キー)を高く引き上げて演奏することがある。
@@ -49,7 +50,7 @@
 - バックエンド(Ruby on Rails)
 - インフラ(MySQL, nginx, unicorn)
 - テスト(RSpec, FactoryBot)
-- AWS EC2(Web サーバ 1 台, DB サーバ 1 台)
+- AWS VPC, EC2, ELB, ACM(Web サーバ 1 台, DB サーバ 1 台)
 
 # このアプリで解決したい課題
 
