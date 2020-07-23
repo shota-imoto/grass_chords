@@ -1,6 +1,6 @@
 # アプリ概要
 
-[GrassChords](http://3.113.194.185/ "GrassChords")
+[GrassChords](https://grasschords.com "GrassChords")
 ※スマートフォンでの閲覧推奨
 
 "Bluegrass"という音楽の「初心者向けジャムセッション支援アプリ」 です。
