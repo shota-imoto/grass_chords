@@ -16,6 +16,7 @@ module GrassChords
     config.active_record.default_timezone = :local
     config.i18n.default_locale = :ja
     # config.assets.paths << Rails.root.join("app", "assets", "fonts")
+
     config.generators do |g|
       g.test_framework :rspec,
         view_specs: false,
