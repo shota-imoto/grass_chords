@@ -78,3 +78,4 @@ gem 'devise'
 gem 'font-awesome-sass'
 gem 'jquery-rails'
 gem 'rails-i18n'
+gem 'recaptcha', require: "recaptcha/rails"

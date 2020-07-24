@@ -10,6 +10,10 @@
         .c-form__area
           =f.email_field :email, autofocus: true, autocomplete: "email", placeholder: "メール", class:"c-form__textbox c-user__textbox"
           =f.password_field :password, autocomplete: "current-password", placeholder: "パスワード", class:"c-form__textbox"
+          - if @show_checkbox_recaptcha
+            = recaptcha_tags
+          - else
+            = recaptcha_v3(action: 'login')
         .c-form__btn-area
           .c-form__area
             =f.submit "ログイン", class: "c-form__btn c-form__btn--login"

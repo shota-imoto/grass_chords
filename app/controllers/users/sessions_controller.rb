@@ -2,6 +2,7 @@
 
 class Users::SessionsController < Devise::SessionsController
   # before_action :configure_sign_in_params, only: [:create]
+  # before_action :recaptcha_authority, only: :create
   before_action :test_user_call, only: [:test_create]
 
   # GET /resource/sign_in
@@ -10,9 +11,19 @@ class Users::SessionsController < Devise::SessionsController
   # end
 
   # POST /resource/sign_in
-  # def create
-  #   super
-  # end
+  def create
+    binding.pry
+    success = verify_recaptcha(model: @user, action: 'login', minimum_score: 0.5)
+    checkbox_success = verify_recaptcha unless success
+    if success || checkbox_success
+      super
+    else
+      if !success
+        @show_checkbox_recaptcha = true
+      end
+      redirect_back fallback_location: root_path, notice: "Googleにより不正アクセスと判定されました"
+    end
+  end
 
   # DELETE /resource/sign_out
   # def destroy
@@ -33,6 +44,19 @@ class Users::SessionsController < Devise::SessionsController
   def test_user_call
     @user = User.test_user_find
   end
+
+  # def recaptcha_authority
+  #   success = verify_recaptcha(model: @user, action: 'login', minimum_score: 0.5)
+  #   checkbox_success = verify_recaptcha unless success
+  #   if success || checkbox_success
+  #     super
+  #   else
+  #     if !success
+  #       @show_checkbox_recaptcha = true
+  #     end
+  #     redirect_back fallback_location: root_path, notice: "Googleにより不正アクセスと判定されました"
+  #   end
+  # end
   # If you have extra params to permit, append them to the sanitizer.
   # def configure_sign_in_params
   #   devise_parameter_sanitizer.permit(:sign_in, keys: [:attribute])

@@ -2,8 +2,6 @@ class ApplicationController < ActionController::Base
     before_action :configure_permitted_parameters, if: :devise_controller?
     before_action :set_current_user
 
-    # protect_from_forgery with: :exception
-
     def set_current_user
       if user_signed_in?
         @user = User.find(current_user_permit[:user_id])
@@ -34,4 +32,5 @@ class ApplicationController < ActionController::Base
         redirect_back fallback_location: root_path, notice: 'あなたが作成したデータではありません。'
       end
     end
+
 end
