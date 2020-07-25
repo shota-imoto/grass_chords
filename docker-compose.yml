@@ -32,8 +32,8 @@ services:
       context: .
       dockerfile: Dockerfile
     ports:
-      - 80:80
-    restart: always
+      - 8080:80
+    # restart: always
     volumes:
       - tmp-data:/grasschords/public
     depends_on:
