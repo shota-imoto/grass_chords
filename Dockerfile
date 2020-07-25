@@ -18,6 +18,7 @@ WORKDIR /grasschords
 COPY Gemfile /grasschords/Gemfile
 COPY Gemfile.lock /grasschords/Gemfile.lock
 
+ENV BUNDLER_VERSION=2.1.4
 RUN gem install bundler && bundle install
 
 COPY . /grasschords

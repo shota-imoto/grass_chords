@@ -8,16 +8,15 @@ services:
       - "3306:3306"
     environment:
       MYSQL_DATABASE: grass_chords_development
-      MYSQL_ROOT_PASSWORD:
+      MYSQL_ROOT_PASSWORD: pass1234
       MYSQL_USER: root
-      MYSQL_PASSWORD:
     volumes:
       - mysql-data:/var/lib/mysql
   web:
     build:
       context: .
       dockerfile: Dockerfile
-    command: dockerize -wait tcp://db:3306 -timeout 20s bundle exec unicorn -p 3000 -c /grasschords/config/unicorn.conf.rb
+    command: dockerize -wait tcp://db:3306 -timeout 20s bundle exec unicorn -p 3000 -c /grasschords/config/unicorn.rb
     tty: true
     stdin_open: true
     depends_on:
@@ -30,7 +29,7 @@ services:
       - public-data:/grasschords/public
   nginx:
     build:
-      context: ./nginx/nginx.conf
+      context: .
       dockerfile: Dockerfile
     ports:
       - 80:80
