@@ -1,8 +1,10 @@
 # frozen_string_literal: true
+require "uri"
+require "net/http"
+require "json"
 
 class Users::SessionsController < Devise::SessionsController
-  # before_action :configure_sign_in_params, only: [:create]
-  # before_action :recaptcha_authority, only: :create
+  include UsersHelper
   before_action :test_user_call, only: [:test_create]
 
   # GET /resource/sign_in
@@ -12,16 +14,39 @@ class Users::SessionsController < Devise::SessionsController
 
   # POST /resource/sign_in
   def create
-    binding.pry
-    success = verify_recaptcha(model: @user, action: 'login', minimum_score: 0.5)
-    checkbox_success = verify_recaptcha unless success
-    if success || checkbox_success
-      super
-    else
-      if !success
-        @show_checkbox_recaptcha = true
+    # error: before access sessions/create action, automatically sign in even if email & password are correct.
+    judge_bot_score = 0.5
+
+    siteverify_uri = URI.parse("https://www.google.com/recaptcha/api/siteverify?response=#{params[:user][:token]}&secret=#{Rails.application.credentials.recaptcha[:recaptcha_secret_key]}")
+    response = Net::HTTP.get_response(siteverify_uri)
+    json_response = JSON.parse(response.body)
+
+    if json_response["success"] && json_response["score"] > judge_bot_score
+      user = User.find_by(email: params[:user][:email])
+      if user && user.valid_password?(params[:user][:password])
+        respond_to do |format|
+          format.js {
+            flash[:notice] = "ログインしました"
+            render ajax_redirect_to(root_path)
+          }
+        end
+      else
+        respond_to do |format|
+          format.js {
+            flash[:notice] = "メールアドレスもしくはパスワードに誤りがあります"
+            render ajax_redirect_to(new_user_session_path)
+          }
+        end
       end
-      redirect_back fallback_location: root_path, notice: "Googleにより不正アクセスと判定されました"
+    else
+      # by error, user has already signed in
+      # if recaptcha authority is failed, i need user sign out.
+      sign_out
+      respond_to do |format|
+        format.js {
+          flash[:notice] = "Googleによって、アクセスが中止されました"
+          render ajax_redirect_to(new_user_session_path) }
+      end
     end
   end
 
@@ -41,32 +66,11 @@ class Users::SessionsController < Devise::SessionsController
 
   protected
 
+  # def session_params
+  #   params.permit(:email, :password)
+  # end
+
   def test_user_call
     @user = User.test_user_find
   end
-
-  # def recaptcha_authority
-  #   success = verify_recaptcha(model: @user, action: 'login', minimum_score: 0.5)
-  #   checkbox_success = verify_recaptcha unless success
-  #   if success || checkbox_success
-  #     super
-  #   else
-  #     if !success
-  #       @show_checkbox_recaptcha = true
-  #     end
-  #     redirect_back fallback_location: root_path, notice: "Googleにより不正アクセスと判定されました"
-  #   end
-  # end
-  # If you have extra params to permit, append them to the sanitizer.
-  # def configure_sign_in_params
-  #   devise_parameter_sanitizer.permit(:sign_in, keys: [:attribute])
-  # end
-
-  # def after_sign_in_path_for(resource)
-  #   root_path(resource)
-  # end
-
-  # def after_sign_out_path_for(resource)
-  #   root_path(resource)
-  # end
 end

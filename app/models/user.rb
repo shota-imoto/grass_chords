@@ -1,4 +1,7 @@
 class User < ApplicationRecord
+  has_secure_password
+  attr_accessor :token
+
   validates :name, presence: {message: "が空欄です"}, length: {in: 2..40, message: "は2~40文字に設定してください"}, uniqueness: {message: "は既に登録されています"}
   validates :email, uniqueness: {case_sensitive: false, message: "は既に登録されています"}, length: {in: 3..254, message: "は254文字以内のものを登録してください"}
   validates :place, length: {maximum: 50, message: "は50文字以内に設定してください"}
