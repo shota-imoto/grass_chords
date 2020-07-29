@@ -5,13 +5,15 @@ RSpec.feature "Songs", type: :feature do
   scenario "ユーザーが新しい楽曲データを登録する", js: true  do
     user = FactoryBot.create(:user)
 
-    visit root_path
-    all(".l-header__opn-box")[0].click
-    click_link "ログイン"
+    sign_in user
 
-    fill_in "メール", with: user.email
-    fill_in "パスワード", with: user.password
-    click_button "ログイン"
+    # visit root_path
+    # all(".l-header__opn-box")[0].click
+    # click_link "ログイン"
+
+    # fill_in "メール", with: user.email
+    # fill_in "パスワード", with: user.password
+    # click_button "ログイン"
 
     visit new_song_path
 

@@ -1,5 +1,5 @@
 class User < ApplicationRecord
-  has_secure_password
+  # has_secure_password
   attr_accessor :token
 
   validates :name, presence: {message: "が空欄です"}, length: {in: 2..40, message: "は2~40文字に設定してください"}, uniqueness: {message: "は既に登録されています"}
