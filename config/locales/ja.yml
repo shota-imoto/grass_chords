@@ -230,6 +230,8 @@ ja:
       invalid_token: "認証キーが不正です"
       timeout: "一定時間が経過したため、再度ログインが必要です"
       inactive: "アカウントがまだ有効になっていません"
+      user:
+        not_found_in_database: "登録されていないユーザーです"
     sessions:
       signed_in: "ログインしました"
       signed_out: "ログアウトしました"
