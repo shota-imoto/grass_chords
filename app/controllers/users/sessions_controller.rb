@@ -16,14 +16,7 @@ class Users::SessionsController < Devise::SessionsController
   def create
     # error: before access sessions/create action, automatically sign in even if email & password are correct.
     judge_bot_score = 0.5
-    # binding.pry
-    # response_json = get_recaptcha_response(params[:user][:token])
-    # response_json = get_recaptcha_response("token")
-
-    # siteverify_uri = URI.parse("https://www.google.com/recaptcha/api/siteverify?response=#{params[:user][:token]}&secret=#{Rails.application.credentials.recaptcha[:recaptcha_secret_key]}")
-    siteverify_uri = URI.parse("https://www.google.com/recaptcha/api/siteverify?response=aaaa&secret=#{Rails.application.credentials.recaptcha[:recaptcha_secret_key]}")
-    response = Net::HTTP.get_response(siteverify_uri)
-    json_response = JSON.parse(response.body)
+    json_response = get_recaptcha_response(params[:user][:token])
 
     if json_response["success"] && json_response["score"] > judge_bot_score
       user = User.find_by(email: params[:user][:email])
