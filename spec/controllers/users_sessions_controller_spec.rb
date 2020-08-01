@@ -23,13 +23,62 @@ RSpec.describe Users::SessionsController, type: :controller do
   describe "#create" do
     before do
       @user = FactoryBot.create(:user)
-      get_recaptcha_response = double("response")
-      parse = double("")
-      allow(get_recaptcha_response).to receive(:get_response)
+      # get_recaptcha_response = double("response")
+      # http = Net::HTTP.new
+      # allow(http).to receive(:)
+      # recaptcha_mock = double('{ "success": true, "challenge_ts": "2020-08-01T03:00:35Z", "hostname": "localhost", "score": 0.9, "action": "submit"}')
+
     end
-    it "ユーザーログインできること" do
-      post :create, params: {email: @user.email, password: @user.password, token: "token"}
-      expect(response).to have_http_status
+    context "recaptcha認証に成功した場合" do
+      before do
+        response_mock = Net::HTTPOK.new(nil, 200, "OK")
+        http_obj = double("Net::HTTP")
+        recaptcha_mock = '{ "success": true, "challenge_ts": "2020-08-01T03:00:35Z", "hostname": "localhost", "score": 0.9, "action": "submit"}'
+        allow(Net::HTTP).to receive(:get_response).and_return(response_mock)
+        allow(response_mock).to receive(:body).and_return(recaptcha_mock)
+      end
+      context "メールアドレスとパスワードが正しい場合" do
+        it "302レスポンスを返すこと" do
+          post :create, params: {user: {email: @user.email, password: @user.password, token: "token"}}
+          expect(response).to have_http_status "302"
+        end
+        it "フラッシュメッセージが表示されていること" do
+          post :create, params: {user: {email: @user.email, password: @user.password, token: "token"}}
+          expect(flash[:notice]).to eq "ログインしました"
+        end
+        it "トップ画面にリダイレクトすること" do
+          post :create, params: {user: {email: @user.email, password: @user.password, token: "token"}}
+          expect(response).to redirect_to root_path
+        end
+      end
+      context "パスワードが誤っている場合" do
+        it "sessions#newにrenderすること" do
+          post :create, params: {user: {email: @user.email, password: "wrong password", token: "token"}}
+          expect(response).to render_template(:new)
+        end
+        it "フラッシュメッセージが表示されていること" do
+          post :create, params: {user: {email: @user.email, password: "wrong password", token: "token"}}
+          expect(flash[:notice]).to eq "メールアドレスもしくはパスワードに誤りがあります"
+        end
+      end
+    end
+    context "recaptcha認証に失敗した場合" do
+      before do
+        response_mock = Net::HTTPOK.new(nil, 200, "OK")
+        http_obj = double("Net::HTTP")
+        recaptcha_mock = '{"success": false, "error-codes": ["invalid-input-response"]}'
+        allow(Net::HTTP).to receive(:get_response).and_return(response_mock)
+        allow(response_mock).to receive(:body).and_return(recaptcha_mock)
+      end
+      # "{"success": false, "error-codes": ["invalid-input-response"]}"
+      it "sessions#newにrenderすること" do
+        post :create, params: {user: {email: @user.email, password: @user.password, token: "token"}}
+        expect(response).to render_template(:new)
+      end
+      it "フラッシュメッセージが表示されていること" do
+        post :create, params: {user: {email: @user.email, password: @user.password, token: "token"}}
+        expect(flash[:notice]).to eq "Googleによって、アクセスが中止されました"
+      end
     end
   end
 end

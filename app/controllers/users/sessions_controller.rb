@@ -16,21 +16,22 @@ class Users::SessionsController < Devise::SessionsController
   def create
     # error: before access sessions/create action, automatically sign in even if email & password are correct.
     judge_bot_score = 0.5
-    binding.pry
-    response_json = get_recaptcha_response(params[:user][:token])
+    # binding.pry
+    # response_json = get_recaptcha_response(params[:user][:token])
     # response_json = get_recaptcha_response("token")
 
     # siteverify_uri = URI.parse("https://www.google.com/recaptcha/api/siteverify?response=#{params[:user][:token]}&secret=#{Rails.application.credentials.recaptcha[:recaptcha_secret_key]}")
-    # response = Net::HTTP.get_response(siteverify_uri)
-    # json_response = JSON.parse(response.body)
+    siteverify_uri = URI.parse("https://www.google.com/recaptcha/api/siteverify?response=aaaa&secret=#{Rails.application.credentials.recaptcha[:recaptcha_secret_key]}")
+    response = Net::HTTP.get_response(siteverify_uri)
+    json_response = JSON.parse(response.body)
 
-    if response_json["success"] && response_json["score"] > judge_bot_score
+    if json_response["success"] && json_response["score"] > judge_bot_score
       user = User.find_by(email: params[:user][:email])
       if user && user.valid_password?(params[:user][:password])
         redirect_to root_path, notice: 'ログインしました'
       else
         @user = User.new
-        flash.now[:notice] = "メールもしくはパスワードに誤りがあります"
+        flash.now[:notice] = "メールアドレスもしくはパスワードに誤りがあります"
         render :new
       end
     else

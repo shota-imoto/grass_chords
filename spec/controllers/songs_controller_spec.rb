@@ -39,7 +39,6 @@ RSpec.describe SongsController, type: :controller do
         song_params = FactoryBot.attributes_for(:song)
         post :create, params: {chord: song_params}
         expect(response).to redirect_to root_path
-
       end
     end
   end
