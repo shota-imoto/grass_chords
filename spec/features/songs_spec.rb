@@ -5,7 +5,7 @@ RSpec.feature "Songs", type: :feature do
   scenario "ユーザーが新しい楽曲データを登録する", js: true  do
     user = FactoryBot.create(:user)
 
-    login_as(user, :scope => :user)
+    login_as(user)
 
     # visit root_path
     # all(".l-header__opn-box")[0].click
@@ -37,15 +37,9 @@ RSpec.feature "Songs", type: :feature do
     user = FactoryBot.create(:user)
     song = FactoryBot.create(:song, title: "Blue Ridge Cabin Home", user_id: user.id)
 
-    login_as(user, :scope => :user)
+    login_as(user)
 
     visit root_path
-    # all(".l-header__opn-box")[0].click
-
-    # click_link "ログイン"
-    # fill_in "メール", with: user.email
-    # fill_in "パスワード", with: user.password
-    # click_button "ログイン"
 
     all(".c-form__btn")[1].click
     click_link "Blue Ridge Cabin Home"
@@ -68,16 +62,9 @@ RSpec.feature "Songs", type: :feature do
     other_user = FactoryBot.create(:user)
     song = FactoryBot.create(:song, title: "Blue Ridge Cabin Home", user_id: other_user.id)
 
-    login_as(user, :scope => :user)
+    login_as(user)
 
     visit root_path
-
-    # click_link "ログイン"
-    # fill_in "メール", with: user.email
-    # fill_in "パスワード", with: user.password
-    # click_button "ログイン"
-
-
 
     all(".c-form__btn")[1].click
     click_link "Blue Ridge Cabin Home"
@@ -91,16 +78,9 @@ RSpec.feature "Songs", type: :feature do
     user = FactoryBot.create(:user)
     song = FactoryBot.create(:song, title: "Blue Ridge Cabin Home", user_id: user.id)
 
-    login_as(user, :scope => :user)
+    login_as(user)
 
     visit root_path
-
-    # all(".l-header__opn-box")[0].click
-
-    # click_link "ログイン"
-    # fill_in "メール", with: user.email
-    # fill_in "パスワード", with: user.password
-    # click_button "ログイン"
 
     expect{
       all(".c-form__btn")[1].click
@@ -118,14 +98,9 @@ RSpec.feature "Songs", type: :feature do
     other_user = FactoryBot.create(:user)
     song = FactoryBot.create(:song, title: "Blue Ridge Cabin Home", user_id: other_user.id)
 
-    login_as(user, :scope => :user)
+    login_as(user)
 
     visit root_path
-
-    # click_link "ログイン"
-    # fill_in "メール", with: user.email
-    # fill_in "パスワード", with: user.password
-    # click_button "ログイン"
 
     all(".c-form__btn")[1].click
     click_link "Blue Ridge Cabin Home"

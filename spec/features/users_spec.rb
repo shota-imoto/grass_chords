@@ -62,13 +62,8 @@ RSpec.feature "Users", type: :feature do
   scenario "ユーザー情報の編集・削除" do
     user = FactoryBot.create(:user, id: 1)
 
-    login_as(user, :scope => :user)
+    login_as(user)
     visit root_path
-    # click_link "ログイン"
-
-    # fill_in "メール", with: user.email
-    # fill_in "パスワード", with: user.password
-    # click_button "ログイン"
 
     click_link "マイページ"
     click_link "Edit"

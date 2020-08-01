@@ -8,14 +8,7 @@ RSpec.feature "Likes", type: :feature do
     song = FactoryBot.create(:song, user_id: other_user.id)
     chord = FactoryBot.create(:chord, song_id: song.id, user_id: other_user.id, likes_count: 10)
 
-    login_as(user, :scope => :user)
-    # visit root_path
-    # find(".l-header__opn-box").click
-    # click_link "ログイン"
-
-    # fill_in "メール", with: user.email
-    # fill_in "パスワード", with: user.password
-    # click_button "ログイン"
+    login_as(user)
 
     visit "songs/#{song.id}"
 
@@ -62,7 +55,7 @@ RSpec.feature "Likes", type: :feature do
     expect(page).to_not have_css(".c-js__like")
     expect(all(".c-review__btn")[3]).to have_content "10"
 
-    login_as(user, :scope => :user)
+    login_as(user)
 
     # find(".l-header__opn-box").click
     # click_link "ログイン"

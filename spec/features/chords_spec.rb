@@ -6,14 +6,8 @@ RSpec.feature "Chords", type: :feature do
     song = FactoryBot.create(:song, title: "Blue Ridge Cabin Home")
     other_song = FactoryBot.create(:song, title: "Blue Moon of Kentucky")
 
-    login_as(user, :scope => :user)
+    login_as(user)
     visit root_path
-    # find(".l-header__opn-box").click
-    # click_link "ログイン"
-
-    # fill_in "メール", with: user.email
-    # fill_in "パスワード", with: user.password
-    # click_button "ログイン"
 
     expect{
       find(".l-header__opn-box").click
@@ -122,15 +116,9 @@ RSpec.feature "Chords", type: :feature do
     end
     chordunit = FactoryBot.create(:chordunit, address: 47, chord_id: chord.id)
 
-    login_as(user, :scope => :user)
+    login_as(user)
 
     visit root_path
-    # find(".l-header__opn-box").click
-    # click_link "ログイン"
-
-    # fill_in "メール", with: user.email
-    # fill_in "パスワード", with: user.password
-    # click_button "ログイン"
 
     visit "chords/#{chord.id}"
 
@@ -184,14 +172,9 @@ RSpec.feature "Chords", type: :feature do
     song = FactoryBot.create(:song, title: "Blue Ridge Cabin Home")
     chord = FactoryBot.create(:chord, user_id: other_user.id)
 
-    login_as(user, :scope => :user)
+    login_as(user)
 
     visit root_path
-    # click_link "ログイン"
-
-    # fill_in "メール", with: user.email
-    # fill_in "パスワード", with: user.password
-    # click_button "ログイン"
 
     visit "chords/#{chord.id}"
 
@@ -207,14 +190,9 @@ RSpec.feature "Chords", type: :feature do
     song = FactoryBot.create(:song, title: "Blue Ridge Cabin Home")
     chord = FactoryBot.create(:chord, song_id: song.id, user_id: user.id)
 
-    login_as(user, :scope => :user)
+    login_as(user)
 
     visit root_path
-    # click_link "ログイン"
-
-    # fill_in "メール", with: user.email
-    # fill_in "パスワード", with: user.password
-    # click_button "ログイン"
 
     visit "chords/#{chord.id}"
 
@@ -232,14 +210,9 @@ RSpec.feature "Chords", type: :feature do
     song = FactoryBot.create(:song, title: "Blue Ridge Cabin Home")
     chord = FactoryBot.create(:chord, song_id: song.id, user_id: other_user.id)
 
-    login_as(user, :scope => :user)
+    login_as(user)
 
     visit root_path
-    # click_link "ログイン"
-
-    # fill_in "メール", with: user.email
-    # fill_in "パスワード", with: user.password
-    # click_button "ログイン"
 
     visit "chords/#{chord.id}"
 
