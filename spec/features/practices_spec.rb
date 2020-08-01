@@ -11,13 +11,7 @@ RSpec.feature "Practices", type: :feature do
     song2 = FactoryBot.create(:song)
     chord2 = FactoryBot.create(:chord, song_id: song2.id, practices_count: 10)
 
-    visit root_path
-    find(".l-header__opn-box").click
-    click_link "ログイン"
-
-    fill_in "メール", with: user.email
-    fill_in "パスワード", with: user.password
-    click_button "ログイン"
+    login_as(user)
 
     visit "songs/#{song.id}"
 
@@ -75,12 +69,7 @@ RSpec.feature "Practices", type: :feature do
     expect(page).to_not have_css(".c-js__practice")
     expect(all(".c-review__btn")[2]).to have_content "10"
 
-    find(".l-header__opn-box").click
-    click_link "ログイン"
-
-    fill_in "メール", with: user.email
-    fill_in "パスワード", with: user.password
-    click_button "ログイン"
+    login_as(user)
 
     visit "songs/#{song.id}"
 

@@ -22,6 +22,9 @@ ja:
         email: そのメールアドレス
         password: パスワード
         password_confirmation: 確認用のパスワード
+  recaptcha:
+    errors:
+      verification_failed: "reCAPTCHA 認証失敗しました。しばらくしてからもう一度お試しください。"
   date:
     abbr_day_names:
       - 日
