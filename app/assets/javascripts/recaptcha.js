@@ -9,20 +9,11 @@ $(function () {
         })
         .then(function (token) {
           // Add your logic to submit to your backend server here.
-          var email = $("#user_email").val();
-          var password = $("#user_password").val();
-
-          $.ajax({
-            type: "post",
-            url: "/users/sign_in",
-            data: {
-              user: {
-                email: email,
-                password: password,
-                token: token,
-              },
-            },
-          });
+          console.log(token);
+          $(".c-js__recaptcha-token").val(token);
+          // フォーム送信
+          $("#new_user").off("submit");
+          $("#new_user").submit();
         });
     });
   });

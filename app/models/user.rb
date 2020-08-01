@@ -21,4 +21,6 @@ class User < ApplicationRecord
     self.find_by(id: "0")
   end
 
+
+
 end

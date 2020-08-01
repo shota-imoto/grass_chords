@@ -16,37 +16,30 @@ class Users::SessionsController < Devise::SessionsController
   def create
     # error: before access sessions/create action, automatically sign in even if email & password are correct.
     judge_bot_score = 0.5
+    binding.pry
+    response_json = get_recaptcha_response(params[:user][:token])
+    # response_json = get_recaptcha_response("token")
 
-    siteverify_uri = URI.parse("https://www.google.com/recaptcha/api/siteverify?response=#{params[:user][:token]}&secret=#{Rails.application.credentials.recaptcha[:recaptcha_secret_key]}")
-    response = Net::HTTP.get_response(siteverify_uri)
-    json_response = JSON.parse(response.body)
+    # siteverify_uri = URI.parse("https://www.google.com/recaptcha/api/siteverify?response=#{params[:user][:token]}&secret=#{Rails.application.credentials.recaptcha[:recaptcha_secret_key]}")
+    # response = Net::HTTP.get_response(siteverify_uri)
+    # json_response = JSON.parse(response.body)
 
-    if json_response["success"] && json_response["score"] > judge_bot_score
+    if response_json["success"] && response_json["score"] > judge_bot_score
       user = User.find_by(email: params[:user][:email])
       if user && user.valid_password?(params[:user][:password])
-        respond_to do |format|
-          format.js {
-            flash[:notice] = "ログインしました"
-            render ajax_redirect_to(root_path)
-          }
-        end
+        redirect_to root_path, notice: 'ログインしました'
       else
-        respond_to do |format|
-          format.js {
-            flash[:notice] = "メールアドレスもしくはパスワードに誤りがあります"
-            render ajax_redirect_to(new_user_session_path)
-          }
-        end
+        @user = User.new
+        flash.now[:notice] = "メールもしくはパスワードに誤りがあります"
+        render :new
       end
     else
       # by error, user has already signed in
       # if recaptcha authority is failed, i need user sign out.
       sign_out
-      respond_to do |format|
-        format.js {
-          flash[:notice] = "Googleによって、アクセスが中止されました"
-          render ajax_redirect_to(new_user_session_path) }
-      end
+      @user = User.new
+      flash.now[:notice] = "Googleによって、アクセスが中止されました"
+      render :new
     end
   end
 

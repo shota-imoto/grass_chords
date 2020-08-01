@@ -1,4 +1,5 @@
 require 'rails_helper'
+# 未：recaptcha対応
 
 RSpec.feature "Likes", type: :feature do
   scenario "信頼ボタンの選択、userマイページの確認", js: true do
@@ -7,13 +8,14 @@ RSpec.feature "Likes", type: :feature do
     song = FactoryBot.create(:song, user_id: other_user.id)
     chord = FactoryBot.create(:chord, song_id: song.id, user_id: other_user.id, likes_count: 10)
 
-    visit root_path
-    find(".l-header__opn-box").click
-    click_link "ログイン"
+    login_as(user, :scope => :user)
+    # visit root_path
+    # find(".l-header__opn-box").click
+    # click_link "ログイン"
 
-    fill_in "メール", with: user.email
-    fill_in "パスワード", with: user.password
-    click_button "ログイン"
+    # fill_in "メール", with: user.email
+    # fill_in "パスワード", with: user.password
+    # click_button "ログイン"
 
     visit "songs/#{song.id}"
 
@@ -30,12 +32,15 @@ RSpec.feature "Likes", type: :feature do
     find(".l-header__opn-box").click
     click_link "ログアウト"
 
-    find(".l-header__opn-box").click
-    click_link "ログイン"
+    # find(".l-header__opn-box").click
+    # click_link "ログイン"
 
-    fill_in "メール", with: other_user.email
-    fill_in "パスワード", with: other_user.password
-    click_button "ログイン"
+    # fill_in "メール", with: other_user.email
+    # fill_in "パスワード", with: other_user.password
+    # click_button "ログイン"
+    login_as(other_user)
+
+    visit root_path
 
     find(".l-header__opn-box").click
     click_link "マイページ"
@@ -57,12 +62,14 @@ RSpec.feature "Likes", type: :feature do
     expect(page).to_not have_css(".c-js__like")
     expect(all(".c-review__btn")[3]).to have_content "10"
 
-    find(".l-header__opn-box").click
-    click_link "ログイン"
+    login_as(user, :scope => :user)
 
-    fill_in "メール", with: user.email
-    fill_in "パスワード", with: user.password
-    click_button "ログイン"
+    # find(".l-header__opn-box").click
+    # click_link "ログイン"
+
+    # fill_in "メール", with: user.email
+    # fill_in "パスワード", with: user.password
+    # click_button "ログイン"
 
     visit "songs/#{song.id}"
 
