@@ -13,13 +13,14 @@ default: &default
   adapter: mysql2
   encoding: utf8
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
-  username: root
-  # password:
-  password: pass1234
-  host: db
 
 development:
   <<: *default
+  username: root
+  password:
+  # password: pass1234
+  # host: localhost
+  # port: 3306
   socket: /tmp/mysql.sock
   database: grass_chords_development
 
@@ -28,31 +29,12 @@ development:
 # Do not set this db to the same as development or production.
 test:
   <<: *default
-  socket: /tmp/mysql.sock
+  # socket: /tmp/mysql.sock
   database: grass_chords_test
 
-# As with config/secrets.yml, you never want to store sensitive information,
-# like your database password, in your source code. If your source code is
-# ever seen by anyone, they now have access to your database.
-#
-# Instead, provide the password as a unix environment variable when you boot
-# the app. Read http://guides.rubyonrails.org/configuring.html#configuring-a-database
-# for a full rundown on how to provide these environment variables in a
-# production deployment.
-#
-# On Heroku and other platform providers, you may have a full connection URL
-# available as an environment variable. For example:
-#
-#   DATABASE_URL="mysql2://myuser:mypass@localhost/somedatabase"
-#
-# You can use this database configuration with:
-#
-#   production:
-#     url: <%= ENV['DATABASE_URL'] %>
-#
 production:
   <<: *default
-  host: <%= ENV['GRASS_CHORDS_DATABASE_ADDRESS'] %>
+  host: <%= Rails.application.credentials.db[:grasschords_database_host] %>
   database: grass_chords_production
-  username: grass_chords
-  password: <%= ENV['GRASS_CHORDS_DATABASE_PASSWORD'] %>
+  username: <%= Rails.application.credentials.db[:grasschords_database_user] %>
+  password: <%= Rails.application.credentials.db[:grasschords_database_password] %>
