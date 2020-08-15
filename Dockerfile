@@ -4,6 +4,9 @@ ENV BUNDLER_VERSION=2.1.4
 
 WORKDIR /grasschords
 
+# ARG RAILS_MASTER_KEY
+# ENV RAILS_MASTER_KEY dfcf8be3b4d9d26d3dfa1767b4ce5f20
+
 COPY Gemfile /grasschords/Gemfile
 COPY Gemfile.lock /grasschords/Gemfile.lock
 

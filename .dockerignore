@@ -1,4 +1,3 @@
-/.Dockerfile
 /.Dockerfile.development
 /.docker-compose_dev.yml
 /.docker-compose.mysql.yml
