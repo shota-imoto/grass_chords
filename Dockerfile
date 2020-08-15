@@ -28,8 +28,3 @@ RUN apk update && \
 
 COPY . /grasschords
 RUN find /grasschords/tmp/cache -name "*" -delete
-
-
-# apkのゴミ
-# ビルドに使用したソース
-#
