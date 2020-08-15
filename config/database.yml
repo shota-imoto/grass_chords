@@ -17,11 +17,11 @@ default: &default
 development:
   <<: *default
   username: root
-  # password:
-  password: pass1234
-  host: localhost
-  port: 3306
-  # socket: /tmp/mysql.sock
+  password:
+  # password: pass1234
+  # host: localhost
+  # port: 3306
+  socket: /tmp/mysql.sock
   database: grass_chords_development
 
 # Warning: The database defined as "test" will be erased and
