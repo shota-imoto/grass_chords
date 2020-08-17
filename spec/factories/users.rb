@@ -5,6 +5,7 @@ FactoryBot.define do
     sequence(:name) {|n| "Jim Mills#{n}"}
     place {"North Carolina"}
     password {"scruggslove"}
+    token {"token"}
 
     factory :ricky, class: User do
       name {"Ricky Skaggs"}

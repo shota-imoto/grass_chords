@@ -1,4 +1,4 @@
-
+%script{src: "https://www.google.com/recaptcha/api.js?render=6LdDibUZAAAAAB3YKCwEDjWuSwzOM86evQRvjWah"}
 %aside.l-contents__top.l-contents__top--low-volume.l-contents__top--sub
 %article.c-user__position-article
   %section.c-section__sentence-box
@@ -8,11 +8,13 @@
     .c-user__form
       = form_for(resource, as: resource_name, url: session_path(resource_name)) do |f|
         .c-form__area
-          =f.email_field :email, autofocus: true, autocomplete: "email", placeholder: "メール", class:"c-form__textbox c-user__textbox"
-          =f.password_field :password, autocomplete: "current-password", placeholder: "パスワード", class:"c-form__textbox"
+          =f.email_field :email, autofocus: true, autocomplete: "email", placeholder: "メール", class:"c-form__textbox c-user__textbox", required: "required"
+          =f.password_field :password, autocomplete: "current-password", placeholder: "パスワード", class:"c-form__textbox", required: "required"
+          =f.hidden_field :token, class: "c-js__recaptcha-token"
         .c-form__btn-area
           .c-form__area
-            =f.submit "ログイン", class: "c-form__btn c-form__btn--login"
+            -# =f.submit "ログイン", class: "c-form__btn c-form__btn--login"
+            =f.submit "ログイン", class: "c-form__btn c-form__btn--login c-js__recaptcha"
           .c-form__area
             .c-form__btn.c-form__btn--login.c-form__btn-blue
               =link_to "お試しログイン", users_test_sign_in_path
