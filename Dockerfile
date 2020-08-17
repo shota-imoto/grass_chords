@@ -4,7 +4,6 @@ ENV BUNDLER_VERSION=2.1.4
 
 WORKDIR /grasschords
 
-
 COPY Gemfile /grasschords/Gemfile
 COPY Gemfile.lock /grasschords/Gemfile.lock
 
