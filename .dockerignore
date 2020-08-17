@@ -9,6 +9,5 @@ nginx
 spec
 .byebug_history
 .DS_Store
-!public/favicon.ico
 !public/robots.txt
 config/master.key
