@@ -1,0 +1,14 @@
+/.Dockerfile.development
+/.docker-compose_dev.yml
+/.docker-compose.mysql.yml
+
+log/development.log
+log/test.log
+tmp/capybara
+nginx
+spec
+.byebug_history
+.DS_Store
+!public/favicon.ico
+!public/robots.txt
+config/master.key

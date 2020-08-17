@@ -12,7 +12,13 @@
 
 ActiveRecord::Schema.define(version: 2020_07_04_121132) do
 
-  create_table "chords", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+  create_table "artists", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci", force: :cascade do |t|
+    t.string "name", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "chords", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci", force: :cascade do |t|
     t.bigint "song_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -25,7 +31,7 @@ ActiveRecord::Schema.define(version: 2020_07_04_121132) do
     t.index ["user_id"], name: "index_chords_on_user_id"
   end
 
-  create_table "chordunits", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+  create_table "chordunits", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci", force: :cascade do |t|
     t.integer "address", null: false
     t.text "text"
     t.string "leftbar"
@@ -37,7 +43,18 @@ ActiveRecord::Schema.define(version: 2020_07_04_121132) do
     t.index ["chord_id"], name: "index_chordunits_on_chord_id"
   end
 
-  create_table "likes", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+  create_table "keys", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci", force: :cascade do |t|
+    t.string "name", null: false
+    t.boolean "instrumental", null: false
+    t.boolean "male", null: false
+    t.boolean "female", null: false
+    t.bigint "song_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["song_id"], name: "index_keys_on_song_id"
+  end
+
+  create_table "likes", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci", force: :cascade do |t|
     t.bigint "chord_id"
     t.bigint "user_id"
     t.datetime "created_at", null: false
@@ -46,7 +63,7 @@ ActiveRecord::Schema.define(version: 2020_07_04_121132) do
     t.index ["user_id"], name: "index_likes_on_user_id"
   end
 
-  create_table "practice_songs", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+  create_table "practice_songs", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci", force: :cascade do |t|
     t.bigint "song_id"
     t.bigint "user_id"
     t.datetime "created_at", null: false
@@ -55,7 +72,7 @@ ActiveRecord::Schema.define(version: 2020_07_04_121132) do
     t.index ["user_id"], name: "index_practice_songs_on_user_id"
   end
 
-  create_table "practices", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+  create_table "practices", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci", force: :cascade do |t|
     t.bigint "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -66,7 +83,7 @@ ActiveRecord::Schema.define(version: 2020_07_04_121132) do
     t.index ["user_id"], name: "index_practices_on_user_id"
   end
 
-  create_table "songs", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+  create_table "songs", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci", force: :cascade do |t|
     t.string "title", null: false
     t.boolean "jam", null: false
     t.boolean "standard", null: false
@@ -80,7 +97,7 @@ ActiveRecord::Schema.define(version: 2020_07_04_121132) do
     t.index ["user_id"], name: "index_songs_on_user_id"
   end
 
-  create_table "users", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+  create_table "users", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci", force: :cascade do |t|
     t.string "name", null: false
     t.string "place"
     t.string "email", default: "", null: false
@@ -98,6 +115,7 @@ ActiveRecord::Schema.define(version: 2020_07_04_121132) do
   add_foreign_key "chords", "songs"
   add_foreign_key "chords", "users"
   add_foreign_key "chordunits", "chords"
+  add_foreign_key "keys", "songs"
   add_foreign_key "likes", "chords"
   add_foreign_key "likes", "users"
   add_foreign_key "practice_songs", "songs"

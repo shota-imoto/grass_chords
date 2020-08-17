@@ -45,13 +45,20 @@
 女声であれば楽曲全体の音程(=キー)を高く引き上げて演奏することがある。
 キーの変更に合わせて変化するコード進行を譜面表示に反映する
 
+# 非機能要件
+
+- ロードバランシング
+- ローリングアップデート
+- サーバ構成(Web サーバ 1 台, DB サーバ 1 台)
+
 # 使用技術・言語
 
 - フロントエンド(javascript, jQuery, HTML/CSS, HAML, SASS)
 - バックエンド(Ruby on Rails)
 - インフラ(MySQL, nginx, unicorn)
 - テスト(RSpec, FactoryBot)
-- AWS VPC, EC2, Route53, ELB, ACM(Web サーバ 1 台, DB サーバ 1 台)
+- Docker, docker-compose
+- AWS VPC, EC2, Route53, ELB, ACM, ECS, SSM
 
 # このアプリで解決したい課題
 
