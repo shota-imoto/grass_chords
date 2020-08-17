@@ -48,6 +48,7 @@
 
 - ロードバランシング
 - ローリングアップデート
+- サーバ構成(Web サーバ 1 台, DB サーバ 1 台)
 
 # 使用技術・言語
 
@@ -55,7 +56,8 @@
 - バックエンド(Ruby on Rails)
 - インフラ(MySQL, nginx, unicorn)
 - テスト(RSpec, FactoryBot)
-- AWS VPC, EC2, Route53, ELB, ACM(Web サーバ 1 台, DB サーバ 1 台)
+- Docker, docker-compose
+- AWS VPC, EC2, Route53, ELB, ACM, ECS, SSM
 
 # このアプリで解決したい課題
 

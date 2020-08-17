@@ -11,3 +11,4 @@ spec
 .DS_Store
 !public/favicon.ico
 !public/robots.txt
+config/master.key
