@@ -1,7 +1,7 @@
 # アプリ概要
 
 [GrassChords](https://grasschords.com "GrassChords")
-※スマートフォンでの閲覧推奨
+※スマートフォン向けサイト(PC でも閲覧可能)
 
 "Bluegrass"という音楽の「初心者向けジャムセッション支援アプリ」 です。
 ジャムセッションとは、「みんなが知っている定番曲」をその場にいる人で即興で演奏することです。
@@ -23,11 +23,10 @@
 - 楽曲の属性表示機能(初心者向け曲など)
 - 楽曲の条件検索機能: キーワード + 属性検索(ajax 対応)
 - コード譜の信頼度評価ボタン(ajax)
-- コード譜の練習していることの表明ボタン(ajax)
+- 楽曲の練習をしていることの表明ボタン(ajax)
 - コード譜の信頼度順ソート機能
 - 楽曲の練習人数ソート機能
 - ユーザ登録機能
-- ReCAPTCHA(API)を用いたセキュアなユーザ認証機能
 - ユーザ情報 編集機能
 - ユーザ認証機能
 - マイページ 練習曲の管理機能
@@ -36,10 +35,7 @@
 - グローバルメニュー(ハンバーガーメニュー)
 - グローバルサーチ
 - エラーハンドリング
-- モデル単体テスト(rspec)
-- CSS の flocss 対応
 - AWS インフラ(Web サーバ 1 台＋ DB サーバ 1 台)
-- HTTPS 接続
 
 ※音楽用語。曲全体の音の高さのこと(日本語呼称:ハ長調やト短調)
 女声であれば楽曲全体の音程(=キー)を高く引き上げて演奏することがある。
@@ -47,18 +43,23 @@
 
 # 非機能要件
 
+- HTTPS 接続
+- ReCAPTCHA(API)を用いたセキュアなユーザ認証
+- CSS の flocss 対応
+- モデル/コントローラの単体テスト(rspec)
+- 統合テスト(capybara)
 - ロードバランシング
 - ローリングアップデート
-- サーバ構成(Web サーバ 1 台, DB サーバ 1 台)
+- サーバ構成 Web サーバ 2 台(ECS クラスター), DB サーバ 1 台
 
 # 使用技術・言語
 
 - フロントエンド(javascript, jQuery, HTML/CSS, HAML, SASS)
 - バックエンド(Ruby on Rails)
 - インフラ(MySQL, nginx, unicorn)
-- テスト(RSpec, FactoryBot)
+- テスト(RSpec, FactoryBot, Capybara)
 - Docker, docker-compose
-- AWS VPC, EC2, Route53, ELB, ACM, ECS, SSM
+- AWS VPC, EC2, Route53, ELB, ACM, ECS, SSM, KMS
 
 # このアプリで解決したい課題
 
