@@ -6,6 +6,8 @@ orbs:
 
 jobs:
   build:
+    docker:
+      - image: shotaimoto/grasschords_web:latest
     steps:
       - checkout
       - ruby/install-deps
@@ -43,8 +45,6 @@ jobs:
           name: run rspec test
           command: bin/rspec
       # Run rspec in parallel
-      - ruby/rspec-test
-      - ruby/rubocop-check
 
 workflows:
   version: 2
