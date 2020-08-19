@@ -79,5 +79,5 @@ gem 'devise'
 gem 'font-awesome-sass'
 gem 'jquery-rails'
 gem 'rails-i18n'
-gem 'unicorn', '5.4.1'
+gem 'unicorn', '5.5.5'
 gem 'recaptcha', require: "recaptcha/rails"
