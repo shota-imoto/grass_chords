@@ -20,13 +20,12 @@ jobs:
         environment:
           RAILS_ENV: test
       - image: circleci/mysql:8.04
-          environment:
-            MYSQL_ALLOW_EMPTY_PASSWORD: true
-            MYSQL_DATABASE: grass_chords_test
-            MYSQL_HOST: 127.0.0.1
-            MYSQL_ROOT_HOST: %
-            MYSQL_USER: root
-
+        environment:
+          MYSQL_ALLOW_EMPTY_PASSWORD: true
+          MYSQL_DATABASE: grass_chords_test
+          MYSQL_HOST: 127.0.0.1
+          MYSQL_ROOT_HOST: %
+          MYSQL_USER: root
     steps:
       - checkout
       - ruby/install-deps
