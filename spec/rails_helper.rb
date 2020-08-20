@@ -7,7 +7,6 @@ abort("The Rails environment is running in production mode!") if Rails.env.produ
 require 'rspec/rails'
 require 'capybara/rspec'
 
-Dir[Rails.root.join('spec/support/**/*.rb')].each { |f| require f }
 # Capybara.javascript_driver = :selenium_chrome
 # Capybara.default_max_wait_time = 2
 JS_DRIVER = :selenium_chrome_headless

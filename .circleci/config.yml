@@ -51,10 +51,11 @@ jobs:
           MYSQL_USER: root
     steps:
       - checkout
-      - run:
-          name: arrange test env
-          command: |
-            brew install chromedriver
+      # - run:
+      #     name: arrange test env
+      #     command: |
+      #       sh -c "$(curl -fsSL https://raw.githubusercontent.com/Linuxbrew/install/master/install.sh)"
+      #       brew install chromedriver
       # - run:
       # name: install Chrome
       # command: |
