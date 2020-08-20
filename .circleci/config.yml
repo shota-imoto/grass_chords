@@ -36,12 +36,14 @@ jobs:
   test:
     parallelism: 3
     docker:
-      - image: circleci/ruby:2.5.1
+      - image: circleci/ruby:2.5.1-stretch-node-browsers
         environment:
           # BUNDLE_JOBS: "3"
           # BUNDLE_RETRY: "3"
           RAILS_ENV: test
-      - image: circleci/mysql:8.04
+          BUNDLER_VERSION: 2.1.4
+          RAILS_MASTER_KEY: 3924e131df171b94629b234db5b13103
+      - image: circleci/mysql:5.7.31
         environment:
           MYSQL_ALLOW_EMPTY_PASSWORD: true
           MYSQL_DATABASE: grass_chords_test
@@ -49,13 +51,31 @@ jobs:
           MYSQL_USER: root
     steps:
       - checkout
+      - run:
+          name: arrange test env
+          command: |
+            brew install chromedriver
+      # - run:
+      # name: install Chrome
+      # command: |
+      #   sudo apt-get update
+      #   sudo apt-get upgrade
+      #   sudo apt-get install fonts-liberation libappindicator3-1 libasound2 libnspr4 libxss1 libnss3 xdg-utils
+      #   wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
+      #   sudo dpkg -i google-chrome-stable_current_amd64.deb
+      #   sudo apt-get install
+      - run:
+          name: install dependencies
+          command: |
+            gem update --system
+            gem install bundler
       - ruby/install-deps
       # - node/install-packages:
       #     pkg-manager: yarn
       #     cache-key: "yarn.lock"
       - run:
           name: Wait for DB
-          command: dockerize -wait tcp://localhost:5432 -timeout 1m
+          command: dockerize -wait tcp://localhost:3306 -timeout 1m
       - run:
           name: Database setup
           command: |

@@ -7,7 +7,13 @@ abort("The Rails environment is running in production mode!") if Rails.env.produ
 require 'rspec/rails'
 require 'capybara/rspec'
 
-Capybara.javascript_driver = :selenium_chrome
+Dir[Rails.root.join('spec/support/**/*.rb')].each { |f| require f }
+# Capybara.javascript_driver = :selenium_chrome
+# Capybara.default_max_wait_time = 2
+JS_DRIVER = :selenium_chrome_headless
+
+Capybara.default_driver = :rack_test
+Capybara.javascript_driver = JS_DRIVER
 Capybara.default_max_wait_time = 2
 
 # Add additional requires below this line. Rails is not loaded until this point!
@@ -32,6 +38,15 @@ Capybara.default_max_wait_time = 2
 ActiveRecord::Migration.maintain_test_schema!
 
 RSpec.configure do |config|
+  config.before(:each) do |example|
+    Capybara.current_driver = JS_DRIVER if example.metadata[:js]
+    Capybara.current_driver = :selenium if example.metadata[:selenium]
+    Capybara.current_driver = :selenium_chrome if example.metadata[:selenium_chrome]
+  end
+
+  config.after(:each) do
+    Capybara.use_default_driver
+  end
   # Remove this line if you're not using ActiveRecord or ActiveRecord fixtures
   config.fixture_path = "#{::Rails.root}/spec/fixtures"
 

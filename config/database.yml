@@ -5,6 +5,7 @@ default: &default
 
 development:
   <<: *default
+  host: 127.0.0.1
   username: root
   password:
   socket: /tmp/mysql.sock
@@ -12,6 +13,7 @@ development:
 
 test:
   <<: *default
+  host: 127.0.0.1
   username: root
   password:
   socket: /tmp/mysql.sock
