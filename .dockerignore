@@ -5,9 +5,11 @@
 log/development.log
 log/test.log
 tmp/capybara
+tmp/cache
 nginx
 spec
 .byebug_history
 .DS_Store
 !public/robots.txt
+
 config/master.key
