@@ -91,7 +91,7 @@ workflows:
     jobs:
       - test
       - deploy
-          # filters:
-          #   only: master
           requires:
             - test
+          # filters:
+          #   only: master
