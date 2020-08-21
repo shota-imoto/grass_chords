@@ -76,7 +76,7 @@ jobs:
           command: docker image build -t shotaimoto/grasschords_webtest:latest .
       - run:
           name: image push
-          command: docker push shotaimoto/grasschords_web:latest
+          command: docker push shotaimoto/grasschords_webtest:latest
       # - run:
       #     name: install dependencies
       #     command: |
