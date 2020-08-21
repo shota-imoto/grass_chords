@@ -97,7 +97,6 @@ jobs:
           aws-access-key-id: $AWS_ACCESS_KEY_ID
           aws-region: $AWS_DEFAULT_REGION
       - aws-ecs/update-service:
-          aws-region: $AWS_DEFAULT_REGION
           family: $AWS_RESOURCE_NAME_PREFIX
           service-name: $AWS_RESOURCE_NAME_SERVICE
           cluster-name: $AWS_RESOURCE_NAME_CLUSTER
