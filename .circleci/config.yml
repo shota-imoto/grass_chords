@@ -6,109 +6,107 @@ orbs:
   aws-cli: circleci/aws-cli@1.2.1
   aws-ecs: circleci/aws-ecs@1.3.0
 
-# jobs:
-#   test:
-#     parallelism:
-#     docker:
-#       - image: circleci/ruby:2.5.1-stretch-node-browsers
-#         environment:
-#           # BUNDLE_JOBS: "3"
-#           # BUNDLE_RETRY: "3"
-#           RAILS_ENV: test
-#           BUNDLER_VERSION: 2.1.4
-#       - image: circleci/mysql:5.7.31
-#         environment:
-#           MYSQL_ALLOW_EMPTY_PASSWORD: true
-#           MYSQL_DATABASE: grass_chords_test
-#           MYSQL_HOST: 127.0.0.1
-#           MYSQL_USER: root
+jobs:
+  test:
+    parallelism:
+    docker:
+      - image: circleci/ruby:2.5.1-stretch-node-browsers
+        environment:
+          # BUNDLE_JOBS: "3"
+          # BUNDLE_RETRY: "3"
+          RAILS_ENV: test
+          BUNDLER_VERSION: 2.1.4
+      - image: circleci/mysql:5.7.31
+        environment:
+          MYSQL_ALLOW_EMPTY_PASSWORD: true
+          MYSQL_DATABASE: grass_chords_test
+          MYSQL_HOST: 127.0.0.1
+          MYSQL_USER: root
 
-#     steps:
-#       - checkout
-#       # - run:
-#       #     name: arrange test env
-#       #     command: |
-#       #       sh -c "$(curl -fsSL https://raw.githubusercontent.com/Linuxbrew/install/master/install.sh)"
-#       #       brew install chromedriver
-#       - run:
-#           name: install Chrome
-#           command: sudo apt-get --only-upgrade install google-chrome-stable
-#       #   sudo apt-get update
-#       #   sudo apt-get upgrade
-#       #   sudo apt-get install fonts-liberation libappindicator3-1 libasound2 libnspr4 libxss1 libnss3 xdg-utils
-#       #   wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
-#       #   sudo dpkg -i google-chrome-stable_current_amd64.deb
-#       #   sudo apt-get install
-#       - run:
-#           name: install dependencies
-#           command: |
-#             gem update --system
-#             gem install bundler
-#       - ruby/install-deps
-#       # - node/install-packages:
-#       #     pkg-manager: yarn
-#       #     cache-key: "yarn.lock"
-#       - run:
-#           name: Wait for DB
-#           command: dockerize -wait tcp://localhost:3306 -timeout 1m
-#       - run:
-#           name: Database setup
-#           command: |
-#             bundle exec rails db:create
-#             bundle exec rails db:migrate
-#       - run:
-#           name: run rspec test
-#           command: bin/rspec
-#   build_and_push:
-#     docker:
-#       - image: circleci/ruby:2.5.1
-#         user: root
-#         environment:
-#           BUNDLER_VERSION: 2.1.4
-#     steps:
-#       - checkout
-#       - setup_remote_docker
-#       - run:
-#           name: login docker
-#           command: echo "$DOCKER_PASSWORD" | docker login --username $DOCKER_USER --password-stdin
-#       - run:
-#           name: image build
-#           command: docker image build -t shotaimoto/grasschords_web:latest .
-#       - run:
-#           name: image push
-#           command: docker push shotaimoto/grasschords_web:latest
-#       # - run:
-#       #     name: install dependencies
-#       #     command: |
-#       #       gem update --system
-#       #       gem install bundler
-#       # - ruby/install-deps
-#       # Store bundle cache
-#       # - node/install-packages:
-#       #     pkg-manager: yarn
-#       #     cache-key: "yarn.lock"
-#   # deploy:
-#   #   parallelism: 3
-#   #   docker:
-#   #     - image: circleci/python:3.8-node
-#   #   steps:
-#   #     - aws-cli/install
-#   #     - aws-cli/setup
-#   # container-image-name-updates: "container=${AWS_RESOURCE_NAME_PREFIX}-service,tag=${CIRCLE_SHA1}"
+    steps:
+      - checkout
+      # - run:
+      #     name: arrange test env
+      #     command: |
+      #       sh -c "$(curl -fsSL https://raw.githubusercontent.com/Linuxbrew/install/master/install.sh)"
+      #       brew install chromedriver
+      - run:
+          name: install Chrome
+          command: sudo apt-get --only-upgrade install google-chrome-stable
+      #   sudo apt-get update
+      #   sudo apt-get upgrade
+      #   sudo apt-get install fonts-liberation libappindicator3-1 libasound2 libnspr4 libxss1 libnss3 xdg-utils
+      #   wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
+      #   sudo dpkg -i google-chrome-stable_current_amd64.deb
+      #   sudo apt-get install
+      - run:
+          name: install dependencies
+          command: |
+            gem update --system
+            gem install bundler
+      - ruby/install-deps
+      # - node/install-packages:
+      #     pkg-manager: yarn
+      #     cache-key: "yarn.lock"
+      - run:
+          name: Wait for DB
+          command: dockerize -wait tcp://localhost:3306 -timeout 1m
+      - run:
+          name: Database setup
+          command: |
+            bundle exec rails db:create
+            bundle exec rails db:migrate
+      - run:
+          name: run rspec test
+          command: bin/rspec
+  build_and_push:
+    docker:
+      - image: circleci/ruby:2.5.1
+        user: root
+        environment:
+          BUNDLER_VERSION: 2.1.4
+    steps:
+      - checkout
+      - setup_remote_docker
+      - run:
+          name: login docker
+          command: echo "$DOCKER_PASSWORD" | docker login --username $DOCKER_USER --password-stdin
+      - run:
+          name: image build
+          command: docker image build -t shotaimoto/grasschords_web:latest .
+      - run:
+          name: image push
+          command: docker push shotaimoto/grasschords_web:latest
+      # - run:
+      #     name: install dependencies
+      #     command: |
+      #       gem update --system
+      #       gem install bundler
+      # - ruby/install-deps
+      # Store bundle cache
+      # - node/install-packages:
+      #     pkg-manager: yarn
+      #     cache-key: "yarn.lock"
+  # deploy:
+  #   parallelism: 3
+  #   docker:
+  #     - image: circleci/python:3.8-node
+  #   steps:
+  #     - aws-cli/install
+  #     - aws-cli/setup
+  # container-image-name-updates: "container=${AWS_RESOURCE_NAME_PREFIX}-service,tag=${CIRCLE_SHA1}"
 
 workflows:
   version: 2
-  # build_and_test:
-  #   jobs:
-  #     - test
-  #     - build_and_push:
-  #         requires:
-  #           - test
-  rails_deploy:
+  build_and_test:
     jobs:
+      - test
+      - build_and_push:
+          requires:
+            - test
       - aws-ecs/deploy-service-update:
-          # requires:
-          #   - build_and_test
+          requires:
+            - build_and_push
           family: $AWS_RESOURCE_NAME_PREFIX
           service-name: $AWS_RESOURCE_NAME_SERVICE
           cluster-name: $AWS_RESOURCE_NAME_CLUSTER
