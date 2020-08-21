@@ -90,8 +90,8 @@ workflows:
   build_and_test:
     jobs:
       - test
-      - deploy
+      - deploy:
           requires:
             - test
-          # filters:
-          #   only: master
+            # filters:
+            #   only: master
