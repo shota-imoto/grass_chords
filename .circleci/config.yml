@@ -56,9 +56,9 @@ jobs:
       #     command: |
       #       sh -c "$(curl -fsSL https://raw.githubusercontent.com/Linuxbrew/install/master/install.sh)"
       #       brew install chromedriver
-      # - run:
-      # name: install Chrome
-      # command: |
+      - run:
+          name: install Chrome
+          command: sudo apt-get --only-upgrade install google-chrome-stable
       #   sudo apt-get update
       #   sudo apt-get upgrade
       #   sudo apt-get install fonts-liberation libappindicator3-1 libasound2 libnspr4 libxss1 libnss3 xdg-utils
