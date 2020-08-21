@@ -87,21 +87,14 @@ jobs:
       # - node/install-packages:
       #     pkg-manager: yarn
       #     cache-key: "yarn.lock"
-  deploy:
-    parallelism: 3
-    docker:
-      - image: circleci/ruby:2.5.1
-    steps:
-      - aws-cli/install
-      - aws-cli/setup:
-          aws-access-key-id: $AWS_ACCESS_KEY_ID
-          aws-secret-access-key: $AWS_SECRET_ACCESS_KEY
-          aws-region: $AWS_DEFAULT_REGION
-      - aws-ecs/update-service:
-          family: $AWS_RESOURCE_NAME_PREFIX
-          service-name: $AWS_RESOURCE_NAME_SERVICE
-          cluster-name: $AWS_RESOURCE_NAME_CLUSTER
-        # container-image-name-updates: "container=${AWS_RESOURCE_NAME_PREFIX}-service,tag=${CIRCLE_SHA1}"
+  # deploy:
+  #   parallelism: 3
+  #   docker:
+  #     - image: circleci/python:3.8-node
+  #   steps:
+  #     - aws-cli/install
+  #     - aws-cli/setup
+  # container-image-name-updates: "container=${AWS_RESOURCE_NAME_PREFIX}-service,tag=${CIRCLE_SHA1}"
 
 workflows:
   version: 2
@@ -111,8 +104,13 @@ workflows:
       - build_and_push:
           requires:
             - test
-      - deploy:
-          requires:
-            - build_and_push
+  rails_deploy:
+    jobs:
+      - aws-ecs/deploy-service-update:
+          # requires:
+          #   - build_and_test
+          family: $AWS_RESOURCE_NAME_PREFIX
+          service-name: $AWS_RESOURCE_NAME_SERVICE
+          cluster-name: $AWS_RESOURCE_NAME_CLUSTER
         # filters:
         #   only: master
