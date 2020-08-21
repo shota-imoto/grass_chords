@@ -27,4 +27,4 @@ RUN apk update && \
     find /usr/local/bundle/ruby/2.5.0/gems/sassc-2.3.0 -name "*" -delete
 
 COPY . /grasschords
-RUN find /grasschords/tmp/cache -name "*" -delete
+# RUN find /grasschords/tmp/cache -name "*" -delete
