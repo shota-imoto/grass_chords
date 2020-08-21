@@ -5,7 +5,7 @@ orbs:
   node: circleci/node@2
 
 jobs:
-  build:
+  deploy:
     docker:
       - image: circleci/ruby:2.5.1
         user: root
@@ -14,15 +14,15 @@ jobs:
     steps:
       - checkout
       - setup_remote_docker
-      # - run:
-      #     name: login docker
-      #     command: echo "$DOCKER_PASSWORD" | docker login --username $DOCKER_USER --password-stdin
+      - run:
+          name: login docker
+          command: echo "$DOCKER_PASSWORD" | docker login --username $DOCKER_USER --password-stdin
       - run:
           name: image build
           command: docker image build -t shotaimoto/grasschords_web:latest .
-      # - run:
-      #     name: image push
-      #     command: docker push shotaimoto/grasschords_web:latest
+      - run:
+          name: image push
+          command: docker push shotaimoto/grasschords_web:latest
       # - run:
       #     name: install dependencies
       #     command: |
@@ -48,6 +48,7 @@ jobs:
           MYSQL_DATABASE: grass_chords_test
           MYSQL_HOST: 127.0.0.1
           MYSQL_USER: root
+
     steps:
       - checkout
       # - run:
@@ -88,7 +89,9 @@ workflows:
   version: 2
   build_and_test:
     jobs:
-      - build
-      - test:
+      - test
+      - deploy
+          # filters:
+          #   only: master
           requires:
-            - build
+            - test
