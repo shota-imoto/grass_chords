@@ -3,9 +3,11 @@ version: 2.1
 orbs:
   ruby: circleci/ruby@1.1.0
   node: circleci/node@2
+  aws-cli: circleci/aws-cli@0.1.4
+  aws-ecs: circleci/aws-ecs@0.0.8
 
 jobs:
-  deploy:
+  build_and_push:
     docker:
       - image: circleci/ruby:2.5.1
         user: root
@@ -33,8 +35,23 @@ jobs:
       # - node/install-packages:
       #     pkg-manager: yarn
       #     cache-key: "yarn.lock"
-  test:
+  deploy:
     parallelism: 3
+    docker:
+      - image: circleci/ruby:2.5.1
+    steps:
+      - aws-cli/install
+      - aws-cli/configure:
+          aws-access-key-id: $AWS_ACCESS_KEY_ID
+          aws-region: $AWS_DEFAULT_REGION
+      - aws-ecs/deploy-service-update:
+          aws-region: $AWS_DEFAULT_REGION
+          family: $AWS_RESOURCE_NAME_PREFIX
+          service-name: $AWS_RESOURCE_NAME_SERVICE
+          cluster-name: $AWS_RESOURCE_NAME_CLUSTER
+        # container-image-name-updates: "container=${AWS_RESOURCE_NAME_PREFIX}-service,tag=${CIRCLE_SHA1}"
+  test:
+    parallelism:
     docker:
       - image: circleci/ruby:2.5.1-stretch-node-browsers
         environment:
@@ -90,8 +107,11 @@ workflows:
   build_and_test:
     jobs:
       - test
-      - deploy:
+      - build_and_push:
           requires:
             - test
-            # filters:
-            #   only: master
+      - deploy:
+          requires:
+            - build_and_push
+        # filters:
+        #   only: master
