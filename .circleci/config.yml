@@ -7,49 +7,6 @@ orbs:
   aws-ecs: circleci/aws-ecs@0.0.8
 
 jobs:
-  build_and_push:
-    docker:
-      - image: circleci/ruby:2.5.1
-        user: root
-        environment:
-          BUNDLER_VERSION: 2.1.4
-    steps:
-      - checkout
-      - setup_remote_docker
-      - run:
-          name: login docker
-          command: echo "$DOCKER_PASSWORD" | docker login --username $DOCKER_USER --password-stdin
-      - run:
-          name: image build
-          command: docker image build -t shotaimoto/grasschords_web:latest .
-      - run:
-          name: image push
-          command: docker push shotaimoto/grasschords_web:latest
-      # - run:
-      #     name: install dependencies
-      #     command: |
-      #       gem update --system
-      #       gem install bundler
-      # - ruby/install-deps
-      # Store bundle cache
-      # - node/install-packages:
-      #     pkg-manager: yarn
-      #     cache-key: "yarn.lock"
-  deploy:
-    parallelism: 3
-    docker:
-      - image: circleci/ruby:2.5.1
-    steps:
-      - aws-cli/install
-      - aws-cli/configure:
-          aws-access-key-id: $AWS_ACCESS_KEY_ID
-          aws-region: $AWS_DEFAULT_REGION
-      - aws-ecs/deploy-service-update:
-          aws-region: $AWS_DEFAULT_REGION
-          family: $AWS_RESOURCE_NAME_PREFIX
-          service-name: $AWS_RESOURCE_NAME_SERVICE
-          cluster-name: $AWS_RESOURCE_NAME_CLUSTER
-        # container-image-name-updates: "container=${AWS_RESOURCE_NAME_PREFIX}-service,tag=${CIRCLE_SHA1}"
   test:
     parallelism:
     docker:
@@ -102,6 +59,50 @@ jobs:
       - run:
           name: run rspec test
           command: bin/rspec
+  build_and_push:
+    docker:
+      - image: circleci/ruby:2.5.1
+        user: root
+        environment:
+          BUNDLER_VERSION: 2.1.4
+    steps:
+      - checkout
+      - setup_remote_docker
+      - run:
+          name: login docker
+          command: echo "$DOCKER_PASSWORD" | docker login --username $DOCKER_USER --password-stdin
+      - run:
+          name: image build
+          command: docker image build -t shotaimoto/grasschords_web:latest .
+      - run:
+          name: image push
+          command: docker push shotaimoto/grasschords_web:latest
+      # - run:
+      #     name: install dependencies
+      #     command: |
+      #       gem update --system
+      #       gem install bundler
+      # - ruby/install-deps
+      # Store bundle cache
+      # - node/install-packages:
+      #     pkg-manager: yarn
+      #     cache-key: "yarn.lock"
+  deploy:
+    parallelism: 3
+    docker:
+      - image: circleci/ruby:2.5.1
+    steps:
+      - aws-cli/install
+      - aws-cli/configure:
+          aws-access-key-id: $AWS_ACCESS_KEY_ID
+          aws-region: $AWS_DEFAULT_REGION
+      - aws-ecs/update-service:
+          aws-region: $AWS_DEFAULT_REGION
+          family: $AWS_RESOURCE_NAME_PREFIX
+          service-name: $AWS_RESOURCE_NAME_SERVICE
+          cluster-name: $AWS_RESOURCE_NAME_CLUSTER
+        # container-image-name-updates: "container=${AWS_RESOURCE_NAME_PREFIX}-service,tag=${CIRCLE_SHA1}"
+
 workflows:
   version: 2
   build_and_test:
