@@ -73,7 +73,7 @@ jobs:
           command: echo "$DOCKER_PASSWORD" | docker login --username $DOCKER_USER --password-stdin
       - run:
           name: image build
-          command: docker image build -t shotaimoto/grasschords_web:latest .
+          command: docker image build -t shotaimoto/grasschords_webtest:latest .
       - run:
           name: image push
           command: docker push shotaimoto/grasschords_web:latest
