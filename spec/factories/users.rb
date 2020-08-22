@@ -6,6 +6,7 @@ FactoryBot.define do
     place {"North Carolina"}
     password {"scruggslove"}
     token {"token"}
+    image {"image"}
 
     factory :ricky, class: User do
       name {"Ricky Skaggs"}
