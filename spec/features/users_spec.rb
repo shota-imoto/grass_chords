@@ -34,29 +34,39 @@ RSpec.feature "Users", type: :feature do
     expect(page).to_not have_content "マイページ"
     expect(page).to_not have_content "データ作成"
   end
-  scenario "ユーザ登録" do
-    user = FactoryBot.build(:user)
-    visit root_path
+  context do
+    before do
+      response_mock = Net::HTTPOK.new(nil, 200, "OK")
+      http_obj = double("Net::HTTP")
+      recaptcha_mock = '{ "success": true, "challenge_ts": "2020-08-01T03:00:35Z", "hostname": "localhost", "score": 0.9, "action": "submit"}'
+      allow(Net::HTTP).to receive(:get_response).and_return(response_mock)
+      allow(response_mock).to receive(:body).and_return(recaptcha_mock)
+    end
+    scenario "ユーザ登録" do
 
-    expect(page).to_not have_content "マイページ"
-    expect(page).to_not have_content "データ作成"
+      user = FactoryBot.build(:user)
+      visit root_path
 
-    expect{
-    click_link "ユーザ登録"
+      expect(page).to_not have_content "マイページ"
+      expect(page).to_not have_content "データ作成"
 
-    fill_in "名前", with: user.name
-    fill_in "主な活動地域", with: user.place
-    fill_in "メール", with: user.email
-    fill_in "パスワード", with: user.password
-    fill_in "パスワード(確認)", with: user.password
+      expect{
+      click_link "ユーザ登録"
 
-    click_button "登録"
+      fill_in "名前", with: user.name
+      fill_in "主な活動地域", with: user.place
+      fill_in "メール", with: user.email
+      fill_in "パスワード", with: user.password
+      fill_in "パスワード(確認)", with: user.password
 
-    expect(page).to have_current_path(root_path)
-    expect(page).to have_content "ようこそ！ アカウントが登録されました"
-    expect(page).to have_content "マイページ"
-    expect(page).to have_content "データ作成"
-  }.to change(User, :count).by(1)
+      click_button "登録"
+
+      expect(page).to have_current_path(root_path)
+      expect(page).to have_content "ようこそ！ アカウントが登録されました"
+      expect(page).to have_content "マイページ"
+      expect(page).to have_content "データ作成"
+    }.to change(User, :count).by(1)
+    end
   end
 
   scenario "ユーザー情報の編集・削除" do

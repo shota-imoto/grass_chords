@@ -1,3 +1,4 @@
+%script{src: "https://www.google.com/recaptcha/api.js?render=6LdDibUZAAAAAB3YKCwEDjWuSwzOM86evQRvjWah"}
 - @user.errors.full_messages.each do |msg|
   %p.l-header__notice
     =msg
@@ -12,12 +13,11 @@
         .c-form__area
           =f.text_field :name, placeholder:"名前", class:"c-form__textbox c-user__textbox"
           =f.text_field :place, placeholder: "主な活動地域", class:"c-form__textbox c-user__textbox"
-
           =f.email_field :email, autofocus: true, autocomplete: "email", placeholder: "メール", class:"c-form__textbox c-user__textbox"
-          %a (#{@minimum_password_length} characters minimum)
           =f.password_field :password, autocomplete: "new-password", placeholder: "パスワード", class:"c-form__textbox c-user__textbox"
           =f.password_field :password_confirmation, autocomplete: "new-password", placeholder: "パスワード(確認)", class:"c-form__textbox c-user__textbox"
+          =f.hidden_field :token, class: "c-js__recaptcha-token"
         .c-form__area
-          =f.submit "登録", class:"c-form__btn c-form__btn--login"
+          =f.submit "登録", class:"c-form__btn c-form__btn--login c-js__recaptcha"
     %figure
       =image_tag "/images/fiddle.png", class: "c-section__image-fiddle"

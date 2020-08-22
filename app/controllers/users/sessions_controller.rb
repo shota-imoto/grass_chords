@@ -2,7 +2,6 @@
 require "uri"
 require "net/http"
 require "json"
-
 class Users::SessionsController < Devise::SessionsController
   include UsersHelper
   before_action :test_user_call, only: [:test_create]
