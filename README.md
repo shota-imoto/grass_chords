@@ -1,7 +1,7 @@
 # アプリ概要
 
 [GrassChords](https://grasschords.com "GrassChords")
-※スマートフォンでの閲覧推奨
+※スマートフォン向けサイト(PC でも閲覧可能)
 
 "Bluegrass"という音楽の「初心者向けジャムセッション支援アプリ」 です。
 ジャムセッションとは、「みんなが知っている定番曲」をその場にいる人で即興で演奏することです。
@@ -14,51 +14,16 @@
 
 ■ テストユーザーログインも可能ですので、自由にお試しください
 
-# 機能
-
-- コード譜面の作成・編集・削除 機能
-- コード譜面エディター機能
-- コード譜面の閲覧機能(音楽記号対応済み)
-- コード譜のキー(※)切替機能
-- 楽曲の属性表示機能(初心者向け曲など)
-- 楽曲の条件検索機能: キーワード + 属性検索(ajax 対応)
-- コード譜の信頼度評価ボタン(ajax)
-- コード譜の練習していることの表明ボタン(ajax)
-- コード譜の信頼度順ソート機能
-- 楽曲の練習人数ソート機能
-- ユーザ登録機能
-- ReCAPTCHA(API)を用いたセキュアなユーザ認証機能
-- ユーザ情報 編集機能
-- ユーザ認証機能
-- マイページ 練習曲の管理機能
-- テストユーザログイン機能
-- レスポンシブ対応(モバイルファースト)
-- グローバルメニュー(ハンバーガーメニュー)
-- グローバルサーチ
-- エラーハンドリング
-- モデル単体テスト(rspec)
-- CSS の flocss 対応
-- AWS インフラ(Web サーバ 1 台＋ DB サーバ 1 台)
-- HTTPS 接続
-
-※音楽用語。曲全体の音の高さのこと(日本語呼称:ハ長調やト短調)
-女声であれば楽曲全体の音程(=キー)を高く引き上げて演奏することがある。
-キーの変更に合わせて変化するコード進行を譜面表示に反映する
-
-# 非機能要件
-
-- ロードバランシング
-- ローリングアップデート
-- サーバ構成(Web サーバ 1 台, DB サーバ 1 台)
-
 # 使用技術・言語
 
 - フロントエンド(javascript, jQuery, HTML/CSS, HAML, SASS)
-- バックエンド(Ruby on Rails)
+- バックエンド(Ruby on Rails, 外部 API)
 - インフラ(MySQL, nginx, unicorn)
-- テスト(RSpec, FactoryBot)
+- テスト(RSpec, FactoryBot, Capybara)
 - Docker, docker-compose
-- AWS VPC, EC2, Route53, ELB, ACM, ECS, SSM
+- AWS (VPC, EC2, Route53, ELB, ACM, ECS, SSM, KMS, CLI)
+
+# インフラ構成
 
 # このアプリで解決したい課題
 
@@ -85,6 +50,83 @@
 - コード進行の把握 => コード譜を蓄積・共有することで解決
 - 練習曲の選定 => 練習している人の人数を集計したり、初心者向けなど属性表示することでサポート
 
+# 使ってみよう
+
+## コード譜を見つけよう
+
+- トップページの検索窓に"Country Road"と入力し、Jam アイコンをクリックしてから、検索ボタンをクリック
+- 検索結果に表示された"Country Road"をクリック。コード譜が表示されます
+- ジャムしながら見たいときは"拡大して見る"をクリック
+- コードを鳴らしながら歌ってみて、声の高さが合わないと思ったら、"key of G"と表示されているボタンをクリック
+- 表示されるメニューを操作してみましょう。選択したキーに合わせてコード譜の表示が変化します
+
+## 人気曲を調べよう
+
+- トップページの検索機能に何も入力せず、検索ボタンをクリック
+- "練習してる人順"を選択後、もう一度"検索ボタンを"クリック
+- 練習しているユーザが多い曲順に楽曲が表示されます
+
+## 楽曲を登録しましょう
+
+この曲のコード譜がないな？と思った楽曲登録しましょう！
+
+- ユーザログインします(テストユーザログインも可能です)
+- 画面右上にあるボタンからメニューを開き、"データ登録"=>"楽曲を登録"の順にクリック
+- 曲名と楽曲の特徴に該当する特徴をアイコンから選択して、"登録"をクリック
+
+## コード譜を登録しましょう
+
+あなたが Bluegrass 上級者であれば、その知見を必要としている人がいます！
+
+- ユーザログインします(テストユーザログインも可能です)
+- 画面右上にあるボタンからメニューを開き、"データ登録"=>"コード譜"の順にクリック
+- "曲名"に文字を入力すると楽曲が検索表示されます。コード譜を登録したい楽曲を選択しましょう！
+- 画面右下の"Editor"ボタンをクリックすると、編集キーボードが表示されます
+- コード譜を入力したいスペースをクリックすると、カーソル点滅が始まります
+- カーソル点滅状態で編集キーボードをクリックすると選択箇所に入力されます
+- 編集が完了したら編集キーボード右上の × ボタンをクリック
+- スクロールして画面下部まで移動し、"登録"をクリック
+
+ありがとうございます！これであなたの知見が共有されました。
+検索機能で先程登録された楽曲を検索すると、登録が確認できます。
+
+# 機能要件
+
+- コード譜面の作成・編集・削除 機能
+- コード譜面エディター機能
+- コード譜面の閲覧機能(音楽記号対応済み)
+- コード譜のキー(\*)切替機能
+- 楽曲の属性表示機能(初心者向け曲など)
+- 楽曲の条件検索機能: キーワード + 属性検索(ajax 対応)
+- コード譜の信頼度評価ボタン(ajax)
+- 楽曲の練習をしていることの表明ボタン(ajax)
+- コード譜の信頼度順ソート機能
+- 楽曲の練習人数ソート機能
+- ユーザ登録機能
+- ユーザ情報 編集機能
+- ユーザ認証機能
+- マイページ 練習曲の管理機能
+- テストユーザログイン機能
+- グローバルメニュー(ハンバーガーメニュー)
+- グローバルサーチ
+
+\* 音楽用語。曲全体の音の高さのこと(日本語呼称:ハ長調やト短調)
+女声であれば楽曲全体の音程(=キー)を高く引き上げて演奏することがある。
+キーの変更に合わせて変化するコード進行を譜面表示に反映する
+
+# 非機能要件
+
+- レスポンシブ対応(モバイルファースト)
+- CSS の flocss 対応
+- エラーハンドリング
+- ReCAPTCHA(API)を用いたセキュアなユーザ認証
+- HTTPS 接続
+- ロードバランシング
+- ローリングアップデート
+- サーバ構成 Web サーバ 2 台(ECS クラスター), DB サーバ 1 台
+- モデル/コントローラの単体テスト(rspec)
+- 統合テスト(capybara)
+
 # 実装を検討中の機能
 
 - コード表の PDF 出力機能
@@ -93,161 +135,3 @@
 - 流行り曲の集計表示機能
 
 ![jamsession](https://user-images.githubusercontent.com/62494531/87237476-b0fc7c80-c431-11ea-801e-322d550cc0f3.jpg)
-
-# table_setting
-
-## song
-
-### table
-
-| name         | type    | option      |
-| ------------ | ------- | ----------- |
-| title        | string  | null: false |
-| jam          | boolean | null: false |
-| standard     | boolean | null: false |
-| beginner     | boolean | null: false |
-| vocal        | boolean | null: false |
-| instrumental | boolean | null: false |
-| user_id      | integer | null: false |
-
-### association
-
-- has_many :chords, dependent: :destroy
-- has_many :practices, dependent: :destroy
-- has_many :keys, dependent: :destroy
-- has_many :scores, dependent: :destroy
-- belongs_to :user
-
-## practice
-
-### table
-
-| name     | type    | option                   |
-| -------- | ------- | ------------------------ |
-| chord_id | integer | null: false, foreign_key |
-| user_id  | integer | null: false, foreign_key |
-
-### asocciation
-
-- belongs_to :chord, counter_cache: true
-- belongs_to :user
-
-## chord
-
-### table
-
-| name           | type    | option                         |
-| -------------- | ------- | ------------------------------ |
-| song_id        | integer | null: false, foreign_key: true |
-| user_id        | integer | foreign_key: true              |
-| version        | string  |                                |
-| like_count     | integer | null: false                    |
-| practice_count | integer | null:false                     |
-
-### asocciation
-
-- belongs_to :song
-- belongs_to :user
-- has_many :chordunits, dependent: :destroy
-- accepts_nested_attributes_for :chordunits
-- has_many :likes, dependent: :destroy
-- has_many :practices, dependent: :destroy
-- has_many :chordunit
-
-## chordunit
-
-### table
-
-| name     | type    | option      |
-| -------- | ------- | ----------- |
-| address  | integer | null: false |
-| text     | text    |             |
-| leftbar  | string  |             |
-| rightbar | string  |             |
-| beat     | string  |             |
-| chord_id | integer | foreign_key |
-
-### asocciation
-
-- belongs_to :chord
-
-## user
-
-### table
-
-| name                  | type   | option                    |
-| --------------------- | ------ | ------------------------- |
-| name                  | string | null: false, unique: true |
-| email                 | string | null: false, unique: true |
-| password              | text   | null: false, unique: true |
-| password_confirmaiton | text   | null: false, unique: true |
-| place                 | string |                           |
-
-### asocciation
-
-- has_many :chords
-- has_many :likes, dependent: :destroy
-- has_many :practices, dependent: :destroy
-- has_many :instruments, through: :user_instruments
-- has_many :user_instruments
-- has_many :tuning_alls
-- has_many :finger_alls
-
-## like
-
-### table
-
-| name     | type    | option                         |
-| -------- | ------- | ------------------------------ |
-| chord_id | integer | null: false, foreign_key: true |
-| user_id  | integer | null: false, foreign_key: true |
-
-### asocciation
-
-- belongs_to :chord, counter_cache: true
-- belongs_to :user
-
----
-
-# authority
-
-| function                  | administrator | editor | general | guest |
-| ------------------------- | ------------- | ------ | ------- | ----- |
-| make/delete a protection  | o             | o      | x       | x     |
-| delete records other user | o             | o      | x       | x     |
-| make records              | o             | o      | o       | x     |
-| delete records self made  | o             | o      | o       | x     |
-| login                     | x             | x      | x       | o     |
-| user registration         | x             | x      | x       | o     |
-| logout                    | o             | o      | o       | x     |
-| edit account              | o             | o      | o       | x     |
-| make a pdf                | o             | o      | o       | o     |
-
-# main menu
-
-| menu                | guest_mode | user_mode | editor_mode |
-| ------------------- | ---------- | --------- | ----------- |
-| registration        | o          | x         | x           |
-| login               | o          | x         | x           |
-| my_page             | x          | o         | o           |
-| practice_list       | x          | o         | o           |
-| make a pdf          | o          | o         | o           |
-| create - song       | x          | o         | o           |
-| create - chord      | x          | o         | o           |
-| create - finger     | x          | o         | o           |
-| create - instrument | x          | x         | o           |
-| search - score      | o          | o         | o           |
-| create - score      | x          | o         | o           |
-| contact             | o          | o         | o           |
-| logout              | x          | o         | o           |
-
-# routing
-
-- song
-  index, new, create, edit, show, update, destroy
-- chord
-  index, new, create, edit, show, update, destroy
-- user
-  new, create, edit, show, update, destroy
-- practice
-  index, create, update, destroy
