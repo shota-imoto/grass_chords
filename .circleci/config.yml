@@ -71,11 +71,14 @@ workflows:
       - build_and_push:
           requires:
             - test
+          filters:
+            only: master
+
       - aws-ecs/deploy-service-update:
           requires:
             - build_and_push
           family: $AWS_RESOURCE_NAME_PREFIX
           service-name: $AWS_RESOURCE_NAME_SERVICE
           cluster-name: $AWS_RESOURCE_NAME_CLUSTER
-        # filters:
-        #   only: master
+          filters:
+            only: master
