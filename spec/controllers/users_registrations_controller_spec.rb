@@ -6,6 +6,13 @@ RSpec.describe Users::RegistrationsController, type: :controller do
     @test_user = FactoryBot.create(:user, id: 0, name: "Ralph Stanley")
   end
   describe "registrations#create" do
+    before do
+      response_mock = Net::HTTPOK.new(nil, 200, "OK")
+      http_obj = double("Net::HTTP")
+      recaptcha_mock = '{ "success": true, "challenge_ts": "2020-08-01T03:00:35Z", "hostname": "localhost", "score": 0.9, "action": "submit"}'
+      allow(Net::HTTP).to receive(:get_response).and_return(response_mock)
+      allow(response_mock).to receive(:body).and_return(recaptcha_mock)
+    end
     it "userレコードを登録できる" do
       user_params = FactoryBot.attributes_for(:user)
       expect{

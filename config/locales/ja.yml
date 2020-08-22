@@ -19,7 +19,7 @@ ja:
         title: "タイトル"
       user:
         name: 名前
-        email: そのメールアドレス
+        email: メールアドレス
         password: パスワード
         password_confirmation: 確認用のパスワード
   recaptcha:

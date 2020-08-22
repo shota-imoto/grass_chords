@@ -1,6 +1,9 @@
 # frozen_string_literal: true
-
+require "uri"
+require "net/http"
+require "json"
 class Users::RegistrationsController < Devise::RegistrationsController
+  include UsersHelper
   # before_action :configure_sign_up_params, only: [:create]
   # before_action :configure_account_update_params, only: [:update]
   # before_action :set_owner, only: [:edit, :update, :destroy]
@@ -15,7 +18,26 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   # POST /resource
   def create
-    super
+    # error: before access sessions/create action, automatically sign in even if email & password are correct.
+    judge_bot_score = 0.5
+    json_response = get_recaptcha_response(params[:user][:token])
+
+    if json_response["success"] && json_response["score"] > judge_bot_score
+      @user = User.new(user_params)
+      if @user.save
+        sign_in @user
+        redirect_to root_path, notice: "ようこそ！ アカウントが登録されました"
+      else
+        render :new
+      end
+
+    else
+      # by error, user has already signed in
+      # if recaptcha authority is failed, i need user sign out.
+      @user = User.new
+      flash.now[:notice] = "Googleによって、アクセスが中止されました"
+      render :new
+    end
   end
 
   # GET /resource/edit
@@ -45,7 +67,9 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # end
 
   protected
-
+  def user_params
+    params.require(:user).permit(:name, :place, :email, :password, :password_confirmation).merge(encrypted_password: Devise::Encryptor.digest(User, params[:user][:password]))
+  end
   # If you have extra params to permit, append them to the sanitizer.
   # def configure_sign_up_params
   #   devise_parameter_sanitizer.permit(:sign_up, keys: [:name])
