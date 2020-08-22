@@ -108,7 +108,7 @@ $(function () {
     // 音名処理、１列目に存在するときのみ反映
     if (note_name_array.includes(letter_array[i])) {
       if (letter_array[i] == "‘") {
-        var html = `<span class="font_repeat">‘</span>`;
+        var html = `<span class="c-font__repeat">‘</span>`;
         $(
           "#" + unit_id + " > .c-chordunit__note > .c-chordunit__note-name"
         ).append(html);
