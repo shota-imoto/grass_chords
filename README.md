@@ -1,6 +1,6 @@
 # アプリ概要
 
-[GrassChords](./public/images/GrassChords_Env.png "GrassChords")
+[GrassChords](https://grasschords.com "GrassChords")
 ※スマートフォン向けサイト(PC でも閲覧可能)
 
 "Bluegrass"という音楽の「初心者向けジャムセッション支援アプリ」 です。
@@ -24,6 +24,8 @@
 - AWS (VPC, EC2, Route53, ELB, ACM, ECS, SSM, KMS, CLI)
 
 # インフラ構成
+
+![environment](./public/images/GrassChords_Env.png)
 
 # このアプリで解決したい課題
 
