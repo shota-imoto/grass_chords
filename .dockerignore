@@ -11,5 +11,7 @@ spec
 .byebug_history
 .DS_Store
 !public/robots.txt
+.README.md
+public/images/GrassChords_Env.png
 
 config/master.key
