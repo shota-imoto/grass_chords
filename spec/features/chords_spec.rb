@@ -278,30 +278,28 @@ RSpec.feature "Chords", type: :feature do
   end
 
   describe "楽曲個別ページからコード譜作成画面に移行に関わる操作" do
-    context do
-      scenario "コード譜を作成する", js: true do
-        user = FactoryBot.create(:user)
-        song = FactoryBot.create(:song, title: "Blue Ridge Cabin Home")
+    scenario "コード譜を作成する", js: true do
+      user = FactoryBot.create(:user)
+      song = FactoryBot.create(:song, title: "Blue Ridge Cabin Home")
 
-        login_as(user)
-        visit "songs/#{song.id}"
+      login_as(user)
+      visit "songs/#{song.id}"
 
-        click_on "コード譜を作成する"
+      click_on "コード譜を作成する"
 
-        expect{
-          expect(find("#search_song_name").value).to match song.title
+      expect{
+        expect(find("#search_song_name").value).to match song.title
 
-          all(".c-chordunit")[0].click
-          find(".p-chord-new__editor-btn").click
-          all(".c-chord-edit__btn")[0].click
+        all(".c-chordunit")[0].click
+        find(".p-chord-new__editor-btn").click
+        all(".c-chord-edit__btn")[0].click
 
-          find(".c-chord-edit__close").click
-          click_button "登録"
+        find(".c-chord-edit__close").click
+        click_button "登録"
 
-          expect(page).to have_content "コード譜を作成しました"
-          expect(page).to have_content "Blue Ridge Cabin Home"
-        }.to change(song.chords, :count).by(1)
-      end
+        expect(page).to have_content "コード譜を作成しました"
+        expect(page).to have_content "Blue Ridge Cabin Home"
+      }.to change(song.chords, :count).by(1)
     end
 
     context "ログインしていない" do
