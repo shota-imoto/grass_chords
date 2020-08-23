@@ -31,17 +31,21 @@ $(function () {
         sort: sort,
       },
       dataType: "json",
-    }).done(function (results) {
-      $(".p-search-result__results").empty();
+    }).done(function (result) {
+      // $(".p-search-result__results").empty();
+      $(".p-search-result__results").remove();
       $(".c-js__result-counter").empty();
+      console.log(result.songs);
 
-      var insertHTML = "";
-      $.each(results, function (i, result) {
-        insertHTML += viewResult(result);
+      var insertHTML = `<div class="p-search-result__results"><ul class="c-js__pagenation">`;
+      $.each(result.songs, function (i, song) {
+        if (i == 8) return false;
+        insertHTML += viewResult(song);
       });
+      insertHTML += `</div></div>`;
 
-      $(".p-search-result__results").append(insertHTML);
-      $(".c-js__result-counter").text($(results).size() + " results..");
+      $(".p-search-result__section").append(insertHTML);
+      $(".c-js__result-counter").text(result.count + " results..");
       icon_color();
     });
   }
