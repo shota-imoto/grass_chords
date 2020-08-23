@@ -118,8 +118,6 @@ RSpec.feature "Chords", type: :feature do
 
     login_as(user)
 
-    visit root_path
-
     visit "chords/#{chord.id}"
 
     click_link "Edit"
@@ -174,8 +172,6 @@ RSpec.feature "Chords", type: :feature do
 
     login_as(user)
 
-    visit root_path
-
     visit "chords/#{chord.id}"
 
     click_link "Edit"
@@ -191,8 +187,6 @@ RSpec.feature "Chords", type: :feature do
     chord = FactoryBot.create(:chord, song_id: song.id, user_id: user.id)
 
     login_as(user)
-
-    visit root_path
 
     visit "chords/#{chord.id}"
 
@@ -211,8 +205,6 @@ RSpec.feature "Chords", type: :feature do
     chord = FactoryBot.create(:chord, song_id: song.id, user_id: other_user.id)
 
     login_as(user)
-
-    visit root_path
 
     visit "chords/#{chord.id}"
 
@@ -283,5 +275,89 @@ RSpec.feature "Chords", type: :feature do
     expect(all(".c-chordunit__modifier")[0]).to have_content "m"
     expect(all(".c-chordunit__leftbar")[0]).to have_content "{"
     expect(all(".c-chordunit__rightbar")[0]).to have_content "}"
+  end
+
+  describe "楽曲個別ページからコード譜作成画面に移行に関わる操作" do
+    context do
+      scenario "コード譜を作成する", js: true do
+        user = FactoryBot.create(:user)
+        song = FactoryBot.create(:song, title: "Blue Ridge Cabin Home")
+
+        login_as(user)
+        visit "songs/#{song.id}"
+
+        click_on "コード譜を作成する"
+
+        expect{
+          expect(find("#search_song_name").value).to match song.title
+
+          all(".c-chordunit")[0].click
+          find(".p-chord-new__editor-btn").click
+          all(".c-chord-edit__btn")[0].click
+
+          find(".c-chord-edit__close").click
+          click_button "登録"
+
+          expect(page).to have_content "コード譜を作成しました"
+          expect(page).to have_content "Blue Ridge Cabin Home"
+        }.to change(song.chords, :count).by(1)
+      end
+    end
+
+    context "ログインしていない" do
+      scenario "ログイン画面への移行が可能" do
+        song = FactoryBot.create(:song, title: "Blue Ridge Cabin Home")
+        visit "songs/#{song.id}"
+
+        click_on "ログイン後、コード譜の登録が可能です"
+
+        expect(page).to have_content "ログイン"
+      end
+    end
+    context "表示確認" do
+      scenario "ログインしている、かつコード譜が登録されている" do
+        user = FactoryBot.create(:user)
+        song = FactoryBot.create(:song, title: "Blue Ridge Cabin Home")
+        chord = FactoryBot.create(:chord, song_id: song.id)
+
+        login_as(user)
+        visit "songs/#{song.id}"
+
+        expect(find(".p-song__create_chord")).to_not have_css(".p-song__create_chord--no-login")
+        expect(page).to_not have_content "ログイン後、コード譜の登録が可能です"
+        expect(page).to_not have_content "この楽曲にはコード譜が登録されていません"
+      end
+
+      scenario "ログインしている、かつコード譜が登録されていない" do
+        user = FactoryBot.create(:user)
+        song = FactoryBot.create(:song, title: "Blue Ridge Cabin Home")
+
+        login_as(user)
+        visit "songs/#{song.id}"
+
+        expect(find(".p-song__create_chord")).to_not have_css(".p-song__create_chord--no-login")
+        expect(page).to_not have_content "ログイン後、コード譜の登録が可能です"
+        expect(page).to have_content "この楽曲には、コード譜が登録されていません"
+      end
+      scenario "ログインしていない、かつコード譜が登録されている" do
+        song = FactoryBot.create(:song, title: "Blue Ridge Cabin Home")
+        chord = FactoryBot.create(:chord, song_id: song.id)
+
+        visit "songs/#{song.id}"
+
+        expect(find(".l-contents__main")).to have_css(".p-song__create_chord--no_login")
+        expect(page).to have_content "ログイン後、コード譜の登録が可能です"
+        expect(page).to_not have_content "この楽曲にはコード譜が登録されていません"
+      end
+      scenario "ログインしていない、かつコード譜が登録されていない" do
+        song = FactoryBot.create(:song, title: "Blue Ridge Cabin Home")
+
+        visit "songs/#{song.id}"
+
+        expect(find(".l-contents__main")).to have_css(".p-song__create_chord--no_login")
+        expect(page).to have_content "ログイン後、コード譜の登録が可能です"
+        expect(page).to have_content "この楽曲には、コード譜が登録されていません"
+      end
+    end
   end
 end

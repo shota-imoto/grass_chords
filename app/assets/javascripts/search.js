@@ -111,6 +111,7 @@ $(function () {
     $(".c-song-candidate__lists").empty();
     $(".c-song-candidate__lists").addClass("u-display__hidden");
   });
+
   function stringForm(i) {
     var html = `<div class="strings__string">
     <input value="${i}" type="hidden" name="[tunings_attributes][${

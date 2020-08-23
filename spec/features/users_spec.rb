@@ -121,4 +121,12 @@ RSpec.feature "Users", type: :feature do
     expect(page).to have_content "テストユーザーは編集できません"
   }.to change(User, :count).by(0)
   end
+
+  scenario "ログイン画面からユーザ登録画面への移行" do
+    visit edit_user_registration_path
+
+    click_link "こちら"
+
+    expect(page).to have_content "ユーザ登録"
+  end
 end
