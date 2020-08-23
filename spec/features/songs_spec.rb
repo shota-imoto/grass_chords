@@ -7,14 +7,6 @@ RSpec.feature "Songs", type: :feature do
 
     login_as(user)
 
-    # visit root_path
-    # all(".l-header__opn-box")[0].click
-    # click_link "ログイン"
-
-    # fill_in "メール", with: user.email
-    # fill_in "パスワード", with: user.password
-    # click_button "ログイン"
-
     visit new_song_path
 
     expect{

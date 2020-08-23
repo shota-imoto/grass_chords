@@ -1,5 +1,5 @@
 class SongsController < ApplicationController
-  before_action :set_song, only: [:show, :edit, :update, :destroy]
+  before_action :set_song, only: [:show, :edit, :update, :destroy, :id_search]
   before_action :set_owner, only: [:edit, :update, :destroy]
   before_action :authority_login, except: [:index, :show, :search, :global_search]
   before_action :authority_user, only: [:edit, :update, :destroy]
@@ -44,6 +44,7 @@ class SongsController < ApplicationController
   def search
     @songs = Song.all.includes(:chords)
 
+    # ソート
     if params[:sort] == "practice"
       @songs = @songs.order("practice_songs_count desc, title asc")
     else
@@ -72,6 +73,10 @@ class SongsController < ApplicationController
     end
   end
 
+  def id_search
+    # set_songアクションを用いて楽曲レコード取得
+  end
+
   end
 
 
@@ -91,7 +96,6 @@ class SongsController < ApplicationController
     def search_song
       params[:keyword].strip!
       keywords = params[:keyword].split(/\s+/)
-
 
       # 条件検索
       # ifによって条件にチェックされているときのみandで絞り込み

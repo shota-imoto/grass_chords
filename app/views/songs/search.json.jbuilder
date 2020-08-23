@@ -9,5 +9,3 @@ json.array! @songs do |song|
   json.practice_songs_count song.practice_songs_count
   json.chords song.chords
 end
-
-

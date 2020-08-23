@@ -9,6 +9,29 @@ $(function () {
     input_text_display(id);
   });
 
+  // 楽曲個別ページからの遷移時に曲名をあらかじめ入力しておく処理
+  $(document).ready(function () {
+    var song_id = $("#selected_song_id").val();
+
+    // 新規作成(コード譜)画面でエラー発生させないため
+    if (song_id == "") song_id = null;
+
+    // コード譜編集画面以外では実行しないためのif条件文
+    if (song_id != null) {
+      $.ajax({
+        type: "get",
+        url: "/songs/id_search",
+        data: {
+          id: song_id,
+        },
+        dataType: "json",
+      }).done(function (song) {
+        console.log(song);
+        $("#search_song_name").val(song.title);
+      });
+    }
+  });
+
   // エディター表示・非表示処理
   $(".p-chord-new__editor-btn").on("touchend mouseup", function () {
     $(".c-chord-edit__wrapper").removeClass("u-display__hidden");

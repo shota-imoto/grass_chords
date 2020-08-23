@@ -9,6 +9,7 @@ Rails.application.routes.draw do
     collection do
       get :search
       get :global_search
+      get :id_search
     end
   end
   resources :chords, except: :index

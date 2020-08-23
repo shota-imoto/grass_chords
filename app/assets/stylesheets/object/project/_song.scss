@@ -66,3 +66,38 @@
   max-width: 720px;
   padding: 0 10%;
 }
+
+.p-song__create_chord {
+  height: 37px;
+  width: 95%;
+  max-width: 810px;
+
+  margin: 0 auto;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background-color: $color-theme-red;
+  border-radius: 5px;
+  box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.3);
+  text-decoration: none;
+  color: $color-font-white;
+  font-size: 20px;
+  & a {
+    text-decoration: none;
+    color: $color-font-white;
+    font-size: 20px;
+  }
+  &--no_login {
+    background-color: $color-icon-gray;
+    box-shadow: 4px 4px 4px rgba(0, 0, 0, 0);
+  }
+}
+
+.p-song__recommend_login {
+  padding-top: 0;
+  & a {
+    color: $color-theme-red;
+  }
+}

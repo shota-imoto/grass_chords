@@ -11,9 +11,13 @@
           =f.email_field :email, autofocus: true, autocomplete: "email", placeholder: "メール", class:"c-form__textbox c-user__textbox", required: "required"
           =f.password_field :password, autocomplete: "current-password", placeholder: "パスワード", class:"c-form__textbox", required: "required"
           =f.hidden_field :token, class: "c-js__recaptcha-token"
+          .p-user__recommend_signup
+            %a※未登録の方は
+            =link_to "こちら", new_user_registration_path, class: "p-user__signup_link"
+            %a、または「お試しログイン」をご利用ください
+
         .c-form__btn-area
           .c-form__area
-            -# =f.submit "ログイン", class: "c-form__btn c-form__btn--login"
             =f.submit "ログイン", class: "c-form__btn c-form__btn--login c-js__recaptcha"
           .c-form__area
             .c-form__btn.c-form__btn--login.c-form__btn-blue
