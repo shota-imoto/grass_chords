@@ -1,6 +1,6 @@
 # アプリ概要
 
-[GrassChords](https://grasschords.com "GrassChords")
+[GrassChords](./public/images/GrassChords_Env.png "GrassChords")
 ※スマートフォン向けサイト(PC でも閲覧可能)
 
 "Bluegrass"という音楽の「初心者向けジャムセッション支援アプリ」 です。
