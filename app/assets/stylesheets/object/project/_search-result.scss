@@ -45,10 +45,7 @@
 
 .p-search-result__results {
   // height => header: 65px, search box: 126px, article margin: about 32px(not fixed)
-  height: calc(85vh - 65px - 126px - 32px);
-  margin: 20px 0;
-
-  overflow: scroll;
+  // height: calc(85vh - 65px - 126px - 32px);
 }
 
 .p-search-result__result {
@@ -67,6 +64,7 @@
 }
 
 .p-search-result__counter {
+  margin: 10px 0;
   padding: 0 20px;
 }
 @media screen and (min-width: 961px) {

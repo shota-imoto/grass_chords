@@ -52,9 +52,10 @@ class SongsController < ApplicationController
     end
 
     search_song
+    @count = @songs.length
 
     respond_to do |format|
-      format.html
+      format.html{@songs = @songs.page(params[:page]).without_count.per(8)}
       format.json
     end
   end
@@ -66,6 +67,9 @@ class SongsController < ApplicationController
 
     exchange_global_params
     search_song
+
+    @count = @songs.length
+    @songs = @songs.page(params[:page]).without_count.per(8)
 
     respond_to do |format|
       format.html{render :search}

@@ -110,11 +110,15 @@ RSpec.feature "Songs", type: :feature do
 
     fill_in "曲名で検索", with: "Blue"
     all(".c-form__btn")[1].click
+
+
     expect(page).to have_content "Blue Ridge Cabin Home"
     expect(page).to have_content "Blue Ridge Mountain Girl"
     expect(page).to have_content "2 results.."
     expect(all(".p-search-result__result").size).to eq(2)
     all(".c-js__attribute-btn")[0].click
+    all(".c-form__btn")[1].click
+
     expect(page).to have_content "Blue Ridge Cabin Home"
     expect(page).to have_content "1 results.."
     expect(all(".p-search-result__result").size).to eq(1)
