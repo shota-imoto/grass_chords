@@ -1,7 +1,7 @@
 %aside.l-contents__top
   %section.l-contents__section.c-window__clear.p-chord__section
-    .p-chord-new__title
-      %h2 Chord Score Creater
+    .p-chord-new__title.js-judge__create-chord
+      %h2 Create Chord Score
       .p-chord-new__subtitle -コード譜を作成する-
 
 =form_with url: chords_path, method: :post, model: @chord, local: true do |f|
@@ -40,5 +40,3 @@
     .p-chord-new__editor-btn
       >> Editor
 =render "/application/chord-editor"
-
-

@@ -29,6 +29,9 @@ class ChordsController < ApplicationController
     if @chord.save
       redirect_to @chord, notice: 'コード譜を作成しました'
     else
+      @chord.errors.full_messages.each do |message|
+        flash.now[:notice] = message
+      end
       render :new
     end
 

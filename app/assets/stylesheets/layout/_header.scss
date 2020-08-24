@@ -42,7 +42,9 @@
 }
 
 // notice
-.l-header__notice {
+.l-header__notice,
+.l-header__alert,
+.l-error {
   // layout
   width: 100vw;
   position: fixed;
