@@ -40,20 +40,28 @@ RSpec.feature "Chords", type: :feature do
       all(".c-chordunit")[0].click
 
       find(".p-chord-new__editor-btn").click
-      all(".c-chord-edit__btn")[15].click
-      all(".c-chord-edit__btn")[1].click
-      all(".c-chord-edit__btn")[8].click
-      all(".c-chord-edit__btn")[9].click
-      all(".c-chord-edit__btn")[10].click
-      all(".c-chord-edit__btn")[2].click
-      all(".c-chord-edit__btn")[11].click
-      all(".c-chord-edit__btn")[12].click
+      all(".c-chord-edit__btn")[14].click   # shift
+      all(".c-chord-edit__btn")[15].click   # 2/4拍子
+      all(".c-chord-edit__btn")[14].click   # shift
+
+      all(".c-chord-edit__btn")[1].click    # A
+      all(".c-chord-edit__btn")[8].click    # ♭
+      all(".c-chord-edit__btn")[9].click    # m
+      all(".c-chord-edit__btn")[10].click   # 7th
+      all(".c-chord-edit__btn")[2].click    # B
+
+      all(".c-chord-edit__btn")[14].click   # shift
+      all(".c-chord-edit__btn")[12].click   # begin-wbar
+      all(".c-chord-edit__btn")[14].click   # shift
+
+      all(".c-chord-edit__btn")[16].click   # end-repeat
+
 
       expect(all(".c-chordunit__beat")[0]).to have_content "@"
       expect(all(".c-chordunit__note-name")[0]).to have_content "A"
       expect(all(".c-chordunit__half-note")[0]).to have_content "b"
       expect(all(".c-chordunit__modifier")[0]).to have_content "m7"
-      expect(all(".c-chordunit__leftbar")[0]).to have_content "{"
+      expect(all(".c-chordunit__leftbar")[0]).to have_content '"'
       expect(all(".c-chordunit__rightbar")[0]).to have_content "}"
 
       expect(find(".c-chord-edit__text-window")).to have_content "Abm7B"
@@ -62,21 +70,26 @@ RSpec.feature "Chords", type: :feature do
       all(".c-chordunit")[47].click
       find(".p-chord-new__editor-btn").click
 
-      all(".c-chord-edit__btn")[3].click
-      all(".c-chord-edit__btn")[7].click
-      all(".c-chord-edit__btn")[7].click
-      all(".c-chord-edit__btn")[9].click
-      all(".c-chord-edit__btn")[12].click
-      all(".c-chord-edit__btn")[12].click
-      all(".c-chord-edit__btn")[16].click
-      all(".c-chord-edit__btn")[17].click
-      all(".c-chord-edit__btn")[4].click
-      all(".c-chord-edit__btn")[19].click
+      all(".c-chord-edit__btn")[3].click    # C
+      all(".c-chord-edit__btn")[7].click    # #
+      all(".c-chord-edit__btn")[7].click    # #
+      all(".c-chord-edit__btn")[9].click    # m
+      all(".c-chord-edit__btn")[15].click   # begin-repeat
+      all(".c-chord-edit__btn")[15].click   # begin-repeat
+
+      all(".c-chord-edit__btn")[14].click   # shift
+
+      all(".c-chord-edit__btn")[16].click   # 4/4拍子
+      all(".c-chord-edit__btn")[18].click   # 6/8拍子
+      all(".c-chord-edit__btn")[4].click    # D
+      all(".c-chord-edit__btn")[19].click   # BackSpace
+
+      all(".c-chord-edit__btn")[14].click   # shift
 
       expect(find(".c-chord-edit__text-window")).to have_content "Cssm"
 
       find(".c-chord-edit__close").click
-      # expect(all(".c-chordunit__beat")[47]).to have_content "#"
+      # expect(all(".c-chordunit__beat")[47]).to have_content "P"
       expect(all(".c-chordunit__note-name")[47]).to have_content "C"
       expect(all(".c-chordunit__half-note")[47]).to have_content "B"
       expect(all(".c-chordunit__modifier")[47]).to have_content ""
@@ -95,10 +108,10 @@ RSpec.feature "Chords", type: :feature do
       expect(all(".c-chordunit__note-name")[0]).to have_content "A"
       expect(all(".c-chordunit__half-note")[0]).to have_content "b"
       expect(all(".c-chordunit__modifier")[0]).to have_content "m7"
-      expect(all(".c-chordunit__leftbar")[0]).to have_content "{"
+      expect(all(".c-chordunit__leftbar")[0]).to have_content '"'
       expect(all(".c-chordunit__rightbar")[0]).to have_content "}"
 
-      # expect(all(".c-chordunit__beat")[47]).to have_content "#"
+      # expect(all(".c-chordunit__beat")[47]).to have_content "P"
       expect(all(".c-chordunit__note-name")[47]).to have_content "C"
       expect(all(".c-chordunit__half-note")[47]).to have_content "B"
       expect(all(".c-chordunit__modifier")[47]).to have_content ""
