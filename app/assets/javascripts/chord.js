@@ -1,13 +1,16 @@
 $(function () {
   // カーソル表示
   $(".c-js__cursor-marker").on("touchend, mouseup", function () {
-    $(".c-js__cursor-marker").removeClass("c-js__cursor");
     var id = $(this).attr("id");
-    $("#" + id).addClass("c-js__cursor");
-
+    cursor_display(id);
     // when user selects chordunit, load input text and indicate it.
     input_text_display(id);
   });
+
+  function cursor_display(id) {
+    $(".c-js__cursor-marker").removeClass("c-js__cursor");
+    $("#" + id).addClass("c-js__cursor");
+  }
 
   // 楽曲個別ページからの遷移時に曲名をあらかじめ入力しておく処理
   $(document).ready(function () {
@@ -26,7 +29,6 @@ $(function () {
         },
         dataType: "json",
       }).done(function (song) {
-        console.log(song);
         $("#search_song_name").val(song.title);
       });
     }
@@ -44,10 +46,6 @@ $(function () {
 
   // エディター表示切り替え処理
   function shift_editor() {
-    console.log(
-      "shift: " +
-        $(".c-chord-edit__wrapper--shift").hasClass("u-display__hidden")
-    );
     $(".c-chord-edit__wrapper--1st").toggleClass("u-display__hidden");
     $(".c-chord-edit__wrapper--2nd").toggleClass("u-display__hidden");
   }
@@ -232,6 +230,26 @@ $(function () {
 
         text_display("unit_" + chord_num + "-" + unit_num, letter);
       }
+
+      // if page shown now is chord#new and no rollback.
+      if (
+        $(".js-judge__create-chord").length &&
+        $(".l-header__notice").text().length == 0
+      )
+        default_input(i);
     });
   });
+
+  // i番目のchordunitに対してiが特定の値のときに縦線を挿入する
+  function default_input(i) {
+    if (i % 4 == 0) {
+      // call "cursor_display" function, because "selected_text_edit" input in cursor selected chordunit
+      cursor_display("unit_0-" + i);
+      selected_text_edit("leftbar", i, "'");
+    } else if (i % 4 == 3) {
+      // call "cursor_display" function, because "selected_text_edit" input in cursor selected chordunit
+      cursor_display("unit_0-" + i);
+      selected_text_edit("rightbar", i, "'");
+    }
+  }
 });

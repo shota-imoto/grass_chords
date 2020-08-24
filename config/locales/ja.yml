@@ -9,6 +9,7 @@ ja:
     attributes:
       chord:
         version: "バージョン名"
+        song: 曲名
       chordunit:
         address: "アドレスデータ"
         text: "テキストデータ(エディターの編集ウィンドウに表示される文字列)"
