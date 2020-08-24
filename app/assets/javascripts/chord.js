@@ -34,19 +34,40 @@ $(function () {
 
   // エディター表示・非表示処理
   $(".p-chord-new__editor-btn").on("touchend mouseup", function () {
-    $(".c-chord-edit__wrapper").removeClass("u-display__hidden");
+    $(".c-chord-edit__wrapper--1st").removeClass("u-display__hidden");
   });
 
   $(".c-chord-edit__close").on("touchend mouseup", function () {
     $(".c-chord-edit__wrapper").addClass("u-display__hidden");
+    // $(".c-chord-edit__wrapper").addClass("u-display__hidden");
   });
+
+  // エディター表示切り替え処理
+  function shift_editor() {
+    console.log(
+      "shift: " +
+        $(".c-chord-edit__wrapper--shift").hasClass("u-display__hidden")
+    );
+    $(".c-chord-edit__wrapper--1st").toggleClass("u-display__hidden");
+    $(".c-chord-edit__wrapper--2nd").toggleClass("u-display__hidden");
+  }
 
   // 入力処理
   $(document).on("touchend, mouseup", ".c-chord-edit__btn", function () {
     var input = $(this).text();
 
-    if ($(".c-js__cursor").length == 0) return false;
+    // if shift-btn is inputted, keyboard is exchanged and input operation is cancelled.
+    if (input == "Shift") {
+      shift_editor();
+      return false;
+    }
+    // キーボードに画像を入れ込む場合、text()が効かなくなるため、対策
+    // var input = $(this).find(".c-chord-edit__input").text();
 
+    // if cursor is off, input operation is cancelled.
+    if ($(".c-js__cursor").length == 0) {
+      return false;
+    }
     var id = $(".c-js__cursor").attr("id");
     id = id.replace("unit_0-", "");
 
@@ -54,6 +75,7 @@ $(function () {
     if ($(this).hasClass("c-js__chord-editor-duplication")) {
       if (input == "B") input = "sharp";
       else if (input == "'") input = "rbar";
+      else if (input == '"') input = "rwbar";
     }
 
     // 入力コマンドに変換
@@ -61,13 +83,18 @@ $(function () {
     else if (input == "7th") input_text(id, "7");
     else if (input == "{") selected_text_edit("leftbar", id, "{");
     else if (input == "}") selected_text_edit("rightbar", id, "}");
+    else if (input == "[") selected_text_edit("leftbar", id, "[");
+    else if (input == "]") selected_text_edit("rightbar", id, "]");
     else if (input == "'") selected_text_edit("leftbar", id, "'");
     else if (input == "rbar") selected_text_edit("rightbar", id, "'");
+    else if (input == '"') selected_text_edit("leftbar", id, '"');
+    else if (input == "rwbar") selected_text_edit("rightbar", id, '"');
     else if (input == "@") selected_text_edit("beat", id, "@");
     else if (input == "$") selected_text_edit("beat", id, "$");
     else if (input == "#") selected_text_edit("beat", id, "#");
+    else if (input == "P") selected_text_edit("beat", id, "P");
     else if (input == "くり返し") input_text(id, "‘");
-    else if (input == "BackSpace") {
+    else if (input == "BS") {
       delete_text(id);
     } else {
       input_text(id, input);
