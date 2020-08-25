@@ -7,7 +7,7 @@ abort("The Rails environment is running in production mode!") if Rails.env.produ
 require 'rspec/rails'
 require 'capybara/rspec'
 
-Capybara.javascript_driver = :selenium_chrome if Rails.env.test?
+# Capybara.javascript_driver = :selenium_chrome if Rails.env.test?
 # Capybara.default_max_wait_time = 2
 # JS_DRIVER = :selenium_chrome_headless
 
