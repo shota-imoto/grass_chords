@@ -12,7 +12,7 @@ FactoryBot.define do
     end
 
     trait :with_chordunits do
-      after(:create) {|chord| create_list(:chordunit, 48, chord: chord)}
+      after(:create) {|chord| create_list(:chordunit, $chordunit_num, chord: chord)}
     end
 
     trait :with_likes do
