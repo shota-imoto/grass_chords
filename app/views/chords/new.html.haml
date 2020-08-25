@@ -32,7 +32,7 @@
         .c-key-change__close-layer
           .c-layer__skeleton
       .p-song__score.c-js__key-change.c-js__disable
-        -48.times do |i|
+        -$chordunit_num.times do |i|
           =render "/application/chordunit", i: i
         =render "/application/chordunit-form", f: f
     .content__registration

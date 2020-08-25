@@ -52,7 +52,7 @@ RSpec.describe Chord, type: :model do
     let(:chord2) {FactoryBot.create(:chord2, :with_chordunits, :with_likes, :with_practices)}
     subject{->{chord.destroy}}
     context "アソシエーション関係にあるレコードは削除される" do
-      it {is_expected.to change{chord.chordunits.length}.by(-48)}
+      it {is_expected.to change{chord.chordunits.length}.by(-$chordunit_num)}
       it {is_expected.to change{chord.likes.length}.by(-10)}
       it {is_expected.to change{chord.practices.length}.by(-10)}
     end

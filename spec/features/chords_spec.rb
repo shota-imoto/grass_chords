@@ -67,7 +67,7 @@ RSpec.feature "Chords", type: :feature do
       expect(find(".c-chord-edit__text-window")).to have_content "Abm7B"
 
       find(".c-chord-edit__close").click
-      all(".c-chordunit")[47].click
+      all(".c-chordunit")[$chordunit_num-1].click
       find(".p-chord-new__editor-btn").click
 
       all(".c-chord-edit__btn")[3].click    # C
@@ -89,11 +89,11 @@ RSpec.feature "Chords", type: :feature do
       expect(find(".c-chord-edit__text-window")).to have_content "Cssm"
 
       find(".c-chord-edit__close").click
-      # expect(all(".c-chordunit__beat")[47]).to have_content "P"
-      expect(all(".c-chordunit__note-name")[47]).to have_content "C"
-      expect(all(".c-chordunit__half-note")[47]).to have_content "B"
-      expect(all(".c-chordunit__modifier")[47]).to have_content ""
-      expect(all(".c-chordunit__rightbar")[47]).to have_content ""
+      # expect(all(".c-chordunit__beat")[$chordunit_num-1]).to have_content "P"
+      expect(all(".c-chordunit__note-name")[$chordunit_num-1]).to have_content "C"
+      expect(all(".c-chordunit__half-note")[$chordunit_num-1]).to have_content "B"
+      expect(all(".c-chordunit__modifier")[$chordunit_num-1]).to have_content ""
+      expect(all(".c-chordunit__rightbar")[$chordunit_num-1]).to have_content ""
 
       click_button "登録"
 
@@ -111,11 +111,11 @@ RSpec.feature "Chords", type: :feature do
       expect(all(".c-chordunit__leftbar")[0]).to have_content '"'
       expect(all(".c-chordunit__rightbar")[0]).to have_content "}"
 
-      # expect(all(".c-chordunit__beat")[47]).to have_content "P"
-      expect(all(".c-chordunit__note-name")[47]).to have_content "C"
-      expect(all(".c-chordunit__half-note")[47]).to have_content "B"
-      expect(all(".c-chordunit__modifier")[47]).to have_content ""
-      expect(all(".c-chordunit__rightbar")[47]).to have_content ""
+      # expect(all(".c-chordunit__beat")[$chordunit_num-1]).to have_content "P"
+      expect(all(".c-chordunit__note-name")[$chordunit_num-1]).to have_content "C"
+      expect(all(".c-chordunit__half-note")[$chordunit_num-1]).to have_content "B"
+      expect(all(".c-chordunit__modifier")[$chordunit_num-1]).to have_content ""
+      expect(all(".c-chordunit__rightbar")[$chordunit_num-1]).to have_content ""
     }.to change(song.chords, :count).by(1)
   end
 
@@ -124,10 +124,11 @@ RSpec.feature "Chords", type: :feature do
     song = FactoryBot.create(:song, title: "Blue Ridge Cabin Home")
     chord = FactoryBot.create(:chord, song_id: song.id, user_id: user.id)
 
-    47.times do |i|
-      FactoryBot.create(:chordunit, address: i, chord_id: chord.id)
+    ($chordunit_num-1).times do |i|
+      FactoryBot.create(:chordunit, address: i-1, chord_id: chord.id)
     end
-    chordunit = FactoryBot.create(:chordunit, address: 47, chord_id: chord.id)
+    # 最後尾のchordunitを明確に定義する
+    chordunit = FactoryBot.create(:chordunit, address: $chordunit_num-1, chord_id: chord.id)
 
     login_as(user)
 
@@ -142,7 +143,7 @@ RSpec.feature "Chords", type: :feature do
 
     find(".c-layer__skeleton").click
 
-    all(".c-chordunit")[47].click
+    all(".c-chordunit")[$chordunit_num-1].click
     find(".p-chord-new__editor-btn").click
 
     all(".c-chord-edit__btn")[19].click
@@ -168,11 +169,11 @@ RSpec.feature "Chords", type: :feature do
     expect(all(".c-chordunit__modifier")[0]).to have_content "m"
     expect(all(".c-chordunit__rightbar")[0]).to have_content "}"
 
-    expect(all(".c-chordunit__beat")[47]).to have_content "@"
-    expect(all(".c-chordunit__leftbar")[47]).to have_content "{"
-    expect(all(".c-chordunit__note-name")[47]).to have_content "F"
-    expect(all(".c-chordunit__half-note")[47]).to have_content "B"
-    expect(all(".c-chordunit__modifier")[47]).to have_content ""
+    expect(all(".c-chordunit__beat")[$chordunit_num-1]).to have_content "@"
+    expect(all(".c-chordunit__leftbar")[$chordunit_num-1]).to have_content "{"
+    expect(all(".c-chordunit__note-name")[$chordunit_num-1]).to have_content "F"
+    expect(all(".c-chordunit__half-note")[$chordunit_num-1]).to have_content "B"
+    expect(all(".c-chordunit__modifier")[$chordunit_num-1]).to have_content ""
     expect(all(".c-chordunit__rightbar")[47]).to have_content "}"
 
   end
@@ -247,7 +248,7 @@ RSpec.feature "Chords", type: :feature do
     song = FactoryBot.create(:song, title: "Blue Ridge Cabin Home")
     chord = FactoryBot.create(:chord, song_id: song.id, user_id: user.id)
 
-    48.times do |i|
+    $chordunit_num.times do |i|
       FactoryBot.create(:chordunit, address: i, chord_id: chord.id)
     end
 

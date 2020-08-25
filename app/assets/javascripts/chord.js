@@ -222,8 +222,8 @@ $(function () {
     $(".c-chordunit__text").each(function (i, text) {
       var letter = $(text).attr("value");
 
-      var chord_num = Math.floor(i / 48);
-      var unit_num = i % 48;
+      var chord_num = Math.floor(i / chordunit_num);
+      var unit_num = i % chordunit_num;
 
       if (letter != undefined) {
         letter = letter.trim();
