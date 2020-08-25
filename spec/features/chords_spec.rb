@@ -248,9 +248,10 @@ RSpec.feature "Chords", type: :feature do
     song = FactoryBot.create(:song, title: "Blue Ridge Cabin Home")
     chord = FactoryBot.create(:chord, song_id: song.id, user_id: user.id)
 
-    $chordunit_num.times do |i|
-      FactoryBot.create(:chordunit, address: i, chord_id: chord.id)
+    ($chordunit_num-1).times do |i|
+      FactoryBot.create(:chordunit, address: i-1, chord_id: chord.id)
     end
+    FactoryBot.create(:chordunit, address: $chordunit_num-1, text: "‘", chord_id: chord.id)
 
     visit "chords/#{chord.id}"
 
@@ -267,6 +268,8 @@ RSpec.feature "Chords", type: :feature do
     expect(all(".c-chordunit__leftbar")[0]).to have_content "{"
     expect(all(".c-chordunit__rightbar")[0]).to have_content "}"
 
+    expect(all(".c-chordunit__note-name")[$chordunit_num-1]).to have_content "‘"
+
     all(".c-key-change__btn")[8].click
 
     expect(find(".c-key-change__present")).to have_content "key of F"
@@ -279,6 +282,8 @@ RSpec.feature "Chords", type: :feature do
     expect(all(".c-chordunit__leftbar")[0]).to have_content "{"
     expect(all(".c-chordunit__rightbar")[0]).to have_content "}"
 
+    expect(all(".c-chordunit__note-name")[$chordunit_num-1]).to have_content "‘"
+
     all(".c-key-change__btn")[3].click
 
     expect(find(".c-key-change__present")).to have_content "key of C"
@@ -289,6 +294,8 @@ RSpec.feature "Chords", type: :feature do
     expect(all(".c-chordunit__modifier")[0]).to have_content "m"
     expect(all(".c-chordunit__leftbar")[0]).to have_content "{"
     expect(all(".c-chordunit__rightbar")[0]).to have_content "}"
+
+    expect(all(".c-chordunit__note-name")[$chordunit_num-1]).to have_content "‘"
   end
 
   describe "楽曲個別ページからコード譜作成画面に移行に関わる操作" do
