@@ -1,6 +1,4 @@
 $(function () {
-  //----------------------------------------------------------------------------//
-
   // キー選択パレットの表示・非表示
   //キー選択パレットを開く
   $(".c-key-change__display").on("touchend, mouseup", function () {
@@ -20,8 +18,7 @@ $(function () {
     }
   );
 
-  // キー表示切替
-  // 絶対音
+  // 現在キーの表示切替
   $(".c-key-change__btn--note").on("touchend, mouseup", function () {
     var selected = $(this).text().trim();
     var key_state = $(".key-display--form").attr("value");
@@ -54,7 +51,7 @@ $(function () {
     var selected = $(this).text().trim();
     var key_state = $(".key-display--form").attr("value");
 
-    // マイナー記号を削除する工程が必要
+    // マイナー記号を削除する
     key_state = key_state.replace("m", "");
 
     const absolute_note_array = [
@@ -137,6 +134,7 @@ $(function () {
     $(".c-chordunit__note").each(function (i, value) {
       var note = $(value).children(".c-chordunit__note-name").text();
       note = note + $(value).children(".c-chordunit__half-note").text();
+      console.log(note);
 
       // 異常表記または別表記を変換する
       if (note == "Ab") {
@@ -158,17 +156,31 @@ $(function () {
       } else {
       }
 
-      if (note == "") note_index = "空欄";
-      else {
-        note_index = absolute_note_array.indexOf(note);
+      // 繰り返し記号は↓のどこにも当てはまらないためindexOfを用いたときに-1となる
+      // if (note == "") note_index = "blank";
+      // else if (note == "‘") note_index = "repeat_symbol";
+      // else  {
+      //   note_index = absolute_note_array.indexOf(note);
+      //   note_index = note_index + key_difference;
+      //   if (note_index > 12) note_index = note_index - 12;
+      //   else if (note_index < 0) note_index = note_index + 12;
+      //   note = absolute_note_array[note_index];
+      // }
+
+      note_index = absolute_note_array.indexOf(note);
+
+      if (note_index != -1) {
+        // 階名の場合
         note_index = note_index + key_difference;
         if (note_index > 12) note_index = note_index - 12;
         else if (note_index < 0) note_index = note_index + 12;
+        note = absolute_note_array[note_index];
+      } else {
+        // 階名ではない場合
+        note_index = "no_action";
       }
 
-      note = absolute_note_array[note_index];
-
-      if (note_index == "空欄");
+      if (note_index == "no_action");
       else if (note.length == 2) {
         $(value).children(".c-chordunit__note-name").text(note.charAt(0));
         $(value).children(".c-chordunit__half-note").text(note.charAt(1));
