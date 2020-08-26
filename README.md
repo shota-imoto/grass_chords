@@ -22,10 +22,11 @@
 - Web サーバ(nginx, unicorn)
 - データベース(MySQL)
 - コンテナ(Docker, docker-compose)
-- AWS(VPC, EC2, Route53, ELB, ACM, ECS, SSM, KMS, CLI)
-- 開発環境(VScode, Git, GitHub, CircleCI)
+- AWS(VPC, EC2, Route53, ELB, ACM, ECS, SSM, KMS, S3, CloudWatch, CLI)
+- 開発環境(VScode, Git, GitHub, CircleCI, shell script)
 
 # インフラ構成
+
 ![environment](./public/images/GrassChords_Env.png)
 
 # 機能要件
@@ -77,7 +78,7 @@
 - HTTPS 接続
 - ロードバランシング
 - ローリングアップデート
-- サーバ構成 Web サーバ 2 台(ECS クラスター), DB サーバ 1 台
+- データベースの定期バックアップ(shellscript + S3)
 - モデル/コントローラの単体テスト(rspec)
 - 統合テスト(capybara)
 
