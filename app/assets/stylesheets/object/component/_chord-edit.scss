@@ -51,8 +51,12 @@
   color: $color-font-white;
 }
 
-.c-chord-edit__size-backspace {
+.c-chord-edit__size-shift {
   width: calc(28% - 14px);
+  display: flex;
+}
+.c-chord-edit__icon {
+  margin-right: 4px;
 }
 
 .c-chord-edit__blank {
