@@ -55,6 +55,15 @@
   width: calc(28% - 14px);
 }
 
+.c-chord-edit__blank {
+  margin: 2px;
+  border: dashed 1px $color-font-gray;
+  height: 20px;
+  width: 15px;
+  position: relative;
+  top: -2px;
+}
+
 .c-chord-edit__close {
   font-size: 24px;
   margin-right: 7px;

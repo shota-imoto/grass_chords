@@ -52,16 +52,15 @@ $(function () {
 
   // 入力処理
   $(document).on("touchend, mouseup", ".c-chord-edit__btn", function () {
-    var input = $(this).text();
+    // var input = $(this).text();
+    // キーボードに画像を入れ込む場合、text()が効かなくなるため、対策
+    var input = $(this).find(".c-chord-edit__input").text();
 
     // if shift-btn is inputted, keyboard is exchanged and input operation is cancelled.
     if (input == "Shift") {
       shift_editor();
       return false;
     }
-    // キーボードに画像を入れ込む場合、text()が効かなくなるため、対策
-    // var input = $(this).find(".c-chord-edit__input").text();
-
     // if cursor is off, input operation is cancelled.
     if ($(".c-js__cursor").length == 0) {
       return false;
@@ -70,7 +69,11 @@ $(function () {
     id = id.replace("unit_0-", "");
 
     // if some of command duplicates, under below judge statement resolves this problem.
-    if ($(this).hasClass("c-js__chord-editor-duplication")) {
+    if (
+      $(this)
+        .find(".c-chord-edit__input")
+        .hasClass("c-js__chord-editor-duplication")
+    ) {
       if (input == "B") input = "sharp";
       else if (input == "'") input = "rbar";
       else if (input == '"') input = "rwbar";
