@@ -28,6 +28,5 @@
 
 
 .DS_Store
-docker-compose.mysql.yml
 docker-compose.yml
 DockerfileDev
