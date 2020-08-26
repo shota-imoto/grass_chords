@@ -15,7 +15,7 @@ class ChordsController < ApplicationController
   def new
     @chord = Chord.new(song_id: params[:song_id])
     @chordunits = []
-    48.times do |i|
+    $chordunit_num.times do |i|
       @chordunit = @chord.chordunits.build(address: i)
       @chordunits << @chordunit
     end
