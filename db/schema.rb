@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_08_22_061214) do
+ActiveRecord::Schema.define(version: 2020_08_26_050506) do
 
   create_table "chords", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.bigint "song_id"
@@ -34,6 +34,9 @@ ActiveRecord::Schema.define(version: 2020_08_22_061214) do
     t.bigint "chord_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "indicator", default: ""
+    t.string "repeat", default: ""
+    t.string "part", default: ""
     t.index ["chord_id"], name: "index_chordunits_on_chord_id"
   end
 

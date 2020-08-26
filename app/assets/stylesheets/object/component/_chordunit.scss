@@ -1,3 +1,20 @@
+.c-chordunit__wrapper {
+  &--large {
+    width: 25%;
+  }
+}
+
+.c-chordunit__part {
+  display: flex;
+  margin-bottom: -3px;
+}
+.c-chordunit__repeat {
+  // 値が代入された時にクラス名.c-chord-edit__js-repeatを追加して装飾
+}
+
+.c-chordunit__indicator {
+}
+
 .c-chordunit {
   height: 48px;
   border-bottom: $color-icon-gray 1px solid;
@@ -7,7 +24,6 @@
   margin-bottom: 12px;
 
   &--large {
-    width: 25%;
   }
   &--small {
     width: 12.5%;

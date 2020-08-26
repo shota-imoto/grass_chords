@@ -1,14 +1,14 @@
 $(function () {
   // カーソル表示
   $(".c-js__cursor-marker").on("touchend, mouseup", function () {
-    var id = $(this).attr("id");
+    var id = $(this).find(".c-chordunit").attr("id");
     cursor_display(id);
     // when user selects chordunit, load input text and indicate it.
     input_text_display(id);
   });
 
   function cursor_display(id) {
-    $(".c-js__cursor-marker").removeClass("c-js__cursor");
+    $(".c-js__cursor-marker").find(".c-chordunit").removeClass("c-js__cursor");
     $("#" + id).addClass("c-js__cursor");
   }
 
@@ -82,37 +82,107 @@ $(function () {
     // 入力コマンドに変換
     if (input == "sharp") input_text(id, "s");
     else if (input == "7th") input_text(id, "7");
-    else if (input == "{") selected_text_edit("leftbar", id, "{");
-    else if (input == "}") selected_text_edit("rightbar", id, "}");
-    else if (input == "[") selected_text_edit("leftbar", id, "[");
-    else if (input == "]") selected_text_edit("rightbar", id, "]");
-    else if (input == "'") selected_text_edit("leftbar", id, "'");
-    else if (input == "rbar") selected_text_edit("rightbar", id, "'");
-    else if (input == '"') selected_text_edit("leftbar", id, '"');
-    else if (input == "rwbar") selected_text_edit("rightbar", id, '"');
-    else if (input == "@") selected_text_edit("beat", id, "@");
-    else if (input == "$") selected_text_edit("beat", id, "$");
-    else if (input == "#") selected_text_edit("beat", id, "#");
-    else if (input == "P") selected_text_edit("beat", id, "P");
-    else if (input == "くり返し") input_text(id, "‘");
-    else if (input == "BS") {
-      delete_text(id);
-    } else {
+    else if (input == "{") selected_text_replace("leftbar", id, "{");
+    else if (input == "}") selected_text_replace("rightbar", id, "}");
+    else if (input == "[") selected_text_replace("leftbar", id, "[");
+    else if (input == "]") selected_text_replace("rightbar", id, "]");
+    else if (input == "'") selected_text_replace("leftbar", id, "'");
+    else if (input == "rbar") selected_text_replace("rightbar", id, "'");
+    else if (input == '"') selected_text_replace("leftbar", id, '"');
+    else if (input == "rwbar") selected_text_replace("rightbar", id, '"');
+    else if (input == "@") selected_text_replace("beat", id, "@");
+    else if (input == "$") selected_text_replace("beat", id, "$");
+    else if (input == "#") selected_text_replace("beat", id, "#");
+    else if (input == "P") selected_text_replace("beat", id, "P");
+    else if (input == "‘") input_text(id, "‘");
+    else if (input == "BS") delete_text(id);
+    else if (input == "In") selected_html_append("part", id, "Intro");
+    else if (input == "partA") selected_html_append("part", id, "A");
+    else if (input == "partB") selected_html_append("part", id, "B");
+    else if (input == "partC") selected_html_append("part", id, "C");
+    else if (input == "Chorus") selected_html_append("part", id, "Chorus");
+    else if (input == "End") selected_html_append("part", id, "Ending");
+    else if (input == "Solo") selected_html_append("part", id, "Solo");
+    else if (input == "break") selected_html_append("indicator", id, "break");
+    else if (input == "repeat") selected_html_replace("repeat", id, "repeat");
+    else {
       input_text(id, input);
     }
   });
 
-  // 楽譜記号の処理(共通)
-  function selected_text_edit(unit_name, id, input) {
-    if ($(".c-js__cursor > .c-chordunit__" + unit_name).text() == input) {
-      $(".c-js__cursor > .c-chordunit__" + unit_name).text("");
-    } else {
-      $(".c-js__cursor > .c-chordunit__" + unit_name).text("");
-      $(".c-js__cursor > .c-chordunit__" + unit_name).text(input);
-    }
+  function selected_html_replace(unit_name, id, input) {
+    var selected_element = $(".c-js__cursor")
+      .parent()
+      .find(".c-chordunit__" + unit_name);
+    var insertHTML = change_input_to_HTML(unit_name, input);
 
+    selected_element.html(insertHTML);
+  }
+
+  function selected_html_append(unit_name, id, input) {
+    var selected_element = $(".c-js__cursor")
+      .parent()
+      .find(".c-chordunit__" + unit_name);
+    var insertHTML = change_input_to_HTML(unit_name, input);
+
+    if (selected_element.html().includes(insertHTML)) {
+      selected_element.children().remove(":contains('" + input + "')");
+    } else if (selected_element.html() == "") {
+      selected_element.append(insertHTML);
+    } else {
+      selected_element.append(insertHTML);
+    }
+  }
+
+  function change_input_to_HTML(unit_name, input) {
+    var html;
+    if (unit_name == "part") {
+      html = `<div class="c-chord-edit__js-part">${input}</div>`;
+    } else if (unit_name == "indicator") {
+      html = `<div>${input}</div>`;
+    } else if (unit_name == "repeat") {
+      var repeat_number = judge_repeat_number();
+      if (repeat_number != "") {
+        html = `<div class="c-chord-edit__js-repeat">${judge_repeat_number()}</div>`;
+      } else {
+        html = ``;
+      }
+    }
+    return html;
+  }
+
+  function judge_repeat_number() {
+    var selected_element = $(".c-js__cursor")
+      .parent()
+      .find(".c-chordunit__repeat");
+
+    const repeat_num_array = ["1.", "2.", "3."];
+    var i = repeat_num_array.indexOf(selected_element.text());
+    i = i + 1;
+    if (i + 1 > repeat_num_array.length) {
+      // if i-st value is last in repeat_num_array
+      return "";
+    } else {
+      // other
+      return repeat_num_array[i];
+    }
+  }
+
+  // 楽譜記号の処理(共通)
+  function selected_text_replace(unit_name, id, input) {
+    var selected_element = $(".c-js__cursor")
+      .parent()
+      .find(".c-chordunit__" + unit_name);
+    if (selected_element.text() == input) {
+      // 表示値と入力値が一致した場合は、削除
+      selected_element.text("");
+    } else {
+      // 表示値と入力値が一致しない場合は、クリアした後で挿入
+      selected_element.text("");
+      selected_element.text(input);
+    }
     $("#chord_chordunits_attributes_" + id + "_" + unit_name).val(
-      $(".c-js__cursor > .c-chordunit__" + unit_name).text()
+      selected_element.text()
     );
   }
 
@@ -246,13 +316,13 @@ $(function () {
   // i番目のchordunitに対してiが特定の値のときに縦線を挿入する
   function default_input(i) {
     if (i % 4 == 0) {
-      // call "cursor_display" function, because "selected_text_edit" input in cursor selected chordunit
+      // call "cursor_display" function, because "selected_text_replace" input in cursor selected chordunit
       cursor_display("unit_0-" + i);
-      selected_text_edit("leftbar", i, "'");
+      selected_text_replace("leftbar", i, "'");
     } else if (i % 4 == 3) {
-      // call "cursor_display" function, because "selected_text_edit" input in cursor selected chordunit
+      // call "cursor_display" function, because "selected_text_replace" input in cursor selected chordunit
       cursor_display("unit_0-" + i);
-      selected_text_edit("rightbar", i, "'");
+      selected_text_replace("rightbar", i, "'");
     }
   }
 });
