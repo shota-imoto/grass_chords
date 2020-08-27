@@ -1,16 +1,53 @@
-.c-chordunit {
-  height: 48px;
+.c-chordunit__wrapper {
   border-bottom: $color-icon-gray 1px solid;
-  display: flex;
-  align-items: center;
-  position: relative;
-  margin-bottom: 12px;
 
   &--large {
     width: 25%;
   }
   &--small {
+    // padding: 0 5px;
     width: 12.5%;
+  }
+}
+
+.c-chordunit__part {
+  display: flex;
+  margin-bottom: -3px;
+}
+.c-chordunit__repeat {
+  // 値が代入された時にクラス名.c-chord-edit__js-repeatを追加して装飾
+}
+
+.c-chordunit__indicator {
+}
+
+.c-chordunit {
+  height: 48px;
+  display: flex;
+  align-items: center;
+  position: relative;
+  &--large {
+    margin-bottom: 6px;
+  }
+  &--small {
+  }
+}
+
+.c-chordunit__part {
+  &--small {
+    font-size: 10px;
+  }
+}
+.c-chordunit__repeat {
+  &--small {
+    font-size: 10px;
+    margin-bottom: -5px;
+  }
+}
+.c-chordunit__indicator {
+  &--small {
+    font-size: 10px;
+    margin-bottom: -5px;
   }
 }
 

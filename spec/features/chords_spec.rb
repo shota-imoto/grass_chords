@@ -40,9 +40,14 @@ RSpec.feature "Chords", type: :feature do
       all(".c-chordunit")[0].click
 
       find(".p-chord-new__editor-btn").click
-      all(".c-chord-edit__btn")[14].click   # shift
-      all(".c-chord-edit__btn")[15].click   # 2/4拍子
-      all(".c-chord-edit__btn")[14].click   # shift
+      all(".c-chord-edit__btn")[14].click   # 1st-shift
+      all(".c-chord-edit__btn")[1].click    # partA
+      all(".c-chord-edit__btn")[7].click    # break
+      all(".c-chord-edit__btn")[8].click    # repeat
+      all(".c-chord-edit__btn")[8].click    # repeat
+      all(".c-chord-edit__btn")[12].click   # 2/4拍子
+
+      all(".c-chord-edit__btn")[11].click   # 2nd-shift
 
       all(".c-chord-edit__btn")[1].click    # A
       all(".c-chord-edit__btn")[8].click    # ♭
@@ -50,13 +55,15 @@ RSpec.feature "Chords", type: :feature do
       all(".c-chord-edit__btn")[10].click   # 7th
       all(".c-chord-edit__btn")[2].click    # B
 
-      all(".c-chord-edit__btn")[14].click   # shift
-      all(".c-chord-edit__btn")[12].click   # begin-wbar
-      all(".c-chord-edit__btn")[14].click   # shift
+      all(".c-chord-edit__btn")[14].click   # 1st-shift
+      all(".c-chord-edit__btn")[9].click   # begin-wbar
+      all(".c-chord-edit__btn")[11].click   # 2nd-shift
 
       all(".c-chord-edit__btn")[16].click   # end-repeat
 
-
+      expect(all(".c-chordunit__part")[0]).to have_content "A"
+      expect(all(".c-chordunit__repeat")[0]).to have_content "2."
+      expect(all(".c-chordunit__indicator")[0]).to have_content "break"
       expect(all(".c-chordunit__beat")[0]).to have_content "@"
       expect(all(".c-chordunit__note-name")[0]).to have_content "A"
       expect(all(".c-chordunit__half-note")[0]).to have_content "b"
@@ -77,19 +84,30 @@ RSpec.feature "Chords", type: :feature do
       all(".c-chord-edit__btn")[15].click   # begin-repeat
       all(".c-chord-edit__btn")[15].click   # begin-repeat
 
-      all(".c-chord-edit__btn")[14].click   # shift
+      all(".c-chord-edit__btn")[14].click   # 1st-shift
 
-      all(".c-chord-edit__btn")[16].click   # 4/4拍子
-      all(".c-chord-edit__btn")[18].click   # 6/8拍子
+      all(".c-chord-edit__btn")[3].click    # partC
+      all(".c-chord-edit__btn")[4].click    # Chorus
+      all(".c-chord-edit__btn")[7].click    # break
+
+      all(".c-chord-edit__btn")[8].click    # repeat
+      all(".c-chord-edit__btn")[8].click    # repeat
+      all(".c-chord-edit__btn")[8].click    # repeat
+      all(".c-chord-edit__btn")[8].click    # repeat
+
+      all(".c-chord-edit__btn")[13].click   # 4/4拍子
+      all(".c-chord-edit__btn")[15].click   # 6/8拍子
+      all(".c-chord-edit__btn")[11].click   # 2nd-shift
+
       all(".c-chord-edit__btn")[4].click    # D
       all(".c-chord-edit__btn")[19].click   # BackSpace
 
-      all(".c-chord-edit__btn")[14].click   # shift
 
       expect(find(".c-chord-edit__text-window")).to have_content "Cssm"
 
       find(".c-chord-edit__close").click
-      # expect(all(".c-chordunit__beat")[$chordunit_num-1]).to have_content "P"
+      expect(all(".c-chordunit__indicator")[$chordunit_num-1]).to have_content ""
+      expect(all(".c-chordunit__repeat")[$chordunit_num-1]).to have_content ""
       expect(all(".c-chordunit__note-name")[$chordunit_num-1]).to have_content "C"
       expect(all(".c-chordunit__half-note")[$chordunit_num-1]).to have_content "B"
       expect(all(".c-chordunit__modifier")[$chordunit_num-1]).to have_content ""
@@ -104,6 +122,10 @@ RSpec.feature "Chords", type: :feature do
 
       expect(find(".c-key-change__present")).to have_content "key of Gm"
 
+      expect(all(".c-chordunit__part")[0]).to have_content "A"
+      expect(all(".c-chordunit__repeat")[0]).to have_content "2."
+      expect(all(".c-chordunit__indicator")[0]).to have_content "break"
+
       expect(all(".c-chordunit__beat")[0]).to have_content "@"
       expect(all(".c-chordunit__note-name")[0]).to have_content "A"
       expect(all(".c-chordunit__half-note")[0]).to have_content "b"
@@ -111,7 +133,8 @@ RSpec.feature "Chords", type: :feature do
       expect(all(".c-chordunit__leftbar")[0]).to have_content '"'
       expect(all(".c-chordunit__rightbar")[0]).to have_content "}"
 
-      # expect(all(".c-chordunit__beat")[$chordunit_num-1]).to have_content "P"
+      expect(all(".c-chordunit__indicator")[$chordunit_num-1]).to have_content ""
+      expect(all(".c-chordunit__repeat")[$chordunit_num-1]).to have_content ""
       expect(all(".c-chordunit__note-name")[$chordunit_num-1]).to have_content "C"
       expect(all(".c-chordunit__half-note")[$chordunit_num-1]).to have_content "B"
       expect(all(".c-chordunit__modifier")[$chordunit_num-1]).to have_content ""
@@ -153,6 +176,18 @@ RSpec.feature "Chords", type: :feature do
     all(".c-chord-edit__btn")[6].click
     all(".c-chord-edit__btn")[7].click
 
+    all(".c-chord-edit__btn")[14].click   # 1st-shift
+
+    all(".c-chord-edit__btn")[5].click    # Ending
+    all(".c-chord-edit__btn")[6].click    # Solo
+    all(".c-chord-edit__btn")[7].click    # break
+
+    all(".c-chord-edit__btn")[8].click    # repeat
+    all(".c-chord-edit__btn")[8].click    # repeat
+
+    all(".c-chord-edit__btn")[13].click   # 4/4拍子
+    all(".c-chord-edit__btn")[11].click   # 2nd-shift
+
     find(".c-chord-edit__close").click
     click_button "登録"
 
@@ -162,6 +197,10 @@ RSpec.feature "Chords", type: :feature do
     expect(find(".c-key-change__present")).to have_content "key of F"
     expect(find(".c-key-change__present").find(".font_base-key")).to have_content "B"
 
+    expect(all(".c-chordunit__part")[0]).to have_content "Intro"
+    expect(all(".c-chordunit__part")[0]).to have_content "Solo"
+    expect(all(".c-chordunit__repeat")[0]).to have_content "3."
+    expect(all(".c-chordunit__indicator")[0]).to have_content "break"
     expect(all(".c-chordunit__beat")[0]).to have_content "@"
     expect(all(".c-chordunit__leftbar")[0]).to have_content "{"
     expect(all(".c-chordunit__note-name")[0]).to have_content "G"
@@ -169,7 +208,11 @@ RSpec.feature "Chords", type: :feature do
     expect(all(".c-chordunit__modifier")[0]).to have_content "m"
     expect(all(".c-chordunit__rightbar")[0]).to have_content "}"
 
-    expect(all(".c-chordunit__beat")[$chordunit_num-1]).to have_content "@"
+    expect(all(".c-chordunit__part")[$chordunit_num-1]).to have_content "Intro"
+    expect(all(".c-chordunit__part")[$chordunit_num-1]).to have_content "Ending"
+    expect(all(".c-chordunit__repeat")[$chordunit_num-1]).to have_content "1."
+    expect(all(".c-chordunit__indicator")[$chordunit_num-1]).to have_content ""
+    expect(all(".c-chordunit__beat")[$chordunit_num-1]).to have_content "$"
     expect(all(".c-chordunit__leftbar")[$chordunit_num-1]).to have_content "{"
     expect(all(".c-chordunit__note-name")[$chordunit_num-1]).to have_content "F"
     expect(all(".c-chordunit__half-note")[$chordunit_num-1]).to have_content "B"

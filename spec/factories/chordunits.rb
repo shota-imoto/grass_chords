@@ -2,6 +2,9 @@ FactoryBot.define do
   factory :chordunit do
     sequence(:id){|n| n}
     sequence(:address){|n| n}
+    part {"Intro, Solo"}
+    repeat {"3."}
+    indicator {"break"}
     text {"Gsm"}
     beat {"@"}
     leftbar {"{"}

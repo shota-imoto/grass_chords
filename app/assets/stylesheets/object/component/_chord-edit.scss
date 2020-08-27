@@ -67,10 +67,46 @@
   position: relative;
   top: -2px;
 }
+.c-chord-edit__part {
+  border: solid $color-font-white 1px;
+
+  text-align: center;
+  border-radius: 2px;
+  display: inline-block;
+
+  &--sizeABC {
+    width: 18px;
+  }
+  &--size_large {
+    padding: 0 2px;
+  }
+}
+
+.c-chord-edit__repeat {
+  padding-left: 4px;
+  margin: 0 2px 4px 0;
+  border: solid $color-font-white;
+  border-width: 1px 0 0 1px;
+}
 
 .c-chord-edit__close {
   font-size: 24px;
   margin-right: 7px;
   margin-bottom: 10px;
   cursor: pointer;
+}
+
+.c-chord-edit__js-part {
+  margin: 0 5px 3px 0;
+  padding: 0 4px;
+  display: inline-block;
+  border-radius: 2px;
+  border: solid $color-font-black 1px;
+}
+
+.c-chord-edit__js-repeat {
+  padding-left: 4px;
+  margin: 0 2px 4px 0;
+  border: solid $color-font-black;
+  border-width: 1px 0px 0px 1px;
 }
