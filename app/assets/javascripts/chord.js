@@ -328,17 +328,20 @@ $(function () {
 
   $(document).ready(function () {
     $(".c-chordunit__wrapper").each(function (i, chordunit) {
-      cursor_display("unit_0-" + i);
       var letter = $(chordunit).find(".c-chordunit__text").attr("value");
 
       var chord_num = Math.floor(i / chordunit_num);
       var unit_num = i % chordunit_num;
 
+      cursor_display("unit_" + chord_num + "-" + unit_num);
+
       if (letter != undefined) {
         letter = letter.trim();
         text_display("unit_" + chord_num + "-" + unit_num, letter);
       }
+      console.log(i + "番目");
 
+      // ↓２つ目のコード譜の１つめのコードユニットでエラーが発生している
       // part_display
       var value_of_part = $(chordunit).find(".c-chordunit__part").text();
       if (value_of_part != "") {
@@ -348,6 +351,8 @@ $(function () {
           selected_html_append("part", i, part);
         });
       }
+      console.log(i + "番目");
+
       // repeat_display
       var value_of_repeat = $(chordunit).find(".c-chordunit__repeat").text();
       if (value_of_repeat != "") {
@@ -363,6 +368,7 @@ $(function () {
         default_input(i);
       }
     });
+
     $(".c-chordunit").removeClass("c-js__cursor");
   });
 
