@@ -34,6 +34,7 @@
 .c-chord-edit__main {
   display: flex;
   flex-wrap: wrap;
+  touch-action: manipulation;
 }
 
 .c-chord-edit__btn {
@@ -49,8 +50,8 @@
   // design
   box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.3);
   color: $color-font-white;
-  cursor: pointer;
   touch-action: manipulation;
+  cursor: pointer;
 }
 
 .c-chord-edit__size-shift {
