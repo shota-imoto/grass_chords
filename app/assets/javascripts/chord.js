@@ -71,14 +71,22 @@ $(function () {
       return false;
     }
     var id = $(".c-js__cursor").attr("id");
+
     id = id.replace("unit_0-", "");
 
-    // if some of command duplicates, under below judge statement resolves this problem.
+    if (input == "next") {
+      id = Number(id) + 1;
+      id = "unit_0-" + id;
+      cursor_display(id);
+      return false;
+    }
+
     if (
       $(this)
         .find(".c-chord-edit__input")
         .hasClass("c-js__chord-editor-duplication")
     ) {
+      // if some of command duplicates, under below judge statement resolves this problem.
       if (input == "B") input = "sharp";
       else if (input == "'") input = "rbar";
       else if (input == '"') input = "rwbar";
@@ -136,7 +144,6 @@ $(function () {
       .find(".c-chordunit__" + unit_name);
     var insertHTML = change_input_to_HTML(unit_name, input);
 
-    console.log(insertHTML);
     if (selected_element.html().includes(insertHTML)) {
       // same value has input
       selected_element.children().remove(":contains('" + input + "')");

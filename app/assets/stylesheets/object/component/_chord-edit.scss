@@ -49,14 +49,13 @@
   // design
   box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.3);
   color: $color-font-white;
+  cursor: pointer;
+  touch-action: manipulation;
 }
 
 .c-chord-edit__size-shift {
   width: calc(28% - 14px);
   display: flex;
-}
-.c-chord-edit__icon {
-  margin-right: 4px;
 }
 
 .c-chord-edit__blank {
