@@ -51,6 +51,13 @@
   color: $color-font-white;
   cursor: pointer;
   touch-action: manipulation;
+
+  &:active {
+    position: relative;
+    top: 1px;
+    left: 1px;
+    box-shadow: 0 0 0 rgba(0, 0, 0, 0);
+  }
 }
 
 .c-chord-edit__size-shift {
