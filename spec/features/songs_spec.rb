@@ -1,5 +1,4 @@
 require 'rails_helper'
-      # save_and_open_page
 
 RSpec.feature "Songs", type: :feature do
   scenario "ユーザーが新しい楽曲データを登録する", js: true  do
@@ -162,6 +161,41 @@ RSpec.feature "Songs", type: :feature do
     all(".c-form__btn")[3].click
     expect(page).to have_content "Blue Ridge Cabin Home"
     expect(all(".p-search-result__result").size).to eq(1)
+  end
+
+  scenario "楽曲個別ページで1~3つ目のコード譜が正常に表示されている", js: true do
+    song = FactoryBot.create(:song, title: "Blue Ridge Cabin Home")
+
+    chord1 = FactoryBot.create(:chord, song_id: song.id)
+    ($chordunit_num).times do |i|
+      FactoryBot.create(:chordunit, address: i-1, chord_id: chord1.id)
+    end
+
+    chord2 = FactoryBot.create(:chord, song_id: song.id)
+    ($chordunit_num).times do |i|
+      FactoryBot.create(:chordunit, address: i-1, chord_id: chord2.id)
+    end
+
+    chord3 = FactoryBot.create(:chord, song_id: song.id)
+    ($chordunit_num).times do |i|
+      FactoryBot.create(:chordunit, address: i-1, chord_id: chord3.id)
+    end
+
+    visit "songs/#{song.id}"
+
+    song.chords.each_with_index do |chord, i|
+      total_index = $chordunit_num * (i)
+      expect(all(".c-chordunit__part")[total_index]).to have_content "Intro"
+      expect(all(".c-chordunit__part")[total_index]).to have_content "Solo"
+      expect(all(".c-chordunit__repeat")[total_index]).to have_content "3."
+      expect(all(".c-chordunit__indicator")[total_index]).to have_content "break"
+      expect(all(".c-chordunit__beat")[total_index]).to have_content "@"
+      expect(all(".c-chordunit__leftbar")[total_index]).to have_content "{"
+      expect(all(".c-chordunit__note-name")[total_index]).to have_content "G"
+      expect(all(".c-chordunit__half-note")[total_index]).to have_content "B"
+      expect(all(".c-chordunit__modifier")[total_index]).to have_content "m"
+      expect(all(".c-chordunit__rightbar")[total_index]).to have_content "}"
+    end
   end
 
 end
