@@ -73,6 +73,12 @@ RSpec.feature "Chords", type: :feature do
 
       expect(find(".c-chord-edit__text-window")).to have_content "Abm7B"
 
+
+      all(".c-chord-edit__btn")[19].click   # next
+      all(".c-chord-edit__btn")[5].click    # E
+
+      expect(all(".c-chordunit__note-name")[1]).to have_content "E"
+
       find(".c-chord-edit__close").click
       all(".c-chordunit")[$chordunit_num-1].click
       find(".p-chord-new__editor-btn").click
@@ -100,7 +106,7 @@ RSpec.feature "Chords", type: :feature do
       all(".c-chord-edit__btn")[11].click   # 2nd-shift
 
       all(".c-chord-edit__btn")[4].click    # D
-      all(".c-chord-edit__btn")[19].click   # BackSpace
+      all(".c-chord-edit__btn")[20].click   # BackSpace
 
 
       expect(find(".c-chord-edit__text-window")).to have_content "Cssm"
@@ -132,6 +138,8 @@ RSpec.feature "Chords", type: :feature do
       expect(all(".c-chordunit__modifier")[0]).to have_content "m7"
       expect(all(".c-chordunit__leftbar")[0]).to have_content '"'
       expect(all(".c-chordunit__rightbar")[0]).to have_content "}"
+
+      expect(all(".c-chordunit__note-name")[1]).to have_content "E"
 
       expect(all(".c-chordunit__indicator")[$chordunit_num-1]).to have_content ""
       expect(all(".c-chordunit__repeat")[$chordunit_num-1]).to have_content ""
@@ -169,9 +177,9 @@ RSpec.feature "Chords", type: :feature do
     all(".c-chordunit")[$chordunit_num-1].click
     find(".p-chord-new__editor-btn").click
 
-    all(".c-chord-edit__btn")[19].click
-    all(".c-chord-edit__btn")[19].click
-    all(".c-chord-edit__btn")[19].click
+    all(".c-chord-edit__btn")[20].click
+    all(".c-chord-edit__btn")[20].click
+    all(".c-chord-edit__btn")[20].click
 
     all(".c-chord-edit__btn")[6].click
     all(".c-chord-edit__btn")[7].click
@@ -217,7 +225,7 @@ RSpec.feature "Chords", type: :feature do
     expect(all(".c-chordunit__note-name")[$chordunit_num-1]).to have_content "F"
     expect(all(".c-chordunit__half-note")[$chordunit_num-1]).to have_content "B"
     expect(all(".c-chordunit__modifier")[$chordunit_num-1]).to have_content ""
-    expect(all(".c-chordunit__rightbar")[47]).to have_content "}"
+    expect(all(".c-chordunit__rightbar")[$chordunit_num-1]).to have_content "}"
 
   end
 
