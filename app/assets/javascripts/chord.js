@@ -1,14 +1,19 @@
 $(function () {
   // カーソル表示
   $(".c-js__cursor-marker").on("touchend, mouseup", function () {
-    var id = $(this).find(".c-chordunit").attr("id");
-    cursor_display(id);
-    // when user selects chordunit, load input text and indicate it.
-    input_text_display(id);
+    if (
+      $(".js-judge__create-chord").length ||
+      $(".js-judge__edit-chord").length
+    ) {
+      var id = $(this).find(".c-chordunit").attr("id");
+      cursor_display(id);
+      // when user selects chordunit, load input text and indicate it.
+      input_text_display(id);
+    }
   });
 
   function cursor_display(id) {
-    $(".c-js__cursor-marker").find(".c-chordunit").removeClass("c-js__cursor");
+    $(".c-chordunit").removeClass("c-js__cursor");
     $("#" + id).addClass("c-js__cursor");
   }
 
@@ -117,6 +122,12 @@ $(function () {
     var insertHTML = change_input_to_HTML(unit_name, input);
 
     selected_element.html(insertHTML);
+    var new_element = $(".c-js__cursor")
+      .parent()
+      .find(".c-chordunit__" + unit_name);
+    $("#chord_chordunits_attributes_" + id + "_" + unit_name).val(
+      new_element.text()
+    );
   }
 
   function selected_html_append(unit_name, id, input) {
@@ -125,13 +136,30 @@ $(function () {
       .find(".c-chordunit__" + unit_name);
     var insertHTML = change_input_to_HTML(unit_name, input);
 
+    console.log(insertHTML);
     if (selected_element.html().includes(insertHTML)) {
+      // same value has input
       selected_element.children().remove(":contains('" + input + "')");
     } else if (selected_element.html() == "") {
+      // no value has input
       selected_element.append(insertHTML);
     } else {
+      // different value has input
       selected_element.append(insertHTML);
     }
+    var new_element = $(".c-js__cursor")
+      .parent()
+      .find(".c-chordunit__" + unit_name);
+
+    var value_of_part = "";
+
+    new_element.children().each(function (i, element) {
+      if (value_of_part != "") value_of_part += ", ";
+      value_of_part += $(element).text();
+    });
+    $("#chord_chordunits_attributes_" + id + "_" + unit_name).val(
+      value_of_part
+    );
   }
 
   function change_input_to_HTML(unit_name, input) {
@@ -139,7 +167,7 @@ $(function () {
     if (unit_name == "part") {
       html = `<div class="c-chord-edit__js-part">${input}</div>`;
     } else if (unit_name == "indicator") {
-      html = `<div>${input}</div>`;
+      html = `<div class="c-chord-edit__js-indicator">${input}</div>`;
     } else if (unit_name == "repeat") {
       var repeat_number = judge_repeat_number();
       if (repeat_number != "") {
@@ -292,36 +320,54 @@ $(function () {
   }
 
   $(document).ready(function () {
-    $(".c-chordunit__text").each(function (i, text) {
-      var letter = $(text).attr("value");
+    $(".c-chordunit__wrapper").each(function (i, chordunit) {
+      cursor_display("unit_0-" + i);
+      var letter = $(chordunit).find(".c-chordunit__text").attr("value");
 
       var chord_num = Math.floor(i / chordunit_num);
       var unit_num = i % chordunit_num;
 
       if (letter != undefined) {
         letter = letter.trim();
-
         text_display("unit_" + chord_num + "-" + unit_num, letter);
+      }
+
+      // part_display
+      var value_of_part = $(chordunit).find(".c-chordunit__part").text();
+      if (value_of_part != "") {
+        var part_array = value_of_part.split(", ");
+        $(chordunit).find(".c-chordunit__part").empty();
+        $.each(part_array, function (j, part) {
+          selected_html_append("part", i, part);
+        });
+      }
+      // repeat_display
+      var value_of_repeat = $(chordunit).find(".c-chordunit__repeat").text();
+      if (value_of_repeat != "") {
+        var html = `<div class="c-chord-edit__js-repeat">${value_of_repeat}</div>`;
+        $(chordunit).find(".c-chordunit__repeat").html(html);
       }
 
       // if page shown now is chord#new and no rollback.
       if (
         $(".js-judge__create-chord").length &&
         $(".l-header__notice").text().length == 0
-      )
+      ) {
         default_input(i);
+      }
     });
+    $(".c-chordunit").removeClass("c-js__cursor");
   });
 
   // i番目のchordunitに対してiが特定の値のときに縦線を挿入する
   function default_input(i) {
     if (i % 4 == 0) {
       // call "cursor_display" function, because "selected_text_replace" input in cursor selected chordunit
-      cursor_display("unit_0-" + i);
+      // cursor_display("unit_0-" + i);
       selected_text_replace("leftbar", i, "'");
     } else if (i % 4 == 3) {
       // call "cursor_display" function, because "selected_text_replace" input in cursor selected chordunit
-      cursor_display("unit_0-" + i);
+      // cursor_display("unit_0-" + i);
       selected_text_replace("rightbar", i, "'");
     }
   }

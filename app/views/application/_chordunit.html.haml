@@ -1,7 +1,8 @@
 .c-chordunit__wrapper.c-chordunit__wrapper--large.c-js__cursor-marker
   .c-chordunit__part= @chord.chordunits[i].part
   .c-chordunit__repeat= @chord.chordunits[i].repeat
-  .c-chordunit__indicator= @chord.chordunits[i].indicator
+  .c-chordunit__indicator
+    .c-chord-edit__js-indicator= @chord.chordunits[i].indicator
   .c-chordunit.c-chordunit--large{id: "unit_0-#{i}"}
     .c-chordunit__beat.c-chordunit__beat--large= @chord.chordunits[i].beat
     .c-chordunit__leftbar.c-chordunit__leftbar--large= @chord.chordunits[i].leftbar

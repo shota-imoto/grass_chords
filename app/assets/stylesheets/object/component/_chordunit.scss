@@ -1,6 +1,12 @@
 .c-chordunit__wrapper {
+  border-bottom: $color-icon-gray 1px solid;
+
   &--large {
     width: 25%;
+  }
+  &--small {
+    // padding: 0 5px;
+    width: 12.5%;
   }
 }
 
@@ -17,16 +23,31 @@
 
 .c-chordunit {
   height: 48px;
-  border-bottom: $color-icon-gray 1px solid;
   display: flex;
   align-items: center;
   position: relative;
-  margin-bottom: 12px;
-
   &--large {
+    margin-bottom: 6px;
   }
   &--small {
-    width: 12.5%;
+  }
+}
+
+.c-chordunit__part {
+  &--small {
+    font-size: 10px;
+  }
+}
+.c-chordunit__repeat {
+  &--small {
+    font-size: 10px;
+    margin-bottom: -5px;
+  }
+}
+.c-chordunit__indicator {
+  &--small {
+    font-size: 10px;
+    margin-bottom: -5px;
   }
 }
 

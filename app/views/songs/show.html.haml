@@ -50,17 +50,21 @@
           =link_to ">> 拡大ページ", chord_path(chord), class: "p-song__detail-page"
         .p-song__score{id: "chord_#{i}"}
           - chord.chordunits.each_with_index do |unit, j|
-            .c-chordunit.c-chordunit--small{id: "unit_#{i}-#{j}"}
-              .c-chordunit__beat.c-chordunit__beat--small= chord.chordunits[j].beat
-              .c-chordunit__leftbar.c-chordunit__leftbar--small
-                - unless (chord.chordunits[j-1].rightbar == chord.chordunits[j].leftbar) && (j%8 == 4)
-                  =chord.chordunits[j].leftbar
-              .c-chordunit__note
-                .c-chordunit__note-name.c-chordunit__note-name--small
-                .c-chordunit__half-note.c-chordunit__half-note--small
-                .c-chordunit__modifier.c-chordunit__modifier--small
-              .c-chordunit__rightbar.c-chordunit__rightbar--small= chord.chordunits[j].rightbar
-              .c-chordunit__text.u-display__hidden{value: "#{chord.chordunits[j].text}"}= chord.chordunits[j].text
+            .c-chordunit__wrapper.c-chordunit__wrapper--small.c-js__cursor-marker
+              .c-chordunit__part.c-chordunit__part--small= chord.chordunits[j].part
+              .c-chordunit__repeat.c-chordunit__repeat--small= chord.chordunits[j].repeat
+              .c-chordunit__indicator.c-chordunit__indicator--small= chord.chordunits[j].indicator
+              .c-chordunit.c-chordunit--small{id: "unit_#{i}-#{j}"}
+                .c-chordunit__beat.c-chordunit__beat--small= chord.chordunits[j].beat
+                .c-chordunit__leftbar.c-chordunit__leftbar--small
+                  - unless (chord.chordunits[j-1].rightbar == chord.chordunits[j].leftbar) && (j%8 == 4)
+                    =chord.chordunits[j].leftbar
+                .c-chordunit__note
+                  .c-chordunit__note-name.c-chordunit__note-name--small
+                  .c-chordunit__half-note.c-chordunit__half-note--small
+                  .c-chordunit__modifier.c-chordunit__modifier--small
+                .c-chordunit__rightbar.c-chordunit__rightbar--small= chord.chordunits[j].rightbar
+                .c-chordunit__text.u-display__hidden{value: "#{chord.chordunits[j].text}"}= chord.chordunits[j].text
         .p-song__footer
           %p.p-song__text-version= "#{chord.version} version"
           %p.p-song__text-writer= "by #{chord.user.name}"
@@ -70,3 +74,4 @@
   - else
     %section.c-window__skeleton.p-song__notice この楽曲には、コード譜が登録されていません
 
+  -# .c-chordunit__wrapper--large
