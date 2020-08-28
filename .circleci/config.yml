@@ -72,8 +72,6 @@ workflows:
             branches:
               ignore: master
       - build_and_push:
-          requires:
-            - test
           filters:
             branches:
               only: master
