@@ -37,6 +37,8 @@
         =render "/application/chordunit-form", f: f
     .content__registration
       =f.submit "登録", class:"c-form__btn c-form__btn--registration"
+    - breadcrumb :chord_new
+    = render "application/breadcrumbs", layout: "footer"
     .p-chord-new__editor-btn
       >> Editor
-=render "/application/chord-editor"
+= render "/application/chord-editor"

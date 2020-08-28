@@ -24,3 +24,5 @@
               =link_to "お試しログイン", users_test_sign_in_path
     %figure
       =image_tag "/images/fiddle.png", class: "c-section__image-fiddle"
+  - breadcrumb :sign_in
+  = render "application/breadcrumbs", layout: "footer"

@@ -134,7 +134,6 @@ $(function () {
     $(".c-chordunit__note").each(function (i, value) {
       var note = $(value).children(".c-chordunit__note-name").text();
       note = note + $(value).children(".c-chordunit__half-note").text();
-      console.log(note);
 
       // 異常表記または別表記を変換する
       if (note == "Ab") {
