@@ -112,12 +112,12 @@ RSpec.feature "Users", type: :feature do
 
     click_button "登録"
 
-    expect(page).to have_current_path(edit_user_registration_path)
+    expect(page).to have_current_path(edit_user_registration_path(id: user.id))
     expect(page).to have_content "テストユーザーは編集できません"
 
     click_button "ユーザを削除する"
 
-    expect(page).to have_current_path(edit_user_registration_path)
+    expect(page).to have_current_path(edit_user_registration_path(id: user.id))
     expect(page).to have_content "テストユーザーは編集できません"
   }.to change(User, :count).by(0)
   end

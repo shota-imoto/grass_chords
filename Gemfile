@@ -82,3 +82,4 @@ gem 'rails-i18n'
 gem 'unicorn', '5.5.5'
 gem 'recaptcha', require: "recaptcha/rails"
 gem 'kaminari'
+gem 'gretel'

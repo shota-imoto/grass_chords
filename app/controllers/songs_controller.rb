@@ -65,7 +65,13 @@ class SongsController < ApplicationController
     @songs = Song.all.includes(:chords)
     @songs = @songs.order("title asc")
 
-    exchange_global_params
+
+    params[:jam] = params[:jam_global]
+    params[:standard] = params[:standard_global]
+    params[:beginner] = params[:beginner_global]
+    params[:vocal] = params[:vocal_global]
+    params[:instrumental] = params[:instrumental_global]
+
     search_song
 
     @count = @songs.length
@@ -80,10 +86,6 @@ class SongsController < ApplicationController
   def id_search
     # set_songアクションを用いて楽曲レコード取得
   end
-
-  end
-
-
   private
     def set_song
       @song = Song.find(params[:id])
@@ -114,11 +116,5 @@ class SongsController < ApplicationController
       end
     end
 
-    def exchange_global_params
-      params[:jam] = params[:jam_global]
-      params[:standard] = params[:standard_global]
-      params[:beginner] = params[:beginner_global]
-      params[:vocal] = params[:vocal_global]
-      params[:instrumental] = params[:instrumental_global]
-    end
+  end
 end

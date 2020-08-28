@@ -1,0 +1,13 @@
+.c-breadcrumbs {
+  width: 100%;
+}
+
+.c-breadcrumbs__list {
+  color: $color-theme-red;
+  & span {
+    color: $color-font-black;
+  }
+  & a {
+    color: $color-theme-red;
+  }
+}

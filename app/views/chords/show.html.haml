@@ -40,5 +40,7 @@
       %a
         |
       =link_to "Delete", chord_path, method: :delete, data: { confirm: "本当によろしいですか？" }
-  .p-chord__return
-    =link_to "コード譜一覧に戻る", song_path(@chord.song)
+  -# .p-chord__return
+  -#   =link_to "コード譜一覧に戻る", song_path(@chord.song)
+  - breadcrumb :chord_show
+  = render "application/breadcrumbs", layout: "footer"

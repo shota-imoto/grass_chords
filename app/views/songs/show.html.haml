@@ -73,5 +73,5 @@
         %hr
   - else
     %section.c-window__skeleton.p-song__notice この楽曲には、コード譜が登録されていません
-
-  -# .c-chordunit__wrapper--large
+  - breadcrumb :song_show
+  = render "application/breadcrumbs", layout: "footer"

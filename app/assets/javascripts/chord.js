@@ -339,7 +339,6 @@ $(function () {
         letter = letter.trim();
         text_display("unit_" + chord_num + "-" + unit_num, letter);
       }
-      console.log(i + "番目");
 
       // ↓２つ目のコード譜の１つめのコードユニットでエラーが発生している
       // part_display
@@ -351,7 +350,6 @@ $(function () {
           selected_html_append("part", i, part);
         });
       }
-      console.log(i + "番目");
 
       // repeat_display
       var value_of_repeat = $(chordunit).find(".c-chordunit__repeat").text();

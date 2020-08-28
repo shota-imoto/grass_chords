@@ -21,3 +21,5 @@
           =f.submit "登録", class:"c-form__btn c-form__btn--login c-js__recaptcha"
     %figure
       =image_tag "/images/fiddle.png", class: "c-section__image-fiddle"
+  - breadcrumb :sign_up
+  = render "application/breadcrumbs", layout: "footer"

@@ -32,7 +32,7 @@
         .c-review__text コード譜の信頼数
       .p-user__edit
         - if current_user.id == @user.id
-          =link_to "Edit", edit_user_registration_path
+          =link_to "Edit", edit_user_registration_path(id: @user.id)
   %section.c-section__sentence-box.p-user__section
     .p-user__section-header
       .p-user__icon--user
@@ -51,9 +51,5 @@
                 = link_to "リストから削除する", practice_path(practice, chord_id: practice.chord.id), method: :delete, remote: true
       -else
         ="練習曲に登録している楽曲がありません"
-
-
-
-
-
-
+  - breadcrumb :user_show
+  = render "application/breadcrumbs", layout: "footer"

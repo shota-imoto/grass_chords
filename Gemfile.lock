@@ -88,6 +88,8 @@ GEM
       sassc (>= 1.11)
     globalid (0.4.2)
       activesupport (>= 4.2.0)
+    gretel (4.0.1)
+      rails (>= 5.1)
     haml (5.1.2)
       temple (>= 0.8.0)
       tilt
@@ -295,6 +297,7 @@ DEPENDENCIES
   devise
   factory_bot_rails
   font-awesome-sass
+  gretel
   haml-rails
   hirb
   hirb-unicode
