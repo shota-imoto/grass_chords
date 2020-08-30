@@ -1,0 +1,110 @@
+%aside.l-contents__top.l-contents__top--low-volume.l-contents__top--sub
+  %section.l-contents__section.c-window__clear.p-chord__section
+    .p-chord-new__title.js-judge__create-chord
+      %h2 Request
+      .p-chord-new__subtitle -Bluegrass上級者の皆様へのお願い-
+%article
+  %section.c-section__sentence-box.p-top__section.u-color__section-red
+    %h3.heading
+      %p 目次
+    .u-space__bottom-10px
+    %ul.sentence
+      %li.u-space__bottom-10px
+        %a{href: "#i1"} 依頼事項 要約
+      %li.u-space__bottom-10px
+        %a{href: "#i2"} 課題を解決する機能
+      %li.u-space__bottom-10px
+        %a{href: "#i3"} 機能が抱える問題
+      %li.u-space__bottom-10px
+        %a{href: "#i4"} 依頼事項 実際の操作内容
+      %li.u-space__bottom-10px
+        %a{href: "#i5"} コロナについて
+      %li.u-space__bottom-10px
+        %a{href: "#i6"} その他の依頼事項
+      %li.u-space__bottom-10px
+        %a{href: "#i7"} お問い合わせ先
+  .u-position__list{id: "i1"}
+  %section.c-section__sentence-box.p-top__section
+    %h3.heading
+      %p 依頼事項 要約
+    .sentence
+      %p
+        当サービスには
+        =link_to "ビジョン", informations_vision_path
+        の実現のため、いくつかの機能がございます。
+      %p 今回はそのうちの1機能、投票によるメジャー曲の見える化 機能についてのご依頼です。
+      .u-space__bottom-10px
+      %p 【作業内容】
+      %p ログイン後、あなたが今まで練習してきた曲の「練習してる」表明ボタンをクリック
+      %p ※1曲からのご参加で構いません
+  .u-position__list{id: "i2"}
+  %section.c-section__sentence-box.p-top__section
+    %h3.heading 現状の課題
+    .sentence
+      %p 初心者の場合、1曲弾けるようになる練習コストが高い
+      %p ①やっと覚えた曲をジャム友だちが知らない…
+      %p ②合わせられる曲がなかなか増えていかない…
+      %p ③ジャム曲を覚える優先度が落ちていく…
+  .u-position__list{id: "i3"}
+  %section.c-section__sentence-box.p-top__section
+    %h3.heading 機能が抱える問題
+    .sentence
+      %p ある程度、票が集まった状態でないと機能しない
+      %p →解決のため、ご協力お願いいたします
+      .u-space__bottom-10px
+      %p 課題解決すると…
+      %p ①1曲覚えるたびに参加できるジャムが増える
+      %p ②楽しいので新しい曲を覚える
+      %p ③参加できるジャムが増える
+      %p ④全体としてジャムに参加する人が増える
+      .u-space__bottom-10px
+      %p
+        →
+        =link_to "ビジョン", informations_vision_path
+        の実現に近づきます
+  .u-position__list{id: "i4"}
+  %section.c-section__sentence-box.p-top__section.u-color__section-red
+    %h3.heading.i2 依頼事項 実際の操作内容
+    .sentence
+      %p
+        ①メニューから
+        =link_to "ユーザ登録", new_user_registration_path
+      %p
+        ②トップページの
+        =link_to "検索ボタン", search_songs_path(keyword: "")
+        をクリック
+      %p ③演奏できる曲のカードをクリック
+      %p.u-space__bottom-10px
+        ③コード譜の下の「練習ボタン」をクリック
+      %p お時間空いているときに1曲ずつでもポチポチ押して頂けると嬉しいです。
+  .u-position__list{id: "i5"}
+  %section.c-section__sentence-box.p-top__section
+    %h3.heading コロナについて
+    .sentence
+      %p 昨今のコロナ禍によりフェス休止、
+      %p.u-space__bottom-10px
+        ブルーグラスプレイヤーのメイン流入口である大学サークルも満足に活動できていないと聞いております
+      %p 危機的状況にある国内ブルーグラス音楽。
+      %p しかし、また活動が再開できる状態になったとき、ブルーグラス入門者がスタートダッシュが切れるよう、ご協力をお願いいたします。
+  .u-position__list{id: "i6"}
+  %section.c-section__sentence-box.p-top__section
+    %h3.heading その他の依頼事項
+    .sentence
+      %p.u-space__bottom-10px
+        さらに”GrassChords”の
+        =link_to "ビジョン", informations_vision_path
+        に共感いただける方には、ぜひコード譜と楽曲の追加をお手伝いいただきたいと思います
+      %p 表現しづらいコード進行がありましたらご意見いただけたら幸いです。
+      %p ほかにも、データ入力担当者、テスター、開発者も募集しております。
+  .u-position__list{id: "i7"}
+  %section.c-section__sentence-box.p-top__section.u-color__section-red
+    %h3.heading お問合せ先(外部リンク)
+    .sentence
+      %p
+        ="Twitter: "
+        = link_to "shotaimoto1", url: "https://twitter.com/ShotaImoto1"
+      %p
+        ="email: "
+        = link_to "hideyoshi.playing.the.banjo@gmail.com", url: "hideyoshi.playing.the.banjo@gmail.com"
+  - breadcrumb :informations_apply
+  = render "application/breadcrumbs", layout: "footer"

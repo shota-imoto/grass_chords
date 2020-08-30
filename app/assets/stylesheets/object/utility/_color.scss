@@ -1,6 +1,14 @@
 .u-color__section-red {
   background-color: $color-theme-red;
   color: $color-font-white;
+  & a {
+    font-weight: bold;
+    color: white;
+  }
+
+  & li:before {
+    background-color: $color-font-white;
+  }
 }
 
 .u-color__skeleton-cover {

@@ -1,0 +1,95 @@
+%aside.l-contents__top.l-contents__top--low-volume.l-contents__top--sub
+  %section.l-contents__section.c-window__clear.p-chord__section
+    .p-chord-new__title.js-judge__create-chord
+      %h2 Vision
+      .p-chord-new__subtitle -GrassChordsのビジョン-
+%article
+  %section.c-section__sentence-box.p-top__section.u-color__section-red
+    %h3.heading ビジョン
+    .sentence
+      %p ジャムセッションに参加するハードルを下げ、ジャム文化の浸透を進めることを通して、国内ブルーグラスの普及に貢献する
+  %section.c-section__sentence-box.p-top__section
+    %h3.heading ジャムセッションから個人が得られるもの
+    .sentence.c-sentence__center=image_tag "/images/jamsession_for_individual.png", alt: "A.合奏する機会が増え、バンド演奏の上達が加速 B.コミュニケーションのきっかけ。ブルーグラスコミュニティ自体が強くなる C.人と合わせる楽しさを気軽に体感できるブルーグラスの魅力が分かる"
+  %section.c-section__sentence-box.p-top__section
+    %h3.heading ジャム文化浸透によるコミュニティへの影響
+    .sentence.c-sentence__center=image_tag "/images/jamsession_for_community.png", alt: "A. ブルーグラスコミュニティの演奏レベルが底上げ B. ブルーグラスコミュニティが好きで参加する人が増える C. ブルーグラス自体が好きで参加する人が増える"
+  %section.c-section__sentence-box.p-top__section.u-color__section-red
+    %h3.heading ジャム文化浸透における課題
+    .sentence
+    .c-section__sentence-flex
+      .u-display__flex
+        .c-section__content
+          %p 心理的・技術的ハードルの高さ
+          %ul
+            %li やっと覚えた1曲をジャム友だちが知らない
+            %li 知らない曲に対応できない
+          .u-space__bottom-10px
+          %p.u-space__bottom-10px ハードルを下げるためにできること…？
+        .c-section__arrow=image_tag "/images/white_arrow.png"
+      .c-section__content
+        %p.u-size__bold ジャムセッション支援サービス
+        %p.u-size__bold GrassChordsの開発
+  %section.c-section__sentence-box.p-top__section
+    .c-section__sentence-flex
+      .c-section__content
+        %h3.heading GrassChordsの特徴
+        .sentence
+          %ul
+            %li Bluegrass曲が充実
+            %li メジャーな曲が一目瞭然
+            %li キー切替機能によりその場対応の幅が広がる
+            %li 完全無料
+          .u-space__bottom-10px
+          %p すべて満たすのは類似サービスの中で "GrassChords" だけ
+      .c-section__content
+        %table.c-sentence__table
+          %tr
+            %th.c-sentence__table--item サービス
+            %th
+              %p Bluegrass
+              %p 充実度
+            %th 定番曲
+            %th キー切替
+            %th 無料
+          %tr
+            %td.c-sentence__table--item GrassChords
+            %td ○
+            %td ○
+            %td ○
+            %td ○
+          %tr
+            %td.c-sentence__table--item
+              %p 国内コード譜
+              %p 検索サイト
+            %td ×
+            %td ×
+            %td ○
+            %td ○
+          %tr
+            %td.c-sentence__table--item
+              %p Bluegrass専門
+              %p webサイト
+            %td ○
+            %td ×
+            %td ×
+            %td ○
+          %tr
+            %td.c-sentence__table--item iRealPro
+            %td ○
+            %td ×
+            %td ○
+            %td ×
+  %section.c-section__sentence-box.p-top__section.u-color__section-red
+    %h3.heading ビジョン実現のためのお願い
+    .sentence
+      %p GrassChordsはジャム初心者向けサービスです
+      .u-space__bottom-10px
+      %p しかし！ベテランの皆様にご協力のお願いがあります
+      .u-space__bottom-10px
+      %p
+        詳細は
+        =link_to "こちら", informations_apply_path
+        =" (最短3分から)"
+  - breadcrumb :informations_vision
+  = render "application/breadcrumbs", layout: "footer"
