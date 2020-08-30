@@ -329,18 +329,13 @@ $(function () {
   $(document).ready(function () {
     $(".c-chordunit__wrapper").each(function (i, chordunit) {
       var letter = $(chordunit).find(".c-chordunit__text").attr("value");
+      var unit_id = $(chordunit).find(".c-chordunit").attr("id");
 
-      var chord_num = Math.floor(i / chordunit_num);
-      var unit_num = i % chordunit_num;
-
-      cursor_display("unit_" + chord_num + "-" + unit_num);
-
-      // 本番環境のでバッグ用
-      console.log("unit_" + chord_num + "-" + unit_num);
+      cursor_display(unit_id);
 
       if (letter != undefined) {
         letter = letter.trim();
-        text_display("unit_" + chord_num + "-" + unit_num, letter);
+        text_display(unit_id, letter);
       }
 
       // part_display
