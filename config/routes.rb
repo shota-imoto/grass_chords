@@ -15,4 +15,9 @@ Rails.application.routes.draw do
   resources :chords, except: :index
   resources :likes, only: [:create, :destroy]
   resources :practices, only: [:create, :destroy]
+
+  get "informations/apply", to: "informations#apply"
+  get "informations/vision", to: "informations#vision"
 end
+
+

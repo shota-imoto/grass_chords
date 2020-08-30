@@ -11,6 +11,27 @@
   background-position: 36% 70%;
 }
 
+.l-contents__event {
+  margin-top: 70px;
+  animation: event_fade_in ease 2s;
+  & a {
+    color: $color-theme-red;
+    font-weight: bold;
+    font-size: 18px;
+  }
+}
+
+@keyframes event_fade_in {
+  0% {
+    opacity: 0;
+    margin-top: 30px;
+  }
+  100% {
+    opacity: 1;
+    margin-top: 70px;
+  }
+}
+
 .l-contents__section {
   margin-top: 100px;
 }

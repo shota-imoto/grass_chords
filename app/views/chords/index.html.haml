@@ -1,4 +1,7 @@
 %aside.p-top
+  %section.c-window__clear.l-contents__event
+    %p 特設ページ
+    %p=link_to "Bluegrass上級者の皆様へのお願い", informations_apply_path
   %section.c-search.c-window__clear
     .c-search__title コード譜を探す
     =form_with  url: search_songs_path, method: :get, local: true do |f|
@@ -12,6 +15,8 @@
         %li コードが分からない…
         %li どの曲を練習すればいいの？
       %p というあなたのためのサービスです。
+      .u-space__bottom-10px
+      %p=link_to "GrassChordsで描くビジョン", informations_vision_path
   %section.c-section__sentence-box.p-top__section
     %h2.heading How to Use
     .sentence
