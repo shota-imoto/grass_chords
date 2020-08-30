@@ -34,10 +34,11 @@
   max-width: 350px;
   text-align: right;
   // border-bottom: double $color-accent-gold;
+  border-bottom: 2px double $color-accent-gold;
 
   & th {
     vertical-align: bottom;
-    border-bottom: double $color-accent-gold;
+    border-bottom: 2px double $color-accent-gold;
   }
   & td {
     border-bottom: 1px solid $color-accent-gold;

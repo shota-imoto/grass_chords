@@ -28,10 +28,14 @@
     %h3.heading
       %p 依頼事項 要約
     .sentence
-      %p 投票により、メジャー曲を見える化する機能についてのご依頼です。
+      %p
+        当サービスには
+        =link_to "ビジョン", informations_vision_path
+        の実現のため、いくつかの機能がございます。
+      %p 今回はそのうちの1機能、投票によるメジャー曲の見える化 機能についてのご依頼です。
       .u-space__bottom-10px
       %p 【作業内容】
-      %p あなたが今まで練習してきた曲の「練習してる」表明ボタンをクリック
+      %p ログイン後、あなたが今まで練習してきた曲の「練習してる」表明ボタンをクリック
       %p ※1曲からのご参加で構いません
   .u-position__list{id: "i2"}
   %section.c-section__sentence-box.p-top__section
@@ -69,7 +73,7 @@
         ②トップページの
         =link_to "検索ボタン", search_songs_path(keyword: "")
         をクリック
-      %p ③演奏できる曲の画面を開く
+      %p ③演奏できる曲のカードをクリック
       %p.u-space__bottom-10px
         ③コード譜の下の「練習ボタン」をクリック
       %p お時間空いているときに1曲ずつでもポチポチ押して頂けると嬉しいです。
@@ -87,9 +91,11 @@
     %h3.heading その他の依頼事項
     .sentence
       %p.u-space__bottom-10px
-        ”GrassChords”のビジョンに共感いただける方にはぜひコード譜と楽曲の追加をお手伝いいただきたいと思います
-      %p 表現しづらいものがありましたらご意見いただけたら幸いです。
-      %p その他、データ入力担当者、テスター、開発者も募集しております。
+        さらに”GrassChords”の
+        =link_to "ビジョン", informations_vision_path
+        に共感いただける方には、ぜひコード譜と楽曲の追加をお手伝いいただきたいと思います
+      %p 表現しづらいコード進行がありましたらご意見いただけたら幸いです。
+      %p ほかにも、データ入力担当者、テスター、開発者も募集しております。
   .u-position__list{id: "i7"}
   %section.c-section__sentence-box.p-top__section.u-color__section-red
     %h3.heading お問合せ先(外部リンク)
