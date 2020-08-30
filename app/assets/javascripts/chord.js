@@ -335,12 +335,14 @@ $(function () {
 
       cursor_display("unit_" + chord_num + "-" + unit_num);
 
+      // 本番環境のでバッグ用
+      console.log("unit_" + chord_num + "-" + unit_num);
+
       if (letter != undefined) {
         letter = letter.trim();
         text_display("unit_" + chord_num + "-" + unit_num, letter);
       }
 
-      // ↓２つ目のコード譜の１つめのコードユニットでエラーが発生している
       // part_display
       var value_of_part = $(chordunit).find(".c-chordunit__part").text();
       if (value_of_part != "") {
