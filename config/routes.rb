@@ -4,7 +4,11 @@ Rails.application.routes.draw do
   devise_scope :user do
     get "users/test_sign_in", to: "users/sessions#test_create"
   end
-  resources :users, only: :show
+  resources :users, only: :show do
+    collection do
+      get :search
+    end
+  end
   resources :songs, except: :index do
     collection do
       get :search

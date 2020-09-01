@@ -1,0 +1,11 @@
+.c-form__search-box
+  .c-song-candidate__wrapper
+    .c-song-candidate__form
+      =f.text_field :song_name, value: (@song.title if @song), autocomplete:"off", id: "search_song_name", placeholder: "曲名",class: "c-form__textbox c-js__song-candidate"
+      =f.text_field :song_id, value: (@song.id if @song), id: "selected_song_id", class: "u-display__hidden"
+    .c-song-candidate__lists.c-window__clear-black.u-display__hidden
+  =f.label :search, class:"c-search__send-btn c-form__position--box-btn" do
+    .c-form__btn
+    %i.fas.fa-search.c-form__btn-icon
+    =f.submit "", class: "c-form__btn u-color__skeleton-cover"
+

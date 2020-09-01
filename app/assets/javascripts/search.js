@@ -8,8 +8,8 @@ $(function () {
   $(".c-js__song-candidate").on("keyup", function () {
     var input = $(this).val();
     $(".c-song-candidate__lists").addClass("u-display__hidden");
-
     if (input == "") {
+      $("#selected_song_id").val("");
       return;
     }
 

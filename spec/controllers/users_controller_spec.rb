@@ -14,4 +14,15 @@ RSpec.describe UsersController, type: :controller do
       expect(response).to have_http_status "200"
     end
   end
+
+  describe "#search" do
+    it "正常にレスポンスを返すこと" do
+      get :search
+      expect(response).to be_success
+    end
+    it "200レスポンスを返すこと" do
+      get :search
+      expect(response).to have_http_status "200"
+    end
+  end
 end

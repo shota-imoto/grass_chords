@@ -129,4 +129,31 @@ RSpec.feature "Users", type: :feature do
 
     expect(page).to have_content "ユーザ登録"
   end
+
+  context "ユーザ検索" do
+    before do
+      @song = FactoryBot.create(:song, title: "Blue Ridge Cabin Home")
+      chord = FactoryBot.create(:chord, song_id: @song.id)
+      @user = FactoryBot.create(:user)
+      practice = FactoryBot.create(:practice, chord_id: chord.id, user_id: @user.id)
+    end
+    scenario "練習している曲名から探す", js: true do
+      visit root_path
+
+      # グローバルナビを開く
+      find(".l-header__opn-box").click
+
+      click_link "ユーザ検索"
+      fill_in "曲名", with: "b"
+
+      expect(page).to have_content("Blue Ridge Cabin Home")
+        # 楽曲の選択
+      all(".c-song-candidate__list")[0].click
+      all(".c-form__btn")[1].click
+
+      expect(page).to have_content(@user.name)
+      expect(page).to have_content(@user.place)
+
+    end
+  end
 end
