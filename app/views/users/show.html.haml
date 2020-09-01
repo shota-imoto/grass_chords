@@ -14,7 +14,7 @@
         .p-user__info-item 名前:
         .p-user__info-data
           = @user.name
-      - if @user.id == current_user.id
+      - if user_signed_in? && @user.id == current_user.id
         .p-user__info-list
           .p-user__info-item メール:
           .p-user__info-data.p-user__info-data--email
@@ -31,7 +31,7 @@
           = @user.chords.sum(:likes_count)
         .c-review__text コード譜の信頼数
       .p-user__edit
-        - if current_user.id == @user.id
+        - if user_signed_in? && current_user.id == @user.id
           =link_to "Edit", edit_user_registration_path(id: @user.id)
   %section.c-section__sentence-box.p-user__section
     .p-user__section-header
@@ -46,7 +46,7 @@
               %h2= practice.chord.song.title
             .p-user__song-menu
               = link_to "コード譜を見る", chord_path(practice.chord)
-              - if current_user.id == @user.id
+              - if user_signed_in? && current_user.id == @user.id
                 %a= "|"
                 = link_to "リストから削除する", practice_path(practice, chord_id: practice.chord.id), method: :delete, remote: true
       -else
