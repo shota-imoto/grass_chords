@@ -38,12 +38,12 @@
               %i.fas.fa-user-plus
             %span.p-navi__string__parent
               =link_to "ユーザ登録", new_user_registration_path
-    .p-navi__content.c-js__menu__fade-in
-      .p-navi__content__parent
-        .p-navi__link-btn--parent
-          .p-navi__icon-box
-            %i.far.fa-file-pdf
-          %span.p-navi__string__parent コード表 作成
+    -# .p-navi__content.c-js__menu__fade-in
+    -#   .p-navi__content__parent
+    -#     .p-navi__link-btn--parent
+    -#       .p-navi__icon-box
+    -#         %i.far.fa-file-pdf
+    -#       %span.p-navi__string__parent コード表 作成
     - if user_signed_in?
       .p-navi__content.c-js__menu__fade-in
         .p-navi__content__parent
