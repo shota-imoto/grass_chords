@@ -12,7 +12,7 @@
       =form_for(resource, as: resource_name, url: registration_path(resource_name))  do |f|
         .c-form__area
           =f.text_field :name, placeholder:"名前", class:"c-form__textbox c-user__textbox"
-          =f.text_field :place, placeholder: "主な活動地域", class:"c-form__textbox c-user__textbox"
+          =f.collection_select :place_id, Place.all.where.not(id: 0), :id, :name,  {include_blank: "主な活動拠点を選ぶ", selected: ""},  class: "c-form__selectbox c-user__selectbox"
           =f.email_field :email, autofocus: true, autocomplete: "email", placeholder: "メール", class:"c-form__textbox c-user__textbox"
           =f.password_field :password, autocomplete: "new-password", placeholder: "パスワード", class:"c-form__textbox c-user__textbox"
           =f.password_field :password_confirmation, autocomplete: "new-password", placeholder: "パスワード(確認)", class:"c-form__textbox c-user__textbox"

@@ -3,21 +3,21 @@ FactoryBot.define do
     sequence(:id) {|n| n}
     sequence(:email) {|n| "bound_ride#{n}@bluegrass.com"}
     sequence(:name) {|n| "Jim Mills#{n}"}
-    place {"North Carolina"}
+    place_id {1}
     password {"scruggslove"}
     token {"token"}
     image {"image"}
 
     factory :ricky, class: User do
       name {"Ricky Skaggs"}
-      place {"Nashville"}
+      place_id {2}
       email {"little_maggie@bluegrass.com"}
       password {"billmonroelove"}
     end
 
     factory :bill, class: User do
       name {"Bill Monroe"}
-      place {"Kentucky"}
+      place_id {3}
       email {"Roanoke@bluegrass.com"}
       password {"imfather"}
     end

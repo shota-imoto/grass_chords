@@ -19,13 +19,13 @@ RSpec.feature "Users", type: :feature do
 
     expect(page).to have_content user.name
     expect(page).to have_content user.email
-    expect(page).to have_content user.place
+    expect(page).to have_content user.place.name
 
     visit "#{other_user.id}"
 
     expect(page).to have_content other_user.name
     expect(page).to_not have_content other_user.email
-    expect(page).to have_content other_user.place
+    expect(page).to have_content other_user.place.name
 
     # ログアウトテスト
     click_link "ログアウト"
@@ -34,7 +34,7 @@ RSpec.feature "Users", type: :feature do
     expect(page).to_not have_content "マイページ"
     expect(page).to_not have_content "データ作成"
   end
-  context do
+  context "ユーザ登録" do
     before do
       response_mock = Net::HTTPOK.new(nil, 200, "OK")
       http_obj = double("Net::HTTP")
@@ -42,7 +42,7 @@ RSpec.feature "Users", type: :feature do
       allow(Net::HTTP).to receive(:get_response).and_return(response_mock)
       allow(response_mock).to receive(:body).and_return(recaptcha_mock)
     end
-    scenario "ユーザ登録" do
+    scenario "活動拠点を選択した場合" do
 
       user = FactoryBot.build(:user)
       visit root_path
@@ -54,7 +54,7 @@ RSpec.feature "Users", type: :feature do
       click_link "ユーザ登録"
 
       fill_in "名前", with: user.name
-      fill_in "主な活動地域", with: user.place
+      select user.place.name, from: "user_place_id" #活動拠点を選択する
       fill_in "メール", with: user.email
       fill_in "パスワード", with: user.password
       fill_in "パスワード(確認)", with: user.password
@@ -65,6 +65,48 @@ RSpec.feature "Users", type: :feature do
       expect(page).to have_content "ようこそ！ アカウントが登録されました"
       expect(page).to have_content "マイページ"
       expect(page).to have_content "データ作成"
+
+      click_link "マイページ"
+
+      expect(page).to have_content user.name
+      expect(page).to have_content user.email
+      expect(page).to have_content user.place.name
+
+    }.to change(User, :count).by(1)
+    end
+    scenario "活動拠点を選択しなかった場合" do
+
+      user = FactoryBot.build(:user)
+      visit root_path
+
+      expect(page).to_not have_content "マイページ"
+      expect(page).to_not have_content "データ作成"
+
+      expect{
+      click_link "ユーザ登録"
+
+      fill_in "名前", with: user.name
+      fill_in "メール", with: user.email
+      fill_in "パスワード", with: user.password
+      fill_in "パスワード(確認)", with: user.password
+
+      click_button "登録"
+
+      expect(page).to have_current_path(root_path)
+      expect(page).to have_content "ようこそ！ アカウントが登録されました"
+      expect(page).to have_content "マイページ"
+      expect(page).to have_content "データ作成"
+
+      click_link "マイページ"
+
+      expect(page).to have_content user.name
+      expect(page).to have_content user.email
+      expect(page).to have_content "未設定"
+
+      click_link "Edit"
+      expect(page).to have_select("user[place_id]", selected: nil)
+
+
     }.to change(User, :count).by(1)
     end
   end
@@ -78,22 +120,29 @@ RSpec.feature "Users", type: :feature do
     click_link "マイページ"
     click_link "Edit"
 
-    fill_in "名前", with: "New Name"
-    fill_in "現在のパスワード", with: user.password
+    expect{
+      expect(page).to have_select("user[place_id]", selected: user.place.name)
 
-    click_button "登録"
+      fill_in "名前", with: "New Name"
+      select "沖縄県", from: "user_place_id" #活動拠点を選択する
+      fill_in "現在のパスワード", with: user.password
 
-    expect(page).to have_current_path(root_path)
-    expect(page).to have_content "アカウントが更新されました"
+      click_button "登録"
 
-    click_link "マイページ"
+      expect(page).to have_current_path(root_path)
+      expect(page).to have_content "アカウントが更新されました"
 
-    expect(page).to have_content "New Name"
+      click_link "マイページ"
 
-    click_link "Edit"
-    click_button "ユーザを削除する"
+      expect(page).to have_content "New Name"
+      expect(page).to have_content "沖縄県"
 
-    expect(page).to have_content "ご利用ありがとうございました。アカウント情報が削除されました"
+      click_link "Edit"
+
+      click_button "ユーザを削除する"
+
+      expect(page).to have_content "ご利用ありがとうございました。アカウント情報が削除されました"
+    }.to change(User, :count).by(-1)
   end
 
   scenario "テストユーザーはユーザー情報を編集することも削除することもできない" do
@@ -152,7 +201,7 @@ RSpec.feature "Users", type: :feature do
       all(".c-form__btn")[1].click
 
       expect(page).to have_content(@user.name)
-      expect(page).to have_content(@user.place)
+      expect(page).to have_content(@user.place.name)
 
     end
   end

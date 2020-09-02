@@ -83,3 +83,4 @@ gem 'unicorn', '5.5.5'
 gem 'recaptcha', require: "recaptcha/rails"
 gem 'kaminari'
 gem 'gretel'
+gem 'active_hash'
