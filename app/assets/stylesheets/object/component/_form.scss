@@ -60,6 +60,18 @@
   }
 }
 
+.c-form__selectbox {
+  padding: 0 8px;
+  height: 1.8em;
+
+  width: 100%;
+  padding-left: -2px;
+
+  border-radius: 5px;
+  border: none;
+  background-color: $color-btn-normal;
+}
+
 .c-form__position--box-btn {
   // adjsut position between search btn and icon
   position: relative;

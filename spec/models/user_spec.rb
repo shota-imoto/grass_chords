@@ -132,27 +132,23 @@ RSpec.describe User, type: :model do
     end
   end
 
-  describe "placeのバリデーション" do
-    let(:user) {FactoryBot.build(:user, place: place)}
+  describe "place_idのバリデーション" do
+    let(:user) {FactoryBot.build(:user, place_id: place_id)}
     context "登録される" do
       subject {user}
-      context "placeの値が空欄の場合" do
-        let(:place) {nil}
-        it {is_expected.to be_valid}
-      end
-      context "placeの値が50文字の場合" do
-        let(:place) {"ゅがゕゆすほじぇなむゆぴぃゅぉろはえぉやっみぉちらぎはぇかぢぉはふしすちだへぷぜさだえゖてにだじもが"}
+      context "placeの値が設定されている場合" do
+        let(:place_id) {1}
         it {is_expected.to be_valid}
       end
     end
     context "登録されない" do
-      subject {user.errors[:place]}
+      subject {user.errors[:place_id]}
       before do
         user.valid?
       end
-      context "placeの値が51文字の場合" do
-        let(:place) {"ゅがゕゆすほじぇなむゆぴぃゅぉろはえぉやっみぉちらぎはぇかぢぉはふしすちだへぷぜさだえゖてにだじもがあ"}
-        it {is_expected.to include("は50文字以内に設定してください")}
+      context "placeの値が空欄の場合" do
+        let(:place_id) {nil}
+        it {is_expected.to include("システムエラー：不正な値が入力されました")}
       end
     end
   end

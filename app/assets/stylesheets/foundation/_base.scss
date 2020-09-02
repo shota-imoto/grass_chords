@@ -85,3 +85,10 @@ input[type="submit"] {
   border: none;
   outline: none;
 }
+
+select::-ms-expand {
+  display: none;
+}
+select {
+  -moz-appearance: none;
+}

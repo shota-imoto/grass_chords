@@ -17,7 +17,7 @@
                 .p-user__info-item 活動拠点：
                 .p-user__info-dat
                   - if user.place.present?
-                    =user.place
+                    =user.place.name
                   - else
                     (登録なし)
       - else

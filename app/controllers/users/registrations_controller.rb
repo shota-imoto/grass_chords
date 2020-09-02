@@ -18,11 +18,13 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   # POST /resource
   def create
+    # [FixMe]
     # error: before access sessions/create action, automatically sign in even if email & password are correct.
     judge_bot_score = 0.5
     json_response = get_recaptcha_response(params[:user][:token])
 
     if json_response["success"] && json_response["score"] > judge_bot_score
+      params[:user][:place_id] = 0 if params[:user][:place_id] == ""
       @user = User.new(user_params)
       if @user.save
         sign_in @user
@@ -32,6 +34,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
       end
 
     else
+      # [FixMe]
       # by error, user has already signed in
       # if recaptcha authority is failed, i need user sign out.
       @user = User.new
@@ -47,6 +50,10 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   # PUT /resource
   def update
+    params[:user][:place_id] = 0 if params[:user][:place_id] == ""
+    # because breadcrumb function needs "params[:id]"
+    params[:id] = current_user.id
+
     super
   end
 
@@ -68,7 +75,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   protected
   def user_params
-    params.require(:user).permit(:name, :place, :email, :password, :password_confirmation).merge(encrypted_password: Devise::Encryptor.digest(User, params[:user][:password]))
+    params.require(:user).permit(:name, :place_id, :email, :password, :password_confirmation).merge(encrypted_password: Devise::Encryptor.digest(User, params[:user][:password]))
   end
   # If you have extra params to permit, append them to the sanitizer.
   # def configure_sign_up_params
