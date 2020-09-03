@@ -23,6 +23,8 @@ ja:
         email: メールアドレス
         password: パスワード
         password_confirmation: 確認用のパスワード
+      message:
+        text: メッセージ
   recaptcha:
     errors:
       verification_failed: "reCAPTCHA 認証失敗しました。しばらくしてからもう一度お試しください。"

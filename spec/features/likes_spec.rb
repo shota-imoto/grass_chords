@@ -1,5 +1,4 @@
 require 'rails_helper'
-# 未：recaptcha対応
 
 RSpec.feature "Likes", type: :feature do
   scenario "信頼ボタンの選択、userマイページの確認", js: true do
@@ -25,12 +24,6 @@ RSpec.feature "Likes", type: :feature do
     find(".l-header__opn-box").click
     click_link "ログアウト"
 
-    # find(".l-header__opn-box").click
-    # click_link "ログイン"
-
-    # fill_in "メール", with: other_user.email
-    # fill_in "パスワード", with: other_user.password
-    # click_button "ログイン"
     login_as(other_user)
 
     visit root_path
@@ -56,13 +49,6 @@ RSpec.feature "Likes", type: :feature do
     expect(all(".c-review__btn")[3]).to have_content "10"
 
     login_as(user)
-
-    # find(".l-header__opn-box").click
-    # click_link "ログイン"
-
-    # fill_in "メール", with: user.email
-    # fill_in "パスワード", with: user.password
-    # click_button "ログイン"
 
     visit "songs/#{song.id}"
 

@@ -1,0 +1,18 @@
+.p-message__header
+  =link_to list_messages_path(id: current_user.id) do
+    %i.fas.fa-angle-right.p-message__back-icon
+  =@to_user.name
+.p-message__content
+  - @messages.each do |message|
+    - if message.from_user_id == current_user.id
+      .p-message__message.p-message__your_message
+        =message.text
+    - else
+      .p-message__message.p-message__partner_message
+        =message.text
+    =""
+.p-message__form
+  =form_with model: @message, method: :post, local: true do |f|
+    =f.text_field :text, placeholder: "メッセージを作成", autocomplete:"off", maxlength: "150", class: "c-form__textbox p-message__textbox"
+    =f.hidden_field :to_user_id, value: @to_user.id
+    =f.submit "送信", class: "c-form__btn"
