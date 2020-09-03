@@ -23,6 +23,19 @@
         .p-user__info-item 活動拠点:
         .p-user__info-data
           = @user.place.name
+    .p-user__section-content
+      -if user_signed_in?
+        - if current_user.id == @user.id
+          =link_to list_messages_path(id: current_user.id), class: "p-user__message-link" do
+            .p-user__message.c-form__btn メッセージボックス
+        - else
+          =link_to messages_path(to_user_id: @user.id), class: "p-user__message-link" do
+            .p-user__message.c-form__btn メッセージを送る
+      - else
+        .p-user__message.p-user__message--no-login.c-form__btn メッセージを送る
+        .p-user__message-notice
+        ※メッセージの送信にはログインが必要です
+
     .p-user__section-footer
       .p-user__review_icon.c-review__btn
         .c-review__icon

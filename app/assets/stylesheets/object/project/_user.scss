@@ -50,6 +50,29 @@
   }
 }
 
+.p-user__message {
+  padding: 5px 15px;
+  height: 35px;
+  width: fit-content;
+  background-color: $color-accent-blue;
+  font-size: 18px;
+  & a {
+    line-height: 35px;
+  }
+
+  &--no-login {
+    background-color: $color-icon-gray;
+    cursor: default;
+  }
+}
+.p-user__message-notice {
+  margin-top: 5px;
+}
+
+.p-user__message-link {
+  text-decoration: none;
+}
+
 .p-user__edit a {
   text-decoration: none;
   color: $color-accent-blue;

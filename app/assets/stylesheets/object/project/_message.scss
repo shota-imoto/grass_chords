@@ -1,0 +1,78 @@
+.margin {
+  margin-top: 80px;
+}
+.p-message__header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 40px;
+  width: 100%;
+  margin-top: 65px;
+  padding: 0 20px;
+
+  background-color: $color-theme-red;
+  color: $color-font-white;
+  font-size: 18px;
+  line-height: 40px;
+}
+
+.p-message__back-icon {
+  margin-right: 10px;
+  color: $color-font-white;
+}
+
+.p-message__content {
+  position: fixed;
+  top: 105px;
+  left: 0;
+  height: calc(100vh - 105px - 60px);
+  width: 100vw;
+
+  padding: 0 20px 0;
+
+  background-color: #eae5e0;
+  overflow-y: scroll;
+}
+
+.p-message__message {
+  margin: 10px;
+  padding: 10px;
+  width: 80%;
+
+  border-radius: 5px;
+  word-wrap: break-word;
+}
+.p-message__your_message {
+  margin-left: auto;
+
+  background-color: $color-accent-blue;
+  color: $color-font-white;
+}
+
+.p-message__partner_message {
+  background-color: $color-section-beige;
+}
+
+.p-message__form {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  height: 60px;
+  width: 100%;
+
+  padding: 0 20px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background-color: $color-section-beige;
+  & form {
+    width: 100%;
+  }
+}
+.p-message__textbox {
+  margin-right: 10px;
+  // (100% - [margin-right] - [c-form__textbox width] - [ajust])
+  width: calc(100% - 10px - 45px - 5px);
+}

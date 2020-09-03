@@ -1,0 +1,12 @@
+.p-message-list__wrapper
+  .p-message-list__top
+    ="- メッセージ一覧 -"
+  - @users.each do |user|
+    =link_to messages_path(to_user_id: user.id) do
+      .p-message-list__content
+        .p-message-list__item.p-message-list__name
+          =user.name
+        .p-message-list__item.p-message-list__message
+          = user.latest_message
+  - breadcrumb :message_list
+  = render "application/breadcrumbs", layout: "footer"

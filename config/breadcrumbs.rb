@@ -61,6 +61,11 @@ crumb :chord_edit do
   parent :chord_show
 end
 
+crumb :message_list do
+  link "メッセージ一覧", list_messages_path
+  parent :user_show
+end
+
 crumb :informations_vision do
   link "ビジョン", informations_vision_path
 end
@@ -69,6 +74,7 @@ crumb :informations_apply do
   link "Bluegrass上級者の皆様へのお願い", informations_apply_path
   parent :informations_vision
 end
+
 
 # crumb :projects do
 #   link "Projects", projects_path

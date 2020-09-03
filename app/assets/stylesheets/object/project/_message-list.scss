@@ -1,0 +1,41 @@
+.p-message-list__wrapper {
+  margin-top: 65px;
+  padding: 20px;
+  & a {
+    text-decoration: none;
+  }
+}
+
+.p-message-list__top {
+  margin-bottom: 10px;
+}
+
+.p-message-list__item {
+  margin-bottom: 10px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.p-message-list__name {
+  font-size: 18px;
+  color: $color-font-white;
+}
+.p-message-list__message {
+  // font-size: 12px;
+  color: $color-font-black;
+}
+
+.p-message-list__content {
+  margin-bottom: 10px;
+  padding: 5px 10px;
+  width: 100%;
+
+  border-radius: 5px;
+  background: linear-gradient(
+    180deg,
+    #a64951 0%,
+    #a64951 35px,
+    #d9d0c7 35px,
+    #d9d0c7 100%
+  );
+}
