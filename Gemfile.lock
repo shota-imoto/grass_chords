@@ -316,7 +316,6 @@ DEPENDENCIES
   recaptcha
   rspec-rails (~> 3.6.0)
   sass-rails (~> 5.0)
-  selenium-webdriver
   spring
   spring-commands-rspec
   spring-watcher-listen (~> 2.0.0)
