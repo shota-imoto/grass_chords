@@ -54,14 +54,14 @@
     .p-user__section-content
       - if @practices.present?
         - @practices.each do |practice|
-          .p-user__song{class: "c-js__practice-list--#{practice.chord.id}"}
+          .p-user__song{class: "c-js__practice-list--#{practice.id}"}
             .p-user__song-title
               %h2= practice.chord.song.title
             .p-user__song-menu
               = link_to "コード譜を見る", chord_path(practice.chord)
               - if user_signed_in? && current_user.id == @user.id
                 %a= "|"
-                = link_to "リストから削除する", practice_path(practice, chord_id: practice.chord.id), method: :delete, remote: true
+                %a.c-js__practice-delete.u-cursor__pointer{id: practice.chord.id} リストから削除する
       -else
         ="練習曲に登録している楽曲がありません"
   - breadcrumb :user_show

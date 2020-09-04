@@ -44,7 +44,7 @@ RSpec.feature "Practices", type: :feature do
     click_link "マイページ"
 
     within(all(".p-user__song")[0]) do
-      click_link "リストから削除する"
+      find(".c-js__practice-delete").click
     end
 
     expect(page).to_not have_content song.title
