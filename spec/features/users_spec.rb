@@ -145,6 +145,116 @@ RSpec.feature "Users", type: :feature do
     }.to change(User, :count).by(-1)
   end
 
+  context "ユーザー情報の更新に成功する" do
+    before do
+      @user = FactoryBot.create(:user, password: "Old Password")
+    end
+    scenario "password以外の情報を変更し、現在のパスワードを入力しない" do
+      login_as(@user)
+      visit root_path
+
+      click_link "マイページ"
+      click_link "Edit"
+
+      fill_in "名前", with: "New Name"
+      click_button "登録"
+
+      expect(page).to have_current_path(root_path)
+      expect(page).to have_content "アカウントが更新されました"
+
+      click_link "マイページ"
+
+      expect(page).to have_content "New Name"
+    end
+    scenario "password以外の情報とpasswordを変更し、確認用パスワードと現在のパスワードを入力する" do
+      login_as(@user)
+      visit root_path
+
+      click_link "マイページ"
+      click_link "Edit"
+
+      fill_in "名前", with: "New Name"
+      fill_in "新しいパスワード", with: "New Password"
+      fill_in "新しいパスワード(確認)", with: "New Password"
+      fill_in "現在のパスワード", with: @user.password
+
+      click_button "登録"
+
+      expect(page).to have_current_path(root_path)
+      expect(page).to have_content "アカウントが更新されました"
+
+      click_link "マイページ"
+
+      expect(page).to have_content "New Name"
+    end
+  end
+  context "ユーザー情報の更新に失敗する" do
+    before do
+      @user = FactoryBot.create(:user, password: "Old Password")
+    end
+    scenario "password以外の情報とpasswordを変更し、確認用パスワードを入力するが現在のパスワードを入力しないredirect" do
+      login_as(@user)
+      visit root_path
+
+      click_link "マイページ"
+      click_link "Edit"
+
+      fill_in "名前", with: "New Name"
+      fill_in "新しいパスワード", with: "New Password"
+      fill_in "新しいパスワード(確認)", with: "New Password"
+
+      click_button "登録"
+
+      expect(page).to have_current_path(edit_user_registration_path(id: @user.id))
+      expect(page).to have_content "パスワードを変更する際は、現在のパスワードを入力してください"
+
+      visit root_path
+      click_link "マイページ"
+
+      expect(page).to have_content @user.name
+    end
+    scenario "passwordを変更し、現在のパスワードを入力するが、確認用パスワードを入力しない" do
+      login_as(@user)
+      visit root_path
+
+      click_link "マイページ"
+      click_link "Edit"
+
+      fill_in "名前", with: "New Name"
+      fill_in "新しいパスワード", with: "New Password"
+      fill_in "現在のパスワード", with: @user.password
+
+      click_button "登録"
+
+      expect(page).to have_current_path("/users")
+
+      visit root_path
+      click_link "マイページ"
+
+      expect(page).to have_content @user.name
+    end
+    scenario "確認用パスワードを入力し、現在のパスワードを入力するが、passwordを変更しない" do
+      login_as(@user)
+      visit root_path
+
+      click_link "マイページ"
+      click_link "Edit"
+
+      fill_in "名前", with: "New Name"
+      fill_in "新しいパスワード(確認)", with: "New Password"
+      fill_in "現在のパスワード", with: @user.password
+
+      click_button "登録"
+
+      expect(page).to have_current_path("/users")
+
+      visit root_path
+      click_link "マイページ"
+
+      expect(page).to have_content @user.name
+    end
+  end
+
   scenario "テストユーザーはユーザー情報を編集することも削除することもできない" do
     user = FactoryBot.create(:user, id: 0)
 
