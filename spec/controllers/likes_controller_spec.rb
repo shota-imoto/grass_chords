@@ -10,13 +10,13 @@ RSpec.describe LikesController, type: :controller do
     context "オーナー権を持つユーザーとして" do
       it "js方式でレスポンスを返すこと" do
         sign_in @user
-        post :create, format: :js, params: {chord_id: @chord.id, user_id: @user.id}
-        expect(response.content_type).to eq "text/javascript"
+        post :create, format: :json, params: {chord_id: @chord.id, user_id: @user.id}
+        expect(response.content_type).to eq "application/json"
       end
       it "likeレコードを登録できる" do
         sign_in @user
         expect{
-          post :create, format: :js, params: {chord_id: @chord.id, user_id: @user.id}
+          post :create, format: :json, params: {chord_id: @chord.id, user_id: @user.id}
         }.to change(@user.likes, :count).by(1)
       end
     end
@@ -24,18 +24,18 @@ RSpec.describe LikesController, type: :controller do
       it "likeレコードを登録できない" do
         sign_in @user
         expect{
-          post :create, format: :js, params: {chord_id: @chord.id, user_id: @other_user.id}
+          post :create, format: :json, params: {chord_id: @chord.id, user_id: @other_user.id}
         }.to change(@other_user.likes, :count).by(0)
       end
     end
     context "ゲストとして" do
       it "likeレコードを登録できない" do
         expect{
-          post :create, format: :js, params: {chord_id: @chord.id, user_id: @user.id}
+          post :create, format: :json, params: {chord_id: @chord.id, user_id: @user.id}
         }.to change(@user.likes, :count).by(0)
       end
       it "rootにリダイレクトすること" do
-        post :create, format: :js, params: {chord_id: @chord.id, user_id: @user.id}
+        post :create, format: :json, params: {chord_id: @chord.id, user_id: @user.id}
         expect(response).to redirect_to root_path
       end
     end
@@ -52,13 +52,13 @@ RSpec.describe LikesController, type: :controller do
       end
       it "js方式でレスポンスを返すこと" do
         sign_in @user
-        delete :destroy, format: :js, params: {id: @like.id}
-        expect(response.content_type).to eq "text/javascript"
+        delete :destroy, format: :json, params: {id: @like.id}
+        expect(response.content_type).to eq "application/json"
       end
       it "likeレコードを削除できる" do
         sign_in @user
         expect{
-          delete :destroy, format: :js, params: {id: @like.id}
+          delete :destroy, format: :json, params: {id: @like.id}
         }.to change(@user.likes, :count).by(-1)
       end
     end
@@ -70,7 +70,7 @@ RSpec.describe LikesController, type: :controller do
       it "likeレコードを削除できない" do
         sign_in @user
         expect{
-          delete :destroy, format: :js, params: {id: @like.id}
+          delete :destroy, format: :json, params: {id: @like.id}
         }.to change(@other_user.likes, :count).by(0)
       end
     end
@@ -80,11 +80,11 @@ RSpec.describe LikesController, type: :controller do
       end
       it "likeレコード削除できない" do
         expect{
-          delete :destroy, format: :js, params: {id: @like.id}
+          delete :destroy, format: :json, params: {id: @like.id}
         }.to change(@other_user.likes, :count).by(0)
       end
       it "rootにリダイレクトすること" do
-        delete :destroy, format: :js, params: {id: @like.id}
+        delete :destroy, format: :json, params: {id: @like.id}
         expect(response).to redirect_to root_path
       end
     end

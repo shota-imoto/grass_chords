@@ -1,2 +1,0 @@
-$(".c-review-"+ <%= @chord.id %> ).find(".c-js__like").remove();
-$(".c-review-"+ <%= @chord.id %> ).append("<a class='c-review__link c-js__not-like' data-remote='true' rel='nofollow' data-method='post' href='/likes?chord_id=<%= @chord.id %>'><div class='c-review__btn c-js__review'><div class='c-review__icon'><i class='fas fa-heart'></i></div><div class='c-review__amount'><%= @chord.likes_count %></div><div class='c-review__text'>信頼できる？</div></div></a>");

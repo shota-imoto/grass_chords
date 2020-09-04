@@ -13,6 +13,7 @@
           %a 6文字以上
           =f.password_field :password, autocomplete: "new-password", placeholder: "新しいパスワード", class:"c-form__textbox c-user__textbox"
           =f.password_field :password_confirmation, autocomplete: "new-password", placeholder: "新しいパスワード(確認)", class:"c-form__textbox c-user__textbox"
+          %a パスワードを変更する際は現在のパスワードを入力してください
           =f.password_field :current_password, autocomplete: "current-password", placeholder: "現在のパスワード", class:"c-form__textbox c-user__textbox"
         .c-form__area
           =f.submit "登録", class:"c-form__btn c-form__btn--login"
