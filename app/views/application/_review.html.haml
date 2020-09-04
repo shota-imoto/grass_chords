@@ -33,7 +33,7 @@
             =chord.likes_count
           .c-review__text 信頼できる！
     - else
-      =link_to likes_path(chord_id: chord.id), class: "c-review__link c-js__not-like", method: :post, remote: true do
+      =link_to likes_path(chord_id: chord.id), class: "c-js__not-like c-review__link", method: :post do
         .c-review__btn.c-js__review
           .c-review__icon
             %i.fas.fa-heart
