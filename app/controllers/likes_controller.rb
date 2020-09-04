@@ -4,7 +4,11 @@ class LikesController < ApplicationController
   def create
     @like = Like.new(like_params)
     @like.save
-    @chord = @like.chord
+    # @chord = @like.chord
+
+    respond_to do |format|
+      format.json
+    end
   end
 
   def destroy
