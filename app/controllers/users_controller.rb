@@ -8,7 +8,6 @@ class UsersController < ApplicationController
   end
 
   def search
-    # binding.pry
     @users = User.all
     if params[:song_id].present?
       @song = Song.find(params[:song_id])
