@@ -357,10 +357,14 @@ RSpec.feature "Users", type: :feature do
       expect(all(".p-search-user__result").size()).to eq(1)
       expect(page).to have_content @user1.name
 
-      fill_in "曲名", with: ""
+      # fill_in "曲名", with: ""
 
-      # for delete song_candidate(song_candidate is being shown because autoinput is too fast.)
-      fill_in "曲名", with: "x"
+      # # for delete song_candidate(song_candidate is being shown because autoinput is too fast.)
+      # fill_in "曲名", with: "x"
+
+      find(".l-header__opn-box").click
+
+      click_link "ユーザ検索"
 
       find(".p-search-user__place-open").click #=>js動作 # 「活動地域から検索する」をクリック
       # wait動作のためのテストケース
