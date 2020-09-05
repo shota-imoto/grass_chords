@@ -62,6 +62,7 @@
               - if user_signed_in? && current_user.id == @user.id
                 %a= "|"
                 %a.c-js__practice-delete.u-cursor__pointer{id: practice.chord.id} リストから削除する
+        .u-space__top--10px.u-space__bottom--20px= pagy_nav(@pagy_practice).html_safe
       -else
         ="練習曲に登録している楽曲がありません"
   %section.c-section__sentence-box.p-user__section
@@ -80,10 +81,10 @@
                 =link_to ">>作成者を見る", user_path(like.chord.user)
             .p-user__song-menu
               = link_to "コード譜を見る", chord_path(like.chord)
-
               - if user_signed_in? && current_user.id == @user.id
                 %a= "|"
                 %a.c-js__like-delete.u-cursor__pointer{id: like.chord.id} 信頼を取り消す
+        .u-space__top--10px.u-space__bottom--20px= pagy_nav(@pagy_like).html_safe
       -else
         ="信頼した楽曲がありません"
   - breadcrumb :user_show

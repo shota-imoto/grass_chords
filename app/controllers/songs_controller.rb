@@ -54,8 +54,10 @@ class SongsController < ApplicationController
     search_song
     @count = @songs.length
 
+    @pagy, @songs = pagy(@songs)
+
     respond_to do |format|
-      format.html{@songs = @songs.page(params[:page]).without_count.per(8)}
+      format.html
       format.json
     end
   end
@@ -75,7 +77,8 @@ class SongsController < ApplicationController
     search_song
 
     @count = @songs.length
-    @songs = @songs.page(params[:page]).without_count.per(8)
+
+    @pagy, @songs = pagy(@songs)
 
     respond_to do |format|
       format.html{render :search}

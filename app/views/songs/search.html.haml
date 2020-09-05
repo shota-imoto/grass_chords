@@ -12,7 +12,6 @@
           =f.radio_button :sort, :practice, checked: ("checked" if params[:sort] == "practice"), class: "c-js__sort u-display__hidden"
           練習してる人数 順
       =f.hidden_field :song_practices
-
     %hr{color: "black", size: "1px"}
     .p-search-result__counter.c-js__result-counter
       =@count.to_s + " results.."
@@ -47,6 +46,5 @@
               .c-review__amount
                 =song.practice_songs_count
               .c-review__text 練習してる人の数
-      .p-search__scroll
-        = link_to_next_page @songs, '', class: "p-search-result__scroll--next"
+      = pagy_nav(@pagy).html_safe
 
