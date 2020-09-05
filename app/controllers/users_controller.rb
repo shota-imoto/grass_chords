@@ -2,9 +2,8 @@ class UsersController < ApplicationController
   before_action :set_user, only: [:show]
 
   def show
-    @practices = @user.practices.includes(:chord)
-    # @likes = @user.likes.includes(:chord).includes(:user)
-    @likes = @user.likes.includes(:chord)
+    @pagy_practice, @practices = pagy(@user.practices.includes(:chord))
+    @pagy_like, @likes = pagy(@user.likes.includes(:chord))
   end
 
   def search
@@ -19,6 +18,8 @@ class UsersController < ApplicationController
       selected_users = []
       @users = @users.where(place_id: params[:places])
     end
+
+    @pagy, @users = pagy(@users)
   end
 
 

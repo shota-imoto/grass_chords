@@ -35,17 +35,4 @@ $(function () {
   $(document).ready(function () {
     icon_colors();
   });
-
-  $(function () {
-    $(".p-search-result__results").jscroll({
-      contentSelector: ".c-js_jscroll_selector",
-      loadingHtml: "Now Loading",
-      autoTrigger: true,
-      nextSelector: "a.p-search-result__scroll--next",
-      padding: 20,
-      callback: function () {
-        icon_colors();
-      },
-    });
-  });
 });

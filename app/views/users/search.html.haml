@@ -20,6 +20,7 @@
                     =user.place.name
                   - else
                     (登録なし)
+        = pagy_nav(@pagy).html_safe
       - else
         ユーザーが見つかりませんでした
 

@@ -7,12 +7,12 @@
   display: flex;
 
   // 特設ページなしのときはコメントアウト
-  flex-direction: column;
-  justify-content: space-between;
-  align-items: center;
+  // flex-direction: column;
+  // justify-content: space-between;
+  // align-items: center;
 
   // 特設ページ有りのときはコメントアウト
-  // align-items: flex-end;
+  align-items: flex-end;
 
   // background image
   background-image: url("/images/top.jpeg");

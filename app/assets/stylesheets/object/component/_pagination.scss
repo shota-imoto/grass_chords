@@ -1,0 +1,61 @@
+.pagy-nav {
+  display: flex;
+  justify-content: center;
+}
+
+.page {
+  margin: 5px 2px;
+  height: 25px;
+  width: 25px;
+
+  display: inline-block;
+
+  border: $color-dark-brown;
+  background-color: $color-font-gray;
+  border-radius: 50%;
+  text-align: center;
+
+  line-height: 25px;
+  font-size: 12px;
+
+  cursor: pointer;
+  & a {
+    text-decoration: none;
+    color: $color-font-black;
+  }
+}
+
+.active {
+  color: $color-font-white;
+  background-color: $color-theme-red;
+  cursor: default;
+}
+.gap {
+  cursor: default;
+}
+
+.prev {
+  width: 50px;
+  // border-radius: 20%;
+  border-top-left-radius: 40%;
+  border-bottom-left-radius: 40%;
+  border-top-right-radius: 2px;
+  border-bottom-right-radius: 2px;
+
+  & a {
+    color: $color-font-black;
+  }
+}
+
+.next {
+  width: 50px;
+  // border-radius: 20%;
+  border-top-left-radius: 2px;
+  border-bottom-left-radius: 2px;
+  border-top-right-radius: 40%;
+  border-bottom-right-radius: 40%;
+
+  & a {
+    color: $color-font-black;
+  }
+}
