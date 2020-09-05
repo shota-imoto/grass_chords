@@ -65,7 +65,7 @@ group :test do
   gem 'capybara', '>= 2.15'
   gem 'launchy', '~>2.4.3'
   # Easy installation and use of chromedriver to run system tests with Chrome
-  gem 'webdrivers'
+  gem 'webdrivers', '~> 4.0'
   gem 'rails-controller-testing'
 end
 

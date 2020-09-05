@@ -10,3 +10,60 @@
 .p-search-user__name {
   color: $color-font-white;
 }
+
+.p-search-user__place-open {
+  margin: 10px 0;
+  color: $color-theme-red;
+  text-decoration: underline;
+  text-decoration-color: $color-theme-red;
+  cursor: pointer;
+}
+
+.p-search-user__place-wrapper {
+  padding: 20px;
+  position: fixed;
+  height: 500px;
+  width: 80%;
+
+  border-radius: 5px;
+
+  background: $color-section-beige;
+  top: calc(50% - 500px / 2);
+  left: calc(50% - 80% / 2);
+  z-index: 70;
+}
+
+.p-serach-user__place-scroll {
+  margin-bottom: 10px;
+  height: calc(100% - 40px);
+  width: 100%;
+}
+
+.p-search__area {
+  margin-bottom: 15px;
+}
+
+.p-search__area-name {
+  font-weight: bold;
+  font-size: 12px;
+}
+.p-search-user__places {
+  display: flex;
+  flex-wrap: wrap;
+  font-size: 14px;
+}
+.p-search-user__place {
+  margin-right: 5px;
+}
+
+.p-search-user__place-btn {
+  display: flex;
+  justify-content: right;
+}
+
+.p-search-user__place-selected {
+  width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
