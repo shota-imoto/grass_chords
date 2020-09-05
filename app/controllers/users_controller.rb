@@ -3,6 +3,8 @@ class UsersController < ApplicationController
 
   def show
     @practices = @user.practices.includes(:chord)
+    # @likes = @user.likes.includes(:chord).includes(:user)
+    @likes = @user.likes.includes(:chord)
   end
 
   def search
