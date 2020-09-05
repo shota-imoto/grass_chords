@@ -91,4 +91,32 @@ $(function () {
       $(".content__strings").append(insertHTML);
     }
   );
+
+  //地域選択パレットを開く
+  $(".p-search-user__place-open").on("touchend, mouseup", function () {
+    $(".p-search-user__place-wrapper").show();
+    $(".p-search-user__close-layer").show();
+  });
+
+  // 地域選択パレットを閉じる
+  $(document).on(
+    "touchend mouseup",
+    ".p-search-user__close-layer",
+    function () {
+      $(".p-search-user__place-wrapper").hide();
+      $(".p-search-user__close-layer").hide();
+    }
+  );
+
+  // 選択した地域を表示する
+  $('[name="places[]"]').change(function () {
+    var selected_places = $('input[name="places[]"]:checked')
+      .map(function () {
+        return $(this).next().text();
+      })
+      .get();
+
+    var selected_places_text = selected_places.join(", ");
+    $(".p-search-user__place-selected").text("地域: " + selected_places_text);
+  });
 });

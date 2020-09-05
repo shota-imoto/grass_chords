@@ -7,13 +7,13 @@ abort("The Rails environment is running in production mode!") if Rails.env.produ
 require 'rspec/rails'
 require 'capybara/rspec'
 
-Capybara.javascript_driver = :selenium_chrome if Rails.env.test?
-# Capybara.default_max_wait_time = 2
-# JS_DRIVER = :selenium_chrome_headless
+Capybara.default_max_wait_time = 2
 
 # Capybara.default_driver = :rack_test
-# Capybara.javascript_driver = JS_DRIVER
-# Capybara.default_max_wait_time = 2
+# Capybara.javascript_driver = :selenium_chrome_headless
+# Capybara.javascript_driver = :selenium_chrome if Rails.env.test?
+
+Capybara.automatic_label_click = true
 
 # Add additional requires below this line. Rails is not loaded until this point!
 

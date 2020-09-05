@@ -8,4 +8,25 @@
     .c-form__btn
     %i.fas.fa-search.c-form__btn-icon
     =f.submit "", class: "c-form__btn u-color__skeleton-cover"
-
+.p-search-user__place-open
+  活動地域から検索する
+.p-search-user__place-selected
+.p-search-user__place-wrapper.u-display__hidden
+  .p-serach-user__place-scroll.u-scroll__design
+    - Area.all.where.not(id: 0).each do |area|
+      .p-search__area
+        .p-search__area-name
+          =area.name
+        .p-search-user__places
+          -area.places.each do |place|
+            .p-search-user__place
+              = f.check_box :places, {multiple: true}, place.id, nil
+              = f.label "places_#{place.id}", place.name
+  .p-search-user__place-btn
+    =f.label :search, class:"c-search__send-btn c-form__position--box-btn" do
+      .c-form__btn
+      %i.fas.fa-search.c-form__btn-icon
+      =f.submit "", class: "c-form__btn u-color__skeleton-cover"
+.p-search-user__close-layer.u-display__hidden
+  .c-layer__skeleton.c-window__clear
+    .for_capybara_test_class

@@ -291,10 +291,20 @@ RSpec.feature "Users", type: :feature do
 
   context "ユーザ検索" do
     before do
-      @song = FactoryBot.create(:song, title: "Blue Ridge Cabin Home")
-      chord = FactoryBot.create(:chord, song_id: @song.id)
-      @user = FactoryBot.create(:user)
-      practice = FactoryBot.create(:practice, chord_id: chord.id, user_id: @user.id)
+      @user1 = FactoryBot.create(:user, place_id: 2) # 青森県　東北
+      @user2 = FactoryBot.create(:user, place_id: 2)
+      @user3 = FactoryBot.create(:user, place_id: 3) # 岩手県　東北
+      @user4 = FactoryBot.create(:user, place_id: 8) # 茨城県　関東
+
+      @song1 = FactoryBot.create(:song, title: "Blue Ridge Cabin Home", user_id: @user1.id)
+      @song2 = FactoryBot.create(:song, title: "You're My Shunshine", user_id: @user1.id)
+      chord1 = FactoryBot.create(:chord, song_id: @song1.id, user_id: @user1.id)
+      chord2 = FactoryBot.create(:chord, song_id: @song2.id, user_id: @user1.id)
+
+      FactoryBot.create(:practice_song, song_id: @song1.id, user_id: @user1.id)
+      FactoryBot.create(:practice_song, song_id: @song2.id, user_id: @user2.id)
+      FactoryBot.create(:practice_song, song_id: @song1.id, user_id: @user3.id)
+      FactoryBot.create(:practice_song, song_id: @song1.id, user_id: @user4.id)
     end
     scenario "練習している曲名から探す", js: true do
       visit root_path
@@ -303,16 +313,83 @@ RSpec.feature "Users", type: :feature do
       find(".l-header__opn-box").click
 
       click_link "ユーザ検索"
-      fill_in "曲名", with: "b"
 
+      # 初期画面表示
+      expect(all(".p-search-user__result").size()).to eq(4)
+      expect(page).to have_content @user1.name
+      expect(page).to have_content @user1.place.name
+
+      expect(page).to have_content @user2.name
+      expect(page).to have_content @user3.name
+      expect(page).to have_content @user4.name
+
+
+      all(".c-form__btn")[1].click # 検索ボタンのクリック
+
+      # 空欄検索結果の確認
+      expect(all(".p-search-user__result").size()).to eq(4)
+      expect(page).to have_content @user1.name
+      expect(page).to have_content @user2.name
+      expect(page).to have_content @user3.name
+      expect(page).to have_content @user4.name
+
+      fill_in "曲名", with: "b" #=>js動作
+
+      # wait動作のためのテストケース
       expect(page).to have_content("Blue Ridge Cabin Home")
-        # 楽曲の選択
-      all(".c-song-candidate__list")[0].click
-      all(".c-form__btn")[1].click
 
-      expect(page).to have_content(@user.name)
-      expect(page).to have_content(@user.place.name)
+      all(".c-song-candidate__list")[0].click # 楽曲の選択
+      all(".c-form__btn")[1].click # 検索ボタンのクリック
 
+      # 練習曲検索結果の確認
+      expect(all(".p-search-user__result").size()).to eq(3)
+      expect(page).to have_content @user1.name
+      expect(page).to have_content @user3.name
+      expect(page).to have_content @user4.name
+
+      find(".p-search-user__place-open").click #=>js動作 # 「活動地域から検索する」をクリック
+      # wait動作のためのテストケース
+      expect(page).to have_css(".p-search-user__place-wrapper")
+      check @user1.place.name # 青森県
+      all(".c-form__btn")[3].click # 検索ボタンのクリック
+
+      # 練習曲+地名検索結果の確認
+      expect(all(".p-search-user__result").size()).to eq(1)
+      expect(page).to have_content @user1.name
+
+      fill_in "曲名", with: ""
+
+      # for delete song_candidate(song_candidate is being shown because autoinput is too fast.)
+      fill_in "曲名", with: "x"
+
+      find(".p-search-user__place-open").click #=>js動作 # 「活動地域から検索する」をクリック
+      # wait動作のためのテストケース
+      expect(page).to have_css(".p-search-user__place-wrapper")
+      check @user1.place.name # 青森県
+      check @user3.place.name # 岩手県
+
+      all(".c-form__btn")[3].click # 検索ボタンのクリック
+
+      # 地名複数検索(同じareaに紐づくplace)結果の確認
+      expect(all(".p-search-user__result").size()).to eq(3)
+      expect(page).to have_content @user1.name
+      expect(page).to have_content @user3.name
+
+      find(".p-search-user__place-open").click #=>js動作 # 「活動地域から検索する」をクリック
+      # wait動作のためのテストケース
+      expect(page).to have_css(".p-search-user__place-wrapper")
+
+      check @user1.place.name # 青森県
+      check @user4.place.name # 茨木県
+
+      find(".for_capybara_test_class").click
+      expect(page).to have_content "青森県, 茨城県"
+      all(".c-form__btn")[1].click # 検索ボタンのクリック
+
+      # 地名複数検索(別のarea紐づくplace)結果の確認
+      expect(all(".p-search-user__result").size()).to eq(3)
+      expect(page).to have_content @user1.name
+      expect(page).to have_content @user4.name
     end
   end
 end
