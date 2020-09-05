@@ -64,5 +64,27 @@
                 %a.c-js__practice-delete.u-cursor__pointer{id: practice.chord.id} リストから削除する
       -else
         ="練習曲に登録している楽曲がありません"
+  %section.c-section__sentence-box.p-user__section
+    .p-user__section-header
+      .p-user__icon--user
+        %i.fas.fa-heart
+      .p-user__section-title 信頼したコード譜
+    .p-user__section-content
+      - if @likes.present?
+        - @likes.each do |like|
+          .p-user__song{class: "c-js__like-list--#{like.id}"}
+            .p-user__song-header
+              .p-user__song-title
+                %h2= like.chord.song.title
+              .p-user__song-editor
+                =link_to ">>作成者を見る", user_path(like.chord.user)
+            .p-user__song-menu
+              = link_to "コード譜を見る", chord_path(like.chord)
+
+              - if user_signed_in? && current_user.id == @user.id
+                %a= "|"
+                %a.c-js__like-delete.u-cursor__pointer{id: like.chord.id} 信頼を取り消す
+      -else
+        ="信頼した楽曲がありません"
   - breadcrumb :user_show
   = render "application/breadcrumbs", layout: "footer"

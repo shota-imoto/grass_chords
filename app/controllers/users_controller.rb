@@ -3,10 +3,11 @@ class UsersController < ApplicationController
 
   def show
     @practices = @user.practices.includes(:chord)
+    # @likes = @user.likes.includes(:chord).includes(:user)
+    @likes = @user.likes.includes(:chord)
   end
 
   def search
-    # binding.pry
     @users = User.all
     if params[:song_id].present?
       @song = Song.find(params[:song_id])

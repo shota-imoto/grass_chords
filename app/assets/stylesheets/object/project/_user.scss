@@ -94,3 +94,19 @@
 .p-user__signup_link {
   color: $color-theme-red;
 }
+
+.p-user__song-header {
+  display: flex;
+  align-items: flex-end;
+}
+
+.p-user__song-editor {
+  margin-left: 10px;
+  padding-bottom: 5px;
+  & a {
+    font-size: 12px;
+    color: $color-font-black;
+    text-decoration: none;
+    text-decoration-color: $color-font-black;
+  }
+}
