@@ -10,7 +10,7 @@ RSpec.describe MessagesController, type: :controller do
     it "正常にレスポンスを返すこと" do
       sign_in @user
       get :index, params: {to_user_id: @partner.id}
-      expect(response).to be_success
+      expect(response).to be_successful
     end
     it "200レスポンスを返すこと" do
       sign_in @user
@@ -27,7 +27,7 @@ RSpec.describe MessagesController, type: :controller do
     it "正常にレスポンスを返すこと" do
       sign_in @user
       get :list, params: {to_user_id: @partner.id}
-      expect(response).to be_success
+      expect(response).to be_successful
     end
     it "200レスポンスを返すこと" do
       sign_in @user

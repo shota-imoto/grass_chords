@@ -7,7 +7,7 @@ RSpec.describe SongsController, type: :controller do
     end
     it "正常にレスポンスを返すこと" do
       get :show, params: {id: @song.id}
-      expect(response).to be_success
+      expect(response).to be_successful
     end
     it "200レスポンスを返すこと" do
       get :show, params: {id: @song.id}

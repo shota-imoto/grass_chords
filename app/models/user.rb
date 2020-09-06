@@ -23,7 +23,7 @@ class User < ApplicationRecord
   belongs_to :place
 
   def self.test_user_find
-    self.find_by(id: "0")
+    self.find(0)
   end
 
   def update_without_current_password(params, *options)

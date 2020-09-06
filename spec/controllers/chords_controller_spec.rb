@@ -4,7 +4,7 @@ RSpec.describe ChordsController, type: :controller do
   describe "#index" do
     it "正常にレスポンスを返すこと" do
       get :index
-      expect(response).to be_success
+      expect(response).to be_successful
     end
 
     it "200レスポンスを返すこと" do
@@ -20,7 +20,7 @@ RSpec.describe ChordsController, type: :controller do
 
     it "正常にレスポンスを返すこと" do
       get :show, params: {id: @chord.id}
-      expect(response).to be_success
+      expect(response).to be_successful
     end
   end
 

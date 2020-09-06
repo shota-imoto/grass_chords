@@ -7,7 +7,7 @@ RSpec.describe UsersController, type: :controller do
     end
     it "正常にレスポンスを返すこと" do
       get :show, params: {id: @user.id}
-      expect(response).to be_success
+      expect(response).to be_successful
     end
     it "200レスポンスを返すこと" do
       get :show, params: {id: @user.id}
@@ -18,7 +18,7 @@ RSpec.describe UsersController, type: :controller do
   describe "#search" do
     it "正常にレスポンスを返すこと" do
       get :search
-      expect(response).to be_success
+      expect(response).to be_successful
     end
     it "200レスポンスを返すこと" do
       get :search

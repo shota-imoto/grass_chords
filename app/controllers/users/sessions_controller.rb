@@ -42,7 +42,7 @@ class Users::SessionsController < Devise::SessionsController
   # end
 
   def test_create
-    sign_in @user
+    sign_in(@user)
     if current_user
       redirect_to root_path, notice: "お試しログインに成功しました"
     else
