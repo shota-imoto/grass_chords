@@ -1,17 +1,17 @@
 source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
-ruby '2.5.1'
+ruby '2.7.1'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '~> 5.2.4', '>= 5.2.4.2'
+gem 'rails', '6.0.3'
 # Use mysql as the database for Active Record
 gem 'mysql2', '>= 0.4.4', '< 0.6.0'
 
 # Use haml for view files
 gem 'haml-rails'
 # Use SCSS for stylesheets
-gem 'sass-rails', '~> 5.0'
+gem 'sassc-rails'
 # Use Uglifier as compressor for JavaScript assets
 gem 'uglifier', '>= 1.3.0'
 # See https://github.com/rails/execjs#readme for more supported runtimes
@@ -39,7 +39,7 @@ gem 'bootsnap', '>= 1.1.0', require: false
 
 group :development, :test do
   # Use Puma as the app server
-  gem 'puma', '~> 3.11'
+  gem "puma", ">= 3.12.6"
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
   gem "pry-rails"
@@ -74,12 +74,15 @@ end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
-gem 'devise'
+gem 'devise', '>=4.7.2'
 gem 'font-awesome-sass'
 gem 'jquery-rails'
-gem 'rails-i18n'
+gem 'rails-i18n', '6.0.0'
 gem 'unicorn', '5.5.5'
 gem 'recaptcha', require: "recaptcha/rails"
 gem 'pagy', '~> 3.5'
 gem 'gretel'
 gem 'active_hash'
+
+# deal with dependency when update rails to 6.0
+gem "websocket-extensions", ">= 0.1.5"

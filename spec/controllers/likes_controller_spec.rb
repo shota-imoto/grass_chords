@@ -11,7 +11,7 @@ RSpec.describe LikesController, type: :controller do
       it "js方式でレスポンスを返すこと" do
         sign_in @user
         post :create, format: :json, params: {chord_id: @chord.id, user_id: @user.id}
-        expect(response.content_type).to eq "application/json"
+        expect(response.media_type).to eq "application/json"
       end
       it "likeレコードを登録できる" do
         sign_in @user
@@ -53,7 +53,7 @@ RSpec.describe LikesController, type: :controller do
       it "js方式でレスポンスを返すこと" do
         sign_in @user
         delete :destroy, format: :json, params: {id: @like.id}
-        expect(response.content_type).to eq "application/json"
+        expect(response.media_type).to eq "application/json"
       end
       it "likeレコードを削除できる" do
         sign_in @user

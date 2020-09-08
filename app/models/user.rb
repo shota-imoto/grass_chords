@@ -3,7 +3,7 @@ class User < ApplicationRecord
   attr_accessor :token, :latest_message, :latest_message_date
 
 
-  validates :name, presence: {message: "が空欄です"}, length: {in: 2..40, message: "は2~40文字に設定してください"}, uniqueness: {message: "は既に登録されています"}
+  validates :name, presence: {message: "が空欄です"}, length: {in: 2..40, message: "は2~40文字に設定してください"}, uniqueness: {case_sensitive: false, message: "は既に登録されています"}
   validates :email, uniqueness: {case_sensitive: false, message: "は既に登録されています"}, length: {in: 3..254, message: "は254文字以内のものを登録してください"}
   validates :place_id, presence: {message: "システムエラー：不正な値が入力されました"}
   validates :admin, exclusion: {in: [true], message: "システムエラー：不正な値が入力されました"}
@@ -34,7 +34,7 @@ class User < ApplicationRecord
       params.delete(:password_confirmation)
     end
 
-    result = update_attributes(params, *options)
+    result = update(params, *options)
     clean_up_passwords
 
     result

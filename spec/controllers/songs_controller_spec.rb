@@ -20,7 +20,7 @@ RSpec.describe SongsController, type: :controller do
     end
     context "認可済みユーザーとして" do
       it "songレコードを登録できる" do
-        sign_in @user
+        login_as(@user)
         song_params = FactoryBot.attributes_for(:song)
 
         expect{

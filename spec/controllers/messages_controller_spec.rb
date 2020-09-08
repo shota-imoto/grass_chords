@@ -26,12 +26,13 @@ RSpec.describe MessagesController, type: :controller do
     end
     it "正常にレスポンスを返すこと" do
       sign_in @user
-      get :list, params: {to_user_id: @partner.id}
+      get :list, params: {id: @user.id}
+      # get :list, params: {to_user_id: @partner.id}
       expect(response).to be_successful
     end
     it "200レスポンスを返すこと" do
       sign_in @user
-      get :list, params: {to_user_id: @partner.id}
+      get :list, params: {id: @user.id}
       expect(response).to have_http_status "200"
     end
   end
