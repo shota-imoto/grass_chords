@@ -10,7 +10,7 @@ jobs:
   test:
     parallelism:
     docker:
-      - image: circleci/ruby:2.5.1-stretch-node-browsers
+      - image: circleci/ruby:2.7.1-stretch-node-browsers
         environment:
           RAILS_ENV: test
           BUNDLER_VERSION: 2.1.4
@@ -44,7 +44,7 @@ jobs:
           command: bin/rspec
   build_and_push:
     docker:
-      - image: circleci/ruby:2.5.1
+      - image: circleci/ruby:2.7.1
         user: root
         environment:
           BUNDLER_VERSION: 2.1.4
