@@ -66,7 +66,6 @@ group :test do
   gem 'launchy', '~>2.4.3'
   # Easy installation and use of chromedriver to run system tests with Chrome
   gem 'webdrivers', '~> 4.0'
-  gem 'rails-controller-testing'
 end
 
 group :production do
