@@ -1,6 +1,3 @@
-import "core-js/stable";
-import "regenerator-runtime/runtime";
-import "../stylesheets/application.scss";
 // This is a manifest file that'll be compiled into application.js, which will include all the files
 // listed below.
 //
