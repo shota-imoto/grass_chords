@@ -28,5 +28,3 @@ Rails.application.routes.draw do
   get "informations/apply", to: "informations#apply"
   get "informations/vision", to: "informations#vision"
 end
-
-
