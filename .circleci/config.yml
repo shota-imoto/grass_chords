@@ -67,10 +67,10 @@ workflows:
   version: 2
   build_and_test:
     jobs:
-      - test:
-          filters:
-            branches:
-              ignore: master # temporary off because test is OK about this branch in local env.
+      # - test:
+      #     filters:
+      #       branches:
+      #         ignore: master # temporary off because test is OK about this branch in local env.
       - build_and_push:
           filters:
             branches:
