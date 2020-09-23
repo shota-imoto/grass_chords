@@ -41,9 +41,9 @@ RSpec.describe Users::SessionsController, type: :request do
         end
       end
       context "パスワードが誤っている場合" do
-        it "sessions#newにrenderすること" do
+        it "200レスポンスを返すこと" do
           post user_session_path(user: {email: @user.email, password: "wrong password", token: "token"})
-          expect(response).to render_template(:new)
+          have_http_status "200"
         end
         it "フラッシュメッセージが表示されていること" do
           post user_session_path(user: {email: @user.email, password: "wrong password", token: "token"})
@@ -59,9 +59,9 @@ RSpec.describe Users::SessionsController, type: :request do
         allow(Net::HTTP).to receive(:get_response).and_return(response_mock)
         allow(response_mock).to receive(:body).and_return(recaptcha_mock)
       end
-      it "sessions#newにrenderすること" do
+      it "200レスポンスを返すこと" do
         post user_session_path(user: {email: @user.email, password: @user.password, token: "token"})
-        expect(response).to render_template(:new)
+        expect(response).to have_http_status "200"
       end
       it "フラッシュメッセージが表示されていること" do
         post user_session_path(user: {email: @user.email, password: @user.password, token: "token"})
