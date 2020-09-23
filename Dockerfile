@@ -22,8 +22,7 @@ RUN apk update && \
     find /usr/lib/node_modules -delete && \
     find /usr/local/bundle/gems/ -name "*.c" -delete && \
     find /usr/local/bundle/gems/ -name "*.o" -delete && \
-    apk del --purge libxml2-dev curl-dev make gcc libc-dev g++ linux-headers && \
-    bundle exec rails assets:precompile RAILS_ENV=production
+    apk del --purge libxml2-dev curl-dev make gcc libc-dev g++ linux-headers
     # find /usr/local/bundle/ruby/2.7.1/gems/sassc-2.3.0 -name "*" -delete
 
 COPY . /grasschords
