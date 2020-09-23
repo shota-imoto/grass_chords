@@ -6,4 +6,5 @@ class Song < ApplicationRecord
   has_many :chords, dependent: :destroy
   has_many :practice_songs, dependent: :destroy
   belongs_to :user
+  has_many :users, through: :practice_songs
 end

@@ -10,8 +10,7 @@ class UsersController < ApplicationController
     @users = User.all
     if params[:song_id].present?
       @song = Song.find(params[:song_id])
-      practicing_songs = @song.practice_songs.pluck("user_id")
-      @users = @users.where(id: practicing_songs)
+      @users = @song.users
     end
 
     if params[:places].present?
