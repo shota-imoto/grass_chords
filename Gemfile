@@ -11,7 +11,7 @@ gem 'mysql2', '>= 0.4.4', '< 0.6.0'
 # Use haml for view files
 gem 'haml-rails'
 # Use SCSS for stylesheets
-gem 'sass-rails', '>=2.1.2'
+gem 'sassc-rails', '>=2.1.2'
 # Use Uglifier as compressor for JavaScript assets
 gem 'uglifier', '>= 1.3.0'
 # See https://github.com/rails/execjs#readme for more supported runtimes
