@@ -14,6 +14,7 @@
 //= require activestorage
 //= require jquery
 //= require jquery_ujs
+//= require_self
 //= require_tree .
 
 const chordunit_num = 72;
