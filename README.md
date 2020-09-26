@@ -21,7 +21,7 @@
 # 使用技術・言語
 
 - フロントエンド(javascript, jQuery, HTML/CSS, HAML, Sass)
-- バックエンド(Ruby on Rails, API: ReCAPTCHA)
+- バックエンド(Ruby on Rails6.0, API: ReCAPTCHA)
 - テスト(RSpec, FactoryBot, Capybara)
 - Web サーバ(nginx, unicorn)
 - データベース(MySQL)
