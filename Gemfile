@@ -74,3 +74,5 @@ gem 'active_hash'
 
 # deal with dependency when update rails to 6.0
 gem "websocket-extensions", ">= 0.1.5"
+gem 'wicked_pdf'
+gem 'wkhtmltopdf-binary'

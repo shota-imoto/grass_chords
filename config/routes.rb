@@ -16,7 +16,11 @@ Rails.application.routes.draw do
       get :id_search
     end
   end
-  resources :chords, except: :index
+  resources :chords, except: :index do
+    collection do
+      get :pdf
+    end
+  end
   resources :likes, only: [:create, :destroy]
   resources :practices, only: [:create, :destroy]
   resources :messages, only: [:index, :create] do

@@ -1,0 +1,36 @@
+%head
+  %meta{charset: "utf-8"}
+  = wicked_pdf_stylesheet_link_tag "application"
+  = wicked_pdf_javascript_include_tag "pdf"
+  = wicked_pdf_javascript_include_tag "#{Gem.loaded_specs['jquery-rails'].full_gem_path}/vendor/assets/javascripts/jquery.js"
+  = wicked_pdf_javascript_include_tag "#{Gem.loaded_specs['jquery-rails'].full_gem_path}/vendor/assets/javascripts/jquery_ujs.js"
+%article.l-contents__main
+  - if @chords.present?
+    - @chords.each_with_index do |chord, i|
+      %section.p-song__score-wrapper
+        .p-song__header
+          .p-song__title=chord.song.title
+          .p-song__key
+            - if ["B","b"].include?(chord.key[1])
+              = "(#{key_of(chord.key[0])}"
+              %a{class: "font_base-key c-font__base"}= chord.key[1]
+              %a )
+            - else
+              = "(#{key_of(chord.key)})"
+        .p-song__score{id: "chord_#{i}"}
+          - chord.chordunits.each_with_index do |unit, j|
+            .c-chordunit__wrapper.c-chordunit__wrapper--small.c-js__cursor-marker
+              .c-chordunit__part.c-chordunit__part--small= chord.chordunits[j].part
+              .c-chordunit__repeat.c-chordunit__repeat--small= chord.chordunits[j].repeat
+              .c-chordunit__indicator.c-chordunit__indicator--small= chord.chordunits[j].indicator
+              .c-chordunit.c-chordunit--small{id: "unit_#{i}-#{j}"}
+                .c-chordunit__beat.c-chordunit__beat--small= chord.chordunits[j].beat
+                .c-chordunit__leftbar.c-chordunit__leftbar--small
+                  - unless (chord.chordunits[j-1].rightbar == chord.chordunits[j].leftbar) && (j%8 == 4)
+                    =chord.chordunits[j].leftbar
+                .c-chordunit__note
+                  .c-chordunit__note-name.c-chordunit__note-name--small
+                  .c-chordunit__half-note.c-chordunit__half-note--small
+                  .c-chordunit__modifier.c-chordunit__modifier--small
+                .c-chordunit__rightbar.c-chordunit__rightbar--small= chord.chordunits[j].rightbar
+                .c-chordunit__text.u-display__hidden{value: "#{chord.chordunits[j].text}"}= chord.chordunits[j].text

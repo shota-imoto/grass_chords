@@ -1,7 +1,7 @@
 class ChordsController < ApplicationController
   before_action :set_chord, only: [:show, :edit, :update, :destroy]
   before_action :set_owner, only: [:edit, :update, :destroy]
-  before_action :authority_login, except: [:index, :show]
+  before_action :authority_login, except: [:index, :show, :pdf]
   before_action :authority_user, only: [:edit, :update, :destroy]
 
   def index
@@ -48,6 +48,19 @@ class ChordsController < ApplicationController
   def destroy
     @chord.destroy
     redirect_to song_path(@chord.song_id), notice: 'コード譜を削除しました'
+  end
+
+  def pdf
+    user = User.find(params[:id])
+    @chords = user.chords
+    respond_to do |format|
+      format.html
+      format.pdf do
+        render pdf: "chord_list", template: "chords/pdf.html", title: "chord_lists", javascript_delay: 3000, debug: true
+        # , disable_javascript: false  # Excluding ".pdf" extension.
+
+      end
+    end
   end
 
   private

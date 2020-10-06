@@ -12,9 +12,11 @@ class User < ApplicationRecord
 
   has_many :songs
   has_many :chords
+
   has_many :likes, dependent: :destroy
   has_many :practices, dependent: :destroy
   has_many :practice_songs, dependent: :destroy
+  has_many :practice_chords, class_name: "Chord", through: :practices
   has_many :received_messages, class_name: "Message", foreign_key: "to_user_id"
   has_many :sent_messages, class_name: "Message", foreign_key: "from_user_id"
   has_many :from_users, -> { distinct }, through: :received_messages

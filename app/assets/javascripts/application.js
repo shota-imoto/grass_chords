@@ -18,3 +18,8 @@
 //= require_tree .
 
 const chordunit_num = 72;
+$(function () {
+  $(document).ready(function () {
+    console.log("test");
+  });
+});
