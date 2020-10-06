@@ -56,7 +56,7 @@ class ChordsController < ApplicationController
     respond_to do |format|
       format.html
       format.pdf do
-        render pdf: "chord_list", template: "chords/pdf.html", title: "chord_lists", javascript_delay: 3000, debug: true
+        render pdf: "chord_list", template: "chords/pdf.html", title: "chord_lists", javascript_delay: 2000, debug: true
         # , disable_javascript: false  # Excluding ".pdf" extension.
 
       end

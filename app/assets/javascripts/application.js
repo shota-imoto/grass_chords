@@ -21,5 +21,6 @@ const chordunit_num = 72;
 $(function () {
   $(document).ready(function () {
     console.log("test");
+    $(".p-song__header").addClass("test_backred");
   });
 });

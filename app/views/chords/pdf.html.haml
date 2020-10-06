@@ -1,9 +1,9 @@
 %head
   %meta{charset: "utf-8"}
   = wicked_pdf_stylesheet_link_tag "application"
-  = wicked_pdf_javascript_include_tag "pdf"
-  = wicked_pdf_javascript_include_tag "#{Gem.loaded_specs['jquery-rails'].full_gem_path}/vendor/assets/javascripts/jquery.js"
-  = wicked_pdf_javascript_include_tag "#{Gem.loaded_specs['jquery-rails'].full_gem_path}/vendor/assets/javascripts/jquery_ujs.js"
+  = wicked_pdf_javascript_include_tag "application"
+  = javascript_include_tag "#{Gem.loaded_specs['jquery-rails'].full_gem_path}/vendor/assets/javascripts/jquery.js"
+  = javascript_include_tag "#{Gem.loaded_specs['jquery-rails'].full_gem_path}/vendor/assets/javascripts/jquery_ujs.js"
 %article.l-contents__main
   - if @chords.present?
     - @chords.each_with_index do |chord, i|

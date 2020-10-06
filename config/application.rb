@@ -22,6 +22,7 @@ module GrassChords
         helper_specs: false,
         routing_specs: false
     end
+    Rails.application.config.assets.precompile += %w( jquery.js jquery_ujs.js )
 
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration can go into files in config/initializers
