@@ -9,9 +9,9 @@ class PracticesController < ApplicationController
     end
     @chord = Chord.find(@practice.chord_id)
   rescue => e
-    logger.error "Exception Error: practice#create"
+    logger.error "Transaction Error: practice#create"
     logger.error e
-    @error = "練習曲の登録に失敗しました。運営局に連絡してください"
+    @error = "システムエラー。画面リロード後に再実行してください"
     # User notices exception error by js.
     #TODO: make "logging error function" DRY.
   end
@@ -25,9 +25,9 @@ class PracticesController < ApplicationController
     end
     @chord = @practice.chord
   rescue => e
-    logger.error "Exception Error: practice#destroy"
+    logger.error "Transaction Error: practice#destroy"
     logger.error e
-    @error = "練習曲の削除に失敗しました。運営局に連絡してください"
+    @error = "システムエラー。画面リロード後に再実行してください"
     # User notices exception error by js.
     #TODO: make "logging error function" DRY.
   end
