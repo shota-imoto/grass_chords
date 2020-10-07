@@ -1,27 +1,42 @@
 class PracticesController < ApplicationController
   before_action :authority_login
   def create
-    PracticeSong.create(practice_song_params) unless PracticeSong.where(practice_song_params).exists?
-    @practice = Practice.new(practice_params)
-    @practice.save
-
+    ActiveRecord::Base.transaction do
+      # binding.pry
+      PracticeSong.create_practice_song!(practice_song_params)
+      @practice = Practice.new(practice_params)
+      @practice.save!
+    end
     @chord = Chord.find(@practice.chord_id)
+  rescue => e
+    logger.error "Exception Error: practice#create"
+    logger.error e
+    @error = "練習曲の登録に失敗しました。運営局に連絡してください"
+    # User notices exception error by js.
+    #TODO: make "logging error function" DRY.
   end
 
 
   def destroy
     @practice = Practice.find_by(practice_destroy_params)
-
-    @practice.destroy
-    @practice.practice_song.destroy unless Practice.where(practice_song_id: @practice.practice_song_id).exists?
-
+    ActiveRecord::Base.transaction do
+      @practice.destroy!
+      PracticeSong.destroy_practice_song!(@practice.practice_song_id)
+    end
     @chord = @practice.chord
+  rescue => e
+    logger.error "Exception Error: practice#destroy"
+    logger.error e
+    @error = "練習曲の削除に失敗しました。運営局に連絡してください"
+    # User notices exception error by js.
+    #TODO: make "logging error function" DRY.
   end
 
 
   private
     def practice_params
-      params.permit(:chord_id).merge(practice_song_id: PracticeSong.find_by(practice_song_params).id ,user_id: current_user.id)
+      params.permit(:chord_id).merge(practice_song_id: PracticeSong.find_by(practice_song_params).id, user_id: current_user.id)
+      # params.permit(:chord_id).merge(user_id: current_user.id)
     end
 
     def practice_song_params
