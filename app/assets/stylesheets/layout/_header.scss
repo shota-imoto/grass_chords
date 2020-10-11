@@ -44,7 +44,8 @@
 // notice
 .l-header__notice,
 .l-header__alert,
-.l-error {
+.l-error,
+.l-error__js {
   // layout
   width: 100vw;
   position: fixed;
@@ -56,6 +57,11 @@
   color: $color-font-white;
   text-indent: 10px;
 
+  animation: fadeout_css 4s forwards;
+  animation-delay: 4s;
+}
+
+.l-error__show {
   animation: fadeout_css 4s forwards;
   animation-delay: 4s;
 }

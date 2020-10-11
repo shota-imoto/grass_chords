@@ -46,7 +46,6 @@ $(function () {
   $(document).on("touchend, mouseup", ".c-js__not-practice", function () {
     var chord_class = $(this).parent().attr("class").split(" ");
     var chord_id = chord_class[1].replace("c-review-", "");
-
     $.ajax({
       type: "post",
       url: "/practices",
@@ -55,6 +54,10 @@ $(function () {
       },
       dataType: "json",
     }).done(function (result) {
+      if (error_hundling(result.error)) {
+        return false;
+      }
+      console.log("returnしてない");
       insertHTML = reviewHTML(result, "practice", "plus");
 
       $(".c-review-" + result.chord.id)
@@ -76,6 +79,9 @@ $(function () {
       },
       dataType: "json",
     }).done(function (result) {
+      if (error_hundling(result.error)) {
+        return false;
+      }
       insertHTML = reviewHTML(result, "practice", "minus");
 
       $(".c-review-" + result.chord.id)
@@ -117,6 +123,15 @@ $(function () {
 
     var html = `<div class="${class_name} c-review__link"><div class='c-review__btn ${icon_color_class} c-js__review u-cursor__pointer'><div class='c-review__icon'><i class='${icon_type}'></i></div><div class='c-review__amount'>${review_count}</div><div class='c-review__text'>${review_text}</div></div></div>`;
     return html;
+  }
+
+  function error_hundling(error) {
+    if (error) {
+      console.log(error);
+      $(".l-header").after('<p class="l-error__js"></p>');
+      $(".l-error__js").text(error);
+      return true;
+    }
   }
 
   // delete practice at user#show view
