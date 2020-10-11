@@ -2,7 +2,6 @@ class PracticesController < ApplicationController
   before_action :authority_login
   def create
     ActiveRecord::Base.transaction do
-      # binding.pry
       PracticeSong.create_practice_song!(practice_song_params)
       @practice = Practice.new(practice_params)
       @practice.save!

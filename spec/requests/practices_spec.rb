@@ -32,6 +32,29 @@ RSpec.describe PracticesController, type: :request do
         post practices_path(format: :json, chord_id: @chord.id, user_id: @user.id)
       }.to change(@user.practices, :count).by(1)
     end
+    context "途中でエラーが発生する" do
+      before do
+        @practice = FactoryBot.build(:practice, chord_id: nil, user_id: @user.id)
+        allow(Practice).to receive(:new).and_return(@practice)
+      end
+      it "practiceレコードを登録できない" do
+        login_as(@user)
+        expect{
+        post practices_path(format: :json, chord_id: @chord.id, user_id: @practice.user_id)
+        }.to change(@user.practices, :count).by(0)
+      end
+      it "practice_songレコードも登録されていない" do
+        login_as(@user)
+        expect{
+        post practices_path(format: :json, chord_id: @chord.id, user_id: @practice.user_id)
+        }.to change(@user.practice_songs, :count).by(0)
+      end
+      it "エラーメッセージを返すこと" do
+        login_as(@user)
+        post practices_path(format: :json, chord_id: @chord.id, user_id: @practice.user_id)
+        expect(response.body).to include("システムエラー。画面リロード後に再実行してください")
+      end
+    end
   end
   context "オーナー権を持たないユーザーとして" do
     it "practiceレコードを登録できない" do
