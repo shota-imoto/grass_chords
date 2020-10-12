@@ -8,15 +8,11 @@ class MessagesController < ApplicationController
   def list
     from_users = current_user.from_users
     to_users = current_user.to_users
-    # from_users = Message.where(to_user_id: current_user.id).select("from_user_id").distinct
-    # to_users = Message.where(from_user_id: current_user.id).select("to_user_id").distinct
 
     @users = []
     from_users.each do |from_user|
       from_message = from_user.sent_messages.where(to_user_id: current_user.id).last
       to_message = from_user.received_messages.where(from_user_id: current_user.id).last
-      # from_message = Message.where(to_user_id: current_user.id, g: user.id).last
-      # to_message = Message.where(to_user_id: user.id, from_user_id: current_user.id).last
 
       # to_message.present?で相手ユーザ側からのメッセージしかないしかない場合はelseに分岐させる
       # 着信/受信メッセージを比較し、新しい方をuserに結合。
