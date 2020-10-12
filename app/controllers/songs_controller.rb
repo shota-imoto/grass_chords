@@ -109,7 +109,6 @@ class SongsController < ApplicationController
       # 条件検索
       # binding.pry
       @songs = @songs.where_attributes(params)
-      binding.pry
       # キーワード検索
       # @songs = @songs.search_keywords(keywords)
       # binding.pry
