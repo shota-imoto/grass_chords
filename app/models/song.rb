@@ -16,17 +16,26 @@ class Song < ApplicationRecord
   scope :where_standard, -> (is_standard){where(standard: is_standard) if (is_standard == "true")}
   scope :where_vocal, -> (is_vocal){where(vocal: is_vocal) if (is_vocal == "true")}
   scope :where_instrumental, -> (is_instrumental){where(instrumental: is_instrumental) if (is_instrumental == "true")}
+  scope :title_search, -> (keyword){where("title like ?", "%#{keyword}%")}
 
   def self.where_attributes(params)
     self.where_jam(params[:jam]).where_standard(params[:standard]).where_beginner(params[:beginner]).where_jam(params[:jam]).where_instrumental(params[:instrumental])
   end
 
-  # def self.search_keywords(keywords)
-  #     keywords.each do |keyword| unless (keywords.nil?)
-  #       self.where("title like ?", "%#{keyword}%")
-  #     end
-  #     return self
-  # end
-# end
+
+  def self.search_keywords(keywords)
+      keywords.each do |keyword| unless (keywords.nil?)
+        title_search(keyword)
+      end
+  end
+
+  def self.sort_songs(kind_of_sort)
+    if kind_of_sort == "practice"
+      order("practice_songs_count desc, title asc")
+    else
+      order("title asc")
+    end
+  end
+end
 
 end

@@ -45,15 +45,16 @@ class SongsController < ApplicationController
     @songs = Song.all.includes(:chords)
 
     # ソート
-    if params[:sort] == "practice"
-      @songs = @songs.order("practice_songs_count desc, title asc")
-    else
-      @songs = @songs.order("title asc")
-    end
+    binding.pry
+    @songs = @songs.sort_songs(params[:sort])
+    # if params[:sort] == "practice"
+    #   @songs = @songs.order("practice_songs_count desc, title asc")
+    # else
+    #   @songs = @songs.order("title asc")
+    # end
 
     search_song
     @count = @songs.length
-
     @pagy, @songs = pagy(@songs)
 
     respond_to do |format|
@@ -107,13 +108,10 @@ class SongsController < ApplicationController
       keywords = params[:keyword].split(/\s+/)
 
       # 条件検索
-      # binding.pry
       @songs = @songs.where_attributes(params)
       # キーワード検索
-      # @songs = @songs.search_keywords(keywords)
-      # binding.pry
       keywords.each do |keyword| unless (params[:keyword].nil?)
-        @songs = @songs.where("title like ?", "%#{keyword}%")
+        @songs = @songs.title_search(keyword)
       end
     end
   end
