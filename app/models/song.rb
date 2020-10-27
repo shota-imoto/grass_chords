@@ -29,12 +29,8 @@ class Song < ApplicationRecord
       end
   end
 
-  def self.sort_songs(kind_of_sort)
-    if kind_of_sort == "practice"
-      order("practice_songs_count desc, title asc")
-    else
-      order("title asc")
-    end
+  def self.test(kind_of_sort)
+      self.order("practice_songs_count desc, title asc")
   end
 end
 

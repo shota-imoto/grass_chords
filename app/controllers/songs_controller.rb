@@ -45,13 +45,11 @@ class SongsController < ApplicationController
     @songs = Song.all.includes(:chords)
 
     # ソート
-    binding.pry
-    @songs = @songs.sort_songs(params[:sort])
-    # if params[:sort] == "practice"
-    #   @songs = @songs.order("practice_songs_count desc, title asc")
-    # else
-    #   @songs = @songs.order("title asc")
-    # end
+    if params[:sort] == "practice"
+      @songs = @songs.order("practice_songs_count desc, title asc")
+    else
+      @songs = @songs.order("title asc")
+    end
 
     search_song
     @count = @songs.length
