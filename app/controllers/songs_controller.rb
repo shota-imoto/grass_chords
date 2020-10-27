@@ -53,7 +53,6 @@ class SongsController < ApplicationController
 
     search_song
     @count = @songs.length
-
     @pagy, @songs = pagy(@songs)
 
     respond_to do |format|
@@ -107,17 +106,11 @@ class SongsController < ApplicationController
       keywords = params[:keyword].split(/\s+/)
 
       # 条件検索
-      # ifによって条件にチェックされているときのみandで絞り込み
-      @songs = @songs.where(jam: params[:jam])  if (params[:jam] == "true")
-      @songs = @songs.where(standard: params[:standard])  if (params[:standard] == "true")
-      @songs = @songs.where(beginner: params[:beginner])  if (params[:beginner] == "true")
-      @songs = @songs.where(vocal: params[:vocal])  if (params[:vocal] == "true")
-      @songs = @songs.where(instrumental: params[:instrumental])  if (params[:instrumental] == "true")
+      @songs = @songs.where_attributes(params)
       # キーワード検索
       keywords.each do |keyword| unless (params[:keyword].nil?)
-        @songs = @songs.where("title like ?", "%#{keyword}%")
+        @songs = @songs.title_search(keyword)
       end
     end
-
   end
 end
