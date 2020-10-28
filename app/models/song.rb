@@ -8,8 +8,6 @@ class Song < ApplicationRecord
   belongs_to :user
   has_many :users, through: :practice_songs
 
-
-
   # 条件にチェックされているときのみand条件で絞り込み
   scope :where_jam, -> (is_jam){where(jam: is_jam) if (is_jam == "true")}
   scope :where_beginner, -> (is_beginner){where(beginner: is_beginner) if (is_beginner == "true")}

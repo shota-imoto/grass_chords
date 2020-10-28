@@ -21,7 +21,7 @@ test:
 
 production:
   <<: *default
-  host: <%= Rails.application.credentials.db[:grasschords_database_host] %>
+  # host: <%= Rails.application.credentials.db[:grasschords_database_host] %>
   database: grass_chords_production
   username: <%= Rails.application.credentials.db[:grasschords_database_user] %>
   password: <%= Rails.application.credentials.db[:grasschords_database_password] %>
