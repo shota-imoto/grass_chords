@@ -25,4 +25,4 @@ production:
   database: grass_chords_production
   username: <%= Rails.application.credentials.db[:grasschords_database_user] %>
   password: <%= Rails.application.credentials.db[:grasschords_database_password] %>
-  socket: /var/run/mysqld.sock
+  socket: /var/run/mysqld/mysqld.sock
